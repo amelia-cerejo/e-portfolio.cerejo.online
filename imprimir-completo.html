@@ -1,0 +1,776 @@
+﻿<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>e-PortfÃ³lio - AmÃ©lia Cerejo Lopes</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #171717;
+        --muted: #5f6470;
+        --blue: #002b5b;
+        --blue-soft: #e7eef7;
+        --gold: #bd8a12;
+        --paper: #fcf9f8;
+        --line: #e6dfdc;
+        --white: #fff;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Segoe UI", Arial, sans-serif;
+        line-height: 1.55;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(252, 249, 248, 0.96);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+      }
+
+      .topbar {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 14px 20px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 6px;
+        background: var(--blue);
+        color: white;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      h1, h2, h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: #001736;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.45rem, 3vw, 2.75rem);
+        line-height: 1.08;
+      }
+
+      h2 {
+        margin: 0 0 16px;
+        font-size: clamp(1.35rem, 2.2vw, 2rem);
+      }
+
+      h3 {
+        margin: 18px 0 8px;
+        font-size: 1.15rem;
+      }
+
+      .subtitle {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      button, .button-link {
+        border: 1px solid #cad4e2;
+        background: var(--white);
+        color: var(--blue);
+        border-radius: 6px;
+        padding: 8px 10px;
+        font: inherit;
+        font-size: 0.9rem;
+        cursor: pointer;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      button:hover, .button-link:hover {
+        border-color: var(--gold);
+      }
+
+      .floating-nav {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 40;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+      }
+
+      .float-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .float-button {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #cad4e2;
+        border-radius: 999px;
+        background: var(--white);
+        color: var(--blue);
+        box-shadow: 0 12px 28px rgba(0, 43, 91, 0.14);
+        text-decoration: none;
+        padding: 0;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .float-button svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .float-button.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+
+      .float-button:hover {
+        border-color: var(--gold);
+        transform: translateY(-1px);
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      body.sidebar-collapsed .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      body.sidebar-collapsed nav {
+        display: none;
+      }
+
+      .layout {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 24px 20px 48px;
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 24px;
+      }
+
+      nav {
+        position: sticky;
+        top: 82px;
+        align-self: start;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      nav a {
+        display: block;
+        color: var(--blue);
+        text-decoration: none;
+        padding: 9px 10px;
+        border-radius: 6px;
+        font-size: 0.92rem;
+        font-weight: 650;
+      }
+
+      nav a:hover, nav a.active {
+        background: var(--blue-soft);
+      }
+
+      .submenu {
+        display: none;
+        margin: -2px 0 6px 14px;
+        padding-left: 10px;
+        border-left: 2px solid var(--line);
+      }
+
+      .submenu.open {
+        display: block;
+      }
+
+      .submenu a {
+        font-size: 0.84rem;
+        padding: 7px 9px;
+      }
+
+      section {
+        display: none;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: clamp(18px, 3vw, 32px);
+        min-height: calc(100vh - 132px);
+        scroll-margin-top: 96px;
+      }
+
+      section.active-section {
+        display: block;
+      }
+
+      body.print-complete-page nav {
+        display: none;
+      }
+
+      body.print-complete-page .layout {
+        grid-template-columns: 1fr;
+      }
+
+      body.print-complete-page:not(.sidebar-collapsed) nav {
+        display: block;
+      }
+
+      body.print-complete-page:not(.sidebar-collapsed) .layout {
+        grid-template-columns: 280px minmax(0, 1fr);
+      }
+
+      body.print-complete-page main section,
+      body.print-complete-page .module {
+        display: block !important;
+        min-height: auto;
+      }
+
+      .hero {
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      main section:not(.active-section) {
+        display: none !important;
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .meta {
+        border-left: 3px solid var(--gold);
+        background: white;
+        padding: 10px 12px;
+      }
+
+      .label {
+        display: block;
+        color: var(--muted);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+      }
+
+      ul {
+        padding-left: 1.2rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      .module, .evidence, .reference, .competence {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 12px 0;
+      }
+
+      .module {
+        display: none;
+      }
+
+      .module.active-module {
+        display: block;
+      }
+
+      .tag {
+        display: inline-block;
+        background: var(--blue-soft);
+        color: var(--blue);
+        border-radius: 999px;
+        padding: 3px 9px;
+        font-size: 0.75rem;
+        font-weight: 800;
+      }
+
+      .evidence-link {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 8px;
+        padding: 8px 11px;
+        border: 1px solid #cad4e2;
+        border-radius: 6px;
+        color: var(--blue);
+        background: var(--soft);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .evidence-link:hover {
+        border-color: var(--gold);
+        background: #fffaf0;
+      }
+
+      .quote {
+        border-left: 4px solid var(--gold);
+        background: #fffaf0;
+        padding: 14px 16px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+      }
+
+      .bars {
+        display: grid;
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+      .bar {
+        height: 8px;
+        border-radius: 999px;
+        background: #edf1f5;
+        overflow: hidden;
+      }
+
+      .fill {
+        height: 100%;
+        background: var(--gold);
+      }
+
+      footer {
+        text-align: center;
+        color: var(--muted);
+        padding: 24px 20px 40px;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 820px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+          padding-top: 14px;
+        }
+
+        nav {
+          position: fixed;
+          left: 14px;
+          right: 86px;
+          bottom: 18px;
+          top: auto;
+          z-index: 39;
+          max-height: min(520px, calc(100vh - 120px));
+          overflow-y: auto;
+          box-shadow: 0 18px 45px rgba(0, 43, 91, 0.16);
+        }
+
+        body.sidebar-collapsed nav {
+          display: none;
+        }
+
+        .meta-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        header, nav, .floating-nav { display: none; }
+        body { background: white; }
+        .layout { display: block; max-width: none; padding: 0; }
+        section {
+          display: none !important;
+          min-height: auto;
+          break-inside: avoid;
+          border: 0;
+          border-bottom: 1px solid #ddd;
+          border-radius: 0;
+        }
+        section.active-section,
+        body.print-complete-page section {
+          display: block !important;
+        }
+        .module { display: none !important; }
+        .module.active-module,
+        body.print-complete-page .module {
+          display: block !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="print-mode print-complete-page sidebar-collapsed">
+    <header>
+      <div class="topbar">
+        <div class="brand">
+          <div class="mark">EP</div>
+          <div>
+            <strong>e-PortfÃ³lio</strong>
+            <p class="subtitle" id="top-formanda"></p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav id="nav" aria-label="SecÃ§Ãµes do e-PortfÃ³lio"></nav>
+      <main id="app"></main>
+    </div>
+
+    <footer id="footer"></footer>
+
+    <div class="floating-nav" aria-label="Navegacao rapida">
+      <div class="float-actions">
+        <button class="float-button primary" type="button" id="float-menu" aria-expanded="false" aria-controls="nav" title="Abrir ou fechar menu lateral" aria-label="Abrir ou fechar menu lateral">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <span class="sr-only">Menu rapido</span>
+        </button>
+        <a class="float-button" href="index.html" title="Voltar ao e-PortfÃ³lio" aria-label="Voltar ao e-PortfÃ³lio">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-5h5v5"/></svg>
+          <span class="sr-only">Inicio</span>
+        </a>
+        <button class="float-button action-print" type="button" onclick="preparePrint()" title="Imprimir completo" aria-label="Imprimir completo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V4h10v4"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v6H7z"/><path d="M17 12h.01"/></svg>
+          <span class="sr-only">Imprimir completo</span>
+        </button>
+<button class="float-button is-hidden" type="button" id="float-top" onclick="scrollToTop()" title="Topo" aria-label="Topo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+          <span class="sr-only">Topo</span>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const portfolio = {"title":"e-PortfÃ³lio","subtitle":"PortfÃ³lio CientÃ­fico-PedagÃ³gico â€¢ Curso de FormaÃ§Ã£o PedagÃ³gica ContÃ­nua de Formador de Formadores","formanda":"AmÃ©lia Cerejo Lopes","entidadeFormadora":"IEFP â€” Instituto do Emprego e FormaÃ§Ã£o Profissional, I.P.","delegacaoRegional":"DelegaÃ§Ã£o Regional do Alentejo","servico":"Centro de Emprego e FormaÃ§Ã£o Profissional de Beja","curso":"FormaÃ§Ã£o PedagÃ³gica ContÃ­nua de Formador de Formadores","formaOrganizacao":"E-learning","periodoFormacao":"14 de maio de 2026 a 10 de julho de 2026","coordenadoraPedagogica":"Ivone Silva","formadores":["Ana Mafalda Maia Caetano de Sales Gomes e Teixeira Pereira","Joaquim Manuel Rodrigues Paulino"],"ccp":"n.Âº EDF 407745/2006 DL â€” emitido a 31 de maio de 2006","dataElaboracao":"Junho de 2026","referencialRef":"Referencial de FormaÃ§Ã£o PedagÃ³gica ContÃ­nua de Formadores â€” IEFP, 3.Âª EdiÃ§Ã£o (Janeiro 2022)","personalBio":"Sou formadora certificada desde 2006, tendo iniciado a minha atividade formativa apÃ³s a conclusÃ£o da FormaÃ§Ã£o PedagÃ³gica Inicial de Formadores. Ao longo destes anos, desenvolvi atividade na formaÃ§Ã£o de formandos em processos de desenvolvimento de competÃªncias digitais, desenvolvimento pessoal e andragogia, trabalhando com pÃºblicos diversos (ativos empregados, desempregados e jovens em formaÃ§Ã£o profissional).","experienceBullets":["FormaÃ§Ã£o especializada em contexto de centros de formaÃ§Ã£o do IEFP, empresas e escolas profissionais parceiras","Ãreas de especializaÃ§Ã£o orientadas principalmente para as TIC (Tecnologias de InformaÃ§Ã£o e ComunicaÃ§Ã£o), soft skills e orientaÃ§Ã£o profissional","Acompanhamento individualizado e de grupo em processos de diagnÃ³stico e inserÃ§Ã£o profissional ativa"],"motivationBullets":["Aprofundar competÃªncias tÃ©cnicas e pedagÃ³gicas estruturantes para formar futuros formadores, transmitindo nÃ£o apenas conhecimentos operacionais, mas tambÃ©m a postura reflexiva e crÃ­tica estruturada que a profissÃ£o exige.","Aceder a novas Ã¡reas de intervenÃ§Ã£o profissional de relevÃ¢ncia estratÃ©gica, nomeadamente: participaÃ§Ã£o ativa em processos de RVCC como tÃ©cnica ou jÃºri avaliador, validaÃ§Ã£o de novos mÃ³dulos atravÃ©s do NETFORCE e orientaÃ§Ã£o na FormaÃ§Ã£o PedagÃ³gica Inicial.","AtualizaÃ§Ã£o, consolidaÃ§Ã£o e valorizaÃ§Ã£o cientÃ­fica permanente, ciente de que a andragogia de vanguarda requer aprendizagem ao longo da vida e inovaÃ§Ã£o instrucional constante."],"portfolioGoalsBullets":["Documentar e refletir criticamente sobre todo o itinerÃ¡rio de aprendizagem percorrido ao longo do Curso de FormaÃ§Ã£o de Formadores.","Autoavaliar as competÃªncias adquiridas e consolidadas, reconhecendo pilares de excelÃªncia e demarcando domÃ­nios adicionais de especializaÃ§Ã£o futura.","Sistematizar evidÃªncias tangÃ­veis das atividades realizadas em cada um dos mÃ³dulos letivos.","Projetar a atividade andragÃ³gica futura, estabelecendo um plano de aÃ§Ã£o robusto e diretrizes sÃ³lidas de desenvolvimento individual contÃ­nuo.","Demonstrar a proficiÃªncia metacognitiva essencial a quem assume a responsabilidade cientÃ­fica de formar formadores."],"goalsQuote":"Este portfÃ³lio nÃ£o Ã© apenas um requisito formal de avaliaÃ§Ã£o, mas um instrumento dinÃ¢mico de desenvolvimento profissional contÃ­nuo que pretendo alimentar e atualizar regularmente ao longo da minha carreira.","modules":[{"id":"m1","code":"MF1","title":"DiagnÃ³stico de Necessidades e Referenciais de CompetÃªncias e de FormaÃ§Ã£o","hours":"18 Horas","sabia":"Antes de iniciar este mÃ³dulo, jÃ¡ possuÃ­a conhecimentos prÃ¡ticos sobre a identificaÃ§Ã£o de necessidades de formaÃ§Ã£o, adquiridos ao longo de anos de atividade formativa. Sabia que era importante perceber o perfil dos formandos antes de planear uma aÃ§Ã£o, mas nunca tinha sistematizado esse processo de forma pedagÃ³gica, tÃ©cnica e estruturada. Os conceitos de 'referencial de competÃªncias' e 'referencial de formaÃ§Ã£o' eram-me familiares de forma intuitiva, mas nÃ£o dominava a sua construÃ§Ã£o formal.","aprendi":["Instrumentos de diagnÃ³stico de necessidades de excelÃªncia: distinÃ§Ã£o rigorosa e aplicaÃ§Ã£o prÃ¡tica de mÃ©todos qualitativos e quantitativos â€” observaÃ§Ã£o direta estruturada, avaliaÃ§Ã£o de pares/360 graus, inquÃ©ritos por entrevista de diagnÃ³stico, focus group de competÃªncias e anÃ¡lise documental aprofundada.","AvaliaÃ§Ã£o 360 Graus e ObservaÃ§Ã£o Direta: a dinÃ¢mica de trabalho colaborativo permitiu compreender a fundo as suas vantagens estruturais, eventuais resistÃªncias, riscos e aplicabilidade real no alinhamento de equipas corporativas e formativas.","ConstruÃ§Ã£o de referenciais de competÃªncias: fases operatÃ³rias de conceÃ§Ã£o, mapeamento sistemÃ¡tico de unidades de competÃªncias, identificaÃ§Ã£o de competÃªncias transversais integradas e processos de homologaÃ§Ã£o/validaÃ§Ã£o cientÃ­fica.","Perfil de formaÃ§Ã£o orientado para competÃªncias emergentes: o desenvolvimento do referencial para o cenÃ¡rio estimulante e desafiador de 'Especialista em PromoÃ§Ã£o de Destinos no TikTok' serviu de Ã¢ncora para entender como conceber referenciais para funÃ§Ãµes em mutaÃ§Ã£o acelerada e as metodologias de Storytelling Visual em VÃ­deos Curtos.","AnÃ¡lise rigorosa de lacunas de competÃªncias: mensurar a distÃ¢ncia tÃ©cnica entre competÃªncias em uso profissional e as competÃªncias exigidas pelo referencial de mercado, convertendo esta anÃ¡lise num plano de aÃ§Ã£o personalizado."],"atividades":["Atividade 1 (Grupo 3 â€” AmÃ©lia, Elisabete, LuÃ­sa, SÃ­lvia): Instrumentos de DiagnÃ³stico de Necessidades de CompetÃªncias e de FormaÃ§Ã£o. Foco exaustivo nas metodologias de 'ObservaÃ§Ã£o Direta' e 'AvaliaÃ§Ã£o de Pares / AvaliaÃ§Ã£o 360 Graus', estruturando as vantagens, limitaÃ§Ãµes institucionais e propostas de relatÃ³rios.","Atividade 2 (Individual): AnÃ¡lise profunda de lacunas de competÃªncias e de formaÃ§Ã£o profissional a partir de um caso de estudo. ElaboraÃ§Ã£o de um relatÃ³rio consolidado com propostas de intervenÃ§Ã£o formativa direta. (DuraÃ§Ã£o aproximada: 180 minutos).","Atividade 3 (Grupo 3 â€” AmÃ©lia, Elisabete, LuÃ­sa, SÃ­lvia): Desenvolvimento integral do perfil de competÃªncias e plano de formaÃ§Ã£o para a funÃ§Ã£o emergente 'Especialista em PromoÃ§Ã£o de Destinos no TikTok' centrado no mÃ³dulo de Storytelling Visual. Feedback do formador Joaquim Paulino: 'Trabalho de nÃ­vel muito elevado e rigoroso do ponto de vista tÃ©cnico-pedagÃ³gico.'"],"reflexao":"A jornada no MF1 alterou radicalmente a minha perspetiva sobre a iniciaÃ§Ã£o de qualquer intervenÃ§Ã£o pedagÃ³gica. Percebi que o diagnÃ³stico nÃ£o Ã© um preÃ¢mbulo administrativo dispensÃ¡vel, mas sim o alicerce Ã©tico-cientÃ­fico de toda a aÃ§Ã£o formativa. O trabalho sobre o Specialist de TikTok demonstrou-nos que os referenciais contemporÃ¢neos necessitam de ser dinÃ¢micos, plÃ¡sticos e fortemente sintonizados com as linguagens emergentes.","aplicacaoFutura":"Pretendo reestruturar ativamente as fichas e prÃ¡ticas de diagnÃ³stico iniciais das formaÃ§Ãµes que lidero, substituindo questionÃ¡rios meramente burocrÃ¡ticos por metodologias ativas de observaÃ§Ã£o e mapeamento de lacunas alinhadas com o CNQ (CatÃ¡logo Nacional de QualificaÃ§Ãµes).","aspetosAprofundar":"Desejo realizar formaÃ§Ã£o avanÃ§ada em engenharia de diagnÃ³stico de necessidades industriais e aprofundar as bases de dados e ferramentas de cruzamento de competÃªncias dinÃ¢micas no CNQ."},{"id":"m2","code":"MF2","title":"ConceÃ§Ã£o da FormaÃ§Ã£o: Recursos DidÃ¡ticos e Comunidades de PrÃ¡tica","hours":"18 Horas","sabia":"JÃ¡ utilizava com bom desempenho ferramentas digitais comuns na criaÃ§Ã£o de recursos de apoio â€” apresentaÃ§Ãµes, pequenos vÃ­deos didÃ¡ticos, tabelas e guiÃµes â€” contudo, tal acontecia de modo muito intuitivo, sem o respaldo sistemÃ¡tico da teoria de Design Instrucional, dos princÃ­pios cognitivos da aprendizagem multimÃ©dia ou da articulaÃ§Ã£o estruturada das Comunidades de PrÃ¡tica.","aprendi":["PrincÃ­pios da aprendizagem multimÃ©dia de Richard Mayer: reduÃ§Ã£o da carga cognitiva estranha, sinalizaÃ§Ã£o de informaÃ§Ã£o relevante, contiguidade espacial e temporal, e importÃ¢ncia capital da coerÃªncia para evitar sobrecarga auditiva/visual.","IntegraÃ§Ã£o Tecnologia-Pedagogia: a convicÃ§Ã£o de que a tecnologia atua estritamente como mediadora e amplificadora do processo de formaÃ§Ã£o, devendo adaptar-se escrupulosamente aos objetivos pedagÃ³gicos e caracterÃ­sticas do pÃºblico adulto.","Teoria de Comunidades de PrÃ¡tica (CoP) de Etienne Wenger: estruturaÃ§Ã£o baseada na triangulaÃ§Ã£o vital entre DomÃ­nio (identidade partilhada), Comunidade (encontros e partilha de saberes) e PrÃ¡tica (repertÃ³rio de conhecimento gerado).","Conceitos de Envolvimento MÃºtuo e RepertÃ³rio Partilhado: dinÃ¢mica de fomento de responsabilidades comuns, interaÃ§Ãµes recorrentes de apoio mÃºtuo e consolidaÃ§Ã£o de recursos, tÃ©cnicas, lÃ©xico e boas-prÃ¡ticas construÃ­dos em espÃ­rito cooperativo."],"atividades":["Atividade 1 (Individual) â€” MF2 A1: ConceÃ§Ã£o de raiz e desenvolvimento de um Recurso DidÃ¡tico Interativo e MultimÃ©dia subordinado ao tema 'ProfissÃ£o de Risco: Bombeiro'. O recurso foi desenhado com base em arquiteturas cognitivas rigorosas, detalhando riscos ocupacionais, proteÃ§Ã£o ativa e tomadas de decisÃ£o preventivas.","Atividade 3 (Individual) â€” MF2 A3: ElaboraÃ§Ã£o fundamentada de um GlossÃ¡rio TÃ©cnico sobre Comunidades de PrÃ¡tica, conceituando e aplicando com exemplos reais 'Envolvimento MÃºtuo' e 'RepertÃ³rio Partilhado' com amparo na literatura cientÃ­fica de Wenger-Trayner e da APDSI.","Atividade 4 (Grupo 3 â€” AmÃ©lia e LuÃ­sa) â€” MF2 A4: CaracterizaÃ§Ã£o abrangente do desenvolvimento de uma Comunidade de PrÃ¡tica. Mapeamento das trÃªs fases vitais (Potencial, CoalizÃ£o e InÃ­cio Ativo), fatores cruciais de sustentabilidade, barreiras funcionais e anÃ¡lise de caso prÃ¡tico de uma CoP de emergÃªncia fundada por formadores durante a pandemia de COVID-19."],"reflexao":"Este mÃ³dulo forneceu-me os Ã³culos da ergonomia cognitiva aplicados ao material de aprendizagem. Compreendi que apresentar um recurso esteticamente atrativo mas pedagogicamente sobrecarregado diminui drasticamente a retenÃ§Ã£o. Da mesma forma, compreender a anatomia de uma Comunidade de PrÃ¡tica permitiu-me enxergar como o formador de formadores pode emancipar grupos para continuarem a aprender de forma autÃ³noma pÃ³s-formaÃ§Ã£o formal.","aplicacaoFutura":"Passarei a rever todos os meus recursos pedagÃ³gicos de acordo com os princÃ­pios de Mayer, erradicando o ruÃ­do visual e apostando em interfaces digitais limpas e intuitivas. Pretendo igualmente atuar no fomento de e-Communities duradouras entre as minhas turmas.","aspetosAprofundar":"Aprofundar o domÃ­nio tÃ©cnico de softwares dedicados a e-learning complexo (como iSpring, Articulate Storyline e pacotes interativos em HTML5/H5P) para enriquecer o portfÃ³lio de atividades disponÃ­veis."},{"id":"m3","code":"MF3","title":"DinÃ¢mica de Aprendizagem ao Longo da Vida","hours":"18 Horas","sabia":"Conhecia genericamente o papel do RVCC no sistema nacional de qualificaÃ§Ãµes e sabia que o IEFP geria a certificaÃ§Ã£o docente geral atravÃ©s da plataforma NETFORCE. Contudo, desconhecia totalmente os regulamentos especÃ­ficos do RVCC profissional focado em Formadores ou o fluxo tÃ©cnico necessÃ¡rio para validar mÃ³dulos especializados.","aprendi":["O processo especializado de RVCC Formadores: enquadramento na Portaria 214/2011, pressuposto das 300 horas letivas de formaÃ§Ã£o documentadas, fases sequenciais (candidatura tÃ©cnica, triagem, anÃ¡lise de evidÃªncias, elaboraÃ§Ã£o do portfÃ³lio reflexivo e prova final diante de jÃºri externo).","Funcionamento cientÃ­fico e operatÃ³rio da plataforma NETFORCE: metodologia para solicitaÃ§Ã£o e devida justificaÃ§Ã£o de novos domÃ­nios da prÃ¡tica pedagÃ³gica (ex: sub-mÃ³dulos de Tecnologias, Andragogia AvanÃ§ada, AvaliaÃ§Ã£o), cruzando dados de currÃ­culo, aÃ§Ãµes prÃ¡ticas de campo e formaÃ§Ã£o formal ou contÃ­nua.","DistinÃ§Ã£o tÃ©cnica entre as trÃªs tipologias de educaÃ§Ã£o: Formal (estruturada, oficializado por diplomas), NÃ£o-Formal (formaÃ§Ãµes pontuais, workshops, aÃ§Ãµes de desenvolvimento tÃ©cnico-profissional s/ graus) e Informal (adquirida no labor quotidiano, reflexÃ£o de vida, interaÃ§Ãµes).","O e-PortfÃ³lio Reflexivo de Aprendizagem como instrumento de auto-avaliaÃ§Ã£o metacognitiva: diversidade tipolÃ³gica, metodologias de triagem de evidÃªncias e os critÃ©rios objetivos para estruturaÃ§Ã£o e articulaÃ§Ã£o teÃ³rica do dossiÃª."],"atividades":["Atividade 1 (Especial) â€” 'Sou um Profissional Reflexivo CrÃ­tico?': ExercÃ­cio introspectivo com base numa checklist tÃ©cnica de autoavaliaÃ§Ã£o profissional, que permitiu realÃ§ar forÃ§as (autonomia pedagÃ³gica, cooperaÃ§Ã£o multidisciplinar) e traÃ§ar correÃ§Ãµes em Ã¡reas de formaÃ§Ã£o contÃ­nua especializada.","Atividade 3 (Geral) â€” DinÃ¢mica de Aprendizagem ao Longo da Vida: LiÃ§Ã£o aplicada e debate sobre a porosidade e riqueza da integraÃ§Ã£o ativa das esferas de educaÃ§Ã£o formal, informal e nÃ£o-formal.","Atividade 4 / PortefÃ³lio (ConsolidaÃ§Ã£o): RedaÃ§Ã£o e construÃ§Ã£o do presente e-PortfÃ³lio Reflexivo, juntamente com a Ficha oficial de Percurso Profissional e de FormaÃ§Ã£o."],"reflexao":"A aprendizagem da mecÃ¢nica do RVCC deu-me a certeza de que a experiÃªncia empÃ­rica acumulada Ã© um patrimÃ³nio sagrado de conhecimento que os sistemas pÃºblicos de qualificaÃ§Ã£o devem acarinhar e formalizar com elevado pendor cientÃ­fico. Perceber a NETFORCE nÃ£o apenas como um repositÃ³rio de dados burocrÃ¡ticos, mas sim como um portal dinÃ¢mico de acreditaÃ§Ã£o da minha carreira docente foi crucial.","aplicacaoFutura":"Pretendo candidatar-me formalmente Ã  intervenÃ§Ã£o como tÃ©cnica ou avaliadora em equipas de RVCC no Centro de Emprego e FormaÃ§Ã£o de Beja, facilitando que outros formadores trilhem este e-PortfÃ³lio com seguranÃ§a tÃ©cnica.","aspetosAprofundar":"Assegurar presenÃ§a ativa em sessÃµes de jÃºri pÃºblico de RVCC como formadora observadora para absorver a gesticulaÃ§Ã£o tÃ©cnica e dinÃ¢mica do painel, alÃ©m de dominar os guias operacionais do IEFP."},{"id":"m4","code":"MF4","title":"Metodologias e EstratÃ©gias PedagÃ³gicas AvanÃ§adas","hours":"18 Horas","sabia":"Trabalhava rotineiramente com o mÃ©todo expositivo tradicional nas minhas aulas de formaÃ§Ã£o presencial e alternava pontualmente para atividades individuais de pesquisa prÃ¡tica. No entanto, faltava-me um quadro estruturado de correlaÃ§Ã£o entre os mÃ©todos (demonstrativo, ativo, interrogativo) e a sua articulaÃ§Ã£o dinÃ¢mica baseada na aprendizagem orientada a problemas (PBL) em ambientes puramente digitais.","aprendi":["ClassificaÃ§Ã£o e cruzamento inteligente de MÃ©todos PedagÃ³gicos (expositivo, interrogativo, demonstrativo e ativo) e as respetivas especificidades ao nÃ­vel da descentralizaÃ§Ã£o do papel do formador em favor do formando.","Metodologias Ativadoras de Ensino e Aprendizagem: implementaÃ§Ã£o de dinÃ¢micas como Aprendizagem Baseada em Projetos (Project-Based Learning - PBL), estudo de caso ramificado, encenaÃ§Ãµes profissionais (role playing), gamificaÃ§Ã£o instrucional e dinÃ¢micas cognitivas online.","Metodologias Colaborativas em e-Learning: estruturaÃ§Ã£o de fÃ³runs de discussÃ£o cientÃ­fica geradores de conhecimento crÃ­tico, co-criaÃ§Ã£o sÃ­ncrona em murais colaborativos, mapas mentais partilhados e portfÃ³lios peer-reviewed.","Desenho e orÃ§amentaÃ§Ã£o tÃ©cnica de Projetos PedagÃ³gicos Integrados: correlaÃ§Ã£o de meios curriculares, recursos materiais, recursos digitais de suporte e alinhamento com referenciais tÃ©cnicos de qualidade do IEFP e DGERT."],"atividades":["Atividade 1 (Individual): PlanificaÃ§Ã£o integrada de um Projeto PedagÃ³gico modular, articulando calendarizaÃ§Ã£o hÃ­brida, metodologias ativas especÃ­ficas por bloco letivo e o roteiro detalhado de apoio instrucional sÃ­ncrono/assÃ­ncrono.","Atividade 2 (FÃ³rum Co-Criativo): Debate crÃ­tico nas salas Moodle sobre a mutaÃ§Ã£o da autoridade docente no digital â€” como mediar discussÃµes acesas sem castrar a evoluÃ§Ã£o crÃ­tica individual dos formandos docentes."],"reflexao":"A excelÃªncia didÃ¡tica nÃ£o provÃ©m da abundÃ¢ncia de tecnologias, mas sim do mÃ©todo que rege a sua cadÃªncia. Entender que o papel de quem forma formadores Ã© criar o ambiente propÃ­cio para que a dÃºvida brote e a discussÃ£o crÃ­tica floresÃ§a estimulou-me a desconstruir parte do meu antigo preciosismo expositivo.","aplicacaoFutura":"Desenhar novos guiÃµes didÃ¡ticos para as minhas turmas assentes inteiramente em metodologias de resoluÃ§Ã£o de problemas do quotidiano profissional, aplicando o mÃ©todo ativo no mÃ­nimo em 50% de cada bloco de formaÃ§Ã£o.","aspetosAprofundar":"EspecializaÃ§Ã£o em metodologias Ã¡geis aplicadas ao desenho curricular e tÃ©cnicas avanÃ§adas de facilitaÃ§Ã£o de grupos de elevado rendimento profissional."},{"id":"m5","code":"MF5","title":"SimulaÃ§Ãµes PedagÃ³gicas: Acompanhamento e AvaliaÃ§Ã£o","hours":"18 Horas","sabia":"JÃ¡ tinha assistido Ã  apresentaÃ§Ã£o e gravaÃ§Ã£o de simulaÃ§Ãµes em formaÃ§Ãµes iniciais de formadores hÃ¡ anos, mas sob uma perspetiva quase amadora â€” anotando o que decorria de forma simplista, sem grelhas metÃ³dicas de anÃ¡lise de comportamentos docentes e sem o suporte de projetos estruturados de remediaÃ§Ã£o pedagÃ³gica/melhoria contÃ­nua.","aprendi":["Modelos de SimulaÃ§Ãµes PedagÃ³gicas aplicadas com rigor: SimulaÃ§Ã£o DiagnÃ³stica (identificaÃ§Ã£o de vÃ­cios didÃ¡ticos e potencial nato), SimulaÃ§Ã£o IntermÃ©dia (avaliaÃ§Ã£o de progresso e plasticidade) e SimulaÃ§Ã£o Final integradora.","Taxonomia de Comportamentos Docentes e formulaÃ§Ã£o de Grelhas de ObservaÃ§Ã£o estruturadas: registo de postura andragÃ³gica, gestÃ£o da espacialidade sÃ­ncrona, controlo de tempos letivos, eficÃ¡cia das tÃ©cnicas interrogativas e tratamento de objeÃ§Ãµes de formandos difÃ­ceis.","Feedback Construtivo e ReflexÃ£o Compartilhada: as tÃ©cnicas de visionamento individual e avaliaÃ§Ã£o dialÃ³gica pÃ³s-simulaÃ§Ã£o como catalisadores de mudanÃ§a imediata, evitando reaÃ§Ãµes defensivas baseadas em vulnerabilidades individuais.","Desenho de Projetos de Melhoria ContÃ­nua individualizados: desenhar planos estruturados de reforÃ§o contendo metas claras para correÃ§Ã£o de aspetos crÃ­ticos revelados no transcurso das intervenÃ§Ãµes letivas."],"atividades":["Atividade 1 (SimulaÃ§Ã£o Inicial): Planeamento, simulaÃ§Ã£o e posterior verificaÃ§Ã£o crÃ­tica de uma micro-aula estruturada. Mapeamento de pontos fortes iniciais (assertividade cientÃ­fica, empatia) e deteÃ§Ã£o de oportunidades de intervenÃ§Ã£o e melhoria de ritmo.","Atividade 2 (Individual): Projeto de Melhoria e Acompanhamento Curricular. ElaboraÃ§Ã£o do plano de tutoria ativa focado no suporte pedagÃ³gico personalizado a um formando docente com elevadas fragilidades de projeÃ§Ã£o vocal e gestÃ£o de conflitos grupais."],"reflexao":"Observar com critÃ©rio cientÃ­fico Ã© o ato mais desafiante e precioso do formador de formadores. Ao visionar e codificar as simulaÃ§Ãµes dos colegas e o meu prÃ³prio desempenho, aprendi a analisar os detalhes que fazem uma sessÃ£o letiva passar de enfadonha a transformadora, o que me conferiu total seguranÃ§a para guiar o diagnÃ³stico e a modelaÃ§Ã£o andragÃ³gica de outros profissionais.","aplicacaoFutura":"Pretendo orientar as provas prÃ¡ticas de simulaÃ§Ã£o no IEFP munida destas novas tabelas e do pilar de feedback construtivo humanista, transformando o momento da prova final num ambiente enriquecedor livre de ansiedade.","aspetosAprofundar":"Estudar em profundidade os modelos de microrrelaÃ§Ã£o de Robert Bales aplicados Ã  interaÃ§Ã£o de pequenos grupos e dinÃ¢micas afetivas durante as sessÃµes de formaÃ§Ã£o docente cooperativa."}],"competenceRows":[{"id":"c1","name":"FormaÃ§Ã£o de Formadores (Desenho / FacilitaÃ§Ã£o)","antes":2,"apos":4,"evidences":"Projetos prÃ¡ticos desenvolvidos nos blocos MF4 e MF5"},{"id":"c2","name":"Enquadramento Estrutural e Operacional do Sistema RVCC","antes":1,"apos":4,"evidences":"Fichas tÃ©cnicas e portfÃ³lio oficial estruturado no MF3"},{"id":"c3","name":"ValidaÃ§Ã£o TÃ©cnica Docente (IEFP / NETFORCE)","antes":1,"apos":4,"evidences":"GuiÃµes prÃ¡ticos de acreditaÃ§Ã£o do MF3"},{"id":"c4","name":"DiagnÃ³stico CientÃ­fico de Necessidades","antes":2,"apos":4,"evidences":"Mapeamento e glossÃ¡rios elaborados no mÃ³dulo MF1"},{"id":"c5","name":"Arquitetura de Referenciais de CompetÃªncias","antes":2,"apos":4,"evidences":"Trabalhos prÃ¡ticos de engenharia curricular de base (MF1)"},{"id":"c6","name":"Design de Recursos Instrucionais MultimÃ©dia","antes":3,"apos":5,"evidences":"Recurso interativo para 'ProfissÃ£o de Risco: Bombeiro' (MF2)"},{"id":"c7","name":"MediaÃ§Ã£o e Fomento a CoPs de Formadores","antes":2,"apos":4,"evidences":"Trabalho de anÃ¡lise de nascimento e manutenÃ§Ã£o de CoPs (MF2)"},{"id":"c8","name":"ImplementaÃ§Ã£o CientÃ­fica de Modelos de AvaliaÃ§Ã£o","antes":3,"apos":4,"evidences":"Atividades e avaliaÃ§Ãµes de feedback sistemÃ¡tico formativo (Todos)"},{"id":"c9","name":"AutoavaliaÃ§Ã£o e MetacogniÃ§Ã£o CrÃ­tica","antes":3,"apos":5,"evidences":"DossiÃª pedagÃ³gico geral - Este e-PortfÃ³lio Reflexivo de referÃªncia"},{"id":"c10","name":"Desenvolvimento de Interfaces Digitais de Aprendizagem","antes":2,"apos":4,"evidences":"Trabalho prÃ¡tico global e estruturaÃ§Ã£o sÃ­ncrona de recursos"}],"pontosFortes":["Vasta e consolidada experiÃªncia prÃ¡tica como formadora profissional no terreno desde o ano de 2006, lidando com pÃºblicos de enorme diversidade sociocultural.","Elevada apetÃªncia para a reflexÃ£o crÃ­tica fundamentada e flexibilidade cognitiva na identificaÃ§Ã£o e correÃ§Ã£o de fragilidades andragÃ³gicas prÃ³prias.","Forte facilidade de adaptaÃ§Ã£o perante ambientes digitais de aprendizagem, sistemas LMS de grande escala (Moodle, Teams) e ferramentas de e-learning moderno.","Proatividade comprovada no trabalho colaborativo de cariz cientÃ­fico, facilitando a partilha e o repertÃ³rio mÃºtuo.","Comportamento Ã©tico inabalÃ¡vel e postura humanista pautada pelo incentivo incondicional Ã  autonomia crÃ­tica dos formandos."],"areasDesenvolver":["Falta de experiÃªncia letiva em jÃºris formais no Ã¢mbito do RVCC Profissional (pretendo consolidar esta competÃªncia assistindo a sessÃµes pÃºblicas).","Aprofundar o repertÃ³rio de tÃ©cnicas de remediaÃ§Ã£o andragÃ³gica perante formandos formadores seniores que apresentem considerÃ¡vel resistÃªncia Ã  inovaÃ§Ã£o metodolÃ³gica.","Desenvolver novas competÃªncias na integraÃ§Ã£o produtiva de inteligÃªncia artificial generativa Ã©tica no apoio ao desenvolvimento de planos de formaÃ§Ã£o e tutoria.","ParticipaÃ§Ã£o mais ativa e regular em Comunidades de PrÃ¡tica de formadores nacionais para estreitar as redes de repertÃ³rio tÃ©cnico."],"synthesisText1":"O Curso de Formador de Formadores representou um marco profundamente gerador de sentido no decurso da minha carreira profissional. Se em 2006 a FormaÃ§Ã£o PedagÃ³gica Inicial me conferiu as aptas ferramentas de cariz tÃ©cnico para exercer a docÃªncia, este percurso agora concluÃ­do elevou a minha prÃ¡tica a um patamar superior: a responsabilidade Ã©tica, cientÃ­fica e metodolÃ³gica de formar outros formadores e promover percursos de RVCC profissionais sÃ³lidos no Alentejo.","synthesisText2":"A fusÃ£o sistemÃ¡tica entre a teoria de vanguarda â€” seja nos preceitos cognitivos da aprendizagem multimÃ©dia de Mayer, seja na fecundidade dialÃ³gica das Comunidades de PrÃ¡tica de Wenger â€” e os desafios do mercado laboral atual dotaram-me de uma robustez pedagÃ³gica inabalÃ¡vel. Compreendi que o formador de excelÃªncia assume o papel de arquiteto de experiÃªncias de descoberta, abandonando o pedestal da mera transmissÃ£o de informaÃ§Ã£o estÃ¡tica.","synthesisText3":"Esta jornada percorrida no seio do IEFP em Beja, sob a orientaÃ§Ã£o cientÃ­fica de formadores de excelÃªncia e partilhada com um excecional grupo de pares reflexivos, reafirmou a minha paixÃ£o insubstituÃ­vel pela educaÃ§Ã£o de adultos. Sinto-me pronta para abraÃ§ar o meu novo papel, prestando um serviÃ§o pÃºblico de elevando rigor tÃ©cnico e empatia transformadora.","signatureName":"AmÃ©lia Cerejo Lopes","signatureRole":"Formadora de Formadores Certificada","signatureYear":"2026","goalsShortTerm":["Submeter o dossiÃª curricular devidamente estruturado na plataforma NETFORCE para validaÃ§Ã£o de novas competÃªncias docentes docentes de apoio.","Integrar no prazo de 6 meses uma equipa de acompanhamento RVCC Profissional no Centro de Emprego de Beja como tÃ©cnica de diagnÃ³stico pedagÃ³gico.","Concluir os ajustamentos instrucionais nos meus recursos das formaÃ§Ãµes do CatÃ¡logo Nacional de QualificaÃ§Ãµes de acordo com os princÃ­pios de ergonomia cognitiva de Mayer.","Facilitar sessÃµes tutoriais iniciais para formandos com foco em metodologias ativas hÃ­bridas."],"goalsMediumTerm":["Atuar ativamente na qualidade de membro de JÃºri de RVCC Profissional para certificaÃ§Ã£o de formadores competentes.","Conceber, testar e operacionalizar uma Comunidade de PrÃ¡tica online sintonizada com formadores das Ã¡reas de Beja e Alentejo no partilhar de repertÃ³rio didÃ¡tico.","Especializar-me em metodologias ativas direcionadas para a formaÃ§Ã£o de pÃºblicos seniores altamente especializados.","Desenvolver um website repositÃ³rio de recursos andragÃ³gicos abertos e livres de suporte Ã  andragogia."],"plannedTrainings":["FormaÃ§Ã£o especializada em InteligÃªncia Artificial Generativa aplicada Ã  Engenharia Curricular e AvaliaÃ§Ã£o de CompetÃªncias.","ParticipaÃ§Ã£o regular anual em Congressos Nacionais e ConferÃªncias de Vanguarda de Andragogia e EducaÃ§Ã£o de Adultos.","Curso AvanÃ§ado de Auditoria de FormaÃ§Ã£o e Sistemas de Garantia da Qualidade (modelos EQUAVET / DGERT)."],"evidences":[{"id":"ev1","moduleCode":"MF1","title":"Instrumentos de DiagnÃ³stico â€” ObservaÃ§Ã£o Direta & AvaliaÃ§Ã£o 360","description":"Trabalho de grupo aprofundado mapeando de forma exaustiva as vantagens operativas, limitaÃ§Ãµes funcionais e relatÃ³rios tÃ©cnicos destas ferramentas diagnÃ³sticas."},{"id":"ev2","moduleCode":"MF1","title":"Perfil do TikTok Destination Specialist","description":"Referencial de competÃªncias de vanguarda focado em Storytelling Visual em VÃ­deos Curtos para funÃ§Ãµes em mutaÃ§Ã£o acelerada."},{"id":"ev3","moduleCode":"MF2","title":"Recurso MultimÃ©dia 'ProfissÃ£o de Risco: Bombeiro'","description":"Recurso didÃ¡tico e-learning totalmente desenhado com base nos preceitos de ergonomia cognitiva de Mayer para otimizaÃ§Ã£o da carga mental."},{"id":"ev4","moduleCode":"MF2","title":"GlossÃ¡rio CientÃ­fico sobre Comunidades de PrÃ¡tica","description":"AnÃ¡lise lexicogrÃ¡fica dos conceitos vitais de 'Envolvimento MÃºtuo' e 'RepertÃ³rio Partilhado' defendidos por Etienne Wenger."},{"id":"ev5","moduleCode":"MF3","title":"Este e-PortfÃ³lio Reflexivo Integrado","description":"Instrumento central de meta-avaliaÃ§Ã£o e estruturaÃ§Ã£o da identidade andragÃ³gica madura, unificando todo o percurso formativo."},{"id":"ev6","moduleCode":"MF3","title":"Ficha oficial de Percurso Profissional e de FormaÃ§Ã£o","description":"DocumentaÃ§Ã£o curricular unificada ligando as aprendizagens formais, nÃ£o-formais e informais consolidadas desde 2006."},{"id":"ev7","moduleCode":"MF4","title":"Planeamento Completo de Projeto PedagÃ³gico HÃ­brido","description":"Desenho instrucional de uma unidade curricular com cronograma de momentos sÃ­ncronos e assÃ­ncronos e plano ativo de problemas de campo."},{"id":"ev8","moduleCode":"MF5","title":"Grelhas de AnÃ¡lise de Comportamentos PedagÃ³gicos","description":"GuiÃ£o de observaÃ§Ã£o e codificaÃ§Ã£o objetiva de micro-aulas, postura de voz, dinamizaÃ§Ã£o e estratÃ©gias de remediaÃ§Ã£o grupal."}],"references":[{"id":"r1","category":"LegislaÃ§Ã£o","citation":"Portaria n.Âº 214/2011, de 30 de maio. DiÃ¡rio da RepÃºblica, 1.Âª sÃ©rie â€” N.Âº 104. Regula o Sistema Nacional de QualificaÃ§Ãµes e o processo de Reconhecimento, ValidaÃ§Ã£o e CertificaÃ§Ã£o de CompetÃªncias (RVCC)."},{"id":"r2","category":"Referenciais","citation":"IEFP (2022). Referencial de FormaÃ§Ã£o PedagÃ³gica ContÃ­nua de Formadores â€” Formador de Formadores (3.Âª ediÃ§Ã£o). Instituto do Emprego e FormaÃ§Ã£o Profissional."},{"id":"r3","category":"Referenciais","citation":"IEFP (2023). Referencial de FormaÃ§Ã£o PedagÃ³gica Inicial de Formadores (5.Âª ediÃ§Ã£o). Instituto do Emprego e FormaÃ§Ã£o Profissional."},{"id":"r4","category":"Referenciais","citation":"IEFP. Regulamento da FormaÃ§Ã£o e CertificaÃ§Ã£o de Formadores. Instituto do Emprego e FormaÃ§Ã£o Profissional."},{"id":"r5","category":"Manuais","citation":"ANQEP. Guia de Candidatura ao RVCC Formadores. AgÃªncia Nacional para a QualificaÃ§Ã£o e o Ensino Profissional."},{"id":"r6","category":"Manuais","citation":"ANQEP. Guia de OperacionalizaÃ§Ã£o dos Processos de Reconhecimento, ValidaÃ§Ã£o e CertificaÃ§Ã£o de CompetÃªncias. AgÃªncia Nacional para a QualificaÃ§Ã£o e o Ensino Profissional."},{"id":"r7","category":"Manuais","citation":"ANQEP. Manual de OrientaÃ§Ã£o ao Longo da Vida no Centro Qualifica. AgÃªncia Nacional para a QualificaÃ§Ã£o e o Ensino Profissional."},{"id":"r8","category":"Obras","citation":"APDSI (2009). Comunidades de PrÃ¡tica no EspaÃ§o Digital. AssociaÃ§Ã£o para a PromoÃ§Ã£o e Desenvolvimento da Sociedade da InformaÃ§Ã£o."},{"id":"r9","category":"Obras","citation":"Wenger-Trayner, E., & Wenger-Trayner, B. (2015). Introduction to communities of practice. DisponÃ­vel online."},{"id":"r10","category":"Instrumentos","citation":"Ficha de Percurso Profissional e de FormaÃ§Ã£o. Material de apoio tÃ©cnico do MÃ³dulo 3, Curso de Formador de Formadores, IEFP."},{"id":"r11","category":"Instrumentos","citation":"Checklist de AutoavaliaÃ§Ã£o 'Sou um Formador Reflexivo?'. Material de apoio instrucional do MÃ³dulo 3, Curso de Formador de Formadores, IEFP."},{"id":"r12","category":"Recursos","citation":"Plataforma NETFORCE â€” Sistema de GestÃ£o de Formadores. IEFP. DisponÃ­vel online em netforce.iefp.pt."},{"id":"r13","category":"Recursos","citation":"Plataforma FAD/Moodle IEFP â€” Plataforma de FormaÃ§Ã£o a DistÃ¢ncia do IEFP. DisponÃ­vel online em fad.iefp.pt."}],"quoteText":"Quem ensina, aprende ao ensinar; e quem aprende, ensina ao aprender.","quoteAuthor":"Paulo Freire"};
+
+      const sections = [
+        ["capa", "Ficha Identificativa"],
+        ["apresentacao", "ApresentaÃ§Ã£o Pessoal"],
+        ["objetivos", "Objetivos"],
+        ["modulos", "ReflexÃ£o sobre os MÃ³dulos"],
+        ["autoavaliacao", "AutoavaliaÃ§Ã£o"],
+        ["sintese", "SÃ­ntese Reflexiva"],
+        ["futuro", "Metas e Projetos"],
+        ["evidencias", "EvidÃªncias"],
+        ["bibliografia", "Bibliografia"]
+      ];
+
+      const escapeHtml = (value) => String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+
+      const list = (items) => `<ul>${(items || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+
+      const meta = (label, value) => `
+        <div class="meta">
+          <span class="label">${escapeHtml(label)}</span>
+          <strong>${escapeHtml(value)}</strong>
+        </div>`;
+
+      function renderNav() {
+        const nav = document.getElementById("nav");
+        nav.innerHTML = sections.map(([id, label]) => {
+          const link = `<a href="#${id}" data-section="${id}">${escapeHtml(label)}</a>`;
+          if (id !== "modulos") return link;
+          return link + `
+            <div class="submenu" id="modules-submenu">
+              ${portfolio.modules.map((module) => `
+                <a href="#modulos/${module.code.toLowerCase()}" data-section="modulos" data-module="${escapeHtml(module.code)}">${escapeHtml(module.code)}</a>
+              `).join("")}
+            </div>`;
+        }).join("");
+        nav.addEventListener("click", (event) => {
+          const link = event.target.closest("a[data-section]");
+          if (!link) return;
+          event.preventDefault();
+          showSection(link.dataset.section, true, link.dataset.module || null);
+        });
+      }
+
+      function setupFloatingNav() {
+        const menuButton = document.getElementById("float-menu");
+        if (menuButton) {
+          menuButton.addEventListener("click", () => {
+            const isCollapsed = document.body.classList.toggle("sidebar-collapsed");
+            menuButton.setAttribute("aria-expanded", String(!isCollapsed));
+          });
+        }
+
+        const topButton = document.getElementById("float-top");
+        const updateTopButton = () => {
+          if (!topButton) return;
+          topButton.classList.toggle("is-hidden", window.scrollY < 180);
+        };
+        updateTopButton();
+        window.addEventListener("scroll", updateTopButton, { passive: true });
+      }
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function render() {
+        document.getElementById("top-formanda").textContent = portfolio.formanda;
+        document.getElementById("footer").textContent = `Â© 2026 ${portfolio.formanda} Â· ${portfolio.servico}`;
+
+        document.getElementById("app").innerHTML = `
+          <section id="capa" class="hero">
+            <h1>${escapeHtml(portfolio.title)}</h1>
+            <p class="subtitle">${escapeHtml(portfolio.subtitle)}</p>
+            <div class="meta-grid">
+              ${meta("Formanda", portfolio.formanda)}
+              ${meta("Entidade formadora", portfolio.entidadeFormadora)}
+              ${meta("ServiÃ§o", portfolio.servico)}
+              ${meta("Curso", portfolio.curso)}
+              ${meta("OrganizaÃ§Ã£o", portfolio.formaOrganizacao)}
+              ${meta("PerÃ­odo", portfolio.periodoFormacao)}
+              ${meta("CoordenaÃ§Ã£o", portfolio.coordenadoraPedagogica)}
+              ${meta("Data", portfolio.dataElaboracao)}
+            </div>
+          </section>
+
+          <section id="apresentacao">
+            <h2>ApresentaÃ§Ã£o Pessoal</h2>
+            <p>${escapeHtml(portfolio.personalBio)}</p>
+            <h3>ExperiÃªncia</h3>
+            ${list(portfolio.experienceBullets)}
+            <h3>MotivaÃ§Ã£o</h3>
+            ${list(portfolio.motivationBullets)}
+          </section>
+
+          <section id="objetivos">
+            <h2>Objetivos do e-PortfÃ³lio</h2>
+            ${list(portfolio.portfolioGoalsBullets)}
+            <p class="quote">"${escapeHtml(portfolio.goalsQuote)}"</p>
+          </section>
+
+          <section id="modulos">
+            <h2>ReflexÃ£o sobre os MÃ³dulos</h2>
+            ${portfolio.modules.map((module) => `
+              <article class="module" data-module="${escapeHtml(module.code)}">
+                <h3>${escapeHtml(module.title)}</h3>
+                ${["MF4", "MF5"].includes(module.code) ? "" : `
+                  <span class="tag">${escapeHtml(module.code)} Â· ${escapeHtml(module.hours)}</span>
+                  <p><strong>O que jÃ¡ sabia:</strong> ${escapeHtml(module.sabia)}</p>
+                  <h3>O que aprendi</h3>
+                  ${list(module.aprendi)}
+                  <h3>Atividades realizadas</h3>
+                  ${list(module.atividades)}
+                  <p class="quote">"${escapeHtml(module.reflexao)}"</p>
+                  <p><strong>AplicaÃ§Ã£o futura:</strong> ${escapeHtml(module.aplicacaoFutura)}</p>
+                  <p><strong>A aprofundar:</strong> ${escapeHtml(module.aspetosAprofundar)}</p>
+                `}
+              </article>
+            `).join("")}
+          </section>
+
+          <section id="autoavaliacao">
+            <h2>AutoavaliaÃ§Ã£o</h2>
+            ${portfolio.competenceRows.map((row) => `
+              <article class="competence">
+                <h3>${escapeHtml(row.name)}</h3>
+                <div class="bars">
+                  <span class="label">Antes: ${row.antes}/5</span>
+                  <div class="bar"><div class="fill" style="width: ${row.antes * 20}%"></div></div>
+                  <span class="label">ApÃ³s: ${row.apos}/5</span>
+                  <div class="bar"><div class="fill" style="width: ${row.apos * 20}%"></div></div>
+                </div>
+                <p>${escapeHtml(row.evidences)}</p>
+              </article>
+            `).join("")}
+            <h3>Pontos fortes</h3>
+            ${list(portfolio.pontosFortes)}
+            <h3>Ãreas a desenvolver</h3>
+            ${list(portfolio.areasDesenvolver)}
+          </section>
+
+          <section id="sintese">
+            <h2>SÃ­ntese Reflexiva Global</h2>
+            <p>${escapeHtml(portfolio.synthesisText1)}</p>
+            <p>${escapeHtml(portfolio.synthesisText2)}</p>
+            <p>${escapeHtml(portfolio.synthesisText3)}</p>
+            <p><strong>${escapeHtml(portfolio.signatureName)}</strong><br />${escapeHtml(portfolio.signatureRole)} Â· ${escapeHtml(portfolio.signatureYear)}</p>
+          </section>
+
+          <section id="futuro">
+            <h2>Metas e Projetos de Futuro</h2>
+            <h3>Curto prazo</h3>
+            ${list(portfolio.goalsShortTerm)}
+            <h3>MÃ©dio prazo</h3>
+            ${list(portfolio.goalsMediumTerm)}
+            <h3>FormaÃ§Ãµes planeadas</h3>
+            ${list(portfolio.plannedTrainings)}
+          </section>
+
+          <section id="evidencias">
+            <h2>RepositÃ³rio de EvidÃªncias</h2>
+            ${[
+              ...portfolio.evidences,
+              {
+                id: "ev9",
+                moduleCode: "MF5",
+                title: "Grelha de Observação Interativa e Feedback Estruturado",
+                description: "Instrumento digital de apoio à observação, autoavaliação e feedback construtivo em simulações pedagógicas.",
+                url: "evidencias/mf5/grelha-avaliacao-feedback/"
+              }
+            ]
+              .map((evidence) => `
+              <article class="evidence">
+                <span class="tag">${escapeHtml(evidence.moduleCode)}</span>
+                <h3>${escapeHtml(evidence.title)}</h3>
+                <p>${escapeHtml(evidence.description)}</p>
+                ${evidence.url ? '<a class="evidence-link" href="' + escapeHtml(evidence.url) + '">Abrir evidência</a>' : ""}
+                ${!evidence.url && evidence.id === "ev5" ? '<a class="evidence-link" href="evidencias/mf3/o-formador-reflexivo/">Abrir e-Portfólio MF3</a>' : ""}
+                ${!evidence.url && evidence.id === "ev6" ? '<a class="evidence-link" href="evidencias/ficha-percurso.html">Abrir pÃ¡gina da ficha</a>' : ""}
+              </article>
+            `).join("")}
+          </section>
+
+          <section id="bibliografia">
+            <h2>ReferÃªncias BibliogrÃ¡ficas e Documentais</h2>
+            ${portfolio.references.map((reference) => `
+              <article class="reference">
+                <span class="tag">${escapeHtml(reference.category)}</span>
+                <p>${escapeHtml(reference.citation)}</p>
+              </article>
+            `).join("")}
+            <p class="quote">"${escapeHtml(portfolio.quoteText)}" â€” ${escapeHtml(portfolio.quoteAuthor)}</p>
+          </section>
+        `;
+      }
+
+      function showSection(id, updateHash = false, requestedModule = null) {
+        const [rawSection, rawModule] = String(id || "").split("/");
+        const selectedId = sections.some(([sectionId]) => sectionId === rawSection) ? rawSection : "capa";
+        const selectedModule = requestedModule || (selectedId === "modulos" && rawModule ? rawModule.toUpperCase() : null);
+        document.querySelectorAll("main section").forEach((section) => {
+          section.classList.toggle("active-section", section.id === selectedId);
+        });
+        document.querySelectorAll("nav a").forEach((link) => {
+          const isModuleLink = Boolean(link.dataset.module);
+          const isActiveModuleLink = isModuleLink && selectedId === "modulos" && link.dataset.module === selectedModule;
+          const isActiveSectionLink = !isModuleLink && link.dataset.section === selectedId && !(selectedId === "modulos" && selectedModule);
+          link.classList.toggle("active", isActiveModuleLink || isActiveSectionLink);
+        });
+        document.getElementById("modules-submenu")?.classList.toggle("open", selectedId === "modulos");
+        if (selectedId === "modulos") {
+          document.querySelectorAll(".module").forEach((moduleEl) => {
+            moduleEl.classList.toggle("active-module", !selectedModule || moduleEl.dataset.module === selectedModule);
+          });
+          if (updateHash) {
+            history.replaceState(null, "", selectedModule ? "#modulos/" + selectedModule.toLowerCase() : "#modulos");
+          }
+        } else {
+          document.querySelectorAll(".module").forEach((moduleEl) => moduleEl.classList.remove("active-module"));
+          if (updateHash) history.replaceState(null, "", "#" + selectedId);
+        }
+        window.scrollTo({ top: 0, behavior: updateHash ? "smooth" : "auto" });
+      }
+
+      function preparePrint() {
+        window.scrollTo({ top: 0, behavior: "auto" });
+        setTimeout(() => window.print(), 50);
+      }
+
+      window.addEventListener("afterprint", () => {
+        showSection(location.hash.replace("#", "") || "capa");
+      });
+
+      renderNav();
+      setupFloatingNav();
+      render();
+      showSection("capa");
+      
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,6 @@
+{
+  "name": "Digital Atelier",
+  "description": "Portfólio profissional de Formação de Formadores com matriz de proficiência interactiva, síntese reflexiva global e galeria de projectos pedagógicos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ficha de Percurso Profissional e de Formação - Amélia Cerejo Lopes</title>
+    <style>
+      :root {
+        --ink: #172033;
+        --muted: #626d80;
+        --blue: #002b5b;
+        --gold: #bd8a12;
+        --paper: #fbf8f4;
+        --soft: #edf3f8;
+        --line: #e2ded8;
+        --white: #fff;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Segoe UI", Arial, sans-serif;
+        line-height: 1.62;
+      }
+
+      header {
+        background: linear-gradient(135deg, #ffffff 0%, #eef4fb 58%, #f8efe0 100%);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 44px 22px 34px;
+      }
+
+      h1, h2, h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: #001736;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        max-width: 840px;
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.8rem);
+        line-height: 1.05;
+      }
+
+      .lead {
+        max-width: 760px;
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .summary-card, .fact {
+        background: rgba(255, 255, 255, 0.82);
+        border-left: 3px solid var(--gold);
+        padding: 12px 14px;
+      }
+
+      .summary-card span, .fact span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.74rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .layout {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 28px 22px 56px;
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 24px;
+      }
+
+      nav {
+        position: sticky;
+        top: 18px;
+        align-self: start;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      nav a {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 6px;
+        color: var(--blue);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.91rem;
+      }
+
+      nav a:hover {
+        background: var(--soft);
+      }
+
+      section {
+        position: relative;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: clamp(22px, 3vw, 34px);
+        margin-bottom: 18px;
+      }
+
+      .section-number {
+        display: inline-grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 800;
+        margin-bottom: 12px;
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: clamp(1.35rem, 2vw, 2rem);
+      }
+
+      h3 {
+        margin: 18px 0 8px;
+        font-size: 1.08rem;
+      }
+
+      p {
+        margin: 0 0 14px;
+      }
+
+      ul {
+        margin: 8px 0 14px;
+        padding-left: 1.2rem;
+      }
+
+      li {
+        margin: 6px 0;
+      }
+
+      .fact {
+        margin: 10px 0;
+        border-radius: 6px;
+        border-top: 1px solid #f1ede7;
+        border-right: 1px solid #f1ede7;
+        border-bottom: 1px solid #f1ede7;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        margin-top: 12px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+      }
+
+      th {
+        background: var(--blue);
+        color: #fff;
+        text-align: left;
+        padding: 12px;
+        font-size: 0.88rem;
+      }
+
+      td {
+        border: 1px solid var(--line);
+        padding: 13px 12px;
+        vertical-align: top;
+      }
+
+      td:first-child {
+        width: 28%;
+        color: var(--blue);
+        font-weight: 800;
+      }
+
+      footer {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 22px 34px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .floating-nav {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 40;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+      }
+
+      .float-button {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #cad4e2;
+        border-radius: 999px;
+        background: var(--white);
+        color: var(--blue);
+        box-shadow: 0 12px 28px rgba(0, 43, 91, 0.14);
+        text-decoration: none;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      .float-button svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button:hover {
+        border-color: var(--gold);
+        transform: translateY(-1px);
+      }
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (max-width: 840px) {
+        .summary {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        nav {
+          position: static;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .summary {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        .floating-nav, nav {
+          display: none;
+        }
+
+        body {
+          background: #fff;
+        }
+
+        .layout {
+          display: block;
+          max-width: none;
+          padding: 0;
+        }
+
+        section {
+          border: 0;
+          border-bottom: 1px solid #ddd;
+          border-radius: 0;
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="hero">
+        <h1>Ficha de Percurso Profissional e de Formação</h1>
+        <p class="lead">Página de evidência complementar com a síntese do percurso profissional, formativo e pedagógico de Amélia Cerejo Lopes.</p>
+        <div class="summary"><div class="summary-card"><span>Nome</span><strong>Amélia Cerejo Lopes</strong></div>
+<div class="summary-card"><span>Área</span><strong>TIC, Formação, Psicologia e Gestão</strong></div>
+<div class="summary-card"><span>Situação</span><strong>Formadora / Trabalhadora independente</strong></div>
+<div class="summary-card"><span>Documento</span><strong>Ficha de percurso profissional e de formação</strong></div></div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav aria-label="Índice da ficha">
+        <a href="#identificacao">1. Identificação</a>
+<a href="#percurso-profissional">2. Percurso Profissional</a>
+<a href="#percurso-de-formacao">3. Percurso de Formação</a>
+<a href="#experiencia-na-area-da-formacao">4. Experiência na Área da Formação</a>
+<a href="#competencias-desenvolvidas">5. Competências Desenvolvidas</a>
+<a href="#motivacao-para-a-formacao-de-formadores">6. Motivação para a Formação de Formadores</a>
+<a href="#expectativas-e-objectivos-de-desenvolvimento">7. Expectativas e Objectivos de Desenvolvimento</a>
+<a href="#sintese-final">8. Síntese Final</a>
+      </nav>
+      <main>
+        
+            <section id="identificacao">
+              <span class="section-number">1</span>
+              <h2>Identificação</h2>
+              <div class="fact"><span>Nome</span><strong>Amélia Cerejo Lopes</strong></div>
+<div class="fact"><span>Área profissional predominante</span><strong>Tecnologias de Informação, Formação, Psicologia, Gestão e Apoio Administrativo</strong></div>
+<div class="fact"><span>Situação profissional atual</span><strong>Formadora / Trabalhadora independente</strong></div>
+<div class="fact"><span>Áreas de interesse profissional</span><strong>Formação profissional, TIC, gestão de projetos, recursos humanos, apoio administrativo, gestão financeira e desenvolvimento de competências digitais.</strong></div>
+            </section>
+            
+            <section id="percurso-profissional">
+              <span class="section-number">2</span>
+              <h2>Percurso Profissional</h2>
+              <p>O meu percurso profissional tem sido marcado por uma experiência diversificada, cruzando áreas como as Tecnologias de Informação, a Psicologia, a Gestão, a Formação e o apoio administrativo.</p>
+<p>Durante vários anos trabalhei na Fundação D. Pedro IV – Instituição de Solidariedade Social, onde desempenhei funções como Técnica de Apoio Informático (1994‑2021). Esta experiência permitiu‑me desenvolver competências técnicas, organizacionais e relacionais, nomeadamente na resolução de problemas, apoio a utilizadores, gestão de informação, acompanhamento de processos e adaptação a diferentes necessidades institucionais.</p>
+<p>Paralelamente, o meu percurso académico na área da Psicologia consolidou competências de comunicação, escuta activa, análise de necessidades, acompanhamento individual e compreensão dos processos de aprendizagem e desenvolvimento humano. Embora não exerça actualmente Psicologia Clínica, esta base continua a ser muito relevante na forma como comunico, acompanho e apoio pessoas em contexto formativo.</p>
+<p>Mais recentemente, tenho desenvolvido actividade na área da formação profissional, especialmente no domínio das TIC, apoiando adultos na aquisição e consolidação de competências digitais. Esta experiência reforçou o meu interesse pela educação de adultos, pela criação de recursos pedagógicos claros e pela utilização de ferramentas digitais em contexto de aprendizagem.</p>
+            </section>
+            
+            <section id="percurso-de-formacao">
+              <span class="section-number">3</span>
+              <h2>Percurso de Formação</h2>
+              <p>Sou licenciada em Psicologia – Clínica e do Aconselhamento e conclui o Mestrado em Psicologia, Aconselhamento e Psicoterapia. Esta formação deu‑me uma base sólida ao nível da compreensão do comportamento humano, da comunicação interpessoal e dos processos de desenvolvimento pessoal e profissional.</p>
+<p>Concluí também a Formação Pedagógica Inicial de Formadores (2006), que me permitiu adquirir competências essenciais para planear, dinamizar e avaliar sessões de formação. Desde então, procuro actualizar e aprofundar conhecimentos sobre metodologias pedagógicas, plataformas digitais, formação a distância e ferramentas de produtividade.</p>
+<p>Tenho frequentado formações na área das Tecnologias de Informação, nomeadamente em programação, algoritmia, plataformas colaborativas, Moodle, Microsoft 365, processador de texto, folha de cálculo e recursos digitais aplicados à formação.</p>
+            </section>
+            
+            <section id="experiencia-na-area-da-formacao">
+              <span class="section-number">4</span>
+              <h2>Experiência na Área da Formação</h2>
+              <ul><li>A minha experiência formativa incide sobretudo nas Tecnologias de Informação e competências digitais, com enfoque em adultos em contexto de formação profissional.</li></ul>
+<h3>Temas habituais das sessões:</h3>
+<ul><li>Processador de texto</li><li>Folha de cálculo</li><li>Técnicas de digitação</li><li>Utilização de plataformas digitais (Microsoft 365, Moodle, OneDrive, Teams)</li><li>Criação e organização de recursos formativos online.</li></ul>
+<p>Na preparação das sessões, crio materiais claros, estruturados e adequados ao perfil dos participantes, valorizando uma abordagem prática, progressiva e acessível.</p>
+            </section>
+            
+            <section id="competencias-desenvolvidas">
+              <span class="section-number">5</span>
+              <h2>Competências Desenvolvidas</h2>
+              
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Tipo de competências</th><th>Principais pontos</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Técnicas</td><td>Ferramentas informáticas e plataformas digitais; apoio técnico; organização e gestão de informação; criação de materiais digitais; noções de programação e bases de dados.</td></tr><tr><td>Pedagógicas</td><td>Planeamento de sessões; definição de objectivos; preparação de actividades; adaptação de conteúdos; avaliação das aprendizagens; criação de recursos didácticos digitais.</td></tr><tr><td>Pessoais e sociais</td><td>Comunicação clara e empática; organização; atenção ao detalhe; autonomia; adaptação; responsabilidade; escuta activa; persistência na resolução de problemas.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    
+            </section>
+            
+            <section id="motivacao-para-a-formacao-de-formadores">
+              <span class="section-number">6</span>
+              <h2>Motivação para a Formação de Formadores</h2>
+              <p>A formação oferece‑me a possibilidade de contribuir para o desenvolvimento de competências das pessoas, especialmente na área digital. Valorizo ajudar adultos a ganhar confiança e autonomia, através de sessões práticas e úteis.</p>
+<p>A Formação de Formadores representa uma oportunidade para reforçar competências pedagógicas, reflectir sobre a minha prática e aprofundar metodologias adequadas à aprendizagem de adultos.</p>
+            </section>
+            
+            <section id="expectativas-e-objectivos-de-desenvolvimento">
+              <span class="section-number">7</span>
+              <h2>Expectativas e Objectivos de Desenvolvimento</h2>
+              <ul><li>Aperfeiçoar o planeamento de sessões e a gestão do tempo</li><li>Diversificar metodologias pedagógicas</li><li>Criar recursos mais apelativos e adequados aos adultos</li><li>Reforçar estratégias de avaliação formativa</li><li>Integrar melhor as tecnologias digitais no ensino‑aprendizagem.</li></ul>
+            </section>
+            
+            <section id="sintese-final">
+              <span class="section-number">8</span>
+              <h2>Síntese Final</h2>
+              <p>A combinação entre competências técnicas, humanas e pedagógicas, aliada à experiência em contextos diversos, permite‑me ter uma visão abrangente sobre os processos de aprendizagem. A minha maior força enquanto formadora reside na capacidade de explicar de forma clara, adaptar conteúdos às necessidades dos participantes e criar um ambiente de aprendizagem próximo, organizado e respeitador.</p>
+<p>Continuarei a investir no meu desenvolvimento como formadora, contribuindo para uma formação profissional mais prática, inclusiva e orientada para a autonomia dos participantes.</p>
+            </section>
+            
+      </main>
+    </div>
+
+    <footer>
+      Fonte: Ficha De Percurso Profissional E De Formação - Amélia Cerejo Lopes.docx · Página local gerada para o e-Portfólio.
+    </footer>
+
+    <div class="floating-nav" aria-label="Navegação rápida">
+      <a class="float-button" href="../index.html#evidencias" title="Voltar às evidências" aria-label="Voltar às evidências">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        <span class="sr-only">Voltar às evidências</span>
+      </a>
+      <button class="float-button action-print" type="button" onclick="window.print()" title="Imprimir esta ficha" aria-label="Imprimir esta ficha">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V4h10v4"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v6H7z"/><path d="M17 12h.01"/></svg>
+        <span class="sr-only">Imprimir esta ficha</span>
+      </button>
+      <a class="float-button action-complete" href="../imprimir-completo.html" title="Imprimir e-Portfólio completo" aria-label="Imprimir e-Portfólio completo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h10v13H8z"/><path d="M6 17H5a2 2 0 0 1-2-2V4h10a2 2 0 0 1 2 2v1"/><path d="M11 11h4"/><path d="M11 15h4"/></svg>
+        <span class="sr-only">Imprimir e-Portfólio completo</span>
+      </a>
+      <button class="float-button is-hidden" type="button" id="float-top" onclick="scrollToTop()" title="Topo" aria-label="Topo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+        <span class="sr-only">Topo</span>
+      </button>
+    </div>
+
+    <script>
+      const topButton = document.getElementById("float-top");
+      const updateTopButton = () => {
+        if (!topButton) return;
+        topButton.classList.toggle("is-hidden", window.scrollY < 180);
+      };
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      updateTopButton();
+      window.addEventListener("scroll", updateTopButton, { passive: true });
+    </script>
+  </body>
+</html>

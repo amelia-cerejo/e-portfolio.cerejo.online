@@ -1,0 +1,408 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Dinamização da Simulação Pedagógica</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#737780",
+                        "secondary-fixed-dim": "#ffb780",
+                        "on-surface-variant": "#42474f",
+                        "on-error-container": "#93000a",
+                        "primary": "#002546",
+                        "on-tertiary-container": "#b39cc0",
+                        "secondary-fixed": "#ffdcc4",
+                        "surface-variant": "#e1e3e4",
+                        "on-tertiary-fixed-variant": "#523f5f",
+                        "surface-dim": "#d9dadb",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f8f9fa",
+                        "on-background": "#191c1d",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#453352",
+                        "primary-container": "#0d3b66",
+                        "on-surface": "#191c1d",
+                        "surface-tint": "#3a608d",
+                        "surface-container-high": "#e7e8e9",
+                        "on-primary-fixed": "#001c38",
+                        "tertiary-fixed": "#f3daff",
+                        "inverse-primary": "#a4c9fc",
+                        "inverse-on-surface": "#f0f1f2",
+                        "inverse-surface": "#2e3132",
+                        "surface-container": "#edeeef",
+                        "outline-variant": "#c3c6d0",
+                        "primary-fixed": "#d3e4ff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#ffab69",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#251431",
+                        "on-primary-container": "#81a6d7",
+                        "on-secondary-container": "#783d01",
+                        "on-secondary-fixed-variant": "#6f3800",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-primary-fixed-variant": "#204874",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#d6bee4",
+                        "tertiary": "#2e1d3b",
+                        "on-secondary-fixed": "#2f1400",
+                        "secondary": "#8e4e14",
+                        "primary-fixed-dim": "#a4c9fc",
+                        "surface": "#f8f9fa",
+                        "background": "#f8f9fa",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "0.5rem",
+                        "stack-lg": "2rem",
+                        "gutter": "1.5rem",
+                        "section-gap": "4rem",
+                        "container-max": "1280px",
+                        "margin-mobile": "1rem",
+                        "stack-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["manrope"],
+                        "headline-md": ["manrope"],
+                        "headline-lg": ["manrope"],
+                        "label-md": ["jetbrainsMono"],
+                        "display-lg": ["manrope"],
+                        "body-lg": ["inter"],
+                        "headline-lg-mobile": ["manrope"],
+                        "body-sm": ["inter"],
+                        "body-md": ["inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .process-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .process-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex justify-between items-center w-full px-gutter py-4 max-w-container-max mx-auto bg-primary dark:bg-primary-container">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">Simulação Pedagógica</span>
+</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-on-primary border-b-2 border-secondary-fixed pb-1 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#">Formador</a>
+<a class="text-on-primary/80 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#">Grupo</a>
+<a class="text-on-primary/80 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#">Princípios</a>
+<a class="text-on-primary/80 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#">Recursos</a>
+</nav>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-lg font-bold hover:opacity-90 transition-all active:scale-95">Imprimir</button>
+</header>
+<main class="max-w-container-max mx-auto px-gutter mb-section-gap">
+<!-- Hero Section -->
+<section class="py-section-gap">
+<div class="relative overflow-hidden rounded-xl bg-primary text-on-primary p-stack-lg md:p-16 flex flex-col md:flex-row items-center gap-12">
+
+<div class="relative z-10 flex-1 space-y-6">
+<h1 class="font-display-lg text-display-lg leading-tight">PRÁTICAS DE DINAMIZAÇÃO DA SIMULAÇÃO PEDAGÓGICA</h1>
+<p class="font-headline-md text-headline-md text-on-primary-container font-medium">O papel do formador e do grupo na construção da aprendizagem</p>
+<div class="glass-panel p-stack-md rounded-lg text-primary space-y-4 max-w-2xl mt-8">
+<div class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-4xl text-surface-tint" style="font-variation-settings: &quot;FILL&quot; 1;">target</span>
+<p class="font-body-lg text-body-lg">
+                                A simulação pedagógica é uma estratégia poderosa para desenvolver competências, promover a reflexão e preparar para a realidade profissional.
+                            </p>
+</div>
+<p class="font-body-md text-body-md italic border-l-4 border-surface-tint pl-4">
+                            O sucesso da experiência depende da preparação, da facilitação e do compromisso de todos os participantes com a aprendizagem.
+                        </p>
+</div>
+</div>
+<div class="relative z-10 w-full md:w-1/3 aspect-square rounded-full overflow-hidden border-4 border-on-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional group of educators in a modern, brightly lit university learning lab environment. A female trainer is leading a discussion while students listen intently. The atmosphere is collaborative, featuring clean lines, high-contrast pedagogical materials on screens, and a sophisticated color palette of navy, white, and soft teal accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc3cRofkV8iN8xsRZzf7sTIKFIYySdVqWVqaqyScwrVHCJetq_9xxHF0l8Tsb8av03PKVadAkoDG2Qt8R-1vOe7dir3rbGK3y9JPi46HIvHSyxD19lpIN7A4BRLF5iHnu6LDPTYJzYSzrWvfA9vAbxflLPvb5nVv76HszhC5UQ6TEEKpzWQ30ft-pyLmWaruTuUqntolNnYfVobhZZ0TkPYI0dDADbXIb_5uhyN-3mxeO_-VFkmfyeY1MNUoe-eT_AGb_9trr0O2lE">
+</div>
+</div>
+</section>
+<!-- Main Roles Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg">
+<!-- COLUMN 1: PAPEL DO FORMADOR -->
+<section class="space-y-stack-md">
+<div class="flex items-center gap-3 mb-stack-md">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xl">1</div>
+<h2 class="font-headline-lg text-headline-lg uppercase text-primary tracking-wide">PAPEL DO FORMADOR</h2>
+</div>
+<!-- Trainer Stages -->
+<div class="space-y-stack-md">
+<!-- Antes: Formador -->
+<div class="process-card bg-surface-container-low p-stack-lg rounded-xl border-t-4 border-green-600">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-3xl text-green-600">assignment</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-green-700 uppercase">ANTES DA SIMULAÇÃO</h3>
+<p class="font-body-sm text-body-sm font-bold opacity-70">Preparação</p>
+</div>
+</div>
+<ul class="space-y-stack-sm">
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Diagnóstico das competências dos formandos</strong><span class="text-body-sm">Analiso resultados e perfil de entrada para personalizar objetivos e critérios.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Definição clara de objetivos e critérios</strong><span class="text-body-sm">Partilho grelha de observação e indicadores na plataforma Moodle.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Orientação na elaboração do plano de sessão</strong><span class="text-body-sm">Acompanho e revejo os planos, garantindo coerência pedagógica.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Preparação logística e tecnológica</strong><span class="text-body-sm">Verifico recursos digitais (Canva, Teams, Mentimeter, Moodle) e preparo plano de contingência.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-green-600 text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Briefing ao grupo de observadores</strong><span class="text-body-sm">Distribuo guiões de observação e explico o seu papel ativo na aprendizagem.</span></div></li>
+</ul>
+</div>
+<!-- Durante: Formador -->
+<div class="process-card bg-surface-container-low p-stack-lg rounded-xl border-t-4 border-secondary">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-3xl text-secondary">visibility</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-secondary uppercase">DURANTE A SIMULAÇÃO</h3>
+<p class="font-body-sm text-body-sm font-bold opacity-70">Facilitação e Observação</p>
+</div>
+</div>
+<ul class="space-y-stack-sm">
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-secondary text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Observação sistemática e registo estruturado</strong><span class="text-body-sm">Utilizo a grelha para registar comportamentos concretos, de forma factual e objetiva.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-secondary text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Não interferência, salvo em situações críticas</strong><span class="text-body-sm">Respeito a autonomia do formando, intervindo apenas quando necessário.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-secondary text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Gestão do tempo e do ambiente</strong><span class="text-body-sm">Monitorizo o tempo e asseguro um ambiente propício à aprendizagem.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-secondary text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Registo de momentos-chave</strong><span class="text-body-sm">Identifico e anoto momentos relevantes (positivos e a melhorar) para um debriefing mais preciso e credível.</span></div></li>
+</ul>
+</div>
+<!-- Depois: Formador -->
+<div class="process-card bg-surface-container-low p-stack-lg rounded-xl border-t-4 border-surface-tint">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-3xl text-surface-tint">chat_bubble</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-surface-tint uppercase">DEPOIS DA SIMULAÇÃO</h3>
+<p class="font-body-sm text-body-sm font-bold opacity-70">Debriefing e Consolidação</p>
+</div>
+</div>
+<ul class="space-y-stack-sm">
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-surface-tint text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Autoavaliação em primeiro lugar</strong><span class="text-body-sm">Peço ao formando que se autoavalie com base numa checklist reflexiva.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-surface-tint text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Debriefing estruturado (3 momentos)</strong><span class="text-body-sm italic">1. Valorização dos pontos fortes; 2. Identificação de aspetos a melhorar; 3. Definição colaborativa de melhoria.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-surface-tint text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Feedback do grupo (técnica 2+1)</strong><span class="text-body-sm">Convido os formandos a partilhar dois aspetos positivos e uma sugestão de melhoria.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-surface-tint text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Feed-forward e compromisso de melhoria</strong><span class="text-body-sm">Concluo com a orientação: o que o formando vai fazer de diferente na próxima simulação.</span></div></li>
+</ul>
+</div>
+<!-- Sugestões Formador -->
+<div class="bg-green-50/50 dark:bg-primary-container/20 border border-green-200 dark:border-green-900/30 rounded-xl p-stack-md mt-stack-md">
+<h4 class="font-label-md text-label-md text-green-700 dark:text-green-400 mb-4 text-center tracking-widest uppercase">SUGESTÕES DE MELHORIA – PAPEL DO FORMADOR</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col items-center text-center p-2">
+<span class="material-symbols-outlined text-3xl text-green-600 mb-2">play_circle</span>
+<p class="text-body-sm">Implementar role-play breve (5 a 10 min) antes da simulação.</p>
+</div>
+<div class="flex flex-col items-center text-center p-2">
+<span class="material-symbols-outlined text-3xl text-green-600 mb-2">videocam</span>
+<p class="text-body-sm">Introduzir a autoscopia como prática sistemática.</p>
+</div>
+<div class="flex flex-col items-center text-center p-2">
+<span class="material-symbols-outlined text-3xl text-green-600 mb-2">sync</span>
+<p class="text-body-sm">Diversificar os formatos de debriefing: individual, em par e em grupo.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- COLUMN 2: PAPEL DO GRUPO -->
+<section class="space-y-stack-md">
+<div class="flex items-center gap-3 mb-stack-md">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xl">2</div>
+<h2 class="font-headline-lg text-headline-lg uppercase text-primary tracking-wide">PAPEL DO GRUPO DE PARTICIPANTES</h2>
+</div>
+<!-- Group Stages -->
+<div class="space-y-stack-md">
+<!-- Antes: Grupo -->
+<div class="process-card bg-surface-container-low p-stack-lg rounded-xl border-t-4 border-tertiary-container">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-3xl text-tertiary-container">groups</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-tertiary-container uppercase">ANTES DA SIMULAÇÃO</h3>
+<p class="font-body-sm text-body-sm font-bold opacity-70">Preparação e Envolvimento</p>
+</div>
+</div>
+<ul class="space-y-stack-sm">
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-tertiary-container text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Estudo e preparação atempada</strong><span class="text-body-sm">Consulto os materiais, compreendo os objetivos e apresento dúvidas antecipadamente.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-tertiary-container text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Participação no briefing</strong><span class="text-body-sm">Compreendo o meu papel como observador ativo e os critérios de observação.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-tertiary-container text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Ambiente de confiança</strong><span class="text-body-sm">Contribuo para um clima de respeito, escuta e colaboração.</span></div></li>
+</ul>
+</div>
+<!-- Durante: Grupo -->
+<div class="process-card bg-surface-container-low p-stack-lg rounded-xl border-t-4 border-on-tertiary-fixed-variant">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-3xl text-on-tertiary-fixed-variant">campaign</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-tertiary-fixed-variant uppercase">DURANTE A SIMULAÇÃO</h3>
+<p class="font-body-sm text-body-sm font-bold opacity-70">Participação Ativa</p>
+</div>
+</div>
+<ul class="space-y-stack-sm">
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-on-tertiary-fixed-variant text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Observação focada e respeitosa</strong><span class="text-body-sm">Observo com atenção, sem interrupções, e registo evidências concretas.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-on-tertiary-fixed-variant text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Registo com base na grelha</strong><span class="text-body-sm">Uso a grelha como guia, evitando juízos de valor pessoais.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-on-tertiary-fixed-variant text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Envolvimento na dinâmica</strong><span class="text-body-sm">Participo nas atividades propostas, contribuindo para a interação e aprendizagem coletiva.</span></div></li>
+</ul>
+</div>
+<!-- Depois: Grupo -->
+<div class="process-card bg-surface-container-low p-stack-lg rounded-xl border-t-4 border-on-tertiary-container">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-3xl text-on-tertiary-container">forum</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-tertiary-container uppercase">DEPOIS DA SIMULAÇÃO</h3>
+<p class="font-body-sm text-body-sm font-bold opacity-70">Feedback Construtivo</p>
+</div>
+</div>
+<ul class="space-y-stack-sm">
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-on-tertiary-container text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Feedback positivo e construtivo</strong><span class="text-body-sm">Partilho dois aspetos positivos e uma sugestão de melhoria de forma clara.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-on-tertiary-container text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Escuta ativa</strong><span class="text-body-sm">Ouço as perspetivas dos colegas e integro diferentes pontos de vista.</span></div></li>
+<li class="flex gap-3 items-start"><span class="material-symbols-outlined text-on-tertiary-container text-sm mt-1" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span> <div><strong class="block">Reflexão sobre a aprendizagem</strong><span class="text-body-sm">Identifico aprendizagens pessoais e como posso aplicá-las na minha prática.</span></div></li>
+</ul>
+</div>
+<!-- Sugestões Grupo -->
+<div class="bg-tertiary-container/10 border border-tertiary-container/30 rounded-xl p-stack-md mt-stack-md">
+<h4 class="font-label-md text-label-md text-tertiary-container mb-4 text-center tracking-widest uppercase">SUGESTÕES DE MELHORIA – PAPEL DO GRUPO</h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col items-center text-center p-2">
+<span class="material-symbols-outlined text-3xl text-tertiary-container mb-2">psychology</span>
+<p class="text-body-sm">Assumir o papel de observador como oportunidade de desenvolvimento.</p>
+</div>
+<div class="flex flex-col items-center text-center p-2">
+<span class="material-symbols-outlined text-3xl text-tertiary-container mb-2">quiz</span>
+<p class="text-body-sm">Preparar perguntas-chave para o debriefing profundo.</p>
+</div>
+<div class="flex flex-col items-center text-center p-2">
+<span class="material-symbols-outlined text-3xl text-tertiary-container mb-2">handshake</span>
+<p class="text-body-sm">Manter uma atitude de apoio, valorizando o crescimento dos colegas.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Principles Grid -->
+<section class="mt-section-gap">
+<div class="bg-primary p-stack-md rounded-t-xl text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-primary uppercase tracking-widest">PRINCÍPIOS QUE ORIENTAM A PRÁTICA</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-0 border-x border-b border-outline-variant rounded-b-xl overflow-hidden">
+<div class="p-stack-md border-r border-outline-variant flex flex-col items-center text-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-surface-tint text-4xl">security</span>
+<h5 class="font-headline-sm text-headline-sm text-primary">Segurança psicológica</h5>
+<p class="text-body-sm">Criar um ambiente seguro para arriscar, aprender e crescer.</p>
+</div>
+<div class="p-stack-md border-r border-outline-variant flex flex-col items-center text-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-surface-tint text-4xl">lightbulb</span>
+<h5 class="font-headline-sm text-headline-sm text-primary">Aprendizagem experiencial</h5>
+<p class="text-body-sm">Aprender fazendo, refletindo e aplicando (Kolb, 1984).</p>
+</div>
+<div class="p-stack-md border-r border-outline-variant flex flex-col items-center text-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-surface-tint text-4xl">rate_review</span>
+<h5 class="font-headline-sm text-headline-sm text-primary">Feedback formativo</h5>
+<p class="text-body-sm">Focado na melhoria contínua e no desenvolvimento.</p>
+</div>
+<div class="p-stack-md border-r border-outline-variant flex flex-col items-center text-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-surface-tint text-4xl">diversity_3</span>
+<h5 class="font-headline-sm text-headline-sm text-primary">Colaboração e respeito</h5>
+<p class="text-body-sm">Valorização das diferenças e construção coletiva do saber.</p>
+</div>
+<div class="p-stack-md flex flex-col items-center text-center gap-2 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-surface-tint text-4xl">trending_up</span>
+<h5 class="font-headline-sm text-headline-sm text-primary">Melhoria contínua</h5>
+<p class="text-body-sm">Compromisso de todos com a evolução permanente.</p>
+</div>
+</div>
+</section>
+<!-- Summary & References -->
+<section class="mt-section-gap grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-start">
+<div class="bg-surface-tint text-on-primary p-stack-lg rounded-2xl relative overflow-hidden">
+<div class="absolute -right-8 -bottom-8 opacity-10">
+<span class="material-symbols-outlined text-[200px]" style="font-variation-settings: &quot;FILL&quot; 1;">check_circle</span>
+</div>
+<h3 class="font-headline-md text-headline-md italic mb-4">Em resumo...</h3>
+<p class="font-body-lg text-body-lg leading-relaxed relative z-10">
+                    A simulação pedagógica é uma oportunidade única de transformar a prática em aprendizagem significativa. O formador orienta, desafia e apoia. O grupo observa, participa e constrói. Juntos, criamos experiências que desenvolvem competências e preparam para o sucesso!
+                </p>
+</div>
+<div class="bg-white border-2 border-outline-variant p-stack-lg rounded-2xl">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-3xl text-primary">menu_book</span>
+<h3 class="font-headline-md text-headline-md text-primary uppercase">REFERÊNCIAS PRINCIPAIS</h3>
+</div>
+<ul class="space-y-4 text-body-sm text-on-surface-variant list-disc pl-5">
+<li class="">Kolb, D. A. (1984). <span class="italic">Experiential Learning: Experience as the Source of Learning and Development.</span></li>
+<li class="">Sadalla, A. M. F. A., &amp; Larocca, L. M. (2004). <span class="italic">Autoscopia: um procedimento de formação e de pesquisa.</span></li>
+<li class="">Brookfield, S. D. (2017). <span class="italic">Becoming a Critically Reflective Teacher (2.ª ed.).</span></li>
+<li class="">Black, P., &amp; Wiliam, D. (2009). <span class="italic">Developing the theory of formative assessment.</span></li>
+</ul>
+</div>
+</section>
+<div class="mt-stack-lg text-center">
+<p class="font-headline-sm text-headline-sm text-primary flex items-center justify-center gap-2 italic">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: &quot;FILL&quot; 1;">favorite</span>
+                Aprender juntos hoje, para transformar a prática amanhã!
+                <span class="material-symbols-outlined text-green-600">eco</span>
+</p>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-section-gap bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant">
+<div class="w-full py-stack-lg px-gutter flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto gap-stack-md">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">Dinamização da Simulação Pedagógica</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant">© 2024 Dinamização da Simulação Pedagógica - Referências Bibliográficas</p>
+</div>
+<div class="flex gap-6">
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-secondary-fixed-dim transition-all opacity-80 hover:opacity-100" href="#">IEFP Recursos</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-secondary-fixed-dim transition-all opacity-80 hover:opacity-100" href="#">Guia do Formador</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-secondary-fixed-dim transition-all opacity-80 hover:opacity-100" href="#">Metodologias Ativas</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('.process-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.material-symbols-outlined');
+                if (icon) icon.classList.add('scale-125', 'transition-transform');
+            });
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.material-symbols-outlined');
+                if (icon) icon.classList.remove('scale-125');
+            });
+        });
+    </script>
+
+
+</body></html>

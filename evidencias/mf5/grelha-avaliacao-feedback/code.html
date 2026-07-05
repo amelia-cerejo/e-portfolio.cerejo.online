@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="pt-PT"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Observador SimuEd | Instrumento de Observação Pedagógica</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e8e7f1",
+                        "on-secondary-fixed-variant": "#005137",
+                        "on-tertiary-container": "#003ba1",
+                        "on-primary-container": "#613b00",
+                        "inverse-surface": "#2f3038",
+                        "on-primary-fixed": "#2a1700",
+                        "surface-tint": "#855300",
+                        "on-surface-variant": "#534434",
+                        "surface-variant": "#e3e1ec",
+                        "background": "#fbf8ff",
+                        "secondary-fixed": "#85f8c4",
+                        "secondary-container": "#82f5c1",
+                        "surface-bright": "#fbf8ff",
+                        "outline-variant": "#d8c3ad",
+                        "inverse-primary": "#ffb95f",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e3e1ec",
+                        "secondary": "#006c4a",
+                        "on-background": "#1a1b22",
+                        "tertiary-fixed": "#dbe1ff",
+                        "primary-fixed": "#ffddb8",
+                        "surface-container": "#eeedf7",
+                        "surface": "#fbf8ff",
+                        "on-secondary": "#ffffff",
+                        "outline": "#867461",
+                        "primary-container": "#f59e0b",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "surface-dim": "#dad9e3",
+                        "on-secondary-fixed": "#002114",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#00174b",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#653e00",
+                        "surface-container-low": "#f4f2fd",
+                        "secondary-fixed-dim": "#68dba9",
+                        "inverse-on-surface": "#f1effa",
+                        "tertiary": "#0053db",
+                        "primary": "#855300",
+                        "on-tertiary-fixed-variant": "#003ea8",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#94aeff",
+                        "on-surface": "#1a1b22",
+                        "primary-fixed-dim": "#ffb95f",
+                        "on-secondary-container": "#00714e",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-padding-desktop": "32px",
+                        "card-gap": "24px",
+                        "section-margin": "48px",
+                        "gutter": "24px",
+                        "container-padding-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "data-mono": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .rating-input:checked + label {
+            background-color: #f59e0b;
+            color: white;
+            border-color: #f59e0b;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-lg">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant shadow-sm h-16 flex items-center">
+<div class="max-w-7xl mx-auto w-full flex justify-between items-center px-container-padding-desktop">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-headline-lg font-bold text-primary">Observador SimuEd</span>
+<span class="hidden md:inline px-3 py-1 bg-primary-fixed text-on-primary-fixed text-label-caps rounded-full">MF5 | A3</span>
+</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-title-md text-body-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#instrucoes">Instruções</a>
+<a class="font-title-md text-body-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#identificacao">Identificação</a>
+<a class="font-title-md text-body-sm text-primary border-b-2 border-primary pb-1 font-bold cursor-pointer" href="#observacao">Observação</a>
+<a class="font-title-md text-body-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#feedback">Devolução</a>
+<button class="ml-4 px-6 py-2 bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-all active:opacity-80">Finalizar</button>
+</nav>
+</div>
+</header>
+<!-- SideNavBar (Desktop Only) -->
+<aside class="hidden lg:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 p-4 bg-surface-container-low border-r border-outline-variant transition-all">
+<div class="mb-8">
+<h2 class="font-headline-lg text-primary text-xl mb-1">Simulação Pedagógica</h2>
+<p class="font-body-lg text-on-surface-variant text-sm">Instrumento de Observação</p>
+</div>
+<nav class="space-y-2 flex-grow">
+<a class="flex items-center gap-3 p-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all" href="#preparacao">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span>Preparação</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#abertura">
+<span class="material-symbols-outlined" data-icon="login">login</span>
+<span>Abertura</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#desenvolvimento">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span>Desenvolvimento</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#fecho">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Fecho</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#feedback-section">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span>Devolução</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 space-y-2">
+<button class="w-full bg-primary text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span> Novo registo
+            </button>
+<a class="flex items-center gap-3 p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span> Definições
+            </a>
+<a class="flex items-center gap-3 p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all text-sm" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span> Ajuda
+            </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:ml-64 pt-24 pb-16 px-container-padding-mobile md:px-container-padding-desktop max-w-6xl mx-auto">
+<!-- Hero & Instructions -->
+<section class="mb-section-margin" id="instrucoes">
+<div class="relative rounded-3xl overflow-hidden bg-surface-container-highest p-8 md:p-12 shadow-sm border border-outline-variant">
+<div class="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
+
+</div>
+<div class="relative z-10">
+<h1 class="font-display-lg text-headline-lg md:text-display-lg text-primary mb-4">Observador SimuEd</h1>
+<p class="text-on-surface-variant max-w-2xl mb-8">
+                        Instrumento de suporte à observação, autoavaliação e devolução construtiva desenvolvido por <span class="font-bold text-on-surface">Amélia e Luísa</span> para a Formação Pedagógica Inicial de Formadores (Módulo 5).
+                    </p>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant">
+<span class="text-primary font-bold text-xl block mb-2">01</span>
+<p class="text-body-sm font-bold">Identificação</p>
+<p class="text-xs text-on-surface-variant mt-1">Preencher o cabeçalho antes de iniciar.</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant">
+<span class="text-primary font-bold text-xl block mb-2">02</span>
+<p class="text-body-sm font-bold">Observação</p>
+<p class="text-xs text-on-surface-variant mt-1">Assinalar o desempenho de 1 a 4.</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant">
+<span class="text-primary font-bold text-xl block mb-2">03</span>
+<p class="text-body-sm font-bold">Notas</p>
+<p class="text-xs text-on-surface-variant mt-1">Registar evidências qualitativas.</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant">
+<span class="text-primary font-bold text-xl block mb-2">04</span>
+<p class="text-body-sm font-bold">Devolução</p>
+<p class="text-xs text-on-surface-variant mt-1">Definir pontos fortes e plano de ação.</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant">
+<span class="text-primary font-bold text-xl block mb-2">05</span>
+<p class="text-body-sm font-bold">Autoavaliação</p>
+<p class="text-xs text-on-surface-variant mt-1">Promover reflexão individual.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Identification Form -->
+<section class="mb-section-margin" id="identificacao">
+<div class="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant shadow-sm">
+<div class="flex items-center gap-4 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="person_search">person_search</span>
+<h2 class="font-headline-lg text-title-md">Identificação da Simulação</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="space-y-2">
+<label class="font-label-caps text-on-surface-variant uppercase">Formando/a</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary-container outline-none transition-all" placeholder="Nome completo" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-on-surface-variant uppercase">Tema da Simulação</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary-container outline-none transition-all" placeholder="Título da sessão" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-on-surface-variant uppercase">Observador/a</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary-container outline-none transition-all" placeholder="Nome do/a observador/a" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-on-surface-variant uppercase">Data</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary-container outline-none transition-all" type="date"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-on-surface-variant uppercase">Duração</label>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary-container outline-none transition-all" placeholder="ex: 15 min" type="text"/>
+</div>
+<div class="bg-primary-fixed p-4 rounded-xl flex items-center justify-center text-center">
+<p class="text-on-primary-fixed font-bold text-xs uppercase tracking-wider">Escala de Avaliação: 1 (Não observado) • 2 (Parcial) • 3 (Adequado) • 4 (Excelente)</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Observation Grid -->
+<section class="space-y-gutter mb-section-margin" id="observacao">
+<!-- Category Macro Helper -->
+<div class="flex items-center justify-between sticky top-16 z-40 bg-background/80 backdrop-blur-md py-4 border-b border-outline-variant">
+<h2 class="font-headline-lg text-title-md text-primary">Grelha de Observação Interativa</h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-low text-xs font-bold rounded">1: Insuficiente</span>
+<span class="px-3 py-1 bg-surface-container-low text-xs font-bold rounded">2: Parcial</span>
+<span class="px-3 py-1 bg-surface-container-low text-xs font-bold rounded">3: Adequado</span>
+<span class="px-3 py-1 bg-surface-container-low text-xs font-bold rounded">4: Excelente</span>
+</div>
+</div>
+<!-- Block: 3.1 Preparação -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-sm transition-all hover:shadow-md" id="preparacao">
+<div class="bg-primary-container p-4 text-on-primary-container flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<h3 class="font-bold">3.1 Preparação da Sessão</h3>
+</div>
+<div class="p-4 overflow-x-auto">
+<table class="w-full min-w-[800px]">
+<thead>
+<tr class="text-left font-label-caps text-on-surface-variant border-b border-outline-variant">
+<th class="py-4 px-2 w-1/3">Critério de Avaliação</th>
+<th class="py-4 px-2 text-center w-8">1</th>
+<th class="py-4 px-2 text-center w-8">2</th>
+<th class="py-4 px-2 text-center w-8">3</th>
+<th class="py-4 px-2 text-center w-8">4</th>
+<th class="py-4 px-2">Notas / Evidências</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-2 font-medium">Objetivos claros e alinhados com o conteúdo</td>
+<td class="text-center"><input class="form-radio text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="p1" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="p1" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="p1" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary focus:ring-primary h-5 w-5 border-outline-variant" name="p1" type="radio"/></td>
+<td class="py-2 px-2"><textarea class="w-full bg-transparent border-none focus:ring-0 text-sm resize-none" placeholder="Adicionar notas/evidências..." rows="1"></textarea></td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-2 font-medium">Recursos didáticos adequados e funcionais</td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p2" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p2" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p2" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p2" type="radio"/></td>
+<td class="py-2 px-2"><textarea class="w-full bg-transparent border-none focus:ring-0 text-sm resize-none" placeholder="Adicionar notas/evidências..." rows="1"></textarea></td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-2 font-medium">Plano de sessão coerente (métodos, tempos)</td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p3" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p3" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p3" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p3" type="radio"/></td>
+<td class="py-2 px-2"><textarea class="w-full bg-transparent border-none focus:ring-0 text-sm resize-none" placeholder="Adicionar notas/evidências..." rows="1"></textarea></td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-2 font-medium">Consideração de necessidades do grupo</td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p4" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p4" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p4" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="p4" type="radio"/></td>
+<td class="py-2 px-2"><textarea class="w-full bg-transparent border-none focus:ring-0 text-sm resize-none" placeholder="Adicionar notas/evidências..." rows="1"></textarea></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Block: 3.2 Abertura -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-sm transition-all hover:shadow-md" id="abertura">
+<div class="bg-primary-container/80 p-4 text-on-primary-container flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="login">login</span>
+<h3 class="font-bold">3.2 Abertura</h3>
+</div>
+<div class="p-4 overflow-x-auto">
+<table class="w-full min-w-[800px]">
+<tbody class="divide-y divide-outline-variant">
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-2 font-medium w-1/3">Acolhimento e criação de clima positivo</td>
+<td class="text-center w-8"><input class="form-radio text-primary h-5 w-5" name="a1" type="radio"/></td>
+<td class="text-center w-8"><input class="form-radio text-primary h-5 w-5" name="a1" type="radio"/></td>
+<td class="text-center w-8"><input class="form-radio text-primary h-5 w-5" name="a1" type="radio"/></td>
+<td class="text-center w-8"><input class="form-radio text-primary h-5 w-5" name="a1" type="radio"/></td>
+<td class="py-2 px-2"><textarea class="w-full bg-transparent border-none focus:ring-0 text-sm resize-none" placeholder="Adicionar notas/evidências..." rows="1"></textarea></td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-2 font-medium">Apresentação do tema e relevância prática</td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="a2" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="a2" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="a2" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="a2" type="radio"/></td>
+<td class="py-2 px-2"><textarea class="w-full bg-transparent border-none focus:ring-0 text-sm resize-none" placeholder="Adicionar notas/evidências..." rows="1"></textarea></td>
+</tr>
+<tr class="group hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-2 font-medium">Validação de pré‑requisitos / diagnóstico</td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="a3" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="a3" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="a3" type="radio"/></td>
+<td class="text-center"><input class="form-radio text-primary h-5 w-5" name="a3" type="radio"/></td>
+<td class="py-2 px-2"><textarea class="w-full bg-transparent border-none focus:ring-0 text-sm resize-none" placeholder="Adicionar notas/evidências..." rows="1"></textarea></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- More categories (Combined for flow) -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-sm transition-all" id="desenvolvimento">
+<div class="bg-primary-container/60 p-4 text-on-primary-container flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<h3 class="font-bold">3.3 Desenvolvimento &amp; 3.4 Comunicação</h3>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<p class="font-label-caps text-primary border-l-4 border-primary pl-2">Conteúdo e Métodos</p>
+<ul class="space-y-6">
+<li class="flex flex-col gap-2">
+<span class="text-sm font-medium">Sequência lógica dos conteúdos</span>
+<div class="flex items-center gap-4">
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" max="4" min="1" step="1" type="range"/>
+<span class="text-xs font-bold text-primary">1-4</span>
+</div>
+</li>
+<li class="flex flex-col gap-2">
+<span class="text-sm font-medium">Variedade de métodos / técnicas</span>
+<div class="flex items-center gap-4">
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" max="4" min="1" step="1" type="range"/>
+<span class="text-xs font-bold text-primary">1-4</span>
+</div>
+</li>
+</ul>
+</div>
+<div class="space-y-4">
+<p class="font-label-caps text-primary border-l-4 border-primary pl-2">Postura Pedagógica</p>
+<ul class="space-y-6">
+<li class="flex flex-col gap-2">
+<span class="text-sm font-medium">Expressão corporal e contacto visual</span>
+<div class="flex items-center gap-4">
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" max="4" min="1" step="1" type="range"/>
+<span class="text-xs font-bold text-primary">1-4</span>
+</div>
+</li>
+<li class="flex flex-col gap-2">
+<span class="text-sm font-medium">Empatia e gestão positiva do grupo</span>
+<div class="flex items-center gap-4">
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" max="4" min="1" step="1" type="range"/>
+<span class="text-xs font-bold text-primary">1-4</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- TIC & Time (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-lowest p-6 rounded-3xl border border-outline-variant shadow-sm">
+<h3 class="font-bold flex items-center gap-2 mb-4 text-primary">
+<span class="material-symbols-outlined" data-icon="devices">devices</span> 3.5 Recursos e TIC
+                    </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl">
+<span class="text-sm">Integração eficaz de TIC</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">1</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">2</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">3</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">4</button>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl">
+<span class="text-sm">Qualidade dos materiais</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">1</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">2</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">3</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">4</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-3xl border border-outline-variant shadow-sm">
+<h3 class="font-bold flex items-center gap-2 mb-4 text-primary">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span> 3.6 Gestão do Tempo
+                    </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl">
+<span class="text-sm">Cumprimento do tempo global</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">1</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">2</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">3</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">4</button>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl">
+<span class="text-sm">Distribuição das fases</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">1</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">2</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">3</button>
+<button class="w-8 h-8 rounded border border-outline-variant hover:bg-primary-container transition-colors text-xs">4</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Block: 3.7 Avaliação e Fecho -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-sm transition-all hover:shadow-md" id="fecho">
+<div class="bg-primary/10 p-4 text-primary flex items-center gap-3">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+<h3 class="font-bold">3.7 Avaliação e Fecho</h3>
+</div>
+<div class="p-6 space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-surface-container-low p-4 rounded-xl">
+<p class="font-bold mb-2">Síntese dos pontos-chave</p>
+<div class="flex justify-between items-center">
+<div class="flex gap-2">
+<label class="px-3 py-1 border rounded cursor-pointer hover:bg-primary-fixed">1</label>
+<label class="px-3 py-1 border rounded cursor-pointer hover:bg-primary-fixed">2</label>
+<label class="px-3 py-1 border rounded cursor-pointer hover:bg-primary-fixed">3</label>
+<label class="px-3 py-1 border rounded cursor-pointer hover:bg-primary-fixed">4</label>
+</div>
+<span class="text-xs italic text-on-surface-variant">Classificação</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl">
+<p class="font-bold mb-2">Orientações futuras</p>
+<div class="flex justify-between items-center">
+<div class="flex gap-2">
+<label class="px-3 py-1 border rounded cursor-pointer hover:bg-primary-fixed">1</label>
+<label class="px-3 py-1 border rounded cursor-pointer hover:bg-primary-fixed">2</label>
+<label class="px-3 py-1 border rounded cursor-pointer hover:bg-primary-fixed">3</label>
+<label class="px-3 py-1 border rounded cursor-pointer hover:bg-primary-fixed">4</label>
+</div>
+<span class="text-xs italic text-on-surface-variant">Classificação</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Devolução Section -->
+<section class="mb-section-margin" id="feedback">
+<div class="bg-white rounded-3xl p-8 border border-outline-variant shadow-lg">
+<div class="flex items-center gap-4 mb-8">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="rate_review">rate_review</span>
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Devolução estruturada</h2>
+<p class="text-on-surface-variant">Análise qualitativa e definição de melhorias.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-10">
+<div class="space-y-3">
+<label class="flex items-center gap-2 font-bold text-secondary">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                            Pontos fortes
+                        </label>
+<textarea class="w-full h-40 bg-surface-container-low border border-outline-variant rounded-2xl p-4 focus:ring-2 focus:ring-secondary outline-none" placeholder="O que correu especialmente bem?"></textarea>
+</div>
+<div class="space-y-3">
+<label class="flex items-center gap-2 font-bold text-error">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                            Aspetos a melhorar
+                        </label>
+<textarea class="w-full h-40 bg-surface-container-low border border-outline-variant rounded-2xl p-4 focus:ring-2 focus:ring-error outline-none" placeholder="Oportunidades de melhoria e ajustamento..."></textarea>
+</div>
+</div>
+<div class="space-y-6">
+<h3 class="font-title-md border-b border-outline-variant pb-2">Plano de Ação Sugerido</h3>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-left">
+<th class="p-4 border border-outline-variant font-label-caps">Objetivo</th>
+<th class="p-4 border border-outline-variant font-label-caps">Estratégia</th>
+<th class="p-4 border border-outline-variant font-label-caps">Indicador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="p-0 border border-outline-variant"><textarea class="w-full p-4 border-none focus:ring-0 text-sm" placeholder="Definir objetivo..." rows="3"></textarea></td>
+<td class="p-0 border border-outline-variant"><textarea class="w-full p-4 border-none focus:ring-0 text-sm" placeholder="Como concretizar..." rows="3"></textarea></td>
+<td class="p-0 border border-outline-variant"><textarea class="w-full p-4 border-none focus:ring-0 text-sm" placeholder="Como medir..." rows="3"></textarea></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- Formando Autoavaliação -->
+<section class="mb-section-margin">
+<div class="bg-primary-fixed rounded-3xl p-8 border border-primary/20 shadow-sm relative overflow-hidden">
+<div class="absolute -right-10 -bottom-10 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-[200px]" data-icon="emoji_objects">emoji_objects</span>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline-lg text-primary mb-6">Autoavaliação do Formando/a</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white/60 backdrop-blur p-6 rounded-2xl border border-white">
+<p class="font-bold text-on-primary-fixed mb-4">O que correu melhor?</p>
+<div class="h-24 w-full border-b border-on-primary-fixed/30 italic text-sm opacity-60">Espaço para reflexão do dinamizador...</div>
+</div>
+<div class="bg-white/60 backdrop-blur p-6 rounded-2xl border border-white">
+<p class="font-bold text-on-primary-fixed mb-4">Que dificuldades senti?</p>
+<div class="h-24 w-full border-b border-on-primary-fixed/30 italic text-sm opacity-60">Espaço para reflexão do dinamizador...</div>
+</div>
+<div class="bg-white/60 backdrop-blur p-6 rounded-2xl border border-white">
+<p class="font-bold text-on-primary-fixed mb-4">O que farei de diferente?</p>
+<div class="h-24 w-full border-b border-on-primary-fixed/30 italic text-sm opacity-60">Espaço para reflexão do dinamizador...</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-surface-dim pt-12 border-t border-outline-variant">
+<div class="max-w-7xl mx-auto px-container-padding-desktop pb-12">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<div class="col-span-1 lg:col-span-2">
+<span class="font-display-lg text-title-md font-bold text-primary mb-4 block">Vantagens da Grelha</span>
+<ul class="space-y-3">
+<li class="flex items-start gap-3 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="hub">hub</span>
+                            Integra experiência multidisciplinar (Psicologia, Gestão e TIC).
+                        </li>
+<li class="flex items-start gap-3 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="balance">balance</span>
+                            Promove devolução equilibrada 2:1 (dois pontos positivos, um de melhoria).
+                        </li>
+<li class="flex items-start gap-3 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="psychology_alt">psychology_alt</span>
+                            Inclui rubrica de autoavaliação, incentivando a responsabilidade do formando.
+                        </li>
+<li class="flex items-start gap-3 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="bar_chart">bar_chart</span>
+                            Facilita análise de dados e tratamento estatístico digital.
+                        </li>
+</ul>
+</div>
+<div>
+<span class="font-label-caps text-on-surface-variant block mb-4 uppercase">Recursos</span>
+<nav class="flex flex-col gap-2">
+<a class="text-body-sm text-on-surface-variant hover:underline" href="#">Manual de Apoio</a>
+<a class="text-body-sm text-on-surface-variant hover:underline" href="#">Modelos Microsoft Forms</a>
+<a class="text-body-sm text-on-surface-variant hover:underline" href="#">Guia de devolução pedagógica</a>
+</nav>
+</div>
+<div>
+<span class="font-label-caps text-on-surface-variant block mb-4 uppercase">Suporte</span>
+<nav class="flex flex-col gap-2">
+<a class="text-body-sm text-on-surface-variant hover:underline" href="#">Termos de utilização</a>
+<a class="text-body-sm text-on-surface-variant hover:underline" href="#">Privacidade</a>
+<a class="text-body-sm text-on-surface-variant hover:underline" href="#">Apoio académico</a>
+</nav>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-outline-variant gap-4">
+<p class="text-body-sm text-on-surface-variant">© 2024 Observatório de Práticas Pedagógicas. Sistema de devolução estruturada.</p>
+<div class="flex items-center gap-6">
+<span class="font-label-caps text-primary tracking-widest">AMÉLIA &amp; LUÍSA</span>
+<span class="text-xs text-on-surface-variant bg-surface-container-low px-3 py-1 rounded-full">Bom trabalho!</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Smooth scroll and active state management
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Simple interaction for rating buttons
+        const ratingButtons = document.querySelectorAll('.grid button, .flex button');
+        ratingButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const parent = this.parentElement;
+                parent.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('bg-primary', 'text-white', 'border-primary');
+                    b.classList.add('border-outline-variant');
+                });
+                this.classList.remove('border-outline-variant');
+                this.classList.add('bg-primary', 'text-white', 'border-primary');
+            });
+        });
+
+        // Floating Action Button logic could go here
+    </script>
+</body></html>
