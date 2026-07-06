@@ -1,0 +1,513 @@
+<!DOCTYPE html><html class="light" lang="pt-PT" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Configurações de Feedback | SimuEd Observer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#b4c5ff",
+                    "secondary-fixed": "#85f8c4",
+                    "on-tertiary-container": "#003ba1",
+                    "surface-bright": "#fbf8ff",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#002114",
+                    "on-tertiary-fixed-variant": "#003ea8",
+                    "secondary": "#006c4a",
+                    "on-primary-fixed-variant": "#653e00",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#fbf8ff",
+                    "secondary-container": "#82f5c1",
+                    "on-surface": "#1a1b22",
+                    "inverse-surface": "#2f3038",
+                    "inverse-primary": "#ffb95f",
+                    "surface-container-high": "#e8e7f1",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#00174b",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed-dim": "#68dba9",
+                    "on-primary-container": "#613b00",
+                    "primary-fixed": "#ffddb8",
+                    "primary-container": "#f59e0b",
+                    "outline": "#867461",
+                    "surface-container-low": "#f4f2fd",
+                    "surface-tint": "#855300",
+                    "surface-dim": "#dad9e3",
+                    "surface-container-highest": "#e3e1ec",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e3e1ec",
+                    "primary": "#855300",
+                    "outline-variant": "#d8c3ad",
+                    "inverse-on-surface": "#f1effa",
+                    "background": "#fbf8ff",
+                    "on-surface-variant": "#534434",
+                    "tertiary-fixed": "#dbe1ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#2a1700",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#0053db",
+                    "primary-fixed-dim": "#ffb95f",
+                    "on-background": "#1a1b22",
+                    "tertiary-container": "#94aeff",
+                    "surface-container": "#eeedf7",
+                    "on-secondary-fixed-variant": "#005137",
+                    "on-secondary-container": "#00714e",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-margin": "48px",
+                    "container-padding-desktop": "32px",
+                    "container-padding-mobile": "16px",
+                    "unit": "8px",
+                    "card-gap": "24px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "title-md": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "data-mono": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-item {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Nature-Tech Shadow */
+        .card-shadow {
+            box-shadow: 0 4px 15px -3px rgba(83, 68, 52, 0.12);
+        }
+        /* Custom Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #E2E8F0;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #855300; }
+        input:checked + .slider:before { transform: translateX(20px); }
+    
+        .floating-nav {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .float-button {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border: 1px solid #cad4e2;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #002546;
+            box-shadow: 0 12px 28px rgba(0, 43, 91, 0.14);
+            text-decoration: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        .float-button svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+        .float-button.primary-float {
+            background: #dff4e6;
+            border-color: #4f9a69;
+            color: #155c32;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-full w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant flex flex-col gap-2 p-4 z-50">
+<div class="mb-8 px-4">
+<h1 class="font-title-md text-title-md font-bold text-primary"><h2 class="font-headline-lg text-2xl font-bold text-primary" style="--tw-border-spacing-y: 0; --tw-translate-x: 0; --tw-translate-y: 0; --tw-rotate: 0; --tw-skew-x: 0; --tw-skew-y: 0; --tw-scale-x: 1; --tw-scale-y: 1; --tw-pan-x: ; --tw-pan-y: ; --tw-pinch-zoom: ; --tw-scroll-snap-strictness: proximity; --tw-gradient-from-position: ; --tw-gradient-via-position: ; --tw-gradient-to-position: ; --tw-ordinal: ; --tw-slashed-zero: ; --tw-numeric-figure: ; --tw-numeric-spacing: ; --tw-numeric-fraction: ; --tw-ring-inset: ; --tw-ring-offset-width: 0px; --tw-ring-offset-color: #fff; --tw-ring-color: rgb(59 130 246 / 0.5); --tw-ring-offset-shadow: 0 0 #0000; --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; --tw-shadow-colored: 0 0 #0000; --tw-blur: ; --tw-brightness: ; --tw-contrast: ; --tw-grayscale: ; --tw-hue-rotate: ; --tw-invert: ; --tw-saturate: ; --tw-sepia: ; --tw-drop-shadow: ; --tw-backdrop-blur: ; --tw-backdrop-brightness: ; --tw-backdrop-contrast: ; --tw-backdrop-grayscale: ; --tw-backdrop-hue-rotate: ; --tw-backdrop-invert: ; --tw-backdrop-opacity: ; --tw-backdrop-saturate: ; --tw-backdrop-sepia: ; --tw-contain-size: ; --tw-contain-layout: ; --tw-contain-paint: ; --tw-contain-style: ; --tw-text-opacity: 1; color: rgb(133, 83, 0); background-color: rgb(251, 248, 255); outline: none !important; box-shadow: none !important;">Configurações de Feedback</h2></h1>
+<p class="text-on-surface-variant text-sm">Instrumento de Observação</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all active:opacity-80" href="../grelha.html">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-body-lg text-body-lg">Preparação</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all active:opacity-80" href="../grelha.html">
+<span class="material-symbols-outlined" data-icon="door_open">door_open</span>
+<span class="font-body-lg text-body-lg">Abertura</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all active:opacity-80" href="../grelha.html">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-body-lg text-body-lg">Desenvolvimento</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all active:opacity-80" href="../grelha.html">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-body-lg text-body-lg">Fecho</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all active:opacity-80" href="../grelha.html">
+<span class="material-symbols-outlined" data-icon="maps_ugc">maps_ugc</span>
+<span class="font-body-lg text-body-lg">Feedback</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container rounded-lg font-bold transition-all active:opacity-80" href="../grelha.html">
+<span class="material-symbols-outlined active-nav-item" data-icon="settings" style="font-variation-settings: &quot;FILL&quot; 1;">settings</span>
+<span class="font-body-lg text-body-lg">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto p-4 flex items-center gap-3 border-t border-outline-variant">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold">
+                FAd</div>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate">Formador</p>
+<p class="text-xs text-on-surface-variant truncate">Administrador</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-grow min-h-screen bg-surface flex flex-col relative pb-24">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim shadow-sm flex justify-between items-center w-full px-container-padding-desktop h-16 sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-lg text-2xl font-bold text-primary"><br></h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="help">help</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<div class="p-container-padding-desktop space-y-gutter">
+<!-- Bento Grid Section: Customization & Scales -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- 1. Personalização de Feedback Automático (Span 8) -->
+<section class="col-span-12 lg:col-span-8 space-y-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant card-shadow">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="font-title-md text-title-md text-primary">Personalização de Feedback Automático</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Defina as mensagens automáticas geradas com base no desempenho do formando.</p>
+</div>
+<span class="material-symbols-outlined text-primary-container text-4xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div class="space-y-4">
+<!-- Score 1 (Insufficient) -->
+<div class="group border border-outline-variant p-4 rounded-lg hover:border-primary transition-colors">
+<div class="flex items-center gap-3 mb-2">
+<span class="w-8 h-8 rounded bg-error/10 text-error flex items-center justify-center font-bold">1</span>
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant">Pontuação: Insuficiente</label>
+</div>
+<textarea class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary-container text-body-sm p-3 min-h-[80px]" placeholder="Ex: Necessita de melhoria imediata. O formando não demonstrou competência técnica básica nesta etapa.">O desempenho observado foi insuficiente. Recomenda-se revisão teórica aprofundada e prática supervisionada imediata para consolidar os conceitos fundamentais.</textarea>
+</div>
+<!-- Score 4 (Excellent) -->
+<div class="group border border-outline-variant p-4 rounded-lg hover:border-primary transition-colors">
+<div class="flex items-center gap-3 mb-2">
+<span class="w-8 h-8 rounded bg-secondary/10 text-secondary flex items-center justify-center font-bold">4</span>
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant">Pontuação: Excelente</label>
+</div>
+<textarea class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary-container text-body-sm p-3 min-h-[80px]" placeholder="Ex: Demonstrou mestria excepcional.">Demonstrou total mestria nas competências avaliadas, agindo com precisão técnica e confiança. Superou as expectativas previstas para esta fase da formação.</textarea>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold py-2 hover:bg-primary-fixed/20 rounded px-3 transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="">Adicionar patamar intermédio</span>
+</button>
+</div>
+</div>
+<!-- 3. Gestão de Escalas e Pesos -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant card-shadow">
+<div class="mb-6">
+<h3 class="font-title-md text-title-md text-primary">Gestão de Escalas e Pesos</h3>
+<p class="text-on-surface-variant font-body-sm text-body-sm">Ajuste o impacto de cada categoria no cálculo da pontuação final global.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Category Weight Items -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="assignment">assignment</span>
+<span class="font-medium">Preparação</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-16 border-none bg-surface-container-highest rounded-lg text-center font-bold text-primary" max="100" min="0" type="number" value="15">
+<span class="text-on-surface-variant">%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="door_open">door_open</span>
+<span class="font-medium">Abertura</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-16 border-none bg-surface-container-highest rounded-lg text-center font-bold text-primary" max="100" min="0" type="number" value="10">
+<span class="text-on-surface-variant">%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-primary-container/10 rounded-lg border border-primary-container">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="psychology" style="font-variation-settings: &quot;FILL&quot; 1;">psychology</span>
+<span class="font-bold">Desenvolvimento</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-16 border-none bg-primary-container/20 rounded-lg text-center font-bold text-primary" max="100" min="0" type="number" value="60">
+<span class="text-on-surface-variant">%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="event_available">event_available</span>
+<span class="font-medium">Fecho</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="w-16 border-none bg-surface-container-highest rounded-lg text-center font-bold text-primary" max="100" min="0" type="number" value="15">
+<span class="text-on-surface-variant">%</span>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-center justify-between p-4 bg-surface-container-highest rounded-xl">
+<span class="font-bold text-on-surface">Total da Ponderação:</span>
+<div class="flex items-center gap-2">
+<span class="text-2xl font-display-lg text-primary">100%</span>
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Sidebar Content (Span 4) -->
+<aside class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- 2. Envio e Partilha -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant card-shadow">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="share">share</span>
+<h3 class="font-title-md text-title-md text-primary">Envio e Partilha</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant block mb-2">E-mail do Formando</label>
+<input class="w-full bg-surface-container-low border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary p-3 text-body-sm" type="email" value="formando@empresa.pt">
+</div>
+<div>
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant block mb-2">E-mail da Coordenação</label>
+<input class="w-full bg-surface-container-low border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary p-3 text-body-sm" type="email" value="coordenacao@simued.pt">
+</div>
+<div class="pt-4 border-t border-outline-variant">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant block mb-3">Formato de Exportação</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex flex-col items-center gap-2 p-3 rounded-lg border-2 border-primary bg-primary-fixed/10 text-primary">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="text-xs font-bold">Documento PDF</span>
+</button>
+<button class="flex flex-col items-center gap-2 p-3 rounded-lg border-2 border-outline-variant hover:border-primary/50 transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+<span class="text-xs font-bold">Link Interativo</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Opções de Impressão -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant card-shadow">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="print">print</span>
+<h3 class="font-title-md text-title-md text-primary">Opções de Impressão</h3>
+</div>
+<ul class="space-y-5">
+<li class="flex items-center justify-between">
+<div>
+<p class="font-medium text-on-surface">Incluir Assinaturas</p>
+<p class="text-xs text-on-surface-variant">Espaço para Formando e Observador</p>
+</div>
+<label class="switch">
+<input checked="" type="checkbox">
+<span class="slider"></span>
+</label>
+</li>
+<li class="flex items-center justify-between">
+<div>
+<p class="font-medium text-on-surface">Gráficos de Radar</p>
+<p class="text-xs text-on-surface-variant">Comparativo de competências visual</p>
+</div>
+<label class="switch">
+<input checked="" type="checkbox">
+<span class="slider"></span>
+</label>
+</li>
+<li class="flex items-center justify-between">
+<div>
+<p class="font-medium text-on-surface">Notas Qualitativas</p>
+<p class="text-xs text-on-surface-variant">Incluir comentários livres</p>
+</div>
+<label class="switch">
+<input type="checkbox">
+<span class="slider"></span>
+</label>
+</li>
+<li class="flex items-center justify-between">
+<div>
+<p class="font-medium text-on-surface">Marca de Água</p>
+<p class="text-xs text-on-surface-variant">"Simulação - Uso Interno"</p>
+</div>
+<label class="switch">
+<input checked="" type="checkbox">
+<span class="slider"></span>
+</label>
+</li>
+</ul>
+</div>
+<!-- Live Preview Card (Visual Flavor) -->
+<div class="relative overflow-hidden rounded-xl border border-outline-variant aspect-video group cursor-zoom-in">
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
+<span class="bg-white text-on-surface px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span>
+                                Pré-visualizar Relatório
+                            </span>
+</div>
+<div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="A clean and professional report layout showing a header with a student name, several data visualization charts including a spider radar chart of soft skills, and a section with detailed textual feedback written in a modern serif font on a light cream background, echoing the nature-tech aesthetic." style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAx-hr8T5Fm5RQAYTgxYm1CQTOEmw_lWiqaLuve381dSxK-ZQvJk0et2dGe8YCTVYMk8nfroxNL7zeUygJlDRU7IpnEIQYP8YN6Sdm70_EzAzV6QJWZx9ZbcuiT9kXIULAa6R5obVDFOiuJvWXHpY4Y7wQqvizPY7FjqIXvEO330-LVBg_vLf1f8T3yegvfXLWSkghms2Ms0MI7H4SiK-d31cHFHygdO7KVz4KI-fNqEHXXUm5iJJ42KtVLeBexu4AqIU4EuPmHiHI&quot;);"></div>
+</div>
+</aside>
+</div>
+<!-- Action Bar -->
+<div class="flex justify-end gap-4 pt-6 mt-6 border-t border-outline-variant">
+<button class="px-6 py-2 rounded-lg border border-outline-variant text-on-surface-variant font-bold hover:bg-surface-container-high transition-colors active:opacity-80">
+                    Descartar Alterações
+                </button>
+<button class="px-8 py-2 rounded-lg bg-gradient-to-r from-primary-container to-primary text-white font-bold hover:shadow-lg transition-all active:scale-95">
+                    Guardar Configurações
+                </button>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-dim border-t border-outline-variant w-full px-container-padding-desktop py-6 flex flex-col md:flex-row justify-between items-center ml-64 max-w-[calc(100%-16rem)] mt-auto">
+<span class="font-label-caps text-label-caps text-on-surface-variant">© 2024 SimuEd Observer. Todos os direitos reservados.</span>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors" href="../grelha.html">Suporte</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors" href="../grelha.html">Privacidade</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors" href="../grelha.html">Termos de Uso</a>
+</div>
+</footer>
+</main>
+<script>
+        // Simple notification micro-interaction for the "Guardar" button
+        const saveBtn = document.querySelector('button.bg-gradient-to-r');
+        saveBtn.addEventListener('click', () => {
+            saveBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span> Guardando...';
+            setTimeout(() => {
+                saveBtn.innerHTML = 'Guardado com sucesso!';
+                saveBtn.classList.remove('from-primary-container', 'to-primary');
+                saveBtn.classList.add('bg-secondary');
+                setTimeout(() => {
+                    saveBtn.innerHTML = 'Guardar Configurações';
+                    saveBtn.classList.add('from-primary-container', 'to-primary');
+                    saveBtn.classList.remove('bg-secondary');
+                }, 2000);
+            }, 1200);
+        });
+
+        // Numeric input validation for weights
+        const inputs = document.querySelectorAll('input[type="number"]');
+        inputs.forEach(input => {
+            input.addEventListener('change', () => {
+                let total = 0;
+                inputs.forEach(i => total += parseInt(i.value || 0));
+                const totalDisplay = document.querySelector('.font-display-lg');
+                const checkIcon = document.querySelector('.material-symbols-outlined[data-icon="check_circle"]');
+                
+                totalDisplay.textContent = total + '%';
+                
+                if(total === 100) {
+                    totalDisplay.classList.remove('text-error');
+                    totalDisplay.classList.add('text-primary');
+                    checkIcon.textContent = 'check_circle';
+                    checkIcon.classList.remove('text-error');
+                    checkIcon.classList.add('text-secondary');
+                } else {
+                    totalDisplay.classList.add('text-error');
+                    totalDisplay.classList.remove('text-primary');
+                    checkIcon.textContent = 'warning';
+                    checkIcon.classList.add('text-error');
+                    checkIcon.classList.remove('text-secondary');
+                }
+            });
+        });
+    </script>
+
+
+<div class="floating-nav" aria-label="Navega&ccedil;&atilde;o r&aacute;pida">
+<a class="float-button primary-float" href="../index.html" title="Home" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg><span class="sr-only">Home</span></a>
+<a class="float-button" href="../grelha.html" title="Grelha" aria-label="Grelha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg><span class="sr-only">Grelha</span></a>
+<a class="float-button" href="../resultados/index.html" title="Resultados" aria-label="Resultados"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-5"/><path d="M12 16V8"/><path d="M16 16v-3"/></svg><span class="sr-only">Resultados</span></a>
+<button class="float-button" type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Topo" aria-label="Topo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg><span class="sr-only">Topo</span></button>
+</div>
+</body></html>

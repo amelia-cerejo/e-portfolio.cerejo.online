@@ -213,61 +213,6 @@
             background: #ffffff;
             color: #002546;
         }
-        .resource-feature {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 4rem;
-            background: linear-gradient(135deg, #fff7e6, #f8f9fa);
-            border: 1px solid #c3c6d0;
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 16px 40px rgba(0, 37, 70, 0.08);
-        }
-        .resource-feature-preview {
-            display: block;
-            overflow: hidden;
-            border: 1px solid #c3c6d0;
-            border-radius: 0.75rem;
-            background: #ffffff;
-            box-shadow: 0 10px 30px rgba(0, 37, 70, 0.12);
-        }
-        .resource-feature-preview img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-        .resource-feature-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-        .resource-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #002546;
-            color: #ffffff;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            font-weight: 800;
-            text-decoration: none;
-        }
-        .resource-link.secondary {
-            background: #ffffff;
-            color: #002546;
-            border: 1px solid #c3c6d0;
-        }
-        .resource-link:hover {
-            transform: translateY(-1px);
-        }
-        @media (min-width: 900px) {
-            .resource-feature {
-                grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
-                align-items: center;
-            }
-        }
         .pdf-modal {
             position: fixed;
             inset: 0;
@@ -389,9 +334,93 @@
             white-space: nowrap;
             border: 0;
         }
+        header {
+            gap: 1rem !important;
+        }
+        .menu-toggle {
+            display: none;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            padding: 0.55rem 0.75rem;
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .menu-toggle .material-symbols-outlined {
+            vertical-align: middle;
+        }
+        header nav {
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            row-gap: 0.5rem !important;
+        }
+        main > .grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+        .md\:grid-cols-3,
+        .md\:grid-cols-5 {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+        .md\:grid-cols-5 > div {
+            border-bottom: 1px solid #c3c6d0;
+        }
+        .md\:grid-cols-5 > div:nth-child(2n) {
+            border-right: 0 !important;
+        }
+        .md\:grid-cols-5 > div:last-child {
+            grid-column: 1 / -1;
+            border-right: 0 !important;
+            border-bottom: 0 !important;
+        }
+        @media (max-width: 980px) {
+            main > .grid,
+            .md\:grid-cols-2,
+            .md\:grid-cols-3,
+            .md\:grid-cols-5,
+            .pdf-actions-grid {
+                grid-template-columns: 1fr !important;
+            }
+            header {
+                display: grid !important;
+                grid-template-columns: 1fr auto !important;
+                align-items: center !important;
+            }
+            .menu-toggle {
+                display: inline-flex !important;
+                align-items: center;
+                justify-content: center;
+                gap: 0.35rem;
+            }
+            header nav {
+                grid-column: 1 / -1;
+                display: none !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.5rem 0.75rem !important;
+                width: 100%;
+            }
+            header.menu-open nav {
+                display: grid !important;
+            }
+            header nav a {
+                display: block;
+                padding: 0.45rem 0;
+                border-bottom: 1px solid rgba(255, 220, 196, 0.28);
+            }
+            header > a[href="#documentos-pdf"] {
+                display: none !important;
+                grid-column: 1 / -1;
+                width: 100%;
+                text-align: center;
+            }
+            header.menu-open > a[href="#documentos-pdf"] {
+                display: block !important;
+            }
+        }
         @media (max-width: 760px) {
             .pdf-actions-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
             }
             .pdf-modal {
                 padding: 0.625rem;
@@ -399,6 +428,21 @@
             .pdf-modal-header {
                 align-items: flex-start;
                 flex-direction: column;
+            }
+        }
+        @media (max-width: 560px) {
+            header {
+                grid-template-columns: 1fr !important;
+            }
+            .menu-toggle {
+                width: 100%;
+            }
+            header nav {
+                grid-template-columns: 1fr !important;
+            }
+            header > a[href="#documentos-pdf"] {
+                width: 100%;
+                text-align: center;
             }
         }
 
@@ -410,14 +454,14 @@
 <div class="flex items-center gap-4">
 <span class="font-headline-md text-headline-md font-bold text-on-primary">Simulação Pedagógica</span>
 </div>
-<nav class="hidden md:flex gap-8">
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal"><span class="material-symbols-outlined" aria-hidden="true">menu</span> Menu</button>
+<nav class="hidden md:flex gap-8" id="menu-principal">
 <a class="text-on-primary border-b-2 border-secondary-fixed pb-1 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#papel-formador">Formador</a>
 <a class="text-on-primary/80 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#papel-grupo">Grupo</a>
 <a class="text-on-primary/80 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#principios">Princípios</a>
-<a class="text-on-primary/80 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#grelha-feedback">Grelha</a>
 <a class="text-on-primary/80 font-headline-sm text-headline-sm hover:text-secondary-fixed transition-colors active:scale-95 duration-150" href="#documentos-pdf">Recursos</a>
 </nav>
-<a class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-lg font-bold hover:opacity-90 transition-all active:scale-95 no-underline" href="../grelha-avaliacao-feedback/">Abrir grelha</a>
+<a class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-lg font-bold hover:opacity-90 transition-all active:scale-95 no-underline" href="#documentos-pdf">PDFs</a>
 </header>
 <main class="max-w-container-max mx-auto px-gutter mb-section-gap">
 <!-- Hero Section -->
@@ -443,29 +487,6 @@
 <img class="w-full h-full object-cover" data-alt="A professional group of educators in a modern, brightly lit university learning lab environment. A female trainer is leading a discussion while students listen intently. The atmosphere is collaborative, featuring clean lines, high-contrast pedagogical materials on screens, and a sophisticated color palette of navy, white, and soft teal accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc3cRofkV8iN8xsRZzf7sTIKFIYySdVqWVqaqyScwrVHCJetq_9xxHF0l8Tsb8av03PKVadAkoDG2Qt8R-1vOe7dir3rbGK3y9JPi46HIvHSyxD19lpIN7A4BRLF5iHnu6LDPTYJzYSzrWvfA9vAbxflLPvb5nVv76HszhC5UQ6TEEKpzWQ30ft-pyLmWaruTuUqntolNnYfVobhZZ0TkPYI0dDADbXIb_5uhyN-3mxeO_-VFkmfyeY1MNUoe-eT_AGb_9trr0O2lE">
 </div>
 </div>
-</section>
-<!-- Interactive Evaluation Grid -->
-<section class="resource-feature" id="grelha-feedback">
-<div>
-<p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-3">Nova evidência MF5</p>
-<h2 class="font-headline-lg text-headline-lg text-primary uppercase tracking-wide">Grelha de Avaliação e Feedback</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mt-4">
-                    A pasta <strong>grelha-avaliacao-feedback</strong> está integrada aqui como instrumento interativo de observação, autoavaliação e feedback estruturado. Inclui identificação da simulação, escala de avaliação, notas/evidências, pontos fortes, aspetos a melhorar e plano de ação.
-                </p>
-<div class="resource-feature-actions">
-<a class="resource-link" href="../grelha-avaliacao-feedback/">
-<span class="material-symbols-outlined">open_in_new</span>
-                    Abrir grelha interativa
-                </a>
-<a class="resource-link secondary" href="../grelha-avaliacao-feedback/code.html">
-<span class="material-symbols-outlined">code</span>
-                    Ver ficheiro original
-                </a>
-</div>
-</div>
-<a class="resource-feature-preview" href="../grelha-avaliacao-feedback/" aria-label="Abrir pré-visualização da grelha de avaliação e feedback">
-<img src="../grelha-avaliacao-feedback/screen.png" alt="Pré-visualização da grelha de observação interativa e feedback estruturado">
-</a>
 </section>
 <!-- Main Roles Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg">
@@ -709,13 +730,6 @@
 <button class="pdf-button" type="button" data-modal-target="modal-guiao">Ver PDF</button>
 </div>
 </article>
-<article class="pdf-card secondary">
-<h3>Grelha de Avaliação e Feedback</h3>
-<p>Instrumento interativo para observação, autoavaliação e plano de ação após a simulação.</p>
-<div class="pdf-card-actions">
-<a class="pdf-button" href="../grelha-avaliacao-feedback/">Abrir grelha</a>
-</div>
-</article>
 </div>
 </details>
 
@@ -794,9 +808,24 @@
 
 <script>
 const topButton = document.getElementById("float-top");
+const menuButton = document.querySelector(".menu-toggle");
+const pageHeader = document.querySelector("header");
 const openButtons = document.querySelectorAll("[data-modal-target]");
 const closeButtons = document.querySelectorAll("[data-modal-close]");
 let activeModal = null;
+
+if (menuButton && pageHeader) {
+  menuButton.addEventListener("click", () => {
+    const isOpen = pageHeader.classList.toggle("menu-open");
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+  });
+  pageHeader.querySelectorAll("nav a, a[href='#documentos-pdf']").forEach((link) => {
+    link.addEventListener("click", () => {
+      pageHeader.classList.remove("menu-open");
+      menuButton.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
 function openModal(modalId) {
   const modal = document.getElementById(modalId);

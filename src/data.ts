@@ -237,7 +237,7 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
       moduleCode: "MF3",
       title: "Este e-Portfólio Reflexivo Integrado",
       description: "Instrumento central de meta-avaliação e estruturação da identidade andragógica madura, unificando todo o percurso formativo.",
-      url: "evidencias/mf3/o-formador-reflexivo/"
+      url: "evidencias/mf3/formador-reflexivo/"
     },
     {
       id: "ev6",

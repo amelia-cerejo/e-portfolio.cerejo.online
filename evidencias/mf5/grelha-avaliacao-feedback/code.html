@@ -3,7 +3,7 @@
 <html class="scroll-smooth" lang="pt-PT"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Observador SimuEd | Instrumento de Observação Pedagógica</title>
+<title>Grelha de observa&ccedil;&atilde;o | Instrumento de observa&ccedil;&atilde;o pedag&oacute;gica</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -114,6 +114,75 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(226, 232, 240, 0.5);
         }
+        .floating-nav {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 60;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        .float-button {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border: 1px solid #cad4e2;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #002546;
+            box-shadow: 0 12px 28px rgba(0, 43, 91, 0.14);
+            text-decoration: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        .float-button svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+        .float-button.action-print {
+            background: #dff4e6;
+            border-color: #4f9a69;
+            color: #155c32;
+        }
+        .float-button.is-hidden {
+            display: none;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .observation-notes {
+            width: 100%;
+            min-height: 64px;
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid #d8c3ad;
+            border-radius: 0.75rem;
+            background: #fbf8ff;
+            color: #1a1b22;
+            font-size: 0.875rem;
+            resize: vertical;
+            outline: none;
+        }
+        .observation-notes:focus {
+            border-color: #855300;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18);
+        }
     </style>
 </head>
 <body class="bg-background text-on-surface font-body-lg">
@@ -121,8 +190,7 @@
 <header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant shadow-sm h-16 flex items-center">
 <div class="max-w-7xl mx-auto w-full flex justify-between items-center px-container-padding-desktop">
 <div class="flex items-center gap-4">
-<span class="font-display-lg text-headline-lg font-bold text-primary">Observador SimuEd</span>
-<span class="hidden md:inline px-3 py-1 bg-primary-fixed text-on-primary-fixed text-label-caps rounded-full">MF5 | A3</span>
+<span class="font-display-lg text-title-md font-bold text-primary">Grelha</span>
 </div>
 <nav class="hidden md:flex gap-6 items-center">
 <a class="font-title-md text-body-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer" href="#instrucoes">Instruções</a>
@@ -140,25 +208,21 @@
 <p class="font-body-lg text-on-surface-variant text-sm">Instrumento de Observação</p>
 </div>
 <nav class="space-y-2 flex-grow">
-<a class="flex items-center gap-3 p-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all" href="#preparacao">
-<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
-<span>Preparação</span>
+<a class="flex items-center gap-3 p-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all" href="#identificacao">
+<span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+<span>Identifica&ccedil;&atilde;o</span>
 </a>
-<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#abertura">
-<span class="material-symbols-outlined" data-icon="login">login</span>
-<span>Abertura</span>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#observacao">
+<span class="material-symbols-outlined" data-icon="fact_check">fact_check</span>
+<span>Observa&ccedil;&atilde;o</span>
 </a>
-<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#desenvolvimento">
-<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
-<span>Desenvolvimento</span>
-</a>
-<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#fecho">
-<span class="material-symbols-outlined" data-icon="logout">logout</span>
-<span>Fecho</span>
-</a>
-<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#feedback-section">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#feedback">
 <span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
-<span>Devolução</span>
+<span>Devolu&ccedil;&atilde;o</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#autoavaliacao">
+<span class="material-symbols-outlined" data-icon="psychology_alt">psychology_alt</span>
+<span>Autoavalia&ccedil;&atilde;o</span>
 </a>
 </nav>
 <div class="mt-auto border-t border-outline-variant pt-4 space-y-2">
@@ -182,9 +246,9 @@
 
 </div>
 <div class="relative z-10">
-<h1 class="font-display-lg text-headline-lg md:text-display-lg text-primary mb-4">Observador SimuEd</h1>
+<h1 class="font-display-lg text-headline-lg md:text-display-lg text-primary mb-4">Grelha de observa&ccedil;&atilde;o</h1>
 <p class="text-on-surface-variant max-w-2xl mb-8">
-                        Instrumento de suporte à observação, autoavaliação e devolução construtiva desenvolvido por <span class="font-bold text-on-surface">Amélia e Luísa</span> para a Formação Pedagógica Inicial de Formadores (Módulo 5).
+                        Instrumento de suporte à observação, autoavaliação e devolução construtiva desenvolvido por <span class="font-bold text-on-surface">Amélia e Luísa</span> para a Formação: Formador de Formadores.
                     </p>
 <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
 <div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant">
@@ -266,7 +330,7 @@
 <div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-sm transition-all hover:shadow-md" id="preparacao">
 <div class="bg-primary-container p-4 text-on-primary-container flex items-center gap-3">
 <span class="material-symbols-outlined" data-icon="assignment">assignment</span>
-<h3 class="font-bold">3.1 Preparação da Sessão</h3>
+<h3 class="font-bold">Prepara&ccedil;&atilde;o da sess&atilde;o</h3>
 </div>
 <div class="p-4 overflow-x-auto">
 <table class="w-full min-w-[800px]">
@@ -321,7 +385,7 @@
 <div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-sm transition-all hover:shadow-md" id="abertura">
 <div class="bg-primary-container/80 p-4 text-on-primary-container flex items-center gap-3">
 <span class="material-symbols-outlined" data-icon="login">login</span>
-<h3 class="font-bold">3.2 Abertura</h3>
+<h3 class="font-bold">Abertura</h3>
 </div>
 <div class="p-4 overflow-x-auto">
 <table class="w-full min-w-[800px]">
@@ -358,10 +422,10 @@
 <div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-sm transition-all" id="desenvolvimento">
 <div class="bg-primary-container/60 p-4 text-on-primary-container flex items-center gap-3">
 <span class="material-symbols-outlined" data-icon="psychology">psychology</span>
-<h3 class="font-bold">3.3 Desenvolvimento &amp; 3.4 Comunicação</h3>
+<h3 class="font-bold">Desenvolvimento e comunica&ccedil;&atilde;o</h3>
 </div>
-<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-<div class="space-y-4">
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+<div class="space-y-4 bg-surface-container-low rounded-2xl border border-outline-variant p-5">
 <p class="font-label-caps text-primary border-l-4 border-primary pl-2">Conteúdo e Métodos</p>
 <ul class="space-y-6">
 <li class="flex flex-col gap-2">
@@ -380,7 +444,7 @@
 </li>
 </ul>
 </div>
-<div class="space-y-4">
+<div class="space-y-4 bg-surface-container-low rounded-2xl border border-outline-variant p-5">
 <p class="font-label-caps text-primary border-l-4 border-primary pl-2">Postura Pedagógica</p>
 <ul class="space-y-6">
 <li class="flex flex-col gap-2">
@@ -405,7 +469,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
 <div class="bg-surface-container-lowest p-6 rounded-3xl border border-outline-variant shadow-sm">
 <h3 class="font-bold flex items-center gap-2 mb-4 text-primary">
-<span class="material-symbols-outlined" data-icon="devices">devices</span> 3.5 Recursos e TIC
+<span class="material-symbols-outlined" data-icon="devices">devices</span> Recursos e TIC
                     </h3>
 <div class="space-y-4">
 <div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl">
@@ -430,7 +494,7 @@
 </div>
 <div class="bg-surface-container-lowest p-6 rounded-3xl border border-outline-variant shadow-sm">
 <h3 class="font-bold flex items-center gap-2 mb-4 text-primary">
-<span class="material-symbols-outlined" data-icon="schedule">schedule</span> 3.6 Gestão do Tempo
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span> Gest&atilde;o do tempo
                     </h3>
 <div class="space-y-4">
 <div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl">
@@ -458,7 +522,7 @@
 <div class="bg-surface-container-lowest rounded-3xl overflow-hidden border border-outline-variant shadow-sm transition-all hover:shadow-md" id="fecho">
 <div class="bg-primary/10 p-4 text-primary flex items-center gap-3">
 <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
-<h3 class="font-bold">3.7 Avaliação e Fecho</h3>
+<h3 class="font-bold">Avalia&ccedil;&atilde;o e fecho</h3>
 </div>
 <div class="p-6 space-y-4">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -611,12 +675,60 @@
 <p class="text-body-sm text-on-surface-variant">© 2024 Observatório de Práticas Pedagógicas. Sistema de devolução estruturada.</p>
 <div class="flex items-center gap-6">
 <span class="font-label-caps text-primary tracking-widest">AMÉLIA &amp; LUÍSA</span>
-<span class="text-xs text-on-surface-variant bg-surface-container-low px-3 py-1 rounded-full">Bom trabalho!</span>
+<span class="text-xs text-on-surface-variant bg-surface-container-low px-3 py-1 rounded-full">Bom e-trabalho!</span>
 </div>
 </div>
 </div>
 </footer>
+<div class="floating-nav" aria-label="Navegação rápida">
+<button class="float-button action-print" type="button" onclick="window.print()" title="Imprimir esta página" aria-label="Imprimir esta página">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V4h10v4"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v6H7z"/><path d="M17 12h.01"/></svg>
+<span class="sr-only">Imprimir esta página</span>
+</button>
+<button class="float-button is-hidden" type="button" id="float-top" onclick="scrollToTop()" title="Topo" aria-label="Topo">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+<span class="sr-only">Topo</span>
+</button>
+</div>
 <script>
+        const topButton = document.getElementById("float-top");
+
+        window.addEventListener("scroll", () => {
+            if (!topButton) return;
+            topButton.classList.toggle("is-hidden", window.scrollY < 320);
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function createNotesField() {
+            const textarea = document.createElement("textarea");
+            textarea.className = "observation-notes";
+            textarea.rows = 2;
+            textarea.placeholder = "Notas / evidências observadas...";
+            return textarea;
+        }
+
+        function addNotesToEvaluationItems() {
+            const items = [
+                ...document.querySelectorAll("#desenvolvimento li.flex.flex-col.gap-2"),
+                ...document.querySelectorAll("#observacao .grid.grid-cols-1.md\\:grid-cols-2.gap-gutter .flex.items-center.justify-between.p-3.bg-surface-container-low.rounded-xl"),
+                ...document.querySelectorAll("#fecho .bg-surface-container-low.p-4.rounded-xl")
+            ];
+
+            items.forEach((item) => {
+                if (item.querySelector("textarea")) return;
+                if (item.classList.contains("items-center")) {
+                    item.classList.remove("items-center", "justify-between");
+                    item.classList.add("flex-col", "items-stretch", "gap-3");
+                }
+                item.appendChild(createNotesField());
+            });
+        }
+
+        addNotesToEvaluationItems();
+
         // Smooth scroll and active state management
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
