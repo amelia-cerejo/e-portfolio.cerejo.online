@@ -81,6 +81,10 @@
             overflow-x: hidden;
         }
 
+        html {
+            scroll-padding-top: 96px;
+        }
+
         /* ── HERO ─────────────────────────────────────────────────────────── */
         .hero {
             background: #2a1700;
@@ -180,6 +184,7 @@
             box-shadow: 0 4px 15px rgba(26, 27, 34, 0.12);
             overflow: hidden;
             margin-bottom: 48px;
+            scroll-margin-top: 96px;
         }
 
         .section-header {
@@ -316,6 +321,7 @@
             position: relative;
             overflow: hidden;
             margin-bottom: 48px;
+            scroll-margin-top: 96px;
             box-shadow: 0 4px 15px rgba(26, 27, 34, 0.12);
         }
 
@@ -341,6 +347,13 @@
             transform: translateY(0);
         }
 
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
         .btn-primary {
             background: #f59e0b;
             color: #2a1700;
@@ -360,6 +373,30 @@
             background: #d97706;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.72);
+            color: #2a1700;
+            border: 1px solid rgba(133, 83, 0, 0.28);
+            font-weight: 700;
+            padding: 11px 22px;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: #ffffff;
+            border-color: #855300;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(42, 23, 0, 0.12);
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -442,10 +479,14 @@
 <div class="meta-chip" style="background: rgba(133, 83, 0, 0.05); border-color: rgba(133, 83, 0, 0.2); color: rgb(42, 23, 0);"><i class="fas fa-calendar-alt"></i> Julho 2026</div>
 <div class="meta-chip" style="background: rgba(133, 83, 0, 0.05); border-color: rgba(133, 83, 0, 0.2); color: rgb(42, 23, 0);"><i class="fas fa-list-check"></i> 16 critérios</div>
 </div>
-<div>
+<div class="hero-actions">
 <a class="btn-primary" href="#instrumento">
 <i class="fas fa-arrow-down"></i>
                 Iniciar Análise
+            </a>
+<a class="btn-secondary" href="grelha.html">
+<i class="fas fa-table-list"></i>
+                Ir para a grelha
             </a>
 </div>
 </div>
@@ -746,7 +787,7 @@
 <div class="absolute inset-0 bg-gradient-to-t from-[#2a1700]/90 via-[#2a1700]/40 to-transparent flex items-end p-10">
 <div>
 <h3 class="headline-lg text-white mb-2">Excelência Pedagógica</h3>
-<p class="body-lg text-white/80 italic">Transformando a observação num momento de crescimento partilhado e rigor acadêmico.</p>
+<p class="body-lg text-white/80 italic">Transformando a observação num momento de crescimento partilhado e rigor académico.</p>
 </div>
 </div>
 </div>
