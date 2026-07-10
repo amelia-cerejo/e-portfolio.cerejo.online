@@ -1,28 +1,376 @@
-<!DOCTYPE html><html class="light" lang="pt-PT" style=""><head>
+<!DOCTYPE html><html lang="pt-PT"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>SimuEd Observer - Instrumento de Observação</title>
+<title>MF5 | A3 — Análise da CP3B - SimuEd Observer</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed-variant": "#653e00",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e3e1ec",
+                        "primary-fixed-dim": "#ffb95f",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dad9e3",
+                        "surface-container": "#eeedf7",
+                        "on-tertiary-container": "#003ba1",
+                        "tertiary": "#0053db",
+                        "on-secondary-container": "#00714e",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#94aeff",
+                        "surface-container-highest": "#e3e1ec",
+                        "inverse-primary": "#ffb95f",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#68dba9",
+                        "on-primary-container": "#613b00",
+                        "on-secondary-fixed": "#002114",
+                        "tertiary-fixed": "#dbe1ff",
+                        "secondary": "#006c4a",
+                        "on-tertiary-fixed": "#00174b",
+                        "surface-container-high": "#e8e7f1",
+                        "primary": "#855300",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "inverse-surface": "#2f3038",
+                        "surface-tint": "#855300",
+                        "outline": "#867461",
+                        "on-primary-fixed": "#2a1700",
+                        "outline-variant": "#d8c3ad",
+                        "surface-container-low": "#f4f2fd",
+                        "on-background": "#1a1b22",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#005137",
+                        "on-surface-variant": "#534434",
+                        "secondary-container": "#82f5c1",
+                        "secondary-fixed": "#85f8c4",
+                        "on-surface": "#1a1b22",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#f59e0b",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#ffddb8",
+                        "surface-bright": "#fbf8ff",
+                        "surface": "#fbf8ff",
+                        "inverse-on-surface": "#f1effa",
+                        "on-tertiary-fixed-variant": "#003ea8",
+                        "error-container": "#ffdad6",
+                        "background": "#fbf8ff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "nature-tech": "0 4px 15px rgba(26, 27, 34, 0.12)"
+                    }
+                },
+            },
+        }
+    </script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(226, 232, 240, 1);
-        }
-        .gradient-honey {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #fbf8ff;
             color: #1a1b22;
+            background: #fbf8ff;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
+
+        /* ── HERO ─────────────────────────────────────────────────────────── */
+        .hero {
+            background: #2a1700;
+            color: white;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px; right: -120px;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            background: rgba(245, 158, 11, 0.08);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            color: #ffb95f;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 0.5rem;
+            margin-bottom: 24px;
+        }
+
+        .meta-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.85);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 9999px;
+        }
+
+        .meta-chip i { color: #f59e0b; font-size: 12px; }
+
+        .brand-bar {
+            background: #f59e0b;
+            padding: 10px 32px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #2a1700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* ── NAV ──────────────────────────────────────────────────────────── */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #ffffff;
+            border-bottom: 1px solid #d8c3ad;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 18px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #534434;
+            text-decoration: none;
+            white-space: nowrap;
+            border-bottom: 4px solid transparent;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #855300;
+            border-bottom-color: #f59e0b;
+        }
+
+        /* ── SECTION CARD ─────────────────────────────────────────────────── */
+        .section-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(26, 27, 34, 0.12);
+            overflow: hidden;
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 24px;
+            border-bottom: 1px solid #eeedf7;
+        }
+
+        .section-icon {
+            width: 48px; height: 48px;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .icon-primary   { background: #f59e0b; color: #ffffff; }
+        .icon-secondary { background: #006c4a; color: #ffffff; }
+        .icon-tertiary  { background: #0053db; color: #ffffff; }
+        .icon-brand     { background: #2a1700; color: #ffffff; }
+
+        .section-num {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #855300;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .section-body { padding: 24px; }
+
+        /* ── FEATURE CARDS ────────────────────────────────────────────────── */
+        .feature-card {
+            border-radius: 0.5rem;
+            padding: 20px;
+            border-left: 4px solid #006c4a;
+            background: #82f5c1;
+            height: 100%;
+        }
+
+        .feature-card.primary {
+            border-left-color: #f59e0b;
+            background: #ffddb8;
+        }
+
+        .feature-card.tertiary {
+            border-left-color: #0053db;
+            background: #dbe1ff;
+        }
+
+        /* ── STEPS ────────────────────────────────────────────────────────── */
+        .step-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: #f4f2fd;
+            border-radius: 0.5rem;
+            padding: 20px;
+        }
+
+        .step-num {
+            width: 32px; height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            background: #2a1700;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* ── CRITERIA TABLE ───────────────────────────────────────────────── */
+        .criteria-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .criteria-table thead th {
+            background: #2a1700;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 14px 20px;
+            text-align: left;
+        }
+
+        .criteria-table tbody tr:nth-child(even) { background: #fbf8ff; }
+
+        .criteria-table tbody td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eeedf7;
+            font-size: 14px;
+        }
+
+        .dim-badge {
+            display: inline-block;
+            background: #dbe1ff;
+            color: #00174b;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            white-space: nowrap;
+        }
+
+        .highlight-box {
+            border-left: 4px solid #f59e0b;
+            background: #fffbeb;
+            padding: 20px;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 24px 0;
+            font-style: italic;
+            color: #534434;
+            font-size: 16px;
+        }
+
+        /* ── CONCLUSION ───────────────────────────────────────────────────── */
+        .conclusion-box {
+            background: #2a1700;
+            border-radius: 1rem;
+            padding: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 48px;
+            box-shadow: 0 4px 15px rgba(26, 27, 34, 0.12);
+        }
+
+        .conclusion-quote {
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-style: italic;
+            color: rgba(255,255,255,0.85);
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 24px 0;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: #f59e0b;
+            color: #2a1700;
+            font-weight: 700;
+            padding: 12px 28px;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Typographic Scale Classes */
+        .display-lg { font-size: 48px; line-height: 56px; letter-spacing: -0.02em; font-weight: 700; }
+        .headline-lg { font-size: 32px; line-height: 40px; letter-spacing: -0.01em; font-weight: 600; }
+        .body-lg { font-size: 16px; line-height: 24px; font-weight: 400; }
+        .body-sm { font-size: 14px; line-height: 20px; font-weight: 400; }
+        .label-caps { font-size: 12px; line-height: 16px; letter-spacing: 0.05em; font-weight: 700; text-transform: uppercase; }
     
         .floating-nav {
             position: fixed;
@@ -74,290 +422,388 @@
         }
 
     </style>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "on-primary-fixed-variant": "#653e00",
-                      "surface-container-low": "#f4f2fd",
-                      "inverse-on-surface": "#f1effa",
-                      "tertiary": "#0053db",
-                      "secondary-fixed-dim": "#68dba9",
-                      "tertiary-container": "#94aeff",
-                      "on-surface": "#1a1b22",
-                      "primary": "#855300",
-                      "on-tertiary-fixed-variant": "#003ea8",
-                      "on-tertiary": "#ffffff",
-                      "primary-fixed-dim": "#ffb95f",
-                      "on-secondary-container": "#00714e",
-                      "on-error": "#ffffff",
-                      "primary-fixed": "#ffddb8",
-                      "surface-container": "#eeedf7",
-                      "surface": "#fbf8ff",
-                      "on-secondary": "#ffffff",
-                      "tertiary-fixed-dim": "#b4c5ff",
-                      "outline": "#867461",
-                      "primary-container": "#f59e0b",
-                      "on-tertiary-fixed": "#00174b",
-                      "error-container": "#ffdad6",
-                      "surface-dim": "#dad9e3",
-                      "on-secondary-fixed": "#002114",
-                      "on-primary": "#ffffff",
-                      "secondary-fixed": "#85f8c4",
-                      "secondary-container": "#82f5c1",
-                      "on-error-container": "#93000a",
-                      "surface-bright": "#fbf8ff",
-                      "outline-variant": "#d8c3ad",
-                      "inverse-primary": "#ffb95f",
-                      "error": "#ba1a1a",
-                      "surface-container-highest": "#e3e1ec",
-                      "on-background": "#1a1b22",
-                      "tertiary-fixed": "#dbe1ff",
-                      "secondary": "#006c4a",
-                      "surface-container-high": "#e8e7f1",
-                      "surface-container-lowest": "#ffffff",
-                      "on-primary-container": "#613b00",
-                      "inverse-surface": "#2f3038",
-                      "on-secondary-fixed-variant": "#005137",
-                      "on-tertiary-container": "#003ba1",
-                      "surface-tint": "#855300",
-                      "on-primary-fixed": "#2a1700",
-                      "surface-variant": "#e3e1ec",
-                      "background": "#fbf8ff",
-                      "on-surface-variant": "#534434"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.25rem",
-                      "lg": "0.5rem",
-                      "xl": "0.75rem",
-                      "full": "9999px"
-              },
-              "spacing": {
-                      "unit": "8px",
-                      "container-padding-desktop": "32px",
-                      "card-gap": "24px",
-                      "section-margin": "48px",
-                      "gutter": "24px",
-                      "container-padding-mobile": "16px"
-              },
-              "fontFamily": {
-                      "display-lg": ["Inter"],
-                      "headline-lg": ["Inter"],
-                      "data-mono": ["Inter"],
-                      "body-sm": ["Inter"],
-                      "body-lg": ["Inter"],
-                      "headline-lg-mobile": ["Inter"],
-                      "title-md": ["Inter"],
-                      "label-caps": ["Inter"]
-              },
-              "fontSize": {
-                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                      "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
-                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
-              }
-            },
-          },
-        }
-      </script>
 </head>
-<body class="bg-surface text-on-surface">
-<!-- TopAppBar -->
-<header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant shadow-sm h-16">
-<div class="max-w-7xl mx-auto flex justify-between items-center h-full px-container-padding-desktop">
-<div class="flex items-center gap-4">
-<a class="font-display-lg text-title-md font-bold text-primary hover:opacity-80 transition-opacity" href="index.html">Grelha</a>
+<body>
+<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+<header class="hero" style="background: rgb(244, 242, 253); color: rgb(26, 27, 34);">
+<div class="max-w-[1000px] mx-auto px-8 pt-24 pb-20 relative z-10">
+<div class="hero-badge label-caps">
+<i class="fas fa-clipboard-check"></i>
+            Instrumento de Avaliação · A3
+        </div>
+<h1 class="display-lg mb-4">MF5 | A3 — Análise da <span class="text-[#f59e0b]">CP3B</span></h1>
+<p class="body-lg italic mb-10 max-w-2xl text-[#534434]">
+            Ficha de Apreciação Global da Simulação Pedagógica — Amélia e Luisa.
+        </p>
+<div class="w-20 h-1.5 rounded-full bg-[#f59e0b] mb-10"></div>
+<div class="flex flex-wrap gap-4 mb-10">
+<div class="meta-chip" style="background: rgba(133, 83, 0, 0.05); border-color: rgba(133, 83, 0, 0.2); color: rgb(42, 23, 0);"><i class="fas fa-user-edit"></i> Amélia e Luisa</div>
+<div class="meta-chip" style="background: rgba(133, 83, 0, 0.05); border-color: rgba(133, 83, 0, 0.2); color: rgb(42, 23, 0);"><i class="fas fa-graduation-cap"></i> IEFP</div>
+<div class="meta-chip" style="background: rgba(133, 83, 0, 0.05); border-color: rgba(133, 83, 0, 0.2); color: rgb(42, 23, 0);"><i class="fas fa-calendar-alt"></i> Julho 2026</div>
+<div class="meta-chip" style="background: rgba(133, 83, 0, 0.05); border-color: rgba(133, 83, 0, 0.2); color: rgb(42, 23, 0);"><i class="fas fa-list-check"></i> 16 critérios</div>
 </div>
-<nav class="hidden md:flex items-center gap-8">
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="grelha.html">Nova observa&ccedil;&atilde;o</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="resultados.html">Resultados</a>
-<a class="text-on-surface-variant hover:text-primary transition-colors" href="configuracoes.html">Configura&ccedil;&otilde;es</a>
-</nav>
-
+<div>
+<a class="btn-primary" href="#instrumento">
+<i class="fas fa-arrow-down"></i>
+                Iniciar Análise
+            </a>
+</div>
 </div>
 </header>
-<main class="pt-16 min-h-screen">
-<!-- Hero Section -->
-<section class="relative py-24 px-container-padding-desktop overflow-hidden">
-<div class="absolute inset-0 z-0">
-
+<div class="brand-bar">
+    CP3B_INICIAL · CP3B_FINAL · INSTRUMENTO DE HETEROAVALIAÇÃO E AUTOAVALIAÇÃO
 </div>
-<div class="max-w-4xl mx-auto relative z-10 text-center">
-<span class="inline-block px-4 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps mb-6">SUPORTE À SIMULAÇÃO PEDAGÓGICA</span>
-<h2 class="font-display-lg text-display-lg mb-6 tracking-tight">Grelha de Observação e Feedback</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
-                    Instrumento estruturado para a monitorização de competências didáticas, promovendo uma cultura de reflexão e melhoria contínua na formação pedagógica.
-                </p>
-<div class="flex flex-col sm:flex-row justify-center gap-4">
-<a class="gradient-honey text-on-primary px-8 py-4 rounded-xl font-bold text-title-md shadow-lg hover:scale-[1.02] transition-transform flex items-center justify-center gap-2" href="grelha.html">
-<span class="material-symbols-outlined">add_circle</span>
-                        Novo registo
-                    </a>
-<a class="bg-surface-container-highest text-on-surface-variant px-8 py-4 rounded-xl font-bold text-title-md border border-outline-variant hover:bg-surface-container-high transition-colors" href="resultados.html">
-                        Consultar resultados
-                    </a>
+<!-- ── NAV ────────────────────────────────────────────────────────────── -->
+<nav class="sticky-nav">
+<div class="max-w-[1000px] mx-auto px-8 flex overflow-x-auto no-scrollbar justify-between">
+<a class="nav-link" href="#instrumento"><i class="fas fa-file-alt"></i> Instrumento</a>
+<a class="nav-link" href="#finalidade"><i class="fas fa-bullseye"></i> Finalidade</a>
+<a class="nav-link" href="#criterios"><i class="fas fa-table"></i> Critérios</a>
+<a class="nav-link" href="#pontos"><i class="fas fa-thumbs-up"></i> Pontos</a>
+<a class="nav-link" href="#limitacoes"><i class="fas fa-exclamation-triangle"></i> Limitações</a>
+<a class="nav-link" href="#melhorias"><i class="fas fa-lightbulb"></i> Melhorias</a>
+<a class="nav-link" href="#articulacao"><i class="fas fa-link"></i> Articulação</a>
+</div>
+</nav>
+<!-- ── MAIN ───────────────────────────────────────────────────────────── -->
+<main class="max-w-[1000px] mx-auto px-8 py-16">
+<!-- 1. INSTRUMENTO ESCOLHIDO -->
+<section class="section-card fade-in visible" id="instrumento">
+<div class="section-header">
+<div class="section-icon icon-brand"><i class="fas fa-file-alt"></i></div>
+<div>
+<span class="section-num">Secção 1</span>
+<h2 class="headline-lg text-[#2a1700]">Instrumento Escolhido</h2>
+</div>
+</div>
+<div class="section-body">
+<p class="body-lg text-[#534434] mb-8">No âmbito da preparação e desenvolvimento de uma simulação pedagógica, existem vários recursos que apoiam o/a formando/a na organização da sua intervenção, na estruturação do plano de sessão, na escolha dos métodos e técnicas pedagógicas, na seleção dos recursos didáticos e na posterior avaliação do desempenho.</p>
+<p class="body-lg text-[#534434] mb-6 font-semibold">O instrumento escolhido para esta análise é a <strong>CP3B — Ficha de Apreciação Global da Simulação Pedagógica</strong>, nas suas duas versões:</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+<div class="feature-card tertiary">
+<h3 class="label-caps text-[#00174b] mb-2 flex items-center gap-2">
+<i class="fas fa-play-circle"></i> CP3B_Inicial
+                    </h3>
+<p class="body-sm text-[#00174b]/80">Ficha de Apreciação Global da Simulação Pedagógica Inicial — identifica o ponto de partida e as competências de entrada.</p>
+</div>
+<div class="feature-card primary">
+<h3 class="label-caps text-[#613b00] mb-2 flex items-center gap-2">
+<i class="fas fa-flag-checkered"></i> CP3B_Final
+                    </h3>
+<p class="body-sm text-[#613b00]/80">Ficha de Apreciação Global da Simulação Pedagógica Final — avalia a evolução e o progresso alcançado ao longo da formação.</p>
+</div>
+</div>
+<div class="highlight-box mt-8">
+                A escolha da CP3B justifica-se pelo facto de este instrumento estar diretamente relacionado com o momento prático da simulação pedagógica — o momento mais significativo do percurso formativo.
+            </div>
+</div>
+</section>
+<!-- 2. FINALIDADE -->
+<section class="section-card fade-in visible" id="finalidade">
+<div class="section-header">
+<div class="section-icon icon-primary"><i class="fas fa-bullseye"></i></div>
+<div>
+<span class="section-num">Secção 2</span>
+<h2 class="headline-lg text-[#2a1700]">Finalidade da CP3B</h2>
+</div>
+</div>
+<div class="section-body">
+<p class="body-lg text-[#534434] mb-8">A CP3B tem como principal finalidade permitir uma <strong>apreciação global da simulação pedagógica</strong>, quer na fase inicial, quer na fase final do percurso formativo.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+<div class="feature-card tertiary">
+<h4 class="label-caps text-[#00174b] mb-2 flex items-center gap-2">
+<i class="fas fa-search"></i> Simulação Inicial
+                    </h4>
+<p class="body-sm text-[#00174b]/80">Identifica o ponto de partida do/a formando/a, evidenciando as competências já adquiridas e as áreas que necessitam de desenvolvimento. Funciona como diagnóstico.</p>
+</div>
+<div class="feature-card">
+<h4 class="label-caps text-[#002114] mb-2 flex items-center gap-2">
+<i class="fas fa-chart-line"></i> Simulação Final
+                    </h4>
+<p class="body-sm text-[#002114]/80">Verifica a evolução do/a formando/a, comparando o desempenho posterior com o inicial e analisando o progresso alcançado ao longo da formação.</p>
+</div>
+</div>
+<p class="body-lg text-[#534434]">Desta forma, a CP3B não serve apenas para atribuir uma pontuação. Serve também para <strong>acompanhar o desenvolvimento das competências pedagógicas</strong>, permitindo uma leitura mais objetiva da evolução individual e coletiva dos/as formandos/as.</p>
+</div>
+</section>
+<!-- 3. CRITÉRIOS -->
+<section class="section-card fade-in visible" id="criterios">
+<div class="section-header">
+<div class="section-icon icon-brand"><i class="fas fa-table"></i></div>
+<div>
+<span class="section-num">Secção 3</span>
+<h2 class="headline-lg text-[#2a1700]">16 Critérios de Avaliação</h2>
+</div>
+</div>
+<div class="section-body">
+<p class="body-lg text-[#534434] mb-8">A CP3B contempla <strong>16 critérios de avaliação</strong> que abrangem diferentes dimensões do desempenho do/a formador/a, desde a preparação e domínio dos conteúdos até à comunicação, dinamização e utilização de recursos.</p>
+<div class="overflow-hidden border border-[#eeedf7] rounded-lg">
+<table class="criteria-table">
+<thead>
+<tr>
+<th class="w-16 text-center">N.º</th>
+<th class="">Critério de Análise</th>
+<th class="">Dimensão Pedagógica</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="font-bold text-center">1</td><td class="body-sm">Domínio do Assunto</td><td class=""><span class="dim-badge">Conteúdo e preparação</span></td></tr>
+<tr><td class="font-bold text-center">2</td><td class="body-sm">Comunicação dos Objetivos</td><td class=""><span class="dim-badge">Planeamento e abertura</span></td></tr>
+<tr><td class="font-bold text-center">3</td><td class="body-sm">Verificação dos Pré-requisitos</td><td class=""><span class="dim-badge">Diagnóstico e abertura</span></td></tr>
+<tr><td class="font-bold text-center">4</td><td class="body-sm">Adequação dos Métodos e Técnicas Pedagógicas</td><td class=""><span class="dim-badge">Metodologia e dinamização</span></td></tr>
+<tr><td class="font-bold text-center">5</td><td class="body-sm">Motivação</td><td class=""><span class="dim-badge">Relação pedagógica</span></td></tr>
+<tr><td class="font-bold text-center">6</td><td class="body-sm">Atividades dos Participantes</td><td class=""><span class="dim-badge">Participação e interação</span></td></tr>
+<tr><td class="font-bold text-center">7</td><td class="body-sm">Facilitação da Estruturação do Conteúdo</td><td class=""><span class="dim-badge">Organização e desenvolvimento</span></td></tr>
+<tr><td class="font-bold text-center">8</td><td class="body-sm">Recursos Didáticos</td><td class=""><span class="dim-badge">Recursos e tecnologia</span></td></tr>
+<tr><td class="font-bold text-center">9</td><td class="body-sm">Comportamento Físico na Interação com o Grupo</td><td class=""><span class="dim-badge">Comunicação não verbal</span></td></tr>
+<tr><td class="font-bold text-center">10</td><td class="body-sm">Moderação das Discussões de Grupo</td><td class=""><span class="dim-badge">Gestão do grupo</span></td></tr>
+<tr><td class="font-bold text-center">11</td><td class="body-sm">Autoconfiança</td><td class=""><span class="dim-badge">Postura profissional</span></td></tr>
+<tr><td class="font-bold text-center">12</td><td class="body-sm">Verificação dos Resultados de Aprendizagem</td><td class=""><span class="dim-badge">Avaliação formativa</span></td></tr>
+<tr><td class="font-bold text-center">13</td><td class="body-sm">Comunicação dos Resultados de Aprendizagem</td><td class=""><span class="dim-badge">Avaliação e fecho</span></td></tr>
+<tr><td class="font-bold text-center">14</td><td class="body-sm">Gestão do Tempo</td><td class=""><span class="dim-badge">Organização temporal</span></td></tr>
+<tr><td class="font-bold text-center">15</td><td class="body-sm">Criatividade Pedagógica</td><td class=""><span class="dim-badge">Inovação didática</span></td></tr>
+<tr><td class="font-bold text-center">16</td><td class="body-sm">Plataformas Colaborativas</td><td class=""><span class="dim-badge">Competências digitais</span></td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
-<!-- Bento Content Section -->
-<section class="max-w-7xl mx-auto px-container-padding-desktop pb-24">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-<!-- Instructions Card -->
-<div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-xl border border-outline-variant shadow-sm">
-<div class="flex items-center gap-3 mb-8">
-<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-container">menu_book</span>
-</div>
-<h3 class="font-title-md text-title-md">Fluxo de Utilização</h3>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-<div class="flex gap-4">
-<span class="font-display-lg text-primary/20 leading-none">01</span>
+<!-- 4. PONTOS FORTES -->
+<section class="section-card fade-in visible" id="pontos">
+<div class="section-header">
+<div class="section-icon icon-secondary"><i class="fas fa-thumbs-up"></i></div>
 <div>
-<h4 class="font-bold text-body-lg mb-1">Identificação</h4>
-<p class="text-body-sm text-on-surface-variant">Preencher cabeçalho antes da observação.</p>
+<span class="section-num">Secção 4</span>
+<h2 class="headline-lg text-[#2a1700]">Pontos Fortes da CP3B</h2>
 </div>
 </div>
-<div class="flex gap-4">
-<span class="font-display-lg text-primary/20 leading-none">02</span>
-<div>
-<h4 class="font-bold text-body-lg mb-1">Observação</h4>
-<p class="text-body-sm text-on-surface-variant">Assinalar, para cada critério, o nível de desempenho observado (1–4).</p>
+<div class="section-body">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="feature-card tertiary">
+<h3 class="label-caps text-[#00174b] mb-2 flex items-center gap-2">
+<i class="fas fa-check-circle"></i> Avaliação Estruturada
+                    </h3>
+<p class="body-sm text-[#00174b]/80">Critérios previamente definidos ajudam o/a avaliador/a a observar aspetos concretos da intervenção pedagógica, evitando apreciações demasiado subjetivas.</p>
 </div>
+<div class="feature-card primary">
+<h3 class="label-caps text-[#613b00] mb-2 flex items-center gap-2">
+<i class="fas fa-balance-scale"></i> Comparação Inicial vs. Final
+                    </h3>
+<p class="body-sm text-[#613b00]/80">A existência de duas versões permite valorizar a evolução e o progresso do/a formando/a, não apenas o resultado num único momento.</p>
 </div>
-<div class="flex gap-4">
-<span class="font-display-lg text-primary/20 leading-none">03</span>
-<div>
-<h4 class="font-bold text-body-lg mb-1">Notas Qualitativas</h4>
-<p class="text-body-sm text-on-surface-variant">Registar exemplos concretos que justifiquem a classificação e que sirvam de base ao feedback.</p>
+<div class="feature-card">
+<h3 class="label-caps text-[#002114] mb-2 flex items-center gap-2">
+<i class="fas fa-layer-group"></i> Abrangência Multidimensional
+                    </h3>
+<p class="body-sm text-[#002114]/80">16 critérios cobrem todo o ciclo da simulação, desde o domínio do conteúdo até às competências digitais e relacionais.</p>
 </div>
-</div>
-<div class="flex gap-4">
-<span class="font-display-lg text-primary/20 leading-none">04</span>
-<div>
-<h4 class="font-bold text-body-lg mb-1">Feedback Estruturado</h4>
-<p class="text-body-sm text-on-surface-variant">No final, completar sec&ccedil;&otilde;es de pontos fortes, aspetos a melhorar e plano de a&ccedil;&atilde;o.</p>
-</div>
-</div>
-<div class="flex gap-4 sm:col-span-2">
-<span class="font-display-lg text-primary/20 leading-none">05</span>
-<div>
-<h4 class="font-bold text-body-lg mb-1">Autoavaliação</h4>
-<p class="text-body-sm text-on-surface-variant">Entregar uma cópia ao formando para reflexão individual antes da devolução de feedback.</p>
-</div>
-</div>
-</div>
-</div>
-<!-- Scale Reference Card -->
-<div class="md:col-span-4 bg-primary-container/10 p-8 rounded-xl border border-primary/20 flex flex-col">
-<h3 class="font-title-md text-title-md mb-6">Escala de Desempenho</h3>
-<div class="space-y-4 flex-grow">
-<div class="flex items-center gap-4 p-3 bg-white/50 rounded-lg">
-<span class="w-8 h-8 rounded flex items-center justify-center bg-error/10 text-error font-bold">1</span>
-<span class="text-body-sm font-medium">Não observado / Insuficiente</span>
-</div>
-<div class="flex items-center gap-4 p-3 bg-white/50 rounded-lg">
-<span class="w-8 h-8 rounded flex items-center justify-center bg-primary-container/20 text-primary font-bold">2</span>
-<span class="text-body-sm font-medium">Suficiente / Em desenvolvimento</span>
-</div>
-<div class="flex items-center gap-4 p-3 bg-white/50 rounded-lg">
-<span class="w-8 h-8 rounded flex items-center justify-center bg-secondary-container text-on-secondary-container font-bold">3</span>
-<span class="text-body-sm font-medium">Bom / Competente</span>
-</div>
-<div class="flex items-center gap-4 p-3 bg-white/50 rounded-lg">
-<span class="w-8 h-8 rounded flex items-center justify-center bg-secondary text-on-secondary font-bold">4</span>
-<span class="text-body-sm font-medium">Excelente / Exemplar</span>
-</div>
-</div>
-<p class="mt-6 text-body-sm text-on-surface-variant italic">
-                        * A escala 4 exige evidências de excelência na mediação da aprendizagem.
-                    </p>
-</div>
-<!-- Benefits Section (Bento Bottom) -->
-<div class="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
-<div class="p-6 glass-card rounded-xl">
-<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">groups</span>
-<h4 class="font-bold text-body-lg mb-2">Multidisciplinar</h4>
-<p class="text-body-sm text-on-surface-variant">Adaptável a diversos domínios técnicos e científicos.</p>
-</div>
-<div class="p-6 glass-card rounded-xl">
-<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">forum</span>
-<h4 class="font-bold text-body-lg mb-2">Feedback 2:1</h4>
-<p class="text-body-sm text-on-surface-variant">Equilíbrio entre reforço positivo e orientações de melhoria.</p>
-</div>
-<div class="p-6 glass-card rounded-xl">
-<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">psychology_alt</span>
-<h4 class="font-bold text-body-lg mb-2">Autorreflexão</h4>
-<p class="text-body-sm text-on-surface-variant">Foco na capacidade crítica do formando sobre a sua prática.</p>
-</div>
-<div class="p-6 glass-card rounded-xl">
-<span class="material-symbols-outlined text-primary mb-4" style="font-size: 32px;">bar_chart</span>
-<h4 class="font-bold text-body-lg mb-2">Dados Digitais</h4>
-<p class="text-body-sm text-on-surface-variant">Análise agregada para acompanhamento da evolução pedagógica.</p>
+<div class="feature-card tertiary">
+<h3 class="label-caps text-[#00174b] mb-2 flex items-center gap-2">
+<i class="fas fa-comments"></i> Suporte ao Feedback
+                    </h3>
+<p class="body-sm text-[#00174b]/80">Permite identificar rapidamente áreas fortes e áreas a melhorar, funcionando como recurso útil para apoiar o feedback e a melhoria contínua.</p>
 </div>
 </div>
 </div>
 </section>
-<!-- Visual Context Image Section -->
-<section class="max-w-7xl mx-auto px-container-padding-desktop pb-24">
-<div class="relative h-[430px] rounded-2xl overflow-hidden shadow-xl border border-outline-variant">
-<div class="bg-cover bg-center w-full h-full" data-alt="A professional university classroom setting where a professor is using a modern digital tablet to observe a trainee educator conducting a presentation. The lighting is warm and academic, with soft shadows creating a sense of focus and prestige. The trainees and observers are dressed in professional business casual attire. The atmosphere is collaborative and high-tech, aligning with the amber and cream corporate color palette." style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAeTwhUS6otgdxW8ACUew0ZN0CUj7XtbLFnEDIDePdBabVl-funLOp4q7-OMBQJQnkXNX_fba2a6rxNnwc4E8ltJx74pqkLR3xVQLHF9I4Vr9kLWe4AdHzqytTJyofE-xBHViVvq5fM2HliIh8WjY-r7ddOktkpgMhgLuSxn2q-6mUq-mJn2GiglzXzTf3k_QV52ozl-P2ZCG1Cq4T4YM-eNVxlaFEEI2HxdmtNthefv-lngozK8KrCGbPGmazQmp1C9-gLTgN7NlM&quot;);"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex items-end p-8 md:p-12">
-<div class="max-w-4xl rounded-xl bg-black/45 backdrop-blur-sm p-6 md:p-8 border border-white/20">
-<h3 class="font-headline-lg text-headline-lg text-white mb-3">Excel&ecirc;ncia pedag&oacute;gica</h3>
-<p class="text-body-lg md:text-title-md text-white font-medium leading-relaxed">Transformar a observa&ccedil;&atilde;o num momento de crescimento partilhado e de rigor acad&eacute;mico.</p>
+<!-- 5. LIMITAÇÕES -->
+<section class="section-card fade-in visible" id="limitacoes">
+<div class="section-header">
+<div class="section-icon icon-primary"><i class="fas fa-exclamation-triangle"></i></div>
+<div>
+<span class="section-num">Secção 5</span>
+<h2 class="headline-lg text-[#2a1700]">Limitações Identificadas</h2>
+</div>
+</div>
+<div class="section-body">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="feature-card primary">
+<h3 class="label-caps text-[#613b00] mb-2 flex items-center gap-2">
+<i class="fas fa-sort-numeric-up"></i> Predomínio Quantitativo
+                    </h3>
+<p class="body-sm text-[#613b00]/80">A ficha privilegia a componente quantitativa. Não apresenta espaço suficientemente desenvolvido para feedback qualitativo, limitando a compreensão do/a formando/a.</p>
+</div>
+<div class="feature-card primary">
+<h3 class="label-caps text-[#613b00] mb-2 flex items-center gap-2">
+<i class="fas fa-question-circle"></i> Critérios Subjetivos
+                    </h3>
+<p class="body-sm text-[#613b00]/80">Conceitos como "Motivação", "Autoconfiança" ou "Criatividade Pedagógica" podem ser interpretados de forma diferente sem descritores claros por nível.</p>
+</div>
+<div class="feature-card primary md:col-span-2">
+<h3 class="label-caps text-[#613b00] mb-2 flex items-center gap-2">
+<i class="fas fa-list"></i> Lista Contínua
+                    </h3>
+<p class="body-sm text-[#613b00]/80">Os critérios surgem numa lista contínua, sem agrupamento por áreas de competência, dificultando uma leitura mais rápida e estruturada do desempenho.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. MELHORIAS -->
+<section class="section-card fade-in visible" id="melhorias">
+<div class="section-header">
+<div class="section-icon icon-brand"><i class="fas fa-lightbulb"></i></div>
+<div>
+<span class="section-num">Secção 6</span>
+<h2 class="headline-lg text-[#2a1700]">Propostas de Melhoria</h2>
+</div>
+</div>
+<div class="section-body">
+<div class="flex flex-col gap-6">
+<div class="step-item">
+<div class="step-num">1</div>
+<div class="step-body">
+<h4 class="label-caps text-[#2a1700] mb-1">Feedback Qualitativo</h4>
+<p class="body-lg text-[#534434]">Incluir um campo de observações qualitativas para cada critério, permitindo registar exemplos concretos de comportamentos observados.</p>
+</div>
+</div>
+<div class="step-item">
+<div class="step-num">2</div>
+<div class="step-body">
+<h4 class="label-caps text-[#2a1700] mb-1">Descritores de Nível</h4>
+<p class="body-lg text-[#534434]">Definir indicadores comportamentais para cada nível da escala, tornando a avaliação mais objetiva e consistente entre avaliadores.</p>
+</div>
+</div>
+<div class="step-item">
+<div class="step-num">3</div>
+<div class="step-body">
+<h4 class="label-caps text-[#2a1700] mb-1">Reorganização Estrutural</h4>
+<p class="body-lg text-[#534434]">Agrupar os critérios por áreas: planeamento, comunicação, dinamização, métodos/recursos e avaliação.</p>
+</div>
+</div>
+<div class="step-item">
+<div class="step-num">4</div>
+<div class="step-body">
+<h4 class="label-caps text-[#2a1700] mb-1">Síntese Final</h4>
+<p class="body-lg text-[#534434]">Adicionar campos para: pontos fortes observados, aspetos a melhorar e sugestões para futuras intervenções.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. ARTICULAÇÃO -->
+<section class="section-card fade-in visible" id="articulacao">
+<div class="section-header">
+<div class="section-icon icon-tertiary"><i class="fas fa-link"></i></div>
+<div>
+<span class="section-num">Secção 7</span>
+<h2 class="headline-lg text-[#2a1700]">Articulação com CP3 e CP3A</h2>
+</div>
+</div>
+<div class="section-body">
+<p class="body-lg text-[#534434] mb-8">A CP3B deve ser entendida em articulação com os restantes instrumentos do mesmo conjunto. Os três instrumentos complementam-se e formam um sistema coerente:</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="border border-[#eeedf7] rounded-lg overflow-hidden bg-[#f4f2fd]">
+<div class="bg-[#2a1700] text-white px-5 py-3 label-caps flex items-center gap-2">
+<i class="fas fa-book-open"></i> CP3
+                    </div>
+<div class="p-6">
+<span class="label-caps text-[#867461] block mb-2">Instruções</span>
+<p class="body-sm text-[#534434]">Orienta o preenchimento correto dos instrumentos e clarifica a relação entre as fichas.</p>
+</div>
+</div>
+<div class="border border-[#eeedf7] rounded-lg overflow-hidden bg-[#f4f2fd]">
+<div class="bg-[#006c4a] text-white px-5 py-3 label-caps flex items-center gap-2">
+<i class="fas fa-user-check"></i> CP3A
+                    </div>
+<div class="p-6">
+<span class="label-caps text-[#867461] block mb-2">Progressão</span>
+<p class="body-sm text-[#534434]">Acompanha a evolução individual do/a formando/a, valorizando o progresso em cada critério.</p>
+</div>
+</div>
+<div class="border border-[#eeedf7] rounded-lg overflow-hidden bg-[#f4f2fd]">
+<div class="bg-[#f59e0b] text-[#2a1700] px-5 py-3 label-caps flex items-center gap-2">
+<i class="fas fa-clipboard-check"></i> CP3B
+                    </div>
+<div class="p-6">
+<span class="label-caps text-[#867461] block mb-2">Apreciação</span>
+<p class="body-sm text-[#534434]">Sistematiza a apreciação global, reunindo a pontuação e obtendo uma visão geral do desempenho.</p>
+</div>
+</div>
+</div>
+<div class="highlight-box mt-8">
+                A CP3 orienta o preenchimento · a CP3A acompanha a progressão individual · a CP3B organiza a apreciação global das simulações pedagógicas.
+            </div>
+</div>
+</section>
+<!-- CONCLUSÃO -->
+<div class="conclusion-box fade-in visible" style="background: rgb(238, 237, 247); color: rgb(26, 27, 34);">
+<h2 class="headline-lg mb-6 flex items-center gap-3 text-[#2a1700]">
+<i class="fas fa-star text-[#f59e0b]"></i> Conclusão
+        </h2>
+<div class="space-y-6 body-lg text-[#534434]">
+<p class="">A CP3B — Ficha de Apreciação Global da Simulação Pedagógica é um instrumento adequado e pertinente para avaliar o desempenho dos/as formandos/as nas simulações pedagógicas. A sua estrutura permite observar diferentes dimensões da prática formativa e contribui para uma avaliação mais organizada, uniforme e comparável.</p>
+<p class="">A existência de uma versão inicial e de uma versão final permite ainda acompanhar a evolução dos/as formandos/as ao longo do percurso formativo, valorizando o progresso e o desenvolvimento das competências pedagógicas.</p>
+<div class="conclusion-quote" style="background: rgba(133, 83, 0, 0.05); color: rgb(83, 68, 52); border-left-color: rgb(245, 158, 11);">
+                «Estas melhorias tornariam a CP3B um instrumento mais objetivo, transparente e orientado para a melhoria contínua, permitindo que a avaliação da simulação pedagógica fosse não apenas um momento de classificação, mas também uma oportunidade de reflexão, aprendizagem e desenvolvimento profissional.»
+            </div>
+<p class="">No entanto, para reforçar a sua função formativa, seria importante complementar a pontuação com feedback qualitativo, clarificar alguns critérios através de descritores e organizar os critérios por áreas de competência.</p>
+</div>
+</div>
+<!-- VISUAL CONTEXT -->
+<section class="section-card fade-in overflow-hidden visible" id="contexto">
+<div class="relative h-80 w-full">
+<img alt="Observação Pedagógica" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeTwhUS6otgdxW8ACUew0ZN0CUj7XtbLFnEDIDePdBabVl-funLOp4q7-OMBQJQnkXNX_fba2a6rxNnwc4E8ltJx74pqkLR3xVQLHF9I4Vr9kLWe4AdHzqytTJyofE-xBHViVvq5fM2HliIh8WjY-r7ddOktkpgMhgLuSxn2q-6mUq-mJn2GiglzXzTf3k_QV52ozl-P2ZCG1Cq4T4YM-eNVxlaFEEI2HxdmtNthefv-lngozK8KrCGbPGmazQmp1C9-gLTgN7NlM">
+<div class="absolute inset-0 bg-gradient-to-t from-[#2a1700]/90 via-[#2a1700]/40 to-transparent flex items-end p-10">
+<div>
+<h3 class="headline-lg text-white mb-2">Excelência Pedagógica</h3>
+<p class="body-lg text-white/80 italic">Transformando a observação num momento de crescimento partilhado e rigor acadêmico.</p>
 </div>
 </div>
 </div>
 </section>
 </main>
-<!-- Footer -->
-<footer class="w-full py-8 px-container-padding-desktop bg-surface-container-highest border-t border-outline-variant">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-<div class="flex flex-col items-center md:items-start">
-<span class="font-label-caps text-label-caps text-primary mb-2 tracking-widest">SIMUED OBSERVER</span>
-<p class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-left">
-                    © 2024 Observatório de Práticas Pedagógicas. Sistema de feedback estruturado.
-                </p>
-</div>
-<div class="flex gap-8">
-<a class="font-body-sm text-body-sm text-on-surface-variant hover:underline" href="#">Termos de utiliza&ccedil;&atilde;o</a>
-<a class="font-body-sm text-body-sm text-on-surface-variant hover:underline" href="#">Privacidade</a>
-<a class="font-body-sm text-body-sm text-on-surface-variant hover:underline" href="#">Suporte Académico</a>
-</div>
+<!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+<footer class="text-white/50 text-center py-12 px-8 border-t border-white/5 bg-[#eeedf7]">
+<div class="max-w-[1000px] mx-auto">
+<p class="label-caps text-white/90 mb-4" style="color: rgb(42, 23, 0);">MF5 | A3 — Análise da CP3B</p>
+<p class="body-sm" style="color: rgb(83, 68, 52);">
+            Amélia e Luisa · IEFP · Julho 2026<br>
+            Formação Pedagógica Inicial de Formadores — FCE-10
+        </p>
 </div>
 </footer>
 <script>
-        // Simple micro-interaction for the primary CTA
-        document.querySelector('.gradient-honey').addEventListener('click', function() {
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1.02)';
-            }, 100);
-        });
+    // Fade-in scroll animation
+    const observerOptions = {
+        threshold: 0.1
+    };
 
-        // Sticky header background shift
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 20) {
-                header.classList.add('shadow-md');
-                header.classList.remove('shadow-sm');
-            } else {
-                header.classList.add('shadow-sm');
-                header.classList.remove('shadow-md');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
-    </script>
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Sticky nav active state
+    const sections = document.querySelectorAll('section[id], .conclusion-box');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= (sectionTop - 150)) {
+                current = section.getAttribute('id') || "conclusao"; 
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current) && current !== "") {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
 
 
 <div class="floating-nav" aria-label="Navega&ccedil;&atilde;o r&aacute;pida">
-<a class="float-button primary-float" href="index.html" title="Home" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg><span class="sr-only">Home</span></a>
+<a class="float-button primary-float" href="index.html" title="An&aacute;lise" aria-label="An&aacute;lise"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg><span class="sr-only">An&aacute;lise</span></a>
+<a class="float-button" href="apresentacao.html" title="Apresenta&ccedil;&atilde;o" aria-label="Apresenta&ccedil;&atilde;o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h10"/></svg><span class="sr-only">Apresenta&ccedil;&atilde;o</span></a>
 <a class="float-button" href="grelha.html" title="Grelha" aria-label="Grelha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg><span class="sr-only">Grelha</span></a>
 <a class="float-button" href="resultados.html" title="Resultados" aria-label="Resultados"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-5"/><path d="M12 16V8"/><path d="M16 16v-3"/></svg><span class="sr-only">Resultados</span></a>
 <button class="float-button" type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Topo" aria-label="Topo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg><span class="sr-only">Topo</span></button>
