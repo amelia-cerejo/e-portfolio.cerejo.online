@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="pt-PT"><head>
+﻿<!DOCTYPE html><html lang="pt-PT"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>MF5 | A3 — Análise da CP3B - SimuEd Observer</title>
@@ -84,8 +84,6 @@
         html {
             scroll-padding-top: 96px;
         }
-
-        /* ── HERO ─────────────────────────────────────────────────────────── */
         .hero {
             background: #2a1700;
             color: white;
@@ -145,8 +143,6 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
-
-        /* ── NAV ──────────────────────────────────────────────────────────── */
         .sticky-nav {
             position: sticky;
             top: 0;
@@ -176,8 +172,6 @@
             color: #855300;
             border-bottom-color: #f59e0b;
         }
-
-        /* ── SECTION CARD ─────────────────────────────────────────────────── */
         .section-card {
             background: #ffffff;
             border-radius: 1rem;
@@ -221,8 +215,6 @@
         }
 
         .section-body { padding: 24px; }
-
-        /* ── FEATURE CARDS ────────────────────────────────────────────────── */
         .feature-card {
             border-radius: 0.5rem;
             padding: 20px;
@@ -240,8 +232,6 @@
             border-left-color: #0053db;
             background: #dbe1ff;
         }
-
-        /* ── STEPS ────────────────────────────────────────────────────────── */
         .step-item {
             display: flex;
             gap: 20px;
@@ -264,8 +254,6 @@
             justify-content: center;
             flex-shrink: 0;
         }
-
-        /* ── CRITERIA TABLE ───────────────────────────────────────────────── */
         .criteria-table {
             width: 100%;
             border-collapse: collapse;
@@ -311,8 +299,6 @@
             color: #534434;
             font-size: 16px;
         }
-
-        /* ── CONCLUSION ───────────────────────────────────────────────────── */
         .conclusion-box {
             background: #2a1700;
             border-radius: 1rem;
@@ -413,7 +399,7 @@
             position: fixed;
             right: 22px;
             bottom: 22px;
-            z-index: 60;
+            z-index: 160;
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -461,7 +447,7 @@
     </style>
 </head>
 <body>
-<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+
 <header class="hero" style="background: rgb(244, 242, 253); color: rgb(26, 27, 34);">
 <div class="max-w-[1000px] mx-auto px-8 pt-24 pb-20 relative z-10">
 <div class="hero-badge label-caps">
@@ -488,13 +474,17 @@
 <i class="fas fa-table-list"></i>
                 Ir para a grelha
             </a>
+<a class="btn-secondary" href="../../pdf-viewer.html?file=mf5/grelha-avaliacao-feedback/analise/MF5%20Atividade3%20Cp3b%20Versao%20Final.pdf&back=mf5%2Fgrelha-avaliacao-feedback%2Findex.html">
+<i class="fas fa-file-pdf"></i>
+                Ver PDF
+            </a>
 </div>
 </div>
 </header>
 <div class="brand-bar">
     CP3B_INICIAL · CP3B_FINAL
 </div>
-<!-- ── NAV ────────────────────────────────────────────────────────────── -->
+
 <nav class="sticky-nav">
 <div class="max-w-[1000px] mx-auto px-8 flex overflow-x-auto no-scrollbar justify-between">
 <a class="nav-link" href="#instrumento"><i class="fas fa-file-alt"></i> Instrumento</a>
@@ -506,9 +496,9 @@
 <a class="nav-link" href="#articulacao"><i class="fas fa-link"></i> Articulação</a>
 </div>
 </nav>
-<!-- ── MAIN ───────────────────────────────────────────────────────────── -->
+
 <main class="max-w-[1000px] mx-auto px-8 py-16">
-<!-- 1. INSTRUMENTO ESCOLHIDO -->
+
 <section class="section-card fade-in visible" id="instrumento">
 <div class="section-header">
 <div class="section-icon icon-brand"><i class="fas fa-file-alt"></i></div>
@@ -539,7 +529,7 @@
             </div>
 </div>
 </section>
-<!-- 2. FINALIDADE -->
+
 <section class="section-card fade-in visible" id="finalidade">
 <div class="section-header">
 <div class="section-icon icon-primary"><i class="fas fa-bullseye"></i></div>
@@ -567,7 +557,7 @@
 <p class="body-lg text-[#534434]">Desta forma, a CP3B não serve apenas para atribuir uma pontuação. Serve também para <strong>acompanhar o desenvolvimento das competências pedagógicas</strong>, permitindo uma leitura mais objetiva da evolução individual e coletiva dos/as formandos/as.</p>
 </div>
 </section>
-<!-- 3. CRITÉRIOS -->
+
 <section class="section-card fade-in visible" id="criterios">
 <div class="section-header">
 <div class="section-icon icon-brand"><i class="fas fa-table"></i></div>
@@ -609,7 +599,7 @@
 </div>
 </div>
 </section>
-<!-- 4. PONTOS FORTES -->
+
 <section class="section-card fade-in visible" id="pontos">
 <div class="section-header">
 <div class="section-icon icon-secondary"><i class="fas fa-thumbs-up"></i></div>
@@ -647,7 +637,7 @@
 </div>
 </div>
 </section>
-<!-- 5. LIMITAÇÕES -->
+
 <section class="section-card fade-in visible" id="limitacoes">
 <div class="section-header">
 <div class="section-icon icon-primary"><i class="fas fa-exclamation-triangle"></i></div>
@@ -679,7 +669,7 @@
 </div>
 </div>
 </section>
-<!-- 6. MELHORIAS -->
+
 <section class="section-card fade-in visible" id="melhorias">
 <div class="section-header">
 <div class="section-icon icon-brand"><i class="fas fa-lightbulb"></i></div>
@@ -721,7 +711,7 @@
 </div>
 </div>
 </section>
-<!-- 7. ARTICULAÇÃO -->
+
 <section class="section-card fade-in visible" id="articulacao">
 <div class="section-header">
 <div class="section-icon icon-tertiary"><i class="fas fa-link"></i></div>
@@ -766,7 +756,7 @@
             </div>
 </div>
 </section>
-<!-- CONCLUSÃO -->
+
 <div class="conclusion-box fade-in visible" style="background: rgb(238, 237, 247); color: rgb(26, 27, 34);">
 <h2 class="headline-lg mb-6 flex items-center gap-3 text-[#2a1700]">
 <i class="fas fa-star text-[#f59e0b]"></i> Conclusão
@@ -780,7 +770,7 @@
 <p class="">No entanto, para reforçar a sua função formativa, seria importante complementar a pontuação com feedback qualitativo, clarificar alguns critérios através de descritores e organizar os critérios por áreas de competência.</p>
 </div>
 </div>
-<!-- VISUAL CONTEXT -->
+
 <section class="section-card fade-in overflow-hidden visible" id="contexto">
 <div class="relative h-80 w-full">
 <img alt="Observação Pedagógica" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeTwhUS6otgdxW8ACUew0ZN0CUj7XtbLFnEDIDePdBabVl-funLOp4q7-OMBQJQnkXNX_fba2a6rxNnwc4E8ltJx74pqkLR3xVQLHF9I4Vr9kLWe4AdHzqytTJyofE-xBHViVvq5fM2HliIh8WjY-r7ddOktkpgMhgLuSxn2q-6mUq-mJn2GiglzXzTf3k_QV52ozl-P2ZCG1Cq4T4YM-eNVxlaFEEI2HxdmtNthefv-lngozK8KrCGbPGmazQmp1C9-gLTgN7NlM">
@@ -793,7 +783,7 @@
 </div>
 </section>
 </main>
-<!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+
 <footer class="text-white/50 text-center py-12 px-8 border-t border-white/5 bg-[#eeedf7]">
 <div class="max-w-[1000px] mx-auto">
 <p class="label-caps text-white/90 mb-4" style="color: rgb(42, 23, 0);">MF5 | A3 — Análise da CP3B</p>
@@ -804,7 +794,7 @@
 </div>
 </footer>
 <script>
-    // Fade-in scroll animation
+// Fade-in scroll animation
     const observerOptions = {
         threshold: 0.1
     };
@@ -847,6 +837,6 @@
 <a class="float-button" href="apresentacao.html" title="Apresenta&ccedil;&atilde;o" aria-label="Apresenta&ccedil;&atilde;o"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h10"/></svg><span class="sr-only">Apresenta&ccedil;&atilde;o</span></a>
 <a class="float-button" href="grelha.html" title="Grelha" aria-label="Grelha"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg><span class="sr-only">Grelha</span></a>
 <a class="float-button" href="resultados.html" title="Resultados" aria-label="Resultados"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 16v-5"/><path d="M12 16V8"/><path d="M16 16v-3"/></svg><span class="sr-only">Resultados</span></a>
-<button class="float-button" type="button" onclick="window.scrollTo({top:0, behavior:'smooth'})" title="Topo" aria-label="Topo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg><span class="sr-only">Topo</span></button>
 </div>
+
 </body></html>

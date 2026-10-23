@@ -9,10 +9,11 @@
         --ink: #172033;
         --muted: #626d80;
         --blue: #002b5b;
+        --green: #1f6f5b;
         --gold: #bd8a12;
-        --paper: #fbf8f4;
-        --soft: #edf3f8;
-        --line: #e2ded8;
+        --paper: #f2f7f2;
+        --soft: #e7f1ea;
+        --line: #cddfd4;
         --white: #fff;
       }
 
@@ -27,7 +28,7 @@
       }
 
       header {
-        background: linear-gradient(135deg, #ffffff 0%, #eef4fb 58%, #f8efe0 100%);
+        background: linear-gradient(135deg, #f9fff9 0%, #e7f1ea 62%, #fff7e8 100%);
         border-bottom: 1px solid var(--line);
       }
 
@@ -66,7 +67,7 @@
 
       .summary-card, .fact {
         background: rgba(255, 255, 255, 0.82);
-        border-left: 3px solid var(--gold);
+        border-left: 3px solid var(--green);
         padding: 12px 14px;
       }
 
@@ -102,7 +103,7 @@
         display: block;
         padding: 8px 10px;
         border-radius: 6px;
-        color: var(--blue);
+        color: var(--green);
         text-decoration: none;
         font-weight: 700;
         font-size: 0.91rem;
@@ -127,7 +128,7 @@
         width: 34px;
         height: 34px;
         border-radius: 50%;
-        background: var(--blue);
+        background: var(--green);
         color: #fff;
         font-weight: 800;
         margin-bottom: 12px;
@@ -176,7 +177,7 @@
       }
 
       th {
-        background: var(--blue);
+        background: var(--green);
         color: #fff;
         text-align: left;
         padding: 12px;
@@ -191,7 +192,7 @@
 
       td:first-child {
         width: 28%;
-        color: var(--blue);
+        color: var(--green);
         font-weight: 800;
       }
 
@@ -239,21 +240,15 @@
         fill: none;
       }
 
-      .float-button.action-print {
-        background: #dff4e6;
-        border-color: #4f9a69;
-        color: #155c32;
-      }
-
-      .float-button.action-complete {
-        background: #ffe9a8;
-        border-color: #c98a00;
-        color: #694400;
-      }
-
       .float-button:hover {
         border-color: var(--gold);
         transform: translateY(-1px);
+      }
+
+      .float-button.print-sheet {
+        color: var(--green);
+        border-color: #9bc5ad;
+        background: #f7fff8;
       }
 
       .float-button.is-hidden {
@@ -421,21 +416,13 @@
     </footer>
 
     <div class="floating-nav" aria-label="Navegação rápida">
-      <a class="float-button" href="../index.html#evidencias" title="Voltar às evidências" aria-label="Voltar às evidências">
+      <a class="float-button" href="../e-portfolio.html#evidencias/mf3" title="Voltar às evidências" aria-label="Voltar às evidências">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
         <span class="sr-only">Voltar às evidências</span>
       </a>
-      <button class="float-button action-print" type="button" onclick="window.print()" title="Imprimir esta ficha" aria-label="Imprimir esta ficha">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V4h10v4"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v6H7z"/><path d="M17 12h.01"/></svg>
-        <span class="sr-only">Imprimir esta ficha</span>
-      </button>
-      <a class="float-button action-complete" href="../imprimir-completo.html" title="Imprimir e-Portfólio completo" aria-label="Imprimir e-Portfólio completo">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h10v13H8z"/><path d="M6 17H5a2 2 0 0 1-2-2V4h10a2 2 0 0 1 2 2v1"/><path d="M11 11h4"/><path d="M11 15h4"/></svg>
-        <span class="sr-only">Imprimir e-Portfólio completo</span>
-      </a>
-      <button class="float-button is-hidden" type="button" id="float-top" onclick="scrollToTop()" title="Topo" aria-label="Topo">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
-        <span class="sr-only">Topo</span>
+      <button class="float-button print-sheet" type="button" onclick="window.print()" title="Imprimir ficha" aria-label="Imprimir ficha">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+        <span class="sr-only">Imprimir ficha</span>
       </button>
     </div>
 
@@ -451,5 +438,6 @@
       updateTopButton();
       window.addEventListener("scroll", updateTopButton, { passive: true });
     </script>
-  </body>
+  
+</body>
 </html>

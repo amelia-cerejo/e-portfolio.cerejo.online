@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { FileText, Plus, Trash2, Award, ChevronRight, ChevronLeft } from "lucide-react";
 import { PortfolioData, ModuleDetail } from "../types";
@@ -8,24 +8,61 @@ interface ModulesSectionProps {
   isAdmin: boolean;
   handleUpdateModule: (moduleId: string, field: string, value: any) => void;
   showToast: (msg: string) => void;
+  showIntro?: boolean;
+  selectedModuleCode?: string | null;
+  onSelectedModuleChange?: (moduleCode: string) => void;
 }
 
 export default function ModulesSection({
   portfolio,
   isAdmin,
   handleUpdateModule,
-  showToast
+  showToast,
+  showIntro = false,
+  selectedModuleCode,
+  onSelectedModuleChange
 }: ModulesSectionProps) {
   const [activeModuleIndex, setActiveModuleIndex] = useState(0);
   const activeMod = portfolio.modules[activeModuleIndex];
 
+  useEffect(() => {
+    if (!selectedModuleCode) return;
+    const nextIndex = portfolio.modules.findIndex((module) => module.code === selectedModuleCode);
+    if (nextIndex >= 0) setActiveModuleIndex(nextIndex);
+  }, [portfolio.modules, selectedModuleCode]);
+
+  const selectModuleIndex = (index: number) => {
+    setActiveModuleIndex(index);
+    onSelectedModuleChange?.(portfolio.modules[index].code);
+  };
+
   const handleNext = () => {
-    setActiveModuleIndex((prev) => (prev + 1) % portfolio.modules.length);
+    selectModuleIndex((activeModuleIndex + 1) % portfolio.modules.length);
   };
 
   const handlePrev = () => {
-    setActiveModuleIndex((prev) => (prev - 1 + portfolio.modules.length) % portfolio.modules.length);
+    selectModuleIndex((activeModuleIndex - 1 + portfolio.modules.length) % portfolio.modules.length);
   };
+
+  if (showIntro) {
+    return (
+      <div className="space-y-8 pb-12 border-b border-[#002b5b]/10">
+        <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
+          <FileText className="text-[#bd8a12]" size={24} />
+          <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">ReflexÃµes</h2>
+        </div>
+        <div className="border border-[#002b5b]/10 bg-white p-6 sm:p-8 rounded-2xl space-y-4">
+          <span className="tag">Por mÃ³dulos e atividades</span>
+          <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-serif">
+            A reflexÃ£o por mÃ³dulos permite compreender a progressÃ£o do curso e a forma como cada etapa contribuiu para o desenvolvimento das competÃªncias associadas ao papel de formador de formadores. Os nomes das atividades correspondem aos tÃ­tulos reais usados no percurso formativo.
+          </p>
+          <p className="text-xs text-gray-500 italic">
+            Selecione MF1, MF2, MF3, MF4, MF5 ou Global no menu lateral para consultar cada reflexÃ£o.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 pb-12 border-b border-[#002b5b]/10">
@@ -49,7 +86,7 @@ export default function ModulesSection({
           return (
             <button
               key={mod.id}
-              onClick={() => setActiveModuleIndex(index)}
+              onClick={() => selectModuleIndex(index)}
               className={`relative px-4 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-lg transition-all duration-200 flex items-center space-x-2 ${
                 isActive 
                   ? "bg-[#002b5b] text-white shadow-sm" 

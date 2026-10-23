@@ -315,11 +315,6 @@
             stroke-linejoin: round;
             fill: none;
         }
-        .float-button.action-print {
-            background: #dff4e6;
-            border-color: #4f9a69;
-            color: #155c32;
-        }
         .float-button.is-hidden {
             display: none;
         }
@@ -336,6 +331,7 @@
         }
         header {
             gap: 1rem !important;
+            position: sticky !important;
         }
         .menu-toggle {
             display: none;
@@ -383,39 +379,47 @@
                 grid-template-columns: 1fr !important;
             }
             header {
-                display: grid !important;
-                grid-template-columns: 1fr auto !important;
+                display: flex !important;
+                justify-content: space-between !important;
                 align-items: center !important;
+                flex-wrap: nowrap !important;
             }
             .menu-toggle {
                 display: inline-flex !important;
                 align-items: center;
                 justify-content: center;
                 gap: 0.35rem;
+                flex: 0 0 auto;
             }
             header nav {
-                grid-column: 1 / -1;
+                position: absolute;
+                top: calc(100% + 0.5rem);
+                right: 1rem;
+                z-index: 60;
                 display: none !important;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 0.5rem 0.75rem !important;
-                width: 100%;
+                grid-template-columns: 1fr;
+                gap: 0.35rem 0.5rem !important;
+                width: min(24rem, calc(100vw - 2rem));
+                padding: 0.75rem;
+                border: 1px solid rgba(255, 255, 255, 0.18);
+                border-radius: 0.75rem;
+                background: #002546;
+                box-shadow: 0 18px 36px rgba(0, 37, 70, 0.24);
             }
             header.menu-open nav {
                 display: grid !important;
             }
             header nav a {
-                display: block;
-                padding: 0.45rem 0;
-                border-bottom: 1px solid rgba(255, 220, 196, 0.28);
+                display: flex;
+                align-items: center;
+                min-height: 2.75rem;
+                padding: 0.65rem 0.75rem;
+                border: 1px solid rgba(255, 255, 255, 0.14);
+                border-radius: 0.5rem;
+                background: rgba(255, 255, 255, 0.06);
             }
             header > a[href="#documentos-pdf"] {
                 display: none !important;
-                grid-column: 1 / -1;
-                width: 100%;
-                text-align: center;
-            }
-            header.menu-open > a[href="#documentos-pdf"] {
-                display: block !important;
             }
         }
         @media (max-width: 760px) {
@@ -432,17 +436,13 @@
         }
         @media (max-width: 560px) {
             header {
-                grid-template-columns: 1fr !important;
+                gap: 0.75rem !important;
             }
-            .menu-toggle {
-                width: 100%;
+            header .font-headline-md {
+                font-size: 1.25rem;
             }
             header nav {
                 grid-template-columns: 1fr !important;
-            }
-            header > a[href="#documentos-pdf"] {
-                width: 100%;
-                text-align: center;
             }
         }
 
@@ -795,14 +795,6 @@
 </div>
 
 <div class="floating-nav" aria-label="Navegação rápida">
-<button class="float-button action-print" type="button" onclick="window.print()" title="Imprimir esta página" aria-label="Imprimir esta página">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V4h10v4"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v6H7z"/><path d="M17 12h.01"/></svg>
-<span class="sr-only">Imprimir esta página</span>
-</button>
-<button class="float-button is-hidden" type="button" id="float-top" onclick="scrollToTop()" title="Topo" aria-label="Topo">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
-<span class="sr-only">Topo</span>
-</button>
 </div>
 
 
@@ -873,4 +865,15 @@ updateTopButton();
 window.addEventListener("scroll", updateTopButton, { passive: true });
 </script>
 
+
+<style id="portfolio-floating-buttons-style">
+  .portfolio-floating-buttons{position:fixed;right:22px;bottom:22px;z-index:9999;display:flex;flex-direction:column;gap:10px;font-family:Inter,Arial,sans-serif}
+  .portfolio-floating-buttons a,.portfolio-floating-buttons button{width:48px;height:48px;border-radius:999px;border:1px solid #c8d4e3;background:#fff;color:#002b5b;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,43,91,.18);cursor:pointer;text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}
+  .portfolio-floating-buttons a:hover,.portfolio-floating-buttons button:hover{transform:translateY(-1px);border-color:#bd8a12}
+  .portfolio-floating-buttons svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  @media print{.portfolio-floating-buttons{display:none}}
+</style>
+<div class="portfolio-floating-buttons" aria-label="Navegacao do e-Portfolio">
+  <a href="../../../e-portfolio.html#evidencias/mf5" title="Voltar as evidencias" aria-label="Voltar as evidencias"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/><path d="M9 12h12"/><path d="M3 5v14"/></svg></a>
+</div>
 </body></html>

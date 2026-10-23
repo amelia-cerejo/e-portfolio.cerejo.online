@@ -1,15 +1,17 @@
-﻿import { PortfolioData } from "./types";
+import { PortfolioData } from "./types";
+
+const OFFICIAL_COURSE_NAME = "Formação Pedagógica Contínua de Formadores — Formador de Formadores";
 
 export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
-  title: "e-Portfólio",
-  subtitle: "Portfólio Científico-Pedagógico • Curso de Formação Pedagógica Contínua de Formador de Formadores",
+  title: "e-Portefólio",
+  subtitle: `Portefólio científico-pedagógico • ${OFFICIAL_COURSE_NAME}`,
   
   // Capa Metadata
   formanda: "Amélia Cerejo Lopes",
   entidadeFormadora: "IEFP — Instituto do Emprego e Formação Profissional, I.P.",
   delegacaoRegional: "Delegação Regional do Alentejo",
   servico: "Centro de Emprego e Formação Profissional de Beja",
-  curso: "Formação Pedagógica Contínua de Formador de Formadores",
+  curso: OFFICIAL_COURSE_NAME,
   formaOrganizacao: "E-learning",
   periodoFormacao: "14 de maio de 2026 a 10 de julho de 2026",
   coordenadoraPedagogica: "Ivone Silva",
@@ -18,192 +20,254 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
     "Joaquim Manuel Rodrigues Paulino"
   ],
   ccp: "n.º EDF 407745/2006 DL — emitido a 31 de maio de 2006",
-  dataElaboracao: "Junho de 2026",
-  referencialRef: "Referencial de Formação Pedagógica Contínua de Formadores — IEFP, 3.ª Edição (Janeiro 2022)",
+  dataElaboracao: "Julho de 2026",
+  referencialRef: "IEFP. Referencial de Formação Pedagógica Contínua de Formadores — Formador de Formadores, 3.ª edição, janeiro de 2022.",
 
   // 1. Apresentação Pessoal
-  personalBio: "Sou formadora certificada desde 2006, tendo iniciado a minha atividade formativa após a conclusão da Formação Pedagógica Inicial de Formadores. Ao longo destes anos, desenvolvi atividade na formação de formandos em processos de desenvolvimento de competências digitais, desenvolvimento pessoal e andragogia, trabalhando com públicos diversos (ativos empregados, desempregados e jovens em formação profissional).",
+  personalBio: "O presente e-portf\u00f3lio reflexivo apresenta o meu percurso de aprendizagem na Forma\u00e7\u00e3o Pedag\u00f3gica Cont\u00ednua de Formadores \u2013 Formador de Formadores. Foi elaborado no \u00e2mbito do curso promovido pelo IEFP, em regime de e-learning, e procura evidenciar as aprendizagens, as atividades realizadas e a reflex\u00e3o cr\u00edtica desenvolvida ao longo dos m\u00f3dulos.\n\nSou Am\u00e9lia Cerejo Lopes e tenho um percurso acad\u00e9mico e profissional diversificado, com experi\u00eancia em Psicologia, Gest\u00e3o, Tecnologias de Informa\u00e7\u00e3o, forma\u00e7\u00e3o, gest\u00e3o de projetos e apoio administrativo. Esta diversidade tem contribu\u00eddo para uma vis\u00e3o ampla da forma\u00e7\u00e3o, das pessoas e dos contextos profissionais.\n\nA minha atividade enquanto formadora tem sido marcada pela utiliza\u00e7\u00e3o de ferramentas digitais, ambientes online, plataformas colaborativas e recursos pedag\u00f3gicos multim\u00e9dia. Esta experi\u00eancia ajudou-me a valorizar a clareza, a organiza\u00e7\u00e3o, a acessibilidade dos materiais e a adapta\u00e7\u00e3o das estrat\u00e9gias aos participantes.\n\nAo realizar esta forma\u00e7\u00e3o, procurei refor\u00e7ar a minha capacidade de analisar necessidades, conceber recursos e percursos formativos, refletir sobre pr\u00e1ticas profissionais, utilizar metodologias adequadas e acompanhar outros formadores em processos de desenvolvimento pedag\u00f3gico.",
   experienceBullets: [
     "Formação especializada em contexto de centros de formação do IEFP, empresas e escolas profissionais parceiras",
-    "Áreas de especialização orientadas principalmente para as TIC (Tecnologias de Informação e Comunicação), soft skills e orientação profissional",
+    "Áreas de especialização orientadas principalmente para as TIC, soft skills e orientação profissional",
     "Acompanhamento individualizado e de grupo em processos de diagnóstico e inserção profissional ativa"
   ],
   motivationBullets: [
-    "Aprofundar competências técnicas e pedagógicas estruturantes para formar futuros formadores, transmitindo não apenas conhecimentos operacionais, mas também a postura reflexiva e crítica estruturada que a profissão exige.",
-    "Aceder a novas áreas de intervenção profissional de relevância estratégica, nomeadamente: participação ativa em processos de RVCC como técnica ou júri avaliador, validação de novos módulos através do NETFORCE e orientação na Formação Pedagógica Inicial.",
-    "Atualização, consolidação e valorização científica permanente, ciente de que a andragogia de vanguarda requer aprendizagem ao longo da vida e inovação instrucional constante."
+    "Aprofundar competências técnicas e pedagógicas estruturantes para formar futuros formadores, articulando conhecimentos operacionais com uma postura reflexiva, crítica e responsável.",
+    "Aceder a novas áreas de intervenção profissional, nomeadamente a participação em processos de RvccFor — Reconhecimento, Validação e Certificação de Competências de Formadores, em funções compatíveis com a experiência, as habilitações e o enquadramento institucional.",
+    "Atualizar o meu registo profissional e curricular no NETFORCE, integrando as competências e certificações adquiridas."
   ],
 
-  // 2. Objetivos do e-Portfolio
+  // 2. Objetivos do e-portefólio
   portfolioGoalsBullets: [
-    "Documentar e refletir criticamente sobre todo o itinerário de aprendizagem percorrido ao longo do Curso de Formação de Formadores.",
-    "Autoavaliar as competências adquiridas e consolidadas, reconhecendo pilares de excelência e demarcando domínios adicionais de especialização futura.",
-    "Sistematizar evidências tangíveis das atividades realizadas em cada um dos módulos letivos.",
-    "Projetar a atividade andragógica futura, estabelecendo um plano de ação robusto e diretrizes sólidas de desenvolvimento individual contínuo.",
-    "Demonstrar a proficiência metacognitiva essencial a quem assume a responsabilidade científica de formar formadores."
+    "Reunir informa\u00e7\u00e3o significativa sobre o percurso formativo realizado;",
+    "Relacionar os m\u00f3dulos do curso com as atividades desenvolvidas;",
+    "Identificar aprendizagens adquiridas em contextos formais, n\u00e3o formais e informais;",
+    "Refletir criticamente sobre pr\u00e1ticas pedag\u00f3gicas e identidade profissional;",
+    "Selecionar e justificar evid\u00eancias relevantes para demonstrar compet\u00eancias;",
+    "Identificar pontos fortes, \u00e1reas de melhoria e objetivos de desenvolvimento futuro."
   ],
-  goalsQuote: "Este portfólio não é apenas um requisito formal de avaliação, mas um instrumento dinâmico de desenvolvimento profissional contínuo que pretendo alimentar e atualizar regularmente ao longo da minha carreira.",
+  objectivesIntro: "Este e-portf\u00f3lio tem uma fun\u00e7\u00e3o reflexiva, formativa e demonstrativa. N\u00e3o pretende ser apenas uma cole\u00e7\u00e3o de trabalhos, mas sim um instrumento de an\u00e1lise do percurso realizado, das compet\u00eancias mobilizadas e das aprendizagens constru\u00eddas ao longo da forma\u00e7\u00e3o.",
+  goalsQuote: "Este e-portefólio não é apenas um requisito formal de avaliação, mas um instrumento de desenvolvimento profissional contínuo que pretendo alimentar e atualizar ao longo da minha carreira.",
 
-  // 3. Reflexão Crítica sobre os Módulos
+  // 3. Percurso e Atividades
+  activityModules: [
+    {
+      code: "MF1",
+      title: "Diagnóstico de Necessidades e Referenciais de Competências e de Formação",
+      activities: [
+        "Sessão Síncrona",
+        "Atividade 1 | Instrumentos de Diagnóstico de Necessidades de Competências e de Formação",
+        "Atividade 2 | Lacunas de Competências e de Formação",
+        "Atividade 3 | Competências Essenciais para uma Função"
+      ]
+    },
+    {
+      code: "MF2",
+      title: "Conceção da Formação",
+      activities: [
+        "Atividade 1 | Recurso Didático e Multimédia",
+        "Atividade 2 | Sessão Síncrona",
+        "Atividade 3 | Glossário de termos CoP",
+        "Atividade 4 | Caraterização das Comunidades de Prática"
+      ]
+    },
+    {
+      code: "MF3",
+      title: "Dinâmica de Aprendizagem ao Longo da Vida",
+      activities: [
+        "Atividade 1 | Sou um Profissional Reflexivo Crítico",
+        "Atividade 2 | Sessão Síncrona",
+        "Atividade 3 | Lição Dinâmica de Aprendizagem ao Longo da Vida",
+        "Atividade 4 | E-Portefólio",
+        "Percurso Profissional"
+      ]
+    },
+    {
+      code: "MF4",
+      title: "Metodologias e Estratégias Pedagógicas",
+      activities: [
+        "Atividade 1 | Métodos e Técnicas Pedagógicas",
+        "Atividade 2 | Sessão Síncrona",
+        "Atividade 3 | Planificação e Protótipo de um Miniprojeto"
+      ]
+    },
+    {
+      code: "MF5",
+      title: "Simulações Pedagógicas",
+      activities: [
+        "Atividade 1 | Práticas de Dinamização da Simulação",
+        "Atividade 2 | Sessão Síncrona – Simulação Inicial",
+        "Atividade 3 | Instrumento de Suporte a Simulações Pedagógicas – Escolha do Instrumento a Analisar"
+      ]
+    }
+  ],
+
+  // 4. Reflexão Crítica sobre os Módulos
   modules: [
     {
       id: "m1",
       code: "MF1",
       title: "Diagnóstico de Necessidades e Referenciais de Competências e de Formação",
-      hours: "18 Horas",
-      sabia: "Antes de iniciar este módulo, já possuía conhecimentos práticos sobre a identificação de necessidades de formação, adquiridos ao longo de anos de atividade formativa. Sabia que era importante perceber o perfil dos formandos antes de planear uma ação, mas nunca tinha sistematizado esse processo de forma pedagógica, técnica e estruturada. Os conceitos de 'referencial de competências' e 'referencial de formação' eram-me familiares de forma intuitiva, mas não dominava a sua construção formal.",
+      hours: "10 horas",
+      sabia: "Antes de iniciar este módulo, já possuía conhecimentos práticos sobre a identificação de necessidades de formação, adquiridos ao longo da minha atividade formativa. Sabia que era importante conhecer o perfil dos formandos antes de planear uma ação, mas ainda não tinha sistematizado esse processo de forma tão estruturada. Os conceitos de referencial de competências e referencial de formação eram-me familiares, embora não dominasse totalmente a sua construção formal.",
       aprendi: [
-        "Instrumentos de diagnóstico de necessidades de excelência: distinção rigorosa e aplicação prática de métodos qualitativos e quantitativos — observação direta estruturada, avaliação de pares/360 graus, inquéritos por entrevista de diagnóstico, focus group de competências e análise documental aprofundada.",
-        "Avaliação 360 Graus e Observação Direta: a dinâmica de trabalho colaborativo permitiu compreender a fundo as suas vantagens estruturais, eventuais resistências, riscos e aplicabilidade real no alinhamento de equipas corporativas e formativas.",
-        "Construção de referenciais de competências: fases operatórias de conceção, mapeamento sistemático de unidades de competências, identificação de competências transversais integradas e processos de homologação/validação científica.",
-        "Perfil de formação orientado para competências emergentes: o desenvolvimento do referencial para o cenário estimulante e desafiador de 'Especialista em Promoção de Destinos no TikTok' serviu de âncora para entender como conceber referenciais para funções em mutação acelerada e as metodologias de Storytelling Visual em Vídeos Curtos.",
-        "Análise rigorosa de lacunas de competências: mensurar a distância técnica entre competências em uso profissional e as competências exigidas pelo referencial de mercado, convertendo esta análise num plano de ação personalizado."
+        "Aprofundei instrumentos de diagnóstico de necessidades, distinguindo métodos qualitativos e quantitativos, como observação direta, avaliação de pares, avaliação 360 graus, entrevistas, focus group e análise documental.",
+        "Compreendi melhor as vantagens, limitações e cuidados de aplicação da observação direta e da avaliação 360 graus em contextos formativos e organizacionais.",
+        "Consolidei as etapas de construção de referenciais de competências, incluindo o mapeamento de unidades de competência e a sua articulação com necessidades reais de desempenho.",
+        "A construção de um perfil de formação para Especialista em Promoção de Destinos no TikTok ajudou-me a compreender como se podem desenhar referenciais para funções emergentes.",
+        "A análise de lacunas de competências permitiu-me relacionar competências existentes, competências exigidas e respostas formativas ajustadas."
       ],
       atividades: [
-        "Atividade 1 (Grupo 3 — Amélia, Elisabete, Luísa, Sílvia): Instrumentos de Diagnóstico de Necessidades de Competências e de Formação. Foco exaustivo nas metodologias de 'Observação Direta' e 'Avaliação de Pares / Avaliação 360 Graus', estruturando as vantagens, limitações institucionais e propostas de relatórios.",
-        "Atividade 2 (Individual): Análise profunda de lacunas de competências e de formação profissional a partir de um caso de estudo. Elaboração de um relatório consolidado com propostas de intervenção formativa direta. (Duração aproximada: 180 minutos).",
-        "Atividade 3 (Grupo 3 — Amélia, Elisabete, Luísa, Sílvia): Desenvolvimento integral do perfil de competências e plano de formação para a função emergente 'Especialista em Promoção de Destinos no TikTok' centrado no módulo de Storytelling Visual. Feedback do formador Joaquim Paulino: 'Trabalho de nível muito elevado e rigoroso do ponto de vista técnico-pedagógico.'"
+        "Sessão síncrona",
+        "Atividade 1 | Instrumentos de Diagnóstico de Necessidades de Competências e de Formação",
+        "Atividade 2 | Lacunas de Competências e de Formação",
+        "Atividade 3 | Competências Essenciais para uma Função"
       ],
-      reflexao: "A jornada no MF1 alterou radicalmente a minha perspetiva sobre a iniciação de qualquer intervenção pedagógica. Percebi que o diagnóstico não é um preâmbulo administrativo dispensável, mas sim o alicerce ético-científico de toda a ação formativa. O trabalho sobre o Specialist de TikTok demonstrou-nos que os referenciais contemporâneos necessitam de ser dinâmicos, plásticos e fortemente sintonizados com as linguagens emergentes.",
-      aplicacaoFutura: "Pretendo reestruturar ativamente as fichas e práticas de diagnóstico iniciais das formações que lidero, substituindo questionários meramente burocráticos por metodologias ativas de observação e mapeamento de lacunas alinhadas com o CNQ (Catálogo Nacional de Qualificações).",
-      aspetosAprofundar: "Desejo realizar formação avançada em engenharia de diagnóstico de necessidades industriais e aprofundar as bases de dados e ferramentas de cruzamento de competências dinâmicas no CNQ."
+      reflexao: "O MF1 levou-me a olhar de forma mais estruturada para o diagnóstico de necessidades, reconhecendo-o como uma etapa essencial do planeamento da formação. Percebi que diagnosticar não é apenas recolher informação inicial, mas interpretar dados, compreender contextos e fundamentar decisões pedagógicas. O trabalho sobre o perfil de Especialista em Promoção de Destinos no TikTok mostrou-me também que os referenciais precisam de acompanhar a evolução das profissões e das linguagens digitais.",
+      aplicacaoFutura: "Pretendo rever as fichas e práticas de diagnóstico inicial das formações que dinamizo, usando instrumentos mais adequados ao contexto e ao perfil dos formandos.",
+      aspetosAprofundar: "Desejo aprofundar a construção de referenciais de competências e de formação, bem como a utilização de ferramentas de análise de lacunas alinhadas com o Catálogo Nacional de Qualificações."
     },
     {
       id: "m2",
       code: "MF2",
-      title: "Conceção da Formação: Recursos Didáticos e Comunidades de Prática",
-      hours: "18 Horas",
-      sabia: "Já utilizava com bom desempenho ferramentas digitais comuns na criação de recursos de apoio — apresentações, pequenos vídeos didáticos, tabelas e guiões — contudo, tal acontecia de modo muito intuitivo, sem o respaldo sistemático da teoria de Design Instrucional, dos princípios cognitivos da aprendizagem multimédia ou da articulação estruturada das Comunidades de Prática.",
+      title: "Conceção da Formação",
+      hours: "10 horas",
+      sabia: "Já utilizava ferramentas digitais para criar recursos de apoio, como apresentações, vídeos curtos, tabelas e guiões. Contudo, fazia-o sobretudo com base na experiência e na intuição, sem uma aplicação tão consciente dos princípios da aprendizagem multimédia ou da lógica das comunidades de prática.",
       aprendi: [
-        "Princípios da aprendizagem multimédia de Richard Mayer: redução da carga cognitiva estranha, sinalização de informação relevante, contiguidade espacial e temporal, e importância capital da coerência para evitar sobrecarga auditiva/visual.",
-        "Integração Tecnologia-Pedagogia: a convicção de que a tecnologia atua estritamente como mediadora e amplificadora do processo de formação, devendo adaptar-se escrupulosamente aos objetivos pedagógicos e características do público adulto.",
-        "Teoria de Comunidades de Prática (CoP) de Etienne Wenger: estruturação baseada na triangulação vital entre Domínio (identidade partilhada), Comunidade (encontros e partilha de saberes) e Prática (repertório de conhecimento gerado).",
-        "Conceitos de Envolvimento Mútuo e Repertório Partilhado: dinâmica de fomento de responsabilidades comuns, interações recorrentes de apoio mútuo e consolidação de recursos, técnicas, léxico e boas-práticas construídos em espírito cooperativo."
+        "Aprofundei os princípios da aprendizagem multimédia de Richard Mayer, em especial a redução de ruído, a sinalização da informação relevante e a coerência visual e verbal.",
+        "Reforcei a ideia de que a tecnologia deve estar ao serviço dos objetivos pedagógicos e das características dos formandos adultos.",
+        "Compreendi a estrutura das Comunidades de Prática, nomeadamente a relação entre domínio, comunidade e prática.",
+        "Trabalhei os conceitos de envolvimento mútuo e repertório partilhado, percebendo o seu valor para a aprendizagem colaborativa entre formadores."
       ],
       atividades: [
-        "Atividade 1 (Individual) — MF2 A1: Conceção de raiz e desenvolvimento de um Recurso Didático Interativo e Multimédia subordinado ao tema 'Profissão de Risco: Bombeiro'. O recurso foi desenhado com base em arquiteturas cognitivas rigorosas, detalhando riscos ocupacionais, proteção ativa e tomadas de decisão preventivas.",
-        "Atividade 3 (Individual) — MF2 A3: Elaboração fundamentada de um Glossário Técnico sobre Comunidades de Prática, conceituando e aplicando com exemplos reais 'Envolvimento Mútuo' e 'Repertório Partilhado' com amparo na literatura científica de Wenger-Trayner e da APDSI.",
-        "Atividade 4 (Grupo 3 — Amélia e Luísa) — MF2 A4: Caracterização abrangente do desenvolvimento de uma Comunidade de Prática. Mapeamento das três fases vitais (Potencial, Coalizão e Início Ativo), fatores cruciais de sustentabilidade, barreiras funcionais e análise de caso prático de uma CoP de emergência fundada por formadores durante a pandemia de COVID-19."
+        "Atividade 1 | Elaboração de um Recurso Didático e Multimédia",
+        "Atividade 2 | Sessão Síncrona",
+        "Atividade 3 | Glossário de Termos — Comunidades de Prática",
+        "Atividade 4 | Caracterização das Comunidades de Prática"
       ],
-      reflexao: "Este módulo forneceu-me os óculos da ergonomia cognitiva aplicados ao material de aprendizagem. Compreendi que apresentar um recurso esteticamente atrativo mas pedagogicamente sobrecarregado diminui drasticamente a retenção. Da mesma forma, compreender a anatomia de uma Comunidade de Prática permitiu-me enxergar como o formador de formadores pode emancipar grupos para continuarem a aprender de forma autónoma pós-formação formal.",
-      aplicacaoFutura: "Passarei a rever todos os meus recursos pedagógicos de acordo com os princípios de Mayer, erradicando o ruído visual e apostando em interfaces digitais limpas e intuitivas. Pretendo igualmente atuar no fomento de e-Communities duradouras entre as minhas turmas.",
-      aspetosAprofundar: "Aprofundar o domínio técnico de softwares dedicados a e-learning complexo (como iSpring, Articulate Storyline e pacotes interativos em HTML5/H5P) para enriquecer o portfólio de atividades disponíveis."
+      reflexao: "O MF2 ajudou-me a olhar para os recursos didáticos com mais critério. Compreendi que um recurso visualmente apelativo pode não ser eficaz se criar excesso de informação ou dispersão. A reflexão sobre Comunidades de Prática também me mostrou que a aprendizagem entre pares pode continuar para além da formação formal, desde que exista um propósito comum, interação regular e partilha de recursos.",
+      aplicacaoFutura: "Passarei a rever os meus recursos pedagógicos com maior atenção à clareza, à organização da informação e à adequação aos objetivos de aprendizagem. Pretendo também incentivar comunidades de prática simples e funcionais entre formadores.",
+      aspetosAprofundar: "Quero aprofundar ferramentas de e-learning e recursos interativos, como H5P, Articulate Storyline ou soluções HTML5, mantendo sempre o foco na utilidade pedagógica."
     },
     {
       id: "m3",
       code: "MF3",
       title: "Dinâmica de Aprendizagem ao Longo da Vida",
-      hours: "18 Horas",
-      sabia: "Conhecia genericamente o papel do RVCC no sistema nacional de qualificações e sabia que o IEFP geria a certificação docente geral através da plataforma NETFORCE. Contudo, desconhecia totalmente os regulamentos específicos do RVCC profissional focado em Formadores ou o fluxo técnico necessário para validar módulos especializados.",
+      hours: "10 horas",
+      sabia: "Conhecia genericamente o papel do reconhecimento de competências no sistema nacional de qualificações e sabia que o IEFP disponibiliza a plataforma NETFORCE para a gestão do percurso dos formadores. No entanto, desconhecia vários aspetos específicos do RvccFor e a forma como a aprendizagem formal, não formal e informal se articula no percurso profissional.",
       aprendi: [
-        "O processo especializado de RVCC Formadores: enquadramento na Portaria 214/2011, pressuposto das 300 horas letivas de formação documentadas, fases sequenciais (candidatura técnica, triagem, análise de evidências, elaboração do portfólio reflexivo e prova final diante de júri externo).",
-        "Funcionamento científico e operatório da plataforma NETFORCE: metodologia para solicitação e devida justificação de novos domínios da prática pedagógica (ex: sub-módulos de Tecnologias, Andragogia Avançada, Avaliação), cruzando dados de currículo, ações práticas de campo e formação formal ou contínua.",
-        "Distinção técnica entre as três tipologias de educação: Formal (estruturada, oficializado por diplomas), Não-Formal (formações pontuais, workshops, ações de desenvolvimento técnico-profissional s/ graus) e Informal (adquirida no labor quotidiano, reflexão de vida, interações).",
-        "O e-Portfólio Reflexivo de Aprendizagem como instrumento de auto-avaliação metacognitiva: diversidade tipológica, metodologias de triagem de evidências e os critérios objetivos para estruturação e articulação teórica do dossiê."
+        "Compreendi melhor o RvccFor — Reconhecimento, Validação e Certificação de Competências de Formadores — e a sua relação com a experiência profissional documentada.",
+        "Percebi que o NETFORCE deve ser usado para atualizar o registo profissional e curricular, integrando competências e certificações adquiridas.",
+        "Reforcei a distinção entre educação formal, não formal e informal, reconhecendo que todas contribuem para a aprendizagem ao longo da vida.",
+        "Aprofundei o papel do e-portefólio como instrumento de autoavaliação, seleção de evidências e reflexão crítica sobre a prática profissional."
       ],
       atividades: [
-        "Atividade 1 (Especial) — 'Sou um Profissional Reflexivo Crítico?': Exercício introspectivo com base numa checklist técnica de autoavaliação profissional, que permitiu realçar forças (autonomia pedagógica, cooperação multidisciplinar) e traçar correções em áreas de formação contínua especializada.",
-        "Atividade 3 (Geral) — Dinâmica de Aprendizagem ao Longo da Vida: Lição aplicada e debate sobre a porosidade e riqueza da integração ativa das esferas de educação formal, informal e não-formal.",
-        "Atividade 4 / Portefólio (Consolidação): Redação e construção do presente e-Portfólio Reflexivo, juntamente com a Ficha oficial de Percurso Profissional e de Formação."
+        "Atividade 1 | Sou um Profissional Reflexivo Crítico",
+        "Atividade 2 | Sessão Síncrona",
+        "Atividade 3 | Lição Dinâmica de aprendizagem ao longo da vida",
+        "Atividade 4 | E-Portefólio",
+        "Percurso Profissional"
       ],
-      reflexao: "A aprendizagem da mecânica do RVCC deu-me a certeza de que a experiência empírica acumulada é um património sagrado de conhecimento que os sistemas públicos de qualificação devem acarinhar e formalizar com elevado pendor científico. Perceber a NETFORCE não apenas como um repositório de dados burocráticos, mas sim como um portal dinâmico de acreditação da minha carreira docente foi crucial.",
-      aplicacaoFutura: "Pretendo candidatar-me formalmente à intervenção como técnica ou avaliadora em equipas de RVCC no Centro de Emprego e Formação de Beja, facilitando que outros formadores trilhem este e-Portfólio com segurança técnica.",
-      aspetosAprofundar: "Assegurar presença ativa em sessões de júri público de RVCC como formadora observadora para absorver a gesticulação técnica e dinâmica do painel, além de dominar os guias operacionais do IEFP."
+      reflexao: "O MF3 permitiu-me reconhecer que a experiência profissional ganha valor quando é analisada, documentada e relacionada com referenciais claros. O RvccFor surgiu como uma possibilidade de valorização de percursos, mas também como um processo que exige rigor, evidências e enquadramento adequado. Esta aprendizagem reforçou a importância de manter o meu percurso atualizado e refletido.",
+      aplicacaoFutura: "Pretendo participar em processos de RvccFor, em funções compatíveis com a minha experiência, as minhas habilitações e o enquadramento institucional.",
+      aspetosAprofundar: "Quero conhecer melhor os procedimentos específicos do RvccFor e acompanhar práticas institucionais que me permitam compreender melhor o papel dos diferentes intervenientes."
     },
     {
       id: "m4",
       code: "MF4",
-      title: "Metodologias e Estratégias Pedagógicas Avançadas",
-      hours: "18 Horas",
-      sabia: "Trabalhava rotineiramente com o método expositivo tradicional nas minhas aulas de formação presencial e alternava pontualmente para atividades individuais de pesquisa prática. No entanto, faltava-me um quadro estruturado de correlação entre os métodos (demonstrativo, ativo, interrogativo) e a sua articulação dinâmica baseada na aprendizagem orientada a problemas (PBL) em ambientes puramente digitais.",
+      title: "Metodologias e Estratégias Pedagógicas",
+      hours: "10 horas",
+      sabia: "Já recorria ao método expositivo e a atividades práticas nas minhas formações, alternando momentos de explicação com exercícios individuais ou em grupo. Ainda assim, faltava-me um quadro mais claro para relacionar métodos, técnicas pedagógicas e objetivos de aprendizagem, sobretudo em contextos digitais ou híbridos.",
       aprendi: [
-        "Classificação e cruzamento inteligente de Métodos Pedagógicos (expositivo, interrogativo, demonstrativo e ativo) e as respetivas especificidades ao nível da descentralização do papel do formador em favor do formando.",
-        "Metodologias Ativadoras de Ensino e Aprendizagem: implementação de dinâmicas como Aprendizagem Baseada em Projetos (Project-Based Learning - PBL), estudo de caso ramificado, encenações profissionais (role playing), gamificação instrucional e dinâmicas cognitivas online.",
-        "Metodologias Colaborativas em e-Learning: estruturação de fóruns de discussão científica geradores de conhecimento crítico, co-criação síncrona em murais colaborativos, mapas mentais partilhados e portfólios peer-reviewed.",
-        "Desenho e orçamentação técnica de Projetos Pedagógicos Integrados: correlação de meios curriculares, recursos materiais, recursos digitais de suporte e alinhamento com referenciais técnicos de qualidade do IEFP e DGERT."
+        "Reforcei a distinção entre métodos expositivo, interrogativo, demonstrativo e ativo, compreendendo melhor quando e porquê utilizar cada um.",
+        "Aprofundei metodologias ativas, como aprendizagem baseada em projetos, estudo de caso, role playing, gamificação e resolução de problemas.",
+        "Explorei estratégias colaborativas em e-learning, incluindo fóruns, mapas mentais, murais digitais e trabalho entre pares.",
+        "Trabalhei a organização de projetos pedagógicos, articulando objetivos, métodos, recursos, calendarização e avaliação."
       ],
       atividades: [
-        "Atividade 1 (Individual): Planificação integrada de um Projeto Pedagógico modular, articulando calendarização híbrida, metodologias ativas específicas por bloco letivo e o roteiro detalhado de apoio instrucional síncrono/assíncrono.",
-        "Atividade 2 (Fórum Co-Criativo): Debate crítico nas salas Moodle sobre a mutação da autoridade docente no digital — como mediar discussões acesas sem castrar a evolução crítica individual dos formandos docentes."
+        "Atividade 1 | Métodos e Técnicas Pedagógicas",
+        "Atividade 2 | Sessão Síncrona",
+        "Atividade 3 | Planificação e Protótipo de um Miniprojeto"
       ],
-      reflexao: "A excelência didática não provém da abundância de tecnologias, mas sim do método que rege a sua cadência. Entender que o papel de quem forma formadores é criar o ambiente propício para que a dúvida brote e a discussão crítica floresça estimulou-me a desconstruir parte do meu antigo preciosismo expositivo.",
-      aplicacaoFutura: "Desenhar novos guiões didáticos para as minhas turmas assentes inteiramente em metodologias de resolução de problemas do quotidiano profissional, aplicando o método ativo no mínimo em 50% de cada bloco de formação.",
-      aspetosAprofundar: "Especialização em metodologias ágeis aplicadas ao desenho curricular e técnicas avançadas de facilitação de grupos de elevado rendimento profissional."
+      reflexao: "O MF4 ajudou-me a confirmar que a qualidade pedagógica não depende da quantidade de recursos utilizados, mas da coerência entre objetivos, métodos, atividades e avaliação. A planificação do miniprojeto levou-me a pensar de forma mais integrada, procurando criar experiências de aprendizagem que façam sentido para os formandos e para o contexto profissional em que se inserem.",
+      aplicacaoFutura: "Pretendo desenhar guiões didáticos mais claros, integrando metodologias ativas sempre que estas contribuam para aprendizagens mais significativas.",
+      aspetosAprofundar: "Quero aprofundar técnicas de facilitação de grupos, metodologias ágeis aplicadas à formação e estratégias de acompanhamento em ambientes digitais."
     },
     {
       id: "m5",
       code: "MF5",
       title: "Simulações Pedagógicas: Acompanhamento e Avaliação",
-      hours: "18 Horas",
-      sabia: "Já tinha assistido à apresentação e gravação de simulações em formações iniciais de formadores há anos, mas sob uma perspetiva quase amadora — anotando o que decorria de forma simplista, sem grelhas metódicas de análise de comportamentos docentes e sem o suporte de projetos estruturados de remediação pedagógica/melhoria contínua.",
+      hours: "10 horas",
+      sabia: "Já tinha assistido a simulações pedagógicas em formações anteriores, mas observava-as de forma pouco sistemática. Faltava-me uma grelha de análise mais objetiva para identificar comportamentos pedagógicos, formular feedback e apoiar a melhoria contínua.",
       aprendi: [
-        "Modelos de Simulações Pedagógicas aplicadas com rigor: Simulação Diagnóstica (identificação de vícios didáticos e potencial nato), Simulação Intermédia (avaliação de progresso e plasticidade) e Simulação Final integradora.",
-        "Taxonomia de Comportamentos Docentes e formulação de Grelhas de Observação estruturadas: registo de postura andragógica, gestão da espacialidade síncrona, controlo de tempos letivos, eficácia das técnicas interrogativas e tratamento de objeções de formandos difíceis.",
-        "Feedback Construtivo e Reflexão Compartilhada: as técnicas de visionamento individual e avaliação dialógica pós-simulação como catalisadores de mudança imediata, evitando reações defensivas baseadas em vulnerabilidades individuais.",
-        "Desenho de Projetos de Melhoria Contínua individualizados: desenhar planos estruturados de reforço contendo metas claras para correção de aspetos críticos revelados no transcurso das intervenções letivas."
+        "Compreendi melhor os diferentes momentos das simulações pedagógicas e a sua utilidade para diagnosticar, acompanhar e avaliar competências.",
+        "Aprofundei a construção de grelhas de observação, incluindo critérios relacionados com comunicação, postura, gestão do tempo, interação e estratégias pedagógicas.",
+        "Reforcei a importância do feedback construtivo, claro e respeitador, como elemento central no desenvolvimento de formadores.",
+        "Percebi que o acompanhamento deve transformar a observação em propostas concretas de melhoria, ajustadas à pessoa e ao contexto."
       ],
       atividades: [
-        "Atividade 1 (Simulação Inicial): Planeamento, simulação e posterior verificação crítica de uma micro-aula estruturada. Mapeamento de pontos fortes iniciais (assertividade científica, empatia) e deteção de oportunidades de intervenção e melhoria de ritmo.",
-        "Atividade 2 (Individual): Projeto de Melhoria e Acompanhamento Curricular. Elaboração do plano de tutoria ativa focado no suporte pedagógico personalizado a um formando docente com elevadas fragilidades de projeção vocal e gestão de conflitos grupais."
+        "Atividade 1 | Práticas de Dinamização da Simulação Pedagógica",
+        "Atividade 2 | Sessão Síncrona - Simulação Inicial — Módulo 2 do Curso de Formação Pedagógica Inicial de Formadores, 2022",
+        "Atividade 3 | Instrumento de Suporte a Simulações Pedagógicas: Escolha do Instrumento a Analisar"
       ],
-      reflexao: "Observar com critério científico é o ato mais desafiante e precioso do formador de formadores. Ao visionar e codificar as simulações dos colegas e o meu próprio desempenho, aprendi a analisar os detalhes que fazem uma sessão letiva passar de enfadonha a transformadora, o que me conferiu total segurança para guiar o diagnóstico e a modelação andragógica de outros profissionais.",
-      aplicacaoFutura: "Pretendo orientar as provas práticas de simulação no IEFP munida destas novas tabelas e do pilar de feedback construtivo humanista, transformando o momento da prova final num ambiente enriquecedor livre de ansiedade.",
-      aspetosAprofundar: "Estudar em profundidade os modelos de microrrelação de Robert Bales aplicados à interação de pequenos grupos e dinâmicas afetivas durante as sessões de formação docente cooperativa."
+      reflexao: "O MF5 mostrou-me que observar uma simulação pedagógica exige atenção, método e responsabilidade. Ao analisar comportamentos pedagógicos, percebi que pequenos detalhes de comunicação, organização e interação podem influenciar muito a qualidade da sessão. Este módulo reforçou a importância de um feedback que ajude o formando a compreender o que pode melhorar e como pode fazê-lo.",
+      aplicacaoFutura: "Pretendo utilizar grelhas de observação mais claras nas simulações e apoiar os formandos com feedback prático, respeitador e orientado para a melhoria.",
+      aspetosAprofundar: "Quero aprofundar instrumentos de observação, técnicas de feedback e estratégias de acompanhamento individual em simulações pedagógicas."
     }
   ],
 
   // 4. Autoavaliação de Competências
   competenceRows: [
-    { id: "c1", name: "Formação de Formadores (Desenho / Facilitação)", antes: 2, apos: 4, evidences: "Projetos práticos desenvolvidos nos blocos MF4 e MF5" },
-    { id: "c2", name: "Enquadramento Estrutural e Operacional do Sistema RVCC", antes: 1, apos: 4, evidences: "Fichas técnicas e portfólio oficial estruturado no MF3" },
-    { id: "c3", name: "Validação Técnica Docente (IEFP / NETFORCE)", antes: 1, apos: 4, evidences: "Guiões práticos de acreditação do MF3" },
-    { id: "c4", name: "Diagnóstico Científico de Necessidades", antes: 2, apos: 4, evidences: "Mapeamento e glossários elaborados no módulo MF1" },
-    { id: "c5", name: "Arquitetura de Referenciais de Competências", antes: 2, apos: 4, evidences: "Trabalhos práticos de engenharia curricular de base (MF1)" },
-    { id: "c6", name: "Design de Recursos Instrucionais Multimédia", antes: 3, apos: 5, evidences: "Recurso interativo para 'Profissão de Risco: Bombeiro' (MF2)" },
-    { id: "c7", name: "Mediação e Fomento a CoPs de Formadores", antes: 2, apos: 4, evidences: "Trabalho de análise de nascimento e manutenção de CoPs (MF2)" },
-    { id: "c8", name: "Implementação Científica de Modelos de Avaliação", antes: 3, apos: 4, evidences: "Atividades e avaliações de feedback sistemático formativo (Todos)" },
-    { id: "c9", name: "Autoavaliação e Metacognição Crítica", antes: 3, apos: 5, evidences: "Dossiê pedagógico geral - Este e-Portfólio Reflexivo de referência" },
-    { id: "c10", name: "Desenvolvimento de Interfaces Digitais de Aprendizagem", antes: 2, apos: 4, evidences: "Trabalho prático global e estruturação síncrona de recursos" }
+    { id: "c1", name: "Diagnóstico de necessidades de competências e de formação", antes: 2, apos: 4, evidences: "Atividades do MF1 sobre diagnóstico e análise de lacunas" },
+    { id: "c2", name: "Conceção e adaptação de referenciais de competências", antes: 2, apos: 4, evidences: "Perfil de competências desenvolvido no MF1" },
+    { id: "c3", name: "Conceção e adaptação de referenciais de formação", antes: 1, apos: 4, evidences: "Plano de formação e atividades de referenciação do MF1" },
+    { id: "c4", name: "Conceção de recursos didáticos e multimédia", antes: 3, apos: 5, evidences: "Recurso didático Profissão de Risco: Bombeiro" },
+    { id: "c5", name: "Dinamização de comunidades de prática", antes: 2, apos: 4, evidences: "Glossários e caracterização das Comunidades de Prática" },
+    { id: "c6", name: "Construção e avaliação de portefólios", antes: 3, apos: 5, evidences: "E-portefólio e ficha de percurso profissional" },
+    { id: "c7", name: "Métodos e técnicas pedagógicas", antes: 3, apos: 4, evidences: "Atividades do MF4 sobre métodos e técnicas pedagógicas" },
+    { id: "c8", name: "Organização de projetos pedagógicos", antes: 2, apos: 4, evidences: "Planificação e protótipo de um miniprojeto" },
+    { id: "c9", name: "Acompanhamento e avaliação de simulações pedagógicas", antes: 2, apos: 4, evidences: "Grelhas e instrumentos do MF5" },
+    { id: "c10", name: "Utilização de ferramentas digitais na formação", antes: 2, apos: 4, evidences: "Recursos digitais e evidências multimédia desenvolvidas" },
+    { id: "c11", name: "Reflexão crítica sobre a prática profissional", antes: 3, apos: 5, evidences: "Reflexões por módulo e síntese global do e-portefólio" }
   ],
   pontosFortes: [
-    "Vasta e consolidada experiência prática como formadora profissional no terreno desde o ano de 2006, lidando com públicos de enorme diversidade sociocultural.",
-    "Elevada apetência para a reflexão crítica fundamentada e flexibilidade cognitiva na identificação e correção de fragilidades andragógicas próprias.",
-    "Forte facilidade de adaptação perante ambientes digitais de aprendizagem, sistemas LMS de grande escala (Moodle, Teams) e ferramentas de e-learning moderno.",
-    "Proatividade comprovada no trabalho colaborativo de cariz científico, facilitando a partilha e o repertório mútuo.",
-    "Comportamento ético inabalável e postura humanista pautada pelo incentivo incondicional à autonomia crítica dos formandos."
+    "Experiência prática consolidada como formadora desde 2006, com públicos diversificados.",
+    "Facilidade em refletir criticamente sobre a prática e identificar oportunidades de melhoria.",
+    "Boa adaptação a ambientes digitais de aprendizagem, plataformas LMS e ferramentas de e-learning.",
+    "Disponibilidade para o trabalho colaborativo e para a partilha de repertório didático.",
+    "Postura ética, responsável e centrada na autonomia dos formandos."
   ],
   areasDesenvolver: [
-    "Falta de experiência letiva em júris formais no âmbito do RVCC Profissional (pretendo consolidar esta competência assistindo a sessões públicas).",
-    "Aprofundar o repertório de técnicas de remediação andragógica perante formandos formadores seniores que apresentem considerável resistência à inovação metodológica.",
-    "Desenvolver novas competências na integração produtiva de inteligência artificial generativa ética no apoio ao desenvolvimento de planos de formação e tutoria.",
-    "Participação mais ativa e regular em Comunidades de Prática de formadores nacionais para estreitar as redes de repertório técnico."
+    "Aprofundar a participação em processos de RvccFor, de acordo com o enquadramento institucional aplicável.",
+    "Alargar o repertório de técnicas de acompanhamento pedagógico perante formandos com diferentes níveis de experiência.",
+    "Desenvolver competências na utilização ética de inteligência artificial generativa no apoio à conceção de formação.",
+    "Participar de forma mais regular em Comunidades de Prática de formadores."
   ],
 
   // 5. Síntese Reflexiva Global
-  synthesisText1: "O Curso de Formador de Formadores representou um marco profundamente gerador de sentido no decurso da minha carreira profissional. Se em 2006 a Formação Pedagógica Inicial me conferiu as aptas ferramentas de cariz técnico para exercer a docência, este percurso agora concluído elevou a minha prática a um patamar superior: a responsabilidade ética, científica e metodológica de formar outros formadores e promover percursos de RVCC profissionais sólidos no Alentejo.",
-  synthesisText2: "A fusão sistemática entre a teoria de vanguarda — seja nos preceitos cognitivos da aprendizagem multimédia de Mayer, seja na fecundidade dialógica das Comunidades de Prática de Wenger — e os desafios do mercado laboral atual dotaram-me de uma robustez pedagógica inabalável. Compreendi que o formador de excelência assume o papel de arquiteto de experiências de descoberta, abandonando o pedestal da mera transmissão de informação estática.",
-  synthesisText3: "Esta jornada percorrida no seio do IEFP em Beja, sob a orientação científica de formadores de excelência e partilhada com um excecional grupo de pares reflexivos, reafirmou a minha paixão insubstituível pela educação de adultos. Sinto-me pronta para abraçar o meu novo papel, prestando um serviço público de elevando rigor técnico e empatia transformadora.",
+  synthesisText1: `A ${OFFICIAL_COURSE_NAME} representou um marco importante no meu percurso profissional. Se em 2006 a formação pedagógica inicial me deu as ferramentas adequadas para exercer a atividade formativa, este percurso permitiu-me aprofundar a responsabilidade de formar outros formadores com maior consciência pedagógica, ética e metodológica.`,
+  synthesisText2: "A articulação entre teoria, prática e reflexão ajudou-me a consolidar uma visão mais clara sobre o papel do formador de formadores. Compreendi que a qualidade da formação depende da capacidade de diagnosticar necessidades, planear com rigor, escolher metodologias adequadas, acompanhar processos e avaliar evidências com sentido crítico.",
+  synthesisText3: "Esta jornada no IEFP em Beja, acompanhada pelos formadores e partilhada com colegas de percurso, reforçou o meu compromisso com a educação de adultos. Sinto-me mais preparada para continuar a desenvolver a minha prática, prestando um serviço público de elevado rigor técnico e com atenção às pessoas que aprendem.",
   signatureName: "Amélia Cerejo Lopes",
   signatureRole: "Formadora de Formadores Certificada",
   signatureYear: "2026",
 
   // 6. Expectativas e Projetos Futuros
   goalsShortTerm: [
-    "Submeter o dossiê curricular devidamente estruturado na plataforma NETFORCE para validação de novas competências docentes docentes de apoio.",
-    "Integrar no prazo de 6 meses uma equipa de acompanhamento RVCC Profissional no Centro de Emprego de Beja como técnica de diagnóstico pedagógico.",
-    "Concluir os ajustamentos instrucionais nos meus recursos das formações do Catálogo Nacional de Qualificações de acordo com os princípios de ergonomia cognitiva de Mayer.",
-    "Facilitar sessões tutoriais iniciais para formandos com foco em metodologias ativas híbridas."
+    "Atualizar o meu registo profissional e curricular no NETFORCE, integrando as competências e certificações adquiridas.",
+    "Participar em processos de RvccFor, em funções compatíveis com a experiência, as habilitações e o enquadramento institucional.",
+    "Ajustar os meus recursos formativos de acordo com princípios de clareza, coerência e adequação pedagógica.",
+    "Facilitar sessões tutoriais iniciais com foco em metodologias ativas e acompanhamento próximo dos formandos."
   ],
   goalsMediumTerm: [
-    "Atuar ativamente na qualidade de membro de Júri de RVCC Profissional para certificação de formadores competentes.",
-    "Conceber, testar e operacionalizar uma Comunidade de Prática online sintonizada com formadores das áreas de Beja e Alentejo no partilhar de repertório didático.",
-    "Especializar-me em metodologias ativas direcionadas para a formação de públicos seniores altamente especializados.",
-    "Desenvolver um website repositório de recursos andragógicos abertos e livres de suporte à andragogia."
+    "Aprofundar a participação em processos de RvccFor, quando o enquadramento institucional e profissional o permitir.",
+    "Conceber, testar e dinamizar uma Comunidade de Prática online orientada para a partilha de repertório didático entre formadores.",
+    "Especializar-me em metodologias ativas direcionadas para públicos adultos e experientes.",
+    "Desenvolver um repositório digital de recursos pedagógicos abertos de apoio à formação de adultos."
   ],
   plannedTrainings: [
-    "Formação especializada em Inteligência Artificial Generativa aplicada à Engenharia Curricular e Avaliação de Competências.",
-    "Participação regular anual em Congressos Nacionais e Conferências de Vanguarda de Andragogia e Educação de Adultos.",
-    "Curso Avançado de Auditoria de Formação e Sistemas de Garantia da Qualidade (modelos EQUAVET / DGERT)."
+    "Formação especializada em Inteligência Artificial Generativa aplicada à conceção de formação e avaliação de competências.",
+    "Participação regular em congressos nacionais e conferências sobre andragogia e educação de adultos.",
+    "Curso avançado de auditoria de formação e sistemas de garantia da qualidade."
   ],
 
   // 7. Evidências das Aprendizagens
@@ -211,79 +275,206 @@ export const INITIAL_PORTFOLIO_DATA: PortfolioData = {
     {
       id: "ev1",
       moduleCode: "MF1",
-      title: "Instrumentos de Diagnóstico — Observação Direta & Avaliação 360",
-      description: "Trabalho de grupo aprofundado mapeando de forma exaustiva as vantagens operativas, limitações funcionais e relatórios técnicos destas ferramentas diagnósticas."
+      title: "Atividade 1 — Instrumentos de Diagnóstico de Necessidades de Competências e de Formação",
+      description: "Trabalho de grupo sobre instrumentos de diagnóstico, com foco na observação direta e na avaliação de pares/360 graus.",
+      url: "evidencias/pdf-viewer.html?file=mf1/mf1-atividade-1-diagnostico.pdf&back=../e-portfolio.html%23evidencias"
     },
     {
       id: "ev2",
       moduleCode: "MF1",
-      title: "Perfil do TikTok Destination Specialist",
-      description: "Referencial de competências de vanguarda focado em Storytelling Visual em Vídeos Curtos para funções em mutação acelerada."
+      title: "Atividade 2 — Lacunas de Competências e de Formação",
+      description: "Registo da atividade de análise de lacunas de competências e de formação.",
+      url: "evidencias/pdf-viewer.html?file=mf1/mf1-atividade-2-AMELIA_LOPES_Atividade2 Diagnostico Necessidades Formacao.pdf&back=../e-portfolio.html%23evidencias"
     },
     {
       id: "ev3",
-      moduleCode: "MF2",
-      title: "Recurso Multimédia 'Profissão de Risco: Bombeiro'",
-      description: "Recurso didático e-learning totalmente desenhado com base nos preceitos de ergonomia cognitiva de Mayer para otimização da carga mental."
+      moduleCode: "MF1",
+      title: "Atividade 3 — Competências Essenciais para uma Função",
+      description: "Referencial de competências e plano de formação para a função Especialista em Promoção de Destinos no TikTok.",
+      url: "evidencias/pdf-viewer.html?file=mf1/mf1-atividade-3-perfis-competencias.pdf&back=../e-portfolio.html%23evidencias"
     },
     {
       id: "ev4",
       moduleCode: "MF2",
-      title: "Glossário Científico sobre Comunidades de Prática",
-      description: "Análise lexicográfica dos conceitos vitais de 'Envolvimento Mútuo' e 'Repertório Partilhado' defendidos por Etienne Wenger."
+      title: "MF2 A1 — Profissão de Risco: Bombeiro",
+      description: "Recurso didático e multimédia sobre a profissão de bombeiro, desenvolvido com preocupação de clareza e adequação pedagógica.",
+      url: "evidencias/mf2/recurso-didatico/index.html"
     },
     {
       id: "ev5",
-      moduleCode: "MF3",
-      title: "Este e-Portfólio Reflexivo Integrado",
-      description: "Instrumento central de meta-avaliação e estruturação da identidade andragógica madura, unificando todo o percurso formativo.",
-      url: "evidencias/mf3/formador-reflexivo/"
+      moduleCode: "MF2",
+      title: "MF2 A3 — Glossário: Envolvimento Mútuo",
+      description: "Glossário de termo associado às Comunidades de Prática.",
+      url: "evidencias/mf2/mf2-glossario-envolvimento-mutuo.html"
     },
     {
       id: "ev6",
-      moduleCode: "MF3",
-      title: "Ficha oficial de Percurso Profissional e de Formação",
-      description: "Documentação curricular unificada ligando as aprendizagens formais, não-formais e informais consolidadas desde 2006."
+      moduleCode: "MF2",
+      title: "MF2 A3 — Glossário: Repertório Partilhado",
+      description: "Glossário de termo associado às Comunidades de Prática.",
+      url: "evidencias/mf2/mf2-glossario-repertorio-partilhado.html"
     },
     {
       id: "ev7",
-      moduleCode: "MF4",
-      title: "Planeamento Completo de Projeto Pedagógico Híbrido",
-      description: "Desenho instrucional de uma unidade curricular com cronograma de momentos síncronos e assíncronos e plano ativo de problemas de campo."
+      moduleCode: "MF2",
+      title: "MF2 A4 — Caracterização das Comunidades de Prática",
+      description: "Trabalho de caracterização do desenvolvimento de uma Comunidade de Prática.",
+      url: "evidencias/pdf-viewer.html?file=mf2/mf2-atividade-4-comunidades-pratica.pdf&back=../e-portfolio.html%23evidencias"
     },
     {
       id: "ev8",
-      moduleCode: "MF5",
-      title: "Grelhas de Análise de Comportamentos Pedagógicos",
-      description: "Guião de observação e codificação objetiva de micro-aulas, postura de voz, dinamização e estratégias de remediação grupal."
+      moduleCode: "MF2",
+      title: "MF2 A4 — Proposta de Comunidade de Prática",
+      description: "Proposta de criação e desenvolvimento de uma Comunidade de Prática.",
+      url: "evidencias/mf2/proposta-cop-site/index.html"
     },
     {
       id: "ev9",
+      moduleCode: "MF3",
+      title: "Atividade 1 — Sou um Profissional Reflexivo Crítico",
+      description: "Trabalho reflexivo sobre a prática profissional do formador.",
+      url: "evidencias/mf3/formador-reflexivo/index.html"
+    },
+    {
+      id: "ev10",
+      moduleCode: "MF3",
+      title: "Percurso Profissional",
+      description: "Ficha de percurso profissional e de formação.",
+      url: "evidencias/ficha-percurso.html"
+    },
+    {
+      id: "ev11",
+      moduleCode: "MF4",
+      title: "MF4 | A1 — Métodos e Técnicas Pedagógicas",
+      description: "Evidências associadas à exploração de métodos e técnicas pedagógicas, incluindo infográfico e mapa mental.",
+      url: "evidencias/mf4/mf4-metodos-tecnicas.html"
+    },
+    {
+      id: "ev12",
+      moduleCode: "MF4",
+      title: "Infográfico — Métodos e Técnicas Pedagógicas",
+      description: "Infográfico produzido no âmbito do MF4.",
+      url: "evidencias/mf4/mf4-infografia.png"
+    },
+    {
+      id: "ev13",
+      moduleCode: "MF4",
+      title: "Mapa Mental — Métodos e Técnicas Pedagógicas",
+      description: "Mapa mental produzido no âmbito do MF4.",
+      url: "evidencias/mf4/mf4-mapa-mental.png"
+    },
+    {
+      id: "ev14",
+      moduleCode: "MF4",
+      title: "Planificação e Protótipo de um Miniprojeto",
+      description: "Planificação do miniprojeto pedagógico.",
+      url: "evidencias/pdf-viewer.html?file=mf4/mf4-planificacao-miniprojeto.pdf&back=../e-portfolio.html%23evidencias"
+    },
+    {
+      id: "ev15",
+      moduleCode: "MF4",
+      title: "Manual de Acolhimento do Formando",
+      description: "Manual de acolhimento associado ao miniprojeto.",
+      url: "evidencias/pdf-viewer.html?file=mf4/mf4-manual-acolhimento-formando.pdf&back=../e-portfolio.html%23evidencias"
+    },
+    {
+      id: "ev16",
       moduleCode: "MF5",
-      title: "Grelha de Observação Interativa e Feedback Estruturado",
-      description: "Instrumento digital de apoio à observação, autoavaliação e feedback construtivo em simulações pedagógicas.",
-      url: "evidencias/mf5/grelha-avaliacao-feedback/"
+      title: "MF5 | A1 — Práticas de Dinamização da Simulação Pedagógica",
+      description: "Práticas e materiais de dinamização da simulação pedagógica.",
+      url: "evidencias/mf5/simulacoes-pedagogicas/index.html"
+    },
+    {
+      id: "ev17",
+      moduleCode: "MF5",
+      title: "MF5 | A3 — Instrumento de Suporte a Simulações Pedagógicas",
+      description: "Instrumento digital de apoio à observação, autoavaliação e feedback em simulações pedagógicas.",
+      url: "evidencias/mf5/grelha-avaliacao-feedback/index.html"
+    },
+    {
+      id: "ev19",
+      moduleCode: "MF5",
+      title: "Escolha do Instrumento a Analisar",
+      description: "Análise do instrumento selecionado para observação e feedback.",
+      url: "evidencias/mf5/grelha-avaliacao-feedback/analise.html"
     }
   ],
 
   // 8. Referências Bibliográficas e Documentais
   references: [
-    { id: "r1", category: "Legislação", citation: "Portaria n.º 214/2011, de 30 de maio. Diário da República, 1.ª série — N.º 104. Regula o Sistema Nacional de Qualificações e o processo de Reconhecimento, Validação e Certificação de Competências (RVCC)." },
-    { id: "r2", category: "Referenciais", citation: "IEFP (2022). Referencial de Formação Pedagógica Contínua de Formadores — Formador de Formadores (3.ª edição). Instituto do Emprego e Formação Profissional." },
-    { id: "r3", category: "Referenciais", citation: "IEFP (2023). Referencial de Formação Pedagógica Inicial de Formadores (5.ª edição). Instituto do Emprego e Formação Profissional." },
-    { id: "r4", category: "Referenciais", citation: "IEFP. Regulamento da Formação e Certificação de Formadores. Instituto do Emprego e Formação Profissional." },
-    { id: "r5", category: "Manuais", citation: "ANQEP. Guia de Candidatura ao RVCC Formadores. Agência Nacional para a Qualificação e o Ensino Profissional." },
-    { id: "r6", category: "Manuais", citation: "ANQEP. Guia de Operacionalização dos Processos de Reconhecimento, Validação e Certificação de Competências. Agência Nacional para a Qualificação e o Ensino Profissional." },
-    { id: "r7", category: "Manuais", citation: "ANQEP. Manual de Orientação ao Longo da Vida no Centro Qualifica. Agência Nacional para a Qualificação e o Ensino Profissional." },
-    { id: "r8", category: "Obras", citation: "APDSI (2009). Comunidades de Prática no Espaço Digital. Associação para a Promoção e Desenvolvimento da Sociedade da Informação." },
-    { id: "r9", category: "Obras", citation: "Wenger-Trayner, E., & Wenger-Trayner, B. (2015). Introduction to communities of practice. Disponível online." },
-    { id: "r10", category: "Instrumentos", citation: "Ficha de Percurso Profissional e de Formação. Material de apoio técnico do Módulo 3, Curso de Formador de Formadores, IEFP." },
-    { id: "r11", category: "Instrumentos", citation: "Checklist de Autoavaliação 'Sou um Formador Reflexivo?'. Material de apoio instrucional do Módulo 3, Curso de Formador de Formadores, IEFP." },
-    { id: "r12", category: "Recursos", citation: "Plataforma NETFORCE — Sistema de Gestão de Formadores. IEFP. Disponível online em netforce.iefp.pt." },
-    { id: "r13", category: "Recursos", citation: "Plataforma FAD/Moodle IEFP — Plataforma de Formação a Distância do IEFP. Disponível online em fad.iefp.pt." }
+    {
+      id: "r1",
+      category: "Legisla\u00e7\u00e3o",
+      citation: "Portugal. Portaria n.\u00ba 214/2011, de 30 de maio. Estabelece o regime de forma\u00e7\u00e3o e certifica\u00e7\u00e3o de compet\u00eancias pedag\u00f3gicas dos formadores."
+    },
+    {
+      id: "r2",
+      category: "Referenciais",
+      citation: "IEFP \u2014 Instituto do Emprego e Forma\u00e7\u00e3o Profissional. (2022). Referencial de Forma\u00e7\u00e3o Pedag\u00f3gica Cont\u00ednua de Formadores \u2014 Formador de Formadores. 3.\u00aa edi\u00e7\u00e3o."
+    },
+    {
+      id: "r3",
+      category: "Referenciais",
+      citation: "IEFP \u2014 Instituto do Emprego e Forma\u00e7\u00e3o Profissional. (2023). Referencial de Forma\u00e7\u00e3o Pedag\u00f3gica Cont\u00ednua de Formadores \u2014 Simula\u00e7\u00f5es Pedag\u00f3gicas: Acompanhamento e Avalia\u00e7\u00e3o."
+    },
+    {
+      id: "r4",
+      category: "Referenciais",
+      citation: "IEFP \u2014 Instituto do Emprego e Forma\u00e7\u00e3o Profissional. (s.d.). Regulamento da Forma\u00e7\u00e3o e Certifica\u00e7\u00e3o de Formadores."
+    },
+    {
+      id: "r5",
+      category: "Manuais",
+      citation: "ANQEP \u2014 Ag\u00eancia Nacional para a Qualifica\u00e7\u00e3o e o Ensino Profissional. (s.d.). Guia de apoio ao processo de Reconhecimento, Valida\u00e7\u00e3o e Certifica\u00e7\u00e3o de Compet\u00eancias."
+    },
+    {
+      id: "r6",
+      category: "Manuais",
+      citation: "ANQEP \u2014 Ag\u00eancia Nacional para a Qualifica\u00e7\u00e3o e o Ensino Profissional. (s.d.). Referencial de Compet\u00eancias-Chave para a Educa\u00e7\u00e3o e Forma\u00e7\u00e3o de Adultos."
+    },
+    {
+      id: "r7",
+      category: "Manuais",
+      citation: "ANQEP \u2014 Ag\u00eancia Nacional para a Qualifica\u00e7\u00e3o e o Ensino Profissional. (s.d.). Orienta\u00e7\u00f5es para a constru\u00e7\u00e3o do portef\u00f3lio reflexivo de aprendizagens."
+    },
+    {
+      id: "r8",
+      category: "Obras",
+      citation: "APDSI \u2014 Associa\u00e7\u00e3o para a Promo\u00e7\u00e3o e Desenvolvimento da Sociedade da Informa\u00e7\u00e3o. (2009). e-Portef\u00f3lios: modelos e pr\u00e1ticas."
+    },
+    {
+      id: "r9",
+      category: "Obras",
+      citation: "Wenger-Trayner, E., & Wenger-Trayner, B. (2015). Introduction to communities of practice. Dispon\u00edvel em: https://www.wenger-trayner.com/introduction-to-communities-of-practice/ [acedido em maio de 2026]"
+    },
+    {
+      id: "r10",
+      category: "Instrumentos",
+      citation: "IEFP \u2014 Instituto do Emprego e Forma\u00e7\u00e3o Profissional. (2026). Ficha de Percurso Profissional e de Forma\u00e7\u00e3o."
+    },
+    {
+      id: "r11",
+      category: "Instrumentos",
+      citation: "IEFP \u2014 Instituto do Emprego e Forma\u00e7\u00e3o Profissional. (2026). Instrumento de autoavalia\u00e7\u00e3o \u201cSou um Profissional Reflexivo Cr\u00edtico?\u201d."
+    },
+    {
+      id: "r12",
+      category: "Instrumentos",
+      citation: "IEFP \u2014 Instituto do Emprego e Forma\u00e7\u00e3o Profissional. (2026). Grelhas de avalia\u00e7\u00e3o das simula\u00e7\u00f5es pedag\u00f3gicas \u2014 CP3, CP3A e CP3B."
+    },
+    {
+      id: "r13",
+      category: "Recursos",
+      citation: "IEFP \u2014 Instituto do Emprego e Forma\u00e7\u00e3o Profissional. (2026). Plataforma FAD/Moodle."
+    },
+    {
+      id: "r14",
+      category: "Recursos",
+      citation: "IEFP \u2014 Instituto do Emprego e Forma\u00e7\u00e3o Profissional. (2026). Plataforma NETFORCE."
+    }
   ],
 
-  // General Quote
   quoteText: "Quem ensina, aprende ao ensinar; e quem aprende, ensina ao aprender.",
   quoteAuthor: "Paulo Freire"
 };
+

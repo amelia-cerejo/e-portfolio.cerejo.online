@@ -1,6 +1,0 @@
-{
-  "name": "O Formador Reflexivo",
-  "description": "Plataforma de portfólio pedagógico e autoavaliação contínua para formadores, focada na prática reflexiva, diagnóstico de competências e metas SMART.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

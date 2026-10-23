@@ -1,4 +1,4 @@
-import fs from "node:fs";
+﻿import fs from "node:fs";
 import vm from "node:vm";
 
 const source = fs.readFileSync("src/data.ts", "utf8");
@@ -48,13 +48,13 @@ function cleanReadingChrome(input) {
     )
     .replace(
       /<a class="float-button" href="imprimir-completo\.html" title="Imprimir completo" aria-label="Imprimir completo">[\s\S]*?<\/a>/u,
-      `<button class="float-button" type="button" onclick="preparePrint()" title="Imprimir esta secção" aria-label="Imprimir esta secção">
+      `<button class="float-button" type="button" onclick="preparePrint()" title="Imprimir esta secÃ§Ã£o" aria-label="Imprimir esta secÃ§Ã£o">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V4h10v4"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v6H7z"/><path d="M17 12h.01"/></svg>
-          <span class="sr-only">Imprimir esta secção</span>
+          <span class="sr-only">Imprimir esta secÃ§Ã£o</span>
         </button>
-        <a class="float-button" href="imprimir-completo.html" title="Ver versão completa" aria-label="Ver versão completa">
+        <a class="float-button" href="imprimir-completo.html" title="Ver versÃ£o completa" aria-label="Ver versÃ£o completa">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h8"/><path d="M8 9h2"/></svg>
-          <span class="sr-only">Ver versão completa</span>
+          <span class="sr-only">Ver versÃ£o completa</span>
         </a>`
     )
     .replace(
@@ -157,13 +157,39 @@ $1`
     .replace(/\n\s*document\.body\.classList\.remove\("print-mode"\);/u, "");
 }
 
-function refreshData(input) {
+function tuneMobileMenu(input) {
   return input.replace(
+    /(\s*)nav \{\s*\n\s*position: fixed;\s*\n\s*left: 14px;\s*\n\s*right: 86px;\s*\n\s*bottom: 18px;\s*\n\s*top: auto;\s*\n\s*z-index: 39;\s*\n\s*max-height: min\(520px, calc\(100vh - 120px\)\);\s*\n\s*overflow-y: auto;\s*\n\s*box-shadow: 0 18px 45px rgba\(0, 43, 91, 0\.16\);\s*\n\s*\}/u,
+    (_match, indent) => `${indent}nav {
+${indent}  position: fixed;
+${indent}  left: auto;
+${indent}  right: 86px;
+${indent}  bottom: 18px;
+${indent}  top: auto;
+${indent}  z-index: 39;
+${indent}  width: fit-content;
+${indent}  min-width: 260px;
+${indent}  max-width: calc(100vw - 110px);
+${indent}  max-height: min(520px, calc(100vh - 120px));
+${indent}  overflow-y: auto;
+${indent}  box-shadow: 0 18px 45px rgba(0, 43, 91, 0.16);
+${indent}}`
+  );
+}
+
+function stripExtraEvidence(input) {
+  return input.replace(
+    /\$\{\[\s*\.\.\.portfolio\.evidences,\s*\{[\s\S]*?url:\s*"evidencias\/mf5\/grelha-avaliacao-feedback\/"\s*\}\s*\]\s*\.map/u,
+    "${portfolio.evidences.map"
+  );
+}
+
+function refreshData(input) {
+  return stripExtraEvidence(input).replace(
     /const portfolio = [\s\S]*?;\n\n\s*const sections =/u,
     `const portfolio = ${dataJson};\n\n      const sections =`
   );
 }
-
 function buildPrintPage(input) {
   return input
     .replace("<body>", '<body class="print-mode print-complete-page sidebar-collapsed">')
@@ -173,10 +199,10 @@ function buildPrintPage(input) {
     )
     .replace(
       /<a class="float-button" href="#capa" title="Inicio" aria-label="Inicio">/u,
-      '<a class="float-button" href="index.html" title="Voltar ao e-Portfólio" aria-label="Voltar ao e-Portfólio">'
+      '<a class="float-button" href="index.html" title="Voltar ao e-PortfÃ³lio" aria-label="Voltar ao e-PortfÃ³lio">'
     )
     .replace(
-      /<button class="float-button" type="button" onclick="preparePrint\(\)" title="Imprimir esta secção" aria-label="Imprimir esta secção">[\s\S]*?<\/button>\s*/u,
+      /<button class="float-button" type="button" onclick="preparePrint\(\)" title="Imprimir esta secÃ§Ã£o" aria-label="Imprimir esta secÃ§Ã£o">[\s\S]*?<\/button>\s*/u,
       `<button class="float-button" type="button" onclick="preparePrint()" title="Imprimir completo" aria-label="Imprimir completo">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V4h10v4"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v6H7z"/><path d="M17 12h.01"/></svg>
           <span class="sr-only">Imprimir completo</span>
@@ -184,7 +210,7 @@ function buildPrintPage(input) {
         `
     )
     .replace(
-      /<a class="float-button" href="imprimir-completo\.html" title="Ver versão completa" aria-label="Ver versão completa">[\s\S]*?<\/a>\s*/u,
+      /<a class="float-button" href="imprimir-completo\.html" title="Ver versÃ£o completa" aria-label="Ver versÃ£o completa">[\s\S]*?<\/a>\s*/u,
       ""
     )
     .replace(
@@ -206,7 +232,7 @@ function buildPrintPage(input) {
 }
 
 const currentHtml = fs.readFileSync("index.html", "utf8");
-const html = refreshData(cleanReadingChrome(currentHtml));
+const html = tuneMobileMenu(refreshData(cleanReadingChrome(currentHtml)));
 const printHtml = buildPrintPage(html);
 
 fs.writeFileSync("index.html", html, "utf8");

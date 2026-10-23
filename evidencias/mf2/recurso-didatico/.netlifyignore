@@ -1,0 +1,5 @@
+.git/
+.netlify/
+*.pptx
+assets/pptx/contact-sheet.png
+assets/pptx/pptx-summary.json

@@ -4,6 +4,12 @@
  */
 
 // Structured data representing a single Module Reflection with the newly demanded subsections
+export interface ActivityModule {
+  code: string;
+  title: string;
+  activities: string[];
+}
+
 export interface ModuleDetail {
   id: string; // m1, m2, m3, m4, m5
   code: string; // MF1, MF2, MF3, etc.
@@ -59,9 +65,13 @@ export interface PortfolioData {
 
   // 2. Objetivos do e-Portfolio
   portfolioGoalsBullets: string[];
+  objectivesIntro: string;
   goalsQuote: string;
 
-  // 3. Reflexão Crítica sobre os Módulos
+  // 3. Percurso e atividades dos módulos
+  activityModules: ActivityModule[];
+
+  // 4. Reflexão Crítica sobre os Módulos
   modules: ModuleDetail[];
 
   // 4. Autoavaliação de Competências

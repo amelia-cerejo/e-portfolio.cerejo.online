@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -73,18 +73,18 @@ export default function App() {
     return [
       {
         id: "msg1",
-        senderName: "Ivone Silva (Coordenação Pedagógica)",
+        senderName: "Ivone Silva (CoordenaÃ§Ã£o PedagÃ³gica)",
         senderEmail: "ivone.silva@iefp.pt",
-        subject: "Parecer Técnico do e-Portfólio Reflexivo",
-        content: "Estimada formanda Amélia Cerejo Lopes, o seu e-Portfólio reflete um percurso andragógico e metacognitivo de excelência, cumprindo na íntegra o referencial do IEFP. Destaque especial para a transição reflexiva desenhada no módulo MF2 com o recurso 'Profissão de Risco: Bombeiro'.",
+        subject: "Parecer TÃ©cnico do e-PortfÃ³lio Reflexivo",
+        content: "Estimada formanda AmÃ©lia Cerejo Lopes, o seu e-PortefÃ³lio apresenta um percurso claro, reflexivo e bem articulado com o referencial do IEFP. Destaca-se a forma como relaciona as aprendizagens do MF2 com o recurso 'ProfissÃ£o de Risco: Bombeiro'.",
         date: "2026-06-20 10:14"
       },
       {
         id: "msg2",
         senderName: "Joaquim Manuel Rodrigues Paulino (Formador)",
         senderEmail: "joaquim.paulino@formador.iefp.pt",
-        subject: "Avaliação do Módulo 1 (DGERT/IEFP)",
-        content: "Trabalho de nível muito elevado e rigoroso do ponto de vista técnico-pedagógico na formulação do perfil do 'Especialista em Promoção de Destinos no TikTok'. Parabéns pela profundidade crítica.",
+        subject: "AvaliaÃ§Ã£o do MÃ³dulo 1 (DGERT/IEFP)",
+        content: "Trabalho bem estruturado e consistente na formulaÃ§Ã£o do perfil do 'Especialista em PromoÃ§Ã£o de Destinos no TikTok'. A ligaÃ§Ã£o entre competÃªncias, necessidades e proposta formativa estÃ¡ clara.",
         date: "2026-06-18 16:30"
       }
     ];
@@ -93,6 +93,9 @@ export default function App() {
   // User/Admin/Layout States
   const [isAdmin, setIsAdmin] = useState<boolean>(true); // Active author mode by default
   const [selectedChapter, setSelectedChapter] = useState<string>("capa");
+  const [selectedEvidenceModule, setSelectedEvidenceModule] = useState<string | null>(null);
+  const [selectedReflectionModule, setSelectedReflectionModule] = useState<string | null>(null);
+  const [showSynthesisInReflections, setShowSynthesisInReflections] = useState<boolean>(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -107,10 +110,10 @@ export default function App() {
     let updated: string[];
     if (isHidden) {
       updated = hiddenChapters.filter(id => id !== chapterId);
-      showToast("Secção reatribuída como visível.");
+      showToast("SecÃ§Ã£o reatribuÃ­da como visÃ­vel.");
     } else {
       updated = [...hiddenChapters, chapterId];
-      showToast("Secção oculta do modo Leitor.");
+      showToast("SecÃ§Ã£o oculta do modo Leitor.");
     }
     setHiddenChapters(updated);
     localStorage.setItem("iefp_formadores_hidden_chapters", JSON.stringify(updated));
@@ -166,9 +169,9 @@ export default function App() {
 
   // Reset portfolio safely to original state
   const handleResetData = () => {
-    if (window.confirm("Pretende repor o portfólio académico de Amélia Cerejo Lopes com os dados padrão do e-Portfólio?")) {
+    if (window.confirm("Pretende repor o portfÃ³lio acadÃ©mico de AmÃ©lia Cerejo Lopes com os dados padrÃ£o do e-PortfÃ³lio?")) {
       savePortfolio(INITIAL_PORTFOLIO_DATA);
-      showToast("Portfólio reiniciado para o modelo académico oficial.");
+      showToast("PortfÃ³lio reiniciado para o modelo acadÃ©mico oficial.");
     }
   };
 
@@ -176,10 +179,10 @@ export default function App() {
   const handleAuthToggle = () => {
     if (isAdmin) {
       setIsAdmin(false);
-      showToast("Sessão terminada. Ativado o modo de Leitura Pública.");
+      showToast("SessÃ£o terminada. Ativado o modo de Leitura PÃºblica.");
     } else {
       setIsAdmin(true);
-      showToast("Autenticado como Formadora. Modo de Edição Ativado.");
+      showToast("Autenticado como Formadora. Modo de EdiÃ§Ã£o Ativado.");
     }
   };
 
@@ -229,19 +232,19 @@ export default function App() {
   const handleAddCompetenceRow = () => {
     const newRow: CompetenceRow = {
       id: "comp_" + Date.now(),
-      name: "Nova Competência Pedagógica",
+      name: "Nova CompetÃªncia PedagÃ³gica",
       antes: 2,
       apos: 4,
-      evidences: "Novas evidências ou simulações letivas"
+      evidences: "Novas evidÃªncias ou simulaÃ§Ãµes letivas"
     };
     savePortfolio({ ...portfolio, competenceRows: [...portfolio.competenceRows, newRow] });
-    showToast("Nova competência catalogada.");
+    showToast("Nova competÃªncia catalogada.");
   };
 
   const handleDeleteCompetenceRow = (id: string) => {
     const filtered = portfolio.competenceRows.filter(row => row.id !== id);
     savePortfolio({ ...portfolio, competenceRows: filtered });
-    showToast("Competência removida.");
+    showToast("CompetÃªncia removida.");
   };
 
   // Evidence list modifiers
@@ -252,18 +255,18 @@ export default function App() {
       id: "ev_" + Date.now(),
       moduleCode: newEvidenceModule,
       title: newEvidenceTitle.trim(),
-      description: newEvidenceDesc.trim() || "Sem descrição"
+      description: newEvidenceDesc.trim() || "Sem descriÃ§Ã£o"
     };
     savePortfolio({ ...portfolio, evidences: [...portfolio.evidences, newEv] });
     setNewEvidenceTitle("");
     setNewEvidenceDesc("");
-    showToast("Evidência adicionada.");
+    showToast("EvidÃªncia adicionada.");
   };
 
   const handleDeleteEvidence = (id: string) => {
     const filtered = portfolio.evidences.filter(ev => ev.id !== id);
     savePortfolio({ ...portfolio, evidences: filtered });
-    showToast("Evidência removida.");
+    showToast("EvidÃªncia removida.");
   };
 
   // Bibliographic References modifiers
@@ -277,27 +280,27 @@ export default function App() {
     };
     savePortfolio({ ...portfolio, references: [...portfolio.references, newRef] });
     setNewRefCitation("");
-    showToast("Referência bibliográfica adicionada.");
+    showToast("ReferÃªncia bibliogrÃ¡fica adicionada.");
   };
 
   const handleDeleteReference = (id: string) => {
     const filtered = portfolio.references.filter(ref => ref.id !== id);
     savePortfolio({ ...portfolio, references: filtered });
-    showToast("Referência eliminada.");
+    showToast("ReferÃªncia eliminada.");
   };
 
   // Incoming peer review messages handler
   const handleSendInboxMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newInboxSender.trim() || !newInboxContent.trim()) {
-      showToast("Por favor preencha o remetente e o conteúdo da reflexão.");
+      showToast("Por favor preencha o remetente e o conteÃºdo da reflexÃ£o.");
       return;
     }
     const newMsg: TeacherMessage = {
       id: "msg_" + Date.now(),
       senderName: newInboxSender.trim(),
       senderEmail: newInboxEmail.trim() || "colegapedagogico@iefp.pt",
-      subject: newInboxSubject.trim() || "Reflexão sobre e-Portfólio",
+      subject: newInboxSubject.trim() || "ReflexÃ£o sobre e-PortfÃ³lio",
       content: newInboxContent.trim(),
       date: new Date().toISOString().replace('T', ' ').substring(0, 16)
     };
@@ -306,13 +309,13 @@ export default function App() {
     setNewInboxEmail("");
     setNewInboxSubject("");
     setNewInboxContent("");
-    showToast("Comentário académico submetido com sucesso.");
+    showToast("ComentÃ¡rio acadÃ©mico submetido com sucesso.");
   };
 
   const handleDeleteMessage = (id: string) => {
     const filtered = messages.filter(m => m.id !== id);
     saveMessages(filtered);
-    showToast("Comentário pedagógico arquivado.");
+    showToast("ComentÃ¡rio pedagÃ³gico arquivado.");
   };
 
   // Printable Export triggers
@@ -320,10 +323,20 @@ export default function App() {
     window.print();
   };
 
-  // Dynamic completion metrics of the portfolio
+  const isCompleteEvidence = (ev: PortfolioData["evidences"][number]) => Boolean(
+    ev.title?.trim() && ev.description?.trim() && ev.url?.trim()
+  );
+
+  const shouldOpenEvidenceInNewTab = (url: string) => {
+    const normalizedUrl = url.toLowerCase();
+    return normalizedUrl.startsWith("http") || normalizedUrl.endsWith(".pdf");
+  };
+
+  // Dynamic completion metrics of the portfolio. Evidence only counts when it has content and a real link.
   const calculateProgress = () => {
     let score = 0;
-    const total = 8;
+    const evidenceTotal = portfolio.evidences?.length ?? 0;
+    const total = 7 + evidenceTotal;
     if (portfolio.personalBio && portfolio.personalBio.length > 50) score++;
     if (portfolio.goalsQuote && portfolio.goalsQuote.length > 20) score++;
     if (portfolio.experienceBullets && portfolio.experienceBullets.length > 0) score++;
@@ -333,8 +346,8 @@ export default function App() {
       score += 1;
     }
     if (portfolio.competenceRows && portfolio.competenceRows.length > 0) score++;
-    if (portfolio.evidences && portfolio.evidences.length > 0) score++;
-    if (messages && messages.length > 0) score++;
+    if (portfolio.references && portfolio.references.length > 0) score++;
+    score += portfolio.evidences?.filter(isCompleteEvidence).length ?? 0;
     return Math.min(Math.round((score / total) * 100), 100);
   };
 
@@ -342,19 +355,22 @@ export default function App() {
 
   // Chapter definition for rendering and routing - completely un-numbered!
   const chapters = [
-    { id: "capa", label: "Capa & Ficha Identificativa", icon: BookOpen, desc: "Capa institucional com ficha de identificação pedagógica." },
+    { id: "capa", label: "Ficha Identificativa", icon: BookOpen, desc: "Capa institucional com ficha de identificação pedagógica." },
     { id: "apresentacao", label: "Apresentação Pessoal", icon: User, desc: "A biografia, percurso profissional e motivação na andragogia." },
-    { id: "objetivos", label: "Objetivos do e-Portfólio", icon: Target, desc: "Fins pedagógicos, metacognitivos e autoavaliação continuada." },
-    { id: "reflexao_modulos", label: "Reflexão sobre os Módulos", icon: FileText, desc: "Crítica aos cinco módulos didáticos de formador de formadores." },
-    { id: "autoavaliacao", label: "Autoavaliação", icon: BarChart2, desc: "Balanço de competências comparativo (Antes vs Após) e matriz SWOT." },
-    { id: "sintese_global", label: "Síntese Reflexiva", icon: Award, desc: "Consolidação e compromisso ético-pedagógico da prática formativa." },
-    { id: "expectativas_futuras", label: "Metas & Projetos de Futuro", icon: TrendingUp, desc: "Objetivos de curto e médio prazo de formação profissional." },
-    { id: "evidencias", label: "Repositório de Evidências", icon: Bookmark, desc: "Trabalhos práticos, recursos e simulações científicas criadas." },
-    { id: "bibliografia", label: "Referências Académicas", icon: Info, desc: "Apoio legislativo, manuais e fontes teóricas do percurso." },
-    { id: "inbox", label: "Pareceres & Comentários", icon: Mail, desc: "Notas críticas de formadores, colegas e coordenação técnica." }
+    { id: "objetivos", label: "Objetivos", icon: Target, desc: "Fins pedagógicos, metacognitivos e autoavaliação continuada." },
+    { id: "percurso_atividades", label: "Percurso e Atividades", icon: Compass, desc: "Esquema dos cinco módulos e respetivas atividades." },
+    { id: "autoavaliacao", label: "Autoavaliação", icon: BarChart2, desc: "Balanço de competências comparativo (Antes vs Após)." },
+    { id: "evidencias", label: "Evidências", icon: Bookmark, desc: "Trabalhos práticos, recursos e simulações criadas." },
+    { id: "reflexao_modulos", label: "Reflexões", icon: FileText, desc: "Reflexões por módulos e síntese global." },
+    { id: "expectativas_futuras", label: "Metas e Projetos", icon: TrendingUp, desc: "Objetivos de curto e médio prazo de formação profissional." },
+    { id: "bibliografia", label: "Referências", icon: Info, desc: "Apoio legislativo, manuais e fontes teóricas do percurso." }
   ];
 
   const visibleChapters = chapters.filter(c => isAdmin || !hiddenChapters.includes(c.id));
+  const evidenceModuleCodes = portfolio.modules.map((module) => module.code);
+  const visibleEvidences = selectedEvidenceModule
+    ? portfolio.evidences.filter((ev) => ev.moduleCode === selectedEvidenceModule)
+    : portfolio.evidences;
   const currentIdx = visibleChapters.findIndex(c => c.id === selectedChapter);
   const prevChapter = currentIdx > 0 ? visibleChapters[currentIdx - 1] : null;
   const nextChapter = currentIdx < visibleChapters.length - 1 ? visibleChapters[currentIdx + 1] : null;
@@ -383,7 +399,7 @@ export default function App() {
             </div>
             <div className="flex flex-col cursor-pointer" onClick={() => setSelectedChapter("capa")}>
               <span className="font-serif text-lg sm:text-xl font-bold tracking-tight text-[#001736] hover:text-[#bd8a12] transition-colors">
-                e-Portfólio
+                e-PortfÃ³lio
               </span>
               <span className="text-[10px] sm:text-xs text-[#002b5b]/60 hidden sm:block font-medium">
                 {portfolio.formanda}
@@ -405,7 +421,7 @@ export default function App() {
                   .filter((ch) => isAdmin || !hiddenChapters.includes(ch.id))
                   .map((ch) => (
                     <option key={ch.id} value={ch.id}>
-                      {hiddenChapters.includes(ch.id) ? `📝 [Oculto] ${ch.label}` : ch.label}
+                      {hiddenChapters.includes(ch.id) ? `ðŸ“ [Oculto] ${ch.label}` : ch.label}
                     </option>
                   ))}
               </select>
@@ -448,7 +464,7 @@ export default function App() {
             id="academic-sidebar"
           >
             <div className="flex items-center justify-between lg:hidden mb-6">
-              <span className="font-serif font-bold text-[#001736] text-base">Menu Literário</span>
+              <span className="font-serif font-bold text-[#001736] text-base">Menu LiterÃ¡rio</span>
               <button 
                 onClick={() => setIsSidebarOpen(false)} 
                 className="p-1.5 rounded-full hover:bg-[#002b5b]/5 transition-colors cursor-pointer"
@@ -460,7 +476,7 @@ export default function App() {
 
             <nav className="space-y-1.5 lg:max-h-[calc(100vh-12rem)] lg:overflow-y-auto pr-1 bg-white lg:bg-white/40 border border-[#002b5b]/15 p-4 rounded-xl shadow-xs w-full">
               <div className="text-[10px] font-mono text-[#002b5b]/50 font-bold uppercase tracking-widest px-3 mb-2">
-                Roteiro do e-Portfólio
+                Roteiro do e-PortfÃ³lio
               </div>
               
               <div className="space-y-1 block">
@@ -471,10 +487,17 @@ export default function App() {
                     const isActive = selectedChapter === ch.id;
                     const isHidden = hiddenChapters.includes(ch.id);
                     return (
-                      <div key={ch.id} className="flex items-center group w-full justify-between gap-1">
+                      <div key={ch.id} className="flex items-center group w-full justify-between gap-1 flex-wrap">
                         <button
                           onClick={() => {
                             setSelectedChapter(ch.id);
+                            if (ch.id !== "evidencias") {
+                              setSelectedEvidenceModule(null);
+                            }
+                            if (ch.id === "reflexao_modulos") {
+                              setSelectedReflectionModule(null);
+                              setShowSynthesisInReflections(false);
+                            }
                             if (window.innerWidth < 1024) {
                               setIsSidebarOpen(false);
                             }
@@ -501,6 +524,74 @@ export default function App() {
                           </div>
                         </button>
                         
+                        {ch.id === "evidencias" && selectedChapter === "evidencias" && (
+                          <div className="basis-full order-last ml-4 pl-3 border-l border-[#002b5b]/15 space-y-1">
+                            <span className="block px-3 pt-1 pb-0.5 text-[10px] font-mono uppercase tracking-widest text-[#002b5b]/40 font-bold">
+                              Por mÃ³dulos e atividades
+                            </span>
+                            {evidenceModuleCodes.map((moduleCode) => (
+                              <button
+                                key={moduleCode}
+                                type="button"
+                                onClick={() => {
+                                  setSelectedChapter("evidencias");
+                                  setSelectedEvidenceModule(moduleCode);
+                                  window.scrollTo({ top: 0, behavior: "smooth" });
+                                }}
+                                className={`block w-full text-left px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                                  selectedEvidenceModule === moduleCode
+                                    ? "bg-[#002b5b]/8 text-[#bd8a12]"
+                                    : "text-[#002b5b]/70 hover:bg-[#002b5b]/5 hover:text-[#002b5b]"
+                                }`}
+                              >
+                                {moduleCode}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+
+                        {ch.id === "reflexao_modulos" && selectedChapter === "reflexao_modulos" && (
+                          <div className="basis-full order-last ml-4 pl-3 border-l border-[#002b5b]/15 space-y-1">
+                            <span className="block px-3 pt-1 pb-0.5 text-[10px] font-mono uppercase tracking-widest text-[#002b5b]/40 font-bold">
+                              Por módulos e atividades
+                            </span>
+                            {portfolio.modules.map((module) => (
+                              <button
+                                key={module.code}
+                                type="button"
+                                onClick={() => {
+                                  setSelectedChapter("reflexao_modulos");
+                                  setSelectedReflectionModule(module.code);
+                                  setShowSynthesisInReflections(false);
+                                  window.scrollTo({ top: 0, behavior: "smooth" });
+                                }}
+                                className={`block w-full text-left px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                                  !showSynthesisInReflections && selectedReflectionModule === module.code
+                                    ? "bg-[#002b5b]/8 text-[#bd8a12]"
+                                    : "text-[#002b5b]/70 hover:bg-[#002b5b]/5 hover:text-[#002b5b]"
+                                }`}
+                              >
+                                {module.code}
+                              </button>
+                            ))}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSelectedChapter("reflexao_modulos");
+                                setShowSynthesisInReflections(true);
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                              }}
+                              className={`block w-full text-left px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                                showSynthesisInReflections
+                                  ? "bg-[#002b5b]/8 text-[#bd8a12]"
+                                  : "text-[#002b5b]/70 hover:bg-[#002b5b]/5 hover:text-[#002b5b]"
+                              }`}
+                            >
+                              Síntese global
+                            </button>
+                          </div>
+                        )}
+
                         {isAdmin && ch.id !== "capa" && (
                           <button
                             onClick={(e) => {
@@ -508,7 +599,7 @@ export default function App() {
                               toggleChapterVisibility(ch.id);
                             }}
                             className="p-1.5 text-gray-400 hover:text-[#bd8a12] hover:bg-gray-100 rounded transition-colors cursor-pointer shrink-0"
-                            title={isHidden ? "Atualmente oculto para visitantes. Clique para colocar visível." : "Atualmente visível para visitantes. Clique para ocultar."}
+                            title={isHidden ? "Atualmente oculto para visitantes. Clique para colocar visÃ­vel." : "Atualmente visÃ­vel para visitantes. Clique para ocultar."}
                           >
                             {isHidden ? <EyeOff size={13} className="text-[#bd8a12]" /> : <Eye size={13} />}
                           </button>
@@ -589,7 +680,7 @@ export default function App() {
                 className="flex items-center space-x-2 text-xs font-semibold text-[#002b5b] hover:text-[#bd8a12] transition-colors group shrink-0"
               >
                 <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-                <span>◄ Painel de Navegação</span>
+                <span>â—„ Painel de NavegaÃ§Ã£o</span>
               </button>
               
               <div className="flex items-center space-x-3 text-xs">
@@ -599,7 +690,7 @@ export default function App() {
                     className="px-2.5 py-1.5 text-gray-500 hover:text-[#002b5b] hover:bg-gray-50 border border-gray-200 rounded-lg text-xs transition-all flex items-center space-x-1 cursor-pointer font-medium"
                     title={`Anterior: ${prevChapter.label}`}
                   >
-                    <span>◄</span>
+                    <span>â—„</span>
                   </button>
                 )}
                 
@@ -613,7 +704,7 @@ export default function App() {
                     className="px-2.5 py-1.5 text-[#002b5b] hover:text-white hover:bg-[#002b5b] border border-gray-300 rounded-lg text-xs transition-all flex items-center space-x-1 cursor-pointer font-bold"
                     title={`Seguinte: ${nextChapter.label}`}
                   >
-                    <span>Seguinte ►</span>
+                    <span>Seguinte â–º</span>
                   </button>
                 )}
               </div>
@@ -636,14 +727,14 @@ export default function App() {
                   </div>
                   <div className="space-y-2">
                     <h2 className="font-serif text-2xl font-bold text-[#001736]">
-                      Secção em Elaboração
+                      SecÃ§Ã£o em ElaboraÃ§Ã£o
                     </h2>
                     <p className="text-[10px] font-mono tracking-widest text-[#bd8a12] font-bold uppercase">
                       Documento temporariamente reservado
                     </p>
                   </div>
                   <p className="text-gray-600 text-xs sm:text-sm font-serif leading-relaxed max-w-md mx-auto italic">
-                    "Esta secção encontra-se atualmente em fase de redação, reflexão crítica e revisão pedagógica pela autora. Estará visível assim que o módulo de formação associado for concluído com aproveitamento."
+                    "Esta secÃ§Ã£o encontra-se atualmente em fase de redaÃ§Ã£o, reflexÃ£o crÃ­tica e revisÃ£o pedagÃ³gica pela autora. EstarÃ¡ visÃ­vel assim que o mÃ³dulo de formaÃ§Ã£o associado for concluÃ­do com aproveitamento."
                   </p>
                   <div className="pt-4 flex justify-center pb-2">
                     <button
@@ -653,7 +744,7 @@ export default function App() {
                       }}
                       className="px-5 py-2.5 bg-[#002b5b] hover:bg-[#001c3d] text-white text-xs font-bold rounded-lg transition-all shadow-xs cursor-pointer select-none"
                     >
-                      Voltar à Capa Principal
+                      Voltar Ã  Capa Principal
                     </button>
                   </div>
                 </motion.section>
@@ -670,7 +761,7 @@ export default function App() {
                     </p>
                     <div className="h-0.5 w-16 bg-[#002b5b]/20 mx-auto" />
                     <p className="text-xs sm:text-sm font-serif tracking-wide text-gray-600">
-                      {portfolio.delegacaoRegional} • {portfolio.servico}
+                      {portfolio.delegacaoRegional} â€¢ {portfolio.servico}
                     </p>
                   </div>
 
@@ -682,13 +773,13 @@ export default function App() {
                           value={portfolio.title}
                           onChange={(e) => updateField("title", e.target.value)}
                           className="w-full text-center font-serif text-3xl sm:text-4xl font-extrabold text-[#001736] focus:ring-1 focus:ring-[#bd8a12] border-b border-dashed border-gray-300 pb-2 bg-transparent outline-none"
-                          placeholder="Título do Portfólio"
+                          placeholder="TÃ­tulo do PortfÃ³lio"
                         />
                         <textarea
                           value={portfolio.subtitle}
                           onChange={(e) => updateField("subtitle", e.target.value)}
                           className="w-full text-center text-sm text-[#002b5b]/70 font-semibold focus:ring-1 focus:ring-[#bd8a12] border-b border-dashed border-gray-300 bg-transparent outline-none py-1 h-12 resize-none"
-                          placeholder="Subtítulo do Portfólio"
+                          placeholder="SubtÃ­tulo do PortfÃ³lio"
                         />
                       </div>
                     ) : (
@@ -702,14 +793,14 @@ export default function App() {
                       </div>
                     )}
                     <span className="inline-block bg-[#002b5b]/5 text-[#002b5b] font-mono text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded">
-                      Documento Científico-Pedagógico Refinado
+                      Documento CientÃ­fico-PedagÃ³gico Refinado
                     </span>
                   </div>
 
                   {/* Structured high fidelity cover table */}
                   <div className="max-w-2xl mx-auto bg-[#fcf9f8]/80 border border-[#002b5b]/10 rounded-lg p-6 sm:p-8 space-y-4">
                     <h3 className="font-serif font-bold text-sm text-[#001736] uppercase tracking-wider border-b border-[#002b5b]/10 pb-2">
-                      Ficha de Identificação Curricular
+                      Ficha de IdentificaÃ§Ã£o Curricular
                     </h3>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
@@ -742,7 +833,7 @@ export default function App() {
                       </div>
 
                       <div>
-                        <span className="text-gray-400 font-mono block">Forma de Organização</span>
+                        <span className="text-gray-400 font-mono block">Forma de OrganizaÃ§Ã£o</span>
                         {isAdmin ? (
                           <input
                             type="text"
@@ -756,7 +847,7 @@ export default function App() {
                       </div>
 
                       <div>
-                        <span className="text-gray-400 font-mono block">Período de Formação</span>
+                        <span className="text-gray-400 font-mono block">PerÃ­odo de FormaÃ§Ã£o</span>
                         {isAdmin ? (
                           <input
                             type="text"
@@ -770,7 +861,7 @@ export default function App() {
                       </div>
 
                       <div>
-                        <span className="text-gray-400 font-mono block">Coordenadora Pedagógica</span>
+                        <span className="text-gray-400 font-mono block">Coordenadora PedagÃ³gica</span>
                         {isAdmin ? (
                           <input
                             type="text"
@@ -824,18 +915,18 @@ export default function App() {
                     </div>
 
                     <div className="pt-4 border-t border-[#002b5b]/5 text-[10px] text-gray-400 text-center font-mono uppercase tracking-wider flex items-center justify-between">
-                      <span>Ref: 3.ª Edição (Janeiro 2022)</span>
+                      <span>Ref: 3.Âª EdiÃ§Ã£o (Janeiro 2022)</span>
                       <span>{portfolio.dataElaboracao}</span>
                     </div>
                   </div>
 
-                  {/* PAINEL DE NAVEGAÇÃO AUTÓNOMA (EX-ÍNDICE) */}
+                  {/* PAINEL DE NAVEGAÃ‡ÃƒO AUTÃ“NOMA (EX-ÃNDICE) */}
                   <div className="pt-12 border-t border-[#002b5b]/10 space-y-6">
                     <div className="flex flex-col space-y-1.5">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#bd8a12]">Roteiro Pedagógico</span>
-                      <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#001736]">Dimensões do e-Portfólio</h3>
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#bd8a12]">Roteiro PedagÃ³gico</span>
+                      <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#001736]">DimensÃµes do e-PortfÃ³lio</h3>
                       <p className="text-xs text-gray-500">
-                        Selecione um dos capítulos estruturais do portfólio para consultar os registos e reflexões pedagógicas:
+                        Selecione um dos capÃ­tulos estruturais do portfÃ³lio para consultar os registos e reflexÃµes pedagÃ³gicas:
                       </p>
                     </div>
 
@@ -873,7 +964,7 @@ export default function App() {
                 </motion.section>
               ) : null}
 
-              {/* SECTION 1: APRESENTAÇÃO PESSOAL */}
+              {/* SECTION 1: APRESENTAÃ‡ÃƒO PESSOAL */}
               {selectedChapter === "apresentacao" ? (
                 <motion.section 
                   id="sec-apresentacao" 
@@ -884,7 +975,7 @@ export default function App() {
                   <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
                     <User className="text-[#bd8a12]" size={24} />
                     <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">
-                      1. Apresentação Pessoal
+                      1. ApresentaÃ§Ã£o Pessoal
                     </h2>
                   </div>
 
@@ -903,7 +994,7 @@ export default function App() {
                         </div>
                         <div className="flex items-center space-x-2">
                           <FileCheck size={12} className="text-[#bd8a12]" />
-                          <span>CCP n.º EDF 407745/2006 DL</span>
+                          <span>CCP n.Âº EDF 407745/2006 DL</span>
                         </div>
                         <div className="flex items-center space-x-2">
                           <Calendar size={12} className="text-[#bd8a12]" />
@@ -914,7 +1005,7 @@ export default function App() {
 
                     <div className="md:col-span-8 space-y-6">
                       <div className="space-y-3">
-                        <h3 className="font-serif font-bold text-lg text-[#001736]">1.1. Identificação e Contexto Profissional</h3>
+                        <h3 className="font-serif font-bold text-lg text-[#001736]">1.1. IdentificaÃ§Ã£o e Contexto Profissional</h3>
                         {isAdmin ? (
                           <textarea
                             value={portfolio.personalBio}
@@ -923,9 +1014,13 @@ export default function App() {
                             placeholder="Biografia da formadora"
                           />
                         ) : (
-                          <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-serif">
-                            {portfolio.personalBio}
-                          </p>
+                          <div className="space-y-3">
+                            {portfolio.personalBio.split(/\n{2,}/).map((paragraph, idx) => (
+                              <p key={idx} className="text-sm sm:text-base text-gray-700 leading-relaxed font-serif">
+                                {paragraph}
+                              </p>
+                            ))}
+                          </div>
                         )}
                       </div>
 
@@ -935,7 +1030,7 @@ export default function App() {
                         <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
                           {portfolio.experienceBullets.map((bullet, idx) => (
                             <li key={idx} className="flex items-start space-x-2 bg-gray-50/50 p-2.5 rounded border border-gray-100 group">
-                              <span className="text-[#bd8a12] font-bold mt-0.5">✓</span>
+                              <span className="text-[#bd8a12] font-bold mt-0.5">âœ“</span>
                               <div className="flex-1">
                                 {isAdmin ? (
                                   <input
@@ -986,13 +1081,13 @@ export default function App() {
 
                       {/* Motivation */}
                       <div className="space-y-4 pt-4 border-t border-gray-100">
-                        <h3 className="font-serif font-bold text-lg text-[#001736]">1.2. Motivação para o Curso de Formador de Formadores</h3>
-                        <p className="text-xs text-gray-500 italic">As motivações que impulsionam o investimento contínuo e técnico-pedagógico na andragogia:</p>
+                        <h3 className="font-serif font-bold text-lg text-[#001736]">1.2. MotivaÃ§Ã£o para o Curso de Formador de Formadores</h3>
+                        <p className="text-xs text-gray-500 italic">As motivaÃ§Ãµes que impulsionam o investimento contÃ­nuo e tÃ©cnico-pedagÃ³gico na andragogia:</p>
                         
                         <div className="space-y-3">
                           {portfolio.motivationBullets.map((bullet, idx) => (
                             <div key={idx} className="p-3 bg-amber-50/20 border-l-4 border-[#bd8a12] rounded-r group relative">
-                              <span className="text-[10px] font-mono text-[#bd8a12] block mb-1 uppercase font-semibold">Motivação {idx + 1}</span>
+                              <span className="text-[10px] font-mono text-[#bd8a12] block mb-1 uppercase font-semibold">MotivaÃ§Ã£o {idx + 1}</span>
                               {isAdmin ? (
                                 <textarea
                                   value={bullet}
@@ -1060,7 +1155,7 @@ export default function App() {
 
                   <div className="space-y-6">
                     <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
-                      Este e-portfólio constitui uma ferramenta andragógica de valor inestimável para estruturar a autoavaliação continuada. Ele persegue os seguintes objetivos fundamentais:
+                      {portfolio.objectivesIntro}
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1104,7 +1199,7 @@ export default function App() {
                           type="text"
                           value={newGoalBullet}
                           onChange={(e) => setNewGoalBullet(e.target.value)}
-                          placeholder="Catalogar novo objetivo do instrumento de avaliação..."
+                          placeholder="Catalogar novo objetivo do instrumento de avaliaÃ§Ã£o..."
                           className="flex-1 text-xs px-3 py-1.5 border border-gray-200 rounded outline-none"
                         />
                         <button
@@ -1118,7 +1213,7 @@ export default function App() {
                     )}
 
                     <div className="relative p-6 bg-amber-50/10 border-l-4 border-[#bd8a12] rounded-r mt-6">
-                      <span className="absolute bottom-2 right-4 font-serif text-6xl text-[#bd8a12]/5 pointer-events-none">”</span>
+                      <span className="absolute bottom-2 right-4 font-serif text-6xl text-[#bd8a12]/5 pointer-events-none">â€</span>
                       {isAdmin ? (
                         <textarea
                           value={portfolio.goalsQuote}
@@ -1135,17 +1230,68 @@ export default function App() {
                 </motion.section>
               ) : null}
 
-              {/* SECTION: REFLEXÃO CRÍTICA SOBRE OS MÓDULOS */}
-              {selectedChapter === "reflexao_modulos" ? (
+              {/* SECTION: PERCURSO E ATIVIDADES */}
+              {selectedChapter === "percurso_atividades" ? (
+                <motion.section
+                  id="sec-percurso_atividades"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="space-y-8 pb-12 border-b border-[#002b5b]/10"
+                >
+                  <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
+                    <Compass className="text-[#bd8a12]" size={24} />
+                    <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">
+                      Percurso e Atividades
+                    </h2>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                    {portfolio.activityModules.map((module) => (
+                      <article
+                        key={module.code}
+                        className="bg-white border border-[#002b5b]/10 rounded-xl p-5 shadow-3xs space-y-4 hover:border-[#bd8a12]/25 transition-colors"
+                      >
+                        <div className="flex items-start gap-3">
+                          <span className="w-11 h-11 rounded-lg bg-[#002b5b] text-white flex items-center justify-center font-serif font-bold text-sm shrink-0">
+                            {module.code}
+                          </span>
+                          <div className="space-y-1">
+                            <h3 className="font-serif text-base font-bold text-[#001736] leading-snug">
+                              {module.title}
+                            </h3>
+                            <p className="text-[10px] font-mono uppercase tracking-widest text-[#bd8a12] font-bold">
+                              Módulo do percurso
+                            </p>
+                          </div>
+                        </div>
+                        <ul className="space-y-2.5">
+                          {module.activities.map((activity, index) => (
+                            <li key={index} className="flex items-start gap-2 text-xs sm:text-sm text-gray-700 leading-relaxed bg-[#fcf9f8]/70 border border-gray-100 rounded-lg p-3">
+                              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#bd8a12] shrink-0" />
+                              <span>{activity}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </article>
+                    ))}
+                  </div>
+                </motion.section>
+              ) : null}
+
+              {/* SECTION: REFLEXÃƒO CRÃTICA SOBRE OS MÃ“DULOS */}
+              {selectedChapter === "reflexao_modulos" && !showSynthesisInReflections ? (
                 <ModulesSection
                   portfolio={portfolio}
+                  showIntro={!selectedReflectionModule && !showSynthesisInReflections}
                   isAdmin={isAdmin}
                   handleUpdateModule={handleUpdateModule}
                   showToast={showToast}
+                  selectedModuleCode={selectedReflectionModule}
+                  onSelectedModuleChange={setSelectedReflectionModule}
                 />
               ) : null}
 
-              {/* SECTION 4: AUTOAVALIAÇÃO DE COMPETÊNCIAS */}
+              {/* SECTION 4: AUTOAVALIAÃ‡ÃƒO DE COMPETÃŠNCIAS */}
               {selectedChapter === "autoavaliacao" ? (
                 <motion.section 
                   id="sec-autoavaliacao" 
@@ -1156,7 +1302,7 @@ export default function App() {
                   <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
                     <BarChart2 className="text-[#bd8a12]" size={24} />
                     <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">
-                      4. Autoavaliação de Competências
+                      4. AutoavaliaÃ§Ã£o de CompetÃªncias
                     </h2>
                   </div>
 
@@ -1164,7 +1310,7 @@ export default function App() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <h3 className="font-serif font-bold text-lg text-[#001736]">
-                        4.1. Competências Desenvolvidas no Curso de Formador de Formadores
+                        4.1. CompetÃªncias Desenvolvidas no Curso de Formador de Formadores
                       </h3>
                       {isAdmin && (
                         <button
@@ -1172,21 +1318,21 @@ export default function App() {
                           className="px-3 py-1.5 bg-[#bd8a12] text-white text-xs font-bold rounded hover:bg-[#ab7c0e] flex items-center space-x-1"
                         >
                           <Plus size={12} />
-                          <span>Adicionar Métrica</span>
+                          <span>Adicionar MÃ©trica</span>
                         </button>
                       )}
                     </div>
-                    <p className="text-xs text-gray-400">Classifique as competências de 1 a 5 estrelas comparando o estado técnico antes vs após o CFF:</p>
+                    <p className="text-xs text-gray-400">Classifique as competÃªncias de 1 a 5 estrelas comparando o estado tÃ©cnico antes vs apÃ³s o CFF:</p>
 
                     <div className="overflow-x-auto border border-gray-200 rounded-xl bg-white shadow-3xs">
                       <table className="w-full text-left text-xs border-collapse">
                         <thead>
                           <tr className="bg-gray-50 border-b border-gray-200 text-gray-500 font-mono tracking-wider text-[10px] uppercase">
-                            <th className="p-4 font-bold">Variável / Competência</th>
+                            <th className="p-4 font-bold">VariÃ¡vel / CompetÃªncia</th>
                             <th className="p-4 font-bold text-center w-32">Antes CFF</th>
-                            <th className="p-4 font-bold text-center w-32">Após CFF</th>
-                            <th className="p-4 font-bold hidden sm:table-cell">Evidências / Justificação</th>
-                            {isAdmin && <th className="p-4 text-center w-12">Ações</th>}
+                            <th className="p-4 font-bold text-center w-32">ApÃ³s CFF</th>
+                            <th className="p-4 font-bold hidden sm:table-cell">EvidÃªncias / JustificaÃ§Ã£o</th>
+                            {isAdmin && <th className="p-4 text-center w-12">AÃ§Ãµes</th>}
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-150">
@@ -1281,7 +1427,7 @@ export default function App() {
                       <ul className="space-y-2.5 text-xs sm:text-sm text-gray-700">
                         {portfolio.pontosFortes.map((ponto, idx) => (
                           <li key={idx} className="flex items-start bg-gray-50/70 p-3 rounded-lg border border-gray-100 group">
-                            <span className="text-[#bd8a12] font-semibold mr-2 mt-0.5">✓</span>
+                            <span className="text-[#bd8a12] font-semibold mr-2 mt-0.5">âœ“</span>
                             <div className="flex-1">
                               {isAdmin ? (
                                 <textarea
@@ -1334,17 +1480,17 @@ export default function App() {
                       )}
                     </div>
 
-                    {/* Áreas a desenvolver */}
+                    {/* Ãreas a desenvolver */}
                     <div className="space-y-4">
                       <div className="flex items-center space-x-2 text-[#bd8a12]">
                         <TrendingUp size={18} className="text-[#bd8a12]" />
-                        <h4 className="font-serif font-bold text-base text-[#001736]">4.3. Áreas a Desenvolver</h4>
+                        <h4 className="font-serif font-bold text-base text-[#001736]">4.3. Ãreas a Desenvolver</h4>
                       </div>
                       
                       <ul className="space-y-2.5 text-xs sm:text-sm text-gray-700">
                         {portfolio.areasDesenvolver.map((area, idx) => (
                           <li key={idx} className="flex items-start bg-gray-50/70 p-3 rounded-lg border border-gray-100 group">
-                            <span className="text-[#bd8a12] font-semibold mr-2 mt-0.5">→</span>
+                            <span className="text-[#bd8a12] font-semibold mr-2 mt-0.5">â†’</span>
                             <div className="flex-1">
                               {isAdmin ? (
                                 <textarea
@@ -1401,8 +1547,8 @@ export default function App() {
                 </motion.section>
               ) : null}
 
-              {/* SECTION 5: SÍNTESE REFLEXIVA GLOBAL */}
-              {selectedChapter === "sintese_global" ? (
+              {/* SECTION 5: SÃNTESE REFLEXIVA GLOBAL */}
+              {selectedChapter === "reflexao_modulos" && showSynthesisInReflections ? (
                 <motion.section 
                   id="sec-sintese_global" 
                   initial={{ opacity: 0, y: 15 }} 
@@ -1412,7 +1558,7 @@ export default function App() {
                   <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
                     <Award className="text-[#bd8a12]" size={24} />
                     <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">
-                      5. Síntese Reflexiva Global
+                      Síntese global
                     </h2>
                   </div>
 
@@ -1435,7 +1581,7 @@ export default function App() {
 
                     {/* Paragraph 2 */}
                     <div className="space-y-2 pt-2">
-                      <span className="text-[10px] font-mono text-[#002b5b]/40 font-bold uppercase tracking-widest block">A Consolidação da Praxis Andragógica</span>
+                      <span className="text-[10px] font-mono text-[#002b5b]/40 font-bold uppercase tracking-widest block">A ConsolidaÃ§Ã£o da Praxis AndragÃ³gica</span>
                       {isAdmin ? (
                         <textarea
                           value={portfolio.synthesisText2}
@@ -1487,12 +1633,12 @@ export default function App() {
                   <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
                     <TrendingUp className="text-[#bd8a12]" size={24} />
                     <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">
-                      6. Expectativas e Projetos Futuros
+                      Metas e Projetos
                     </h2>
                   </div>
 
                   <p className="text-sm text-gray-700 leading-relaxed">
-                    O encerramento do percurso letivo do CFF em Beja dá origem a um roteiro estruturado de metas profissionais de curto e médio prazo:
+                    O encerramento do percurso letivo do CFF em Beja dÃ¡ origem a um roteiro estruturado de metas profissionais de curto e mÃ©dio prazo:
                   </p>
 
                   <div className="space-y-8">
@@ -1555,9 +1701,9 @@ export default function App() {
                       )}
                     </div>
 
-                    {/* Objetivos médio prazo */}
+                    {/* Objetivos mÃ©dio prazo */}
                     <div className="space-y-3 pt-4 border-t border-gray-100">
-                      <h4 className="text-xs font-mono uppercase tracking-widest text-[#002b5b]/50 font-bold">Estratégias de Médio Prazo (1-3 anos)</h4>
+                      <h4 className="text-xs font-mono uppercase tracking-widest text-[#002b5b]/50 font-bold">EstratÃ©gias de MÃ©dio Prazo (1-3 anos)</h4>
                       
                       <div className="space-y-2">
                         {portfolio.goalsMediumTerm.map((goal, idx) => (
@@ -1600,7 +1746,7 @@ export default function App() {
                             type="text"
                             value={newMediumTermGoal}
                             onChange={(e) => setNewMediumTermGoal(e.target.value)}
-                            placeholder="Adicionar nova meta de médio prazo..."
+                            placeholder="Adicionar nova meta de mÃ©dio prazo..."
                             className="flex-1 text-xs px-2.5 py-1.5 border border-gray-200 rounded outline-none"
                           />
                           <button
@@ -1613,15 +1759,15 @@ export default function App() {
                       )}
                     </div>
 
-                    {/* Investigação/Formação planeada */}
+                    {/* InvestigaÃ§Ã£o/FormaÃ§Ã£o planeada */}
                     <div className="space-y-3 pt-4 border-t border-gray-100">
-                      <h4 className="text-xs font-mono uppercase tracking-widest text-[#002b5b]/50 font-bold">Focos de Formação Contínua Almejados</h4>
+                      <h4 className="text-xs font-mono uppercase tracking-widest text-[#002b5b]/50 font-bold">Focos de FormaÃ§Ã£o ContÃ­nua Almejados</h4>
                       
                       <div className="space-y-2">
                         {portfolio.plannedTrainings.map((train, idx) => (
                           <div key={idx} className="flex items-center justify-between p-3 bg-[#fcf9f8]/60 border border-gray-200 rounded-lg group">
                             <div className="flex items-center space-x-3 flex-1">
-                              <span className="text-[#bd8a12] font-extrabold text-[#bd8a12]">→</span>
+                              <span className="text-[#bd8a12] font-extrabold text-[#bd8a12]">â†’</span>
                               {isAdmin ? (
                                 <input
                                   type="text"
@@ -1656,7 +1802,7 @@ export default function App() {
                             type="text"
                             value={newPlannedTraining}
                             onChange={(e) => setNewPlannedTraining(e.target.value)}
-                            placeholder="Adicionar curso ou conferência científica futura..."
+                            placeholder="Adicionar curso ou conferÃªncia cientÃ­fica futura..."
                             className="flex-1 text-xs px-2.5 py-1.5 border border-gray-200 rounded outline-none"
                           />
                           <button
@@ -1673,7 +1819,7 @@ export default function App() {
                 </motion.section>
               ) : null}
 
-              {/* SECTION 7: EVIDÊNCIAS DAS APRENDIZAGENS */}
+              {/* SECTION 7: EVIDÃŠNCIAS DAS APRENDIZAGENS */}
               {selectedChapter === "evidencias" ? (
                 <motion.section 
                   id="sec-evidencias" 
@@ -1684,99 +1830,130 @@ export default function App() {
                   <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
                     <Bookmark className="text-[#bd8a12]" size={24} />
                     <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">
-                      7. Evidências das Aprendizagens
+                      7. EvidÃªncias das Aprendizagens
                     </h2>
                   </div>
 
                   <p className="text-sm text-gray-700">
-                    Repositório documental estruturado ao longo dos módulos do CFF para atestar a autenticidade e rigor científico de cada reflexão enunciada neste e-Portfólio:
+                    RepositÃ³rio documental estruturado ao longo dos mÃ³dulos do CFF para atestar a autenticidade e rigor cientÃ­fico de cada reflexÃ£o enunciada neste e-PortfÃ³lio:
                   </p>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {portfolio.evidences.map((ev) => (
-                      <div key={ev.id} className="p-5 bg-[#fcf9f8] border border-[#002b5b]/10 rounded-xl relative space-y-3 group hover:border-[#bd8a12]/30 transition-all">
-                        
-                        <div className="flex items-center justify-between">
-                          <span className="bg-[#002b5b]/10 text-[#002b5b] font-mono text-[9px] font-bold px-2 py-0.5 rounded">
-                            {ev.moduleCode}
-                          </span>
-                          
-                          {isAdmin && (
-                            <button
-                              onClick={() => handleDeleteEvidence(ev.id)}
-                              className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity p-0.5"
-                            >
-                              <Trash2 size={13} />
-                            </button>
-                          )}
-                        </div>
-
-                        <div className="space-y-1">
-                          <h4 className="font-serif font-bold text-[#001736] text-sm sm:text-base leading-tight">
-                            {ev.title}
-                          </h4>
-                          <p className="text-xs text-gray-500 leading-relaxed">
-                            {ev.description}
-                          </p>
-                        </div>
-
-                        <div className="pt-2 border-t border-gray-200/50 flex justify-between items-center text-[10px] font-mono text-gray-400">
-                          <span>Dossier de Trabalho Letivo</span>
-                          {ev.url ? (
-                            <a
-                              href={ev.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-[#bd8a12] font-semibold hover:text-[#8a650f]"
-                            >
-                              Abrir evidência
-                            </a>
-                          ) : (
-                            <span className="text-[#bd8a12] font-semibold">Anexado Virtualmente</span>
-                          )}
-                        </div>
-                      </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedEvidenceModule(null)}
+                      className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${!selectedEvidenceModule ? "bg-[#002b5b] text-white border-[#002b5b]" : "bg-white text-[#002b5b] border-[#002b5b]/15 hover:bg-[#002b5b]/5"}`}
+                    >
+                      Todos
+                    </button>
+                    {evidenceModuleCodes.map((moduleCode) => (
+                      <button
+                        key={moduleCode}
+                        type="button"
+                        onClick={() => setSelectedEvidenceModule(moduleCode)}
+                        className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors ${selectedEvidenceModule === moduleCode ? "bg-[#002b5b] text-white border-[#002b5b]" : "bg-white text-[#002b5b] border-[#002b5b]/15 hover:bg-[#002b5b]/5"}`}
+                      >
+                        {moduleCode}
+                      </button>
                     ))}
+                  </div>
+
+                  <div className="space-y-8">
+                    {(selectedEvidenceModule ? portfolio.modules.filter((module) => module.code === selectedEvidenceModule) : portfolio.modules).map((module) => {
+                      const moduleEvidences = visibleEvidences.filter((ev) => ev.moduleCode === module.code);
+                      if (!moduleEvidences.length) return null;
+
+                      return (
+                        <section key={module.code} className="space-y-4">
+                          <div className="border-b border-[#002b5b]/10 pb-2">
+                            <h3 className="font-serif text-xl font-bold text-[#001736]">
+                              {module.code} ? {module.title}
+                            </h3>
+                          </div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {moduleEvidences.map((ev) => (
+                              <div key={ev.id} className="p-5 bg-[#fcf9f8] border border-[#002b5b]/10 rounded-xl relative space-y-3 group hover:border-[#bd8a12]/30 transition-all">
+                                <div className="flex items-start justify-between gap-4">
+                                  <div className="space-y-1">
+                                    <h4 className="font-serif font-bold text-[#001736] text-sm sm:text-base leading-tight">
+                                      {ev.title}
+                                    </h4>
+                                    <p className="text-xs text-gray-500 leading-relaxed">
+                                      {ev.description}
+                                    </p>
+                                  </div>
+
+                                  {isAdmin && (
+                                    <button
+                                      onClick={() => handleDeleteEvidence(ev.id)}
+                                      className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity p-0.5 shrink-0"
+                                    >
+                                      <Trash2 size={13} />
+                                    </button>
+                                  )}
+                                </div>
+
+                                <div className="pt-2 border-t border-gray-200/50 flex justify-between items-center text-[10px] font-mono text-gray-400">
+                                  <span>Dossier de Trabalho Letivo</span>
+                                  {ev.url ? (
+                                    <a
+                                      href={ev.url}
+                                      target={shouldOpenEvidenceInNewTab(ev.url) ? "_blank" : undefined}
+                                      rel={shouldOpenEvidenceInNewTab(ev.url) ? "noopener noreferrer" : undefined}
+                                      className="text-[#bd8a12] font-semibold hover:text-[#8a650f]"
+                                    >
+                                      Abrir evid?ncia
+                                    </a>
+                                  ) : (
+                                    <span className="text-[#bd8a12] font-semibold">Anexado Virtualmente</span>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </section>
+                      );
+                    })}
                   </div>
 
                   {isAdmin && (
                     <form onSubmit={handleAddEvidence} className="bg-gray-50 p-6 rounded-xl border border-gray-200 space-y-4">
-                      <h4 className="font-serif font-bold text-sm text-[#001736]">Anexar Evidência de Trabalho Prático</h4>
+                      <h4 className="font-serif font-bold text-sm text-[#001736]">Anexar EvidÃªncia de Trabalho PrÃ¡tico</h4>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                          <label className="text-[10px] font-mono block mb-1">Módulo Associado</label>
+                          <label className="text-[10px] font-mono block mb-1">MÃ³dulo Associado</label>
                           <select
                             value={newEvidenceModule}
                             onChange={(e) => setNewEvidenceModule(e.target.value)}
                             className="bg-white border text-xs border-gray-200 outline-none p-1.5 w-full rounded"
                           >
-                            <option value="MF1">MF1 — Diagnóstico</option>
-                            <option value="MF2">MF2 — Design Recursos</option>
-                            <option value="MF3">MF3 — RVCC / ALV</option>
-                            <option value="MF4">MF4 — Metodologias</option>
-                            <option value="MF5">MF5 — Simulações</option>
+                            <option value="MF1">MF1 â€” DiagnÃ³stico</option>
+                            <option value="MF2">MF2 â€” Design Recursos</option>
+                            <option value="MF3">MF3 â€” RvccFor / ALV</option>
+                            <option value="MF4">MF4 â€” Metodologias</option>
+                            <option value="MF5">MF5 â€” SimulaÃ§Ãµes</option>
                           </select>
                         </div>
 
                         <div className="sm:col-span-2">
-                          <label className="text-[10px] font-mono block mb-1">Título da Evidência / Trabalho</label>
+                          <label className="text-[10px] font-mono block mb-1">TÃ­tulo da EvidÃªncia / Trabalho</label>
                           <input
                             type="text"
                             value={newEvidenceTitle}
                             onChange={(e) => setNewEvidenceTitle(e.target.value)}
-                            placeholder="ex: Relatório de análise de lacunas"
+                            placeholder="ex: RelatÃ³rio de anÃ¡lise de lacunas"
                             className="bg-white border text-xs border-gray-200 outline-none p-1.5 w-full rounded"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="text-[10px] font-mono block mb-1">Descrição Técnico-Operacional do Recurso</label>
+                        <label className="text-[10px] font-mono block mb-1">DescriÃ§Ã£o TÃ©cnico-Operacional do Recurso</label>
                         <textarea
                           value={newEvidenceDesc}
                           onChange={(e) => setNewEvidenceDesc(e.target.value)}
-                          placeholder="Sumarizar os objetivos curriculares ou classificação do formador..."
+                          placeholder="Sumarizar os objetivos curriculares ou classificaÃ§Ã£o do formador..."
                           className="bg-white border text-xs border-gray-200 outline-none p-1.5 w-full rounded h-16"
                         />
                       </div>
@@ -1785,14 +1962,14 @@ export default function App() {
                         type="submit"
                         className="px-4 py-1.5 bg-[#002b5b] text-white text-xs font-bold rounded hover:bg-[#001c3d]"
                       >
-                        Arquivar Evidência
+                        Arquivar EvidÃªncia
                       </button>
                     </form>
                   )}
                 </motion.section>
               ) : null}
 
-              {/* SECTION 8: REFERÊNCIAS BIBLIOGRÁFICAS */}
+              {/* SECTION 8: REFERÃŠNCIAS BIBLIOGRÃFICAS */}
               {selectedChapter === "bibliografia" ? (
                 <motion.section 
                   id="sec-bibliografia" 
@@ -1803,7 +1980,7 @@ export default function App() {
                   <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
                     <Info className="text-[#bd8a12]" size={24} />
                     <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">
-                      8. Referências Bibliográficas e Documentais
+                      Referências
                     </h2>
                   </div>
 
@@ -1815,7 +1992,7 @@ export default function App() {
                         type="text"
                         value={refSearch}
                         onChange={(e) => setRefSearch(e.target.value)}
-                        placeholder="Pesquisar autor, código legislativo ou referencial..."
+                        placeholder="Pesquisar autor, cÃ³digo legislativo ou referencial..."
                         className="bg-white border text-xs border-gray-200 pl-8 pr-3 py-2 w-full rounded outline-none focus:border-[#bd8a12]"
                       />
                     </div>
@@ -1871,7 +2048,7 @@ export default function App() {
                             <button
                               onClick={() => handleDeleteReference(ref.id)}
                               className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity ml-4 shrink-0"
-                              title="Remover referência"
+                              title="Remover referÃªncia"
                             >
                               <Trash2 size={13} />
                             </button>
@@ -1882,7 +2059,7 @@ export default function App() {
 
                   {isAdmin && (
                     <form onSubmit={handleAddReference} className="bg-gray-50 p-6 rounded-xl border border-gray-200 space-y-4">
-                      <h4 className="font-serif font-bold text-sm text-[#001736]">Inserir Nova Referência Científica / Legal</h4>
+                      <h4 className="font-serif font-bold text-sm text-[#001736]">Inserir Nova ReferÃªncia CientÃ­fica / Legal</h4>
                       
                       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                         <div>
@@ -1895,19 +2072,19 @@ export default function App() {
                             <option value="Legislação">Legislação</option>
                             <option value="Referenciais">Referenciais</option>
                             <option value="Manuais">Manuais e Guias</option>
-                            <option value="Obras">Obras de Referência</option>
-                            <option value="Instrumentos">Instrumentos práticos</option>
+                            <option value="Obras">Obras de ReferÃªncia</option>
+                            <option value="Instrumentos">Instrumentos prÃ¡ticos</option>
                             <option value="Recursos">Recursos Digitais</option>
                           </select>
                         </div>
 
                         <div className="sm:col-span-3">
-                          <label className="text-[10px] font-mono block mb-1">Citação Bibliográfica Completa (ex. APA / Padrão)</label>
+                          <label className="text-[10px] font-mono block mb-1">CitaÃ§Ã£o BibliogrÃ¡fica Completa (ex. APA / PadrÃ£o)</label>
                           <input
                             type="text"
                             value={newRefCitation}
                             onChange={(e) => setNewRefCitation(e.target.value)}
-                            placeholder="IEFP (2022). Referencial de Formação Pedagógica..."
+                            placeholder="IEFP (2022). Referencial de FormaÃ§Ã£o PedagÃ³gica..."
                             className="bg-white border text-xs border-gray-200 outline-none p-1.5 w-full rounded"
                           />
                         </div>
@@ -1917,14 +2094,14 @@ export default function App() {
                         type="submit"
                         className="px-4 py-1.5 bg-[#002b5b] text-white text-xs font-bold rounded hover:bg-[#001c3d]"
                       >
-                        Adicionar à Lista Geral
+                        Adicionar Ã  Lista Geral
                       </button>
                     </form>
                   )}
                 </motion.section>
               ) : null}
 
-              {/* INBOX SECTION: COMETÁRIOS ACADÉMICOS E PARECERES */}
+              {/* INBOX SECTION: COMETÃRIOS ACADÃ‰MICOS E PARECERES */}
               {selectedChapter === "inbox" ? (
                 <motion.section 
                   id="sec-inbox" 
@@ -1935,12 +2112,12 @@ export default function App() {
                   <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
                     <Mail className="text-[#bd8a12]" size={24} />
                     <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#001736]">
-                      Pareceres Técnicos & Comentários Científicos
+                      Pareceres TÃ©cnicos & ComentÃ¡rios CientÃ­ficos
                     </h2>
                   </div>
 
                   <p className="text-sm text-gray-700">
-                    O acompanhamento mútuo compreende a apreciação constante por parte do conselho de formadores e coordenação técnica do IEFP:
+                    O acompanhamento mÃºtuo compreende a apreciaÃ§Ã£o constante por parte do conselho de formadores e coordenaÃ§Ã£o tÃ©cnica do IEFP:
                   </p>
 
                   <div className="space-y-4">
@@ -1950,7 +2127,7 @@ export default function App() {
                         <div className="flex justify-between items-start">
                           <div>
                             <h4 className="font-serif font-bold text-sm text-[#001736]">{msg.subject}</h4>
-                            <p className="text-[10px] font-mono text-gray-400">{msg.senderName} • {msg.senderEmail}</p>
+                            <p className="text-[10px] font-mono text-gray-400">{msg.senderName} â€¢ {msg.senderEmail}</p>
                           </div>
                           
                           <div className="flex items-center space-x-2 text-[10px] font-mono text-gray-400">
@@ -1978,12 +2155,12 @@ export default function App() {
                   <form onSubmit={handleSendInboxMessage} className="bg-gray-50 p-6 rounded-xl border border-gray-200 space-y-4">
                     <div className="flex items-center space-x-2">
                        <Users size={16} className="text-[#bd8a12]" />
-                       <h4 className="font-serif font-bold text-sm text-[#001736]">Submeter novo Parecer Pedagógico</h4>
+                       <h4 className="font-serif font-bold text-sm text-[#001736]">Submeter novo Parecer PedagÃ³gico</h4>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div>
-                        <label className="text-[10px] font-mono block mb-1">Avaliador / Nome Científico</label>
+                        <label className="text-[10px] font-mono block mb-1">Avaliador / Nome CientÃ­fico</label>
                         <input
                           type="text"
                           value={newInboxSender}
@@ -1994,7 +2171,7 @@ export default function App() {
                       </div>
 
                       <div>
-                        <label className="text-[10px] font-mono block mb-1">Correio Eletrónico</label>
+                        <label className="text-[10px] font-mono block mb-1">Correio EletrÃ³nico</label>
                         <input
                           type="email"
                           value={newInboxEmail}
@@ -2005,23 +2182,23 @@ export default function App() {
                       </div>
 
                       <div>
-                        <label className="text-[10px] font-mono block mb-1">Assunto / Tópico</label>
+                        <label className="text-[10px] font-mono block mb-1">Assunto / TÃ³pico</label>
                         <input
                           type="text"
                           value={newInboxSubject}
                           onChange={(e) => setNewInboxSubject(e.target.value)}
-                          placeholder="Parecer complementar do módulo"
+                          placeholder="Parecer complementar do mÃ³dulo"
                           className="bg-white border text-xs border-gray-200 outline-none p-1.5 w-full rounded"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-[10px] font-mono block mb-1">Parecer Crítico Detalhado</label>
+                      <label className="text-[10px] font-mono block mb-1">Parecer CrÃ­tico Detalhado</label>
                       <textarea
                         value={newInboxContent}
                         onChange={(e) => setNewInboxContent(e.target.value)}
-                        placeholder="Indique os aspetos fortes ou sugestões curriculares de melhoria para o e-Portfólio..."
+                        placeholder="Indique os aspetos fortes ou sugestÃµes curriculares de melhoria para o e-PortfÃ³lio..."
                         className="bg-white border text-xs border-gray-200 outline-none p-1.5 w-full rounded h-20"
                       />
                     </div>
@@ -2030,7 +2207,7 @@ export default function App() {
                       type="submit"
                       className="px-4 py-1.5 bg-[#002b5b] text-white text-xs font-bold rounded hover:bg-[#001c3d]"
                     >
-                      Registar Parecer Pedagógico
+                      Registar Parecer PedagÃ³gico
                     </button>
                   </form>
                 </motion.section>
@@ -2039,7 +2216,7 @@ export default function App() {
               {/* Central Paulo Freire Quote footer decoration */}
               <div className="py-6 text-center text-[#002b5b]/50">
                 <span className="font-serif italic text-sm">"{portfolio.quoteText}"</span>
-                <span className="text-[10px] font-mono block mt-1 uppercase tracking-widest">— {portfolio.quoteAuthor}</span>
+                <span className="text-[10px] font-mono block mt-1 uppercase tracking-widest">â€” {portfolio.quoteAuthor}</span>
               </div>
 
             </div>
@@ -2053,10 +2230,10 @@ export default function App() {
       <footer className="bg-white border-t border-[#002b5b]/10 py-8 text-center" id="academic-footer">
         <div className="max-w-7xl mx-auto px-4 text-xs space-y-3">
           <p className="font-serif font-bold text-[#001736] text-sm">
-            e-Portfólio — Percurso de Formação de Formadores de Excelência
+            e-PortfÃ³lio â€” Percurso de FormaÃ§Ã£o de Formadores de ExcelÃªncia
           </p>
           <p className="text-[#002b5b]/60">
-            © 2026 {portfolio.formanda} • Centro de Emprego e Formação Profissional de Beja. Todos os Direitos Reservados.
+            Â© 2026 {portfolio.formanda} â€¢ Centro de Emprego e FormaÃ§Ã£o Profissional de Beja. Todos os Direitos Reservados.
           </p>
           <p className="text-[10px] text-gray-400 font-mono">
             {portfolio.referencialRef}
@@ -2090,3 +2267,4 @@ export default function App() {
     </div>
   );
 }
+

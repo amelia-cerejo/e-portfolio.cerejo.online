@@ -3076,5 +3076,16 @@
 
       renderAll();
     </script>
-  </body>
+  
+<style id="portfolio-floating-buttons-style">
+  .portfolio-floating-buttons{position:fixed;right:22px;bottom:22px;z-index:9999;display:flex;flex-direction:column;gap:10px;font-family:Inter,Arial,sans-serif}
+  .portfolio-floating-buttons a,.portfolio-floating-buttons button{width:48px;height:48px;border-radius:999px;border:1px solid #c8d4e3;background:#fff;color:#002b5b;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,43,91,.18);cursor:pointer;text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}
+  .portfolio-floating-buttons a:hover,.portfolio-floating-buttons button:hover{transform:translateY(-1px);border-color:#bd8a12}
+  .portfolio-floating-buttons svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  @media print{.portfolio-floating-buttons{display:none}}
+</style>
+<div class="portfolio-floating-buttons" aria-label="Navegacao do e-Portfolio">
+  <a href="../../../e-portfolio.html#evidencias/mf3" title="Voltar as evidencias" aria-label="Voltar as evidencias"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/><path d="M9 12h12"/><path d="M3 5v14"/></svg></a>
+</div>
+</body>
 </html>

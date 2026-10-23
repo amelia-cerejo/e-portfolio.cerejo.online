@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidade de Prática | Carrossel</title>
+  <style>
+    :root {
+      --bg: #e8f3f2;
+      --panel: rgba(246, 252, 251, 0.96);
+      --line: rgba(21, 90, 100, 0.2);
+      --text: #18343b;
+      --muted: rgba(24, 52, 59, 0.62);
+      --accent: #1594a6;
+      --gold: #f5a400;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(21, 148, 166, 0.14), transparent 28%),
+        radial-gradient(circle at 90% 12%, rgba(245, 164, 0, 0.12), transparent 24%),
+        linear-gradient(135deg, #f4fbfa 0%, var(--bg) 64%, #d4eeee 100%);
+      color: var(--text);
+    }
+
+    .app-shell {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      transition: padding 180ms ease;
+    }
+
+    body.menu-open .app-shell {
+      padding-left: 286px;
+      padding-right: 14px;
+    }
+
+    .slide-menu {
+      position: fixed;
+      top: 18px;
+      left: 22px;
+      z-index: 20;
+    }
+
+    .menu-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 96px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: var(--panel);
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(24, 52, 59, 0.14);
+    }
+
+    .menu-toggle::after {
+      content: "▾";
+      margin-left: auto;
+      transition: transform 180ms ease;
+    }
+
+    .slide-menu.open .menu-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .deck-nav {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      width: min(242px, calc(100vw - 44px));
+      display: grid;
+      gap: 4px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      box-shadow: 0 18px 42px rgba(24, 52, 59, 0.18);
+      overflow: visible;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .slide-menu.open .deck-nav {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .deck-nav a {
+      display: block;
+      min-height: 0;
+      padding: 7px 9px;
+      border: 1px solid rgba(21, 90, 100, 0.08);
+      border-radius: 7px;
+      color: var(--text);
+      background: rgba(21, 148, 166, 0.05);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .deck-nav a.active {
+      color: #ffffff;
+      background: var(--accent);
+      border-color: rgba(21, 148, 166, 0.7);
+    }
+
+    .slide-count {
+      position: fixed;
+      top: 18px;
+      right: 22px;
+      z-index: 20;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: var(--panel);
+      font-size: 0.88rem;
+      font-weight: 800;
+      box-shadow: 0 12px 26px rgba(24, 52, 59, 0.14);
+    }
+
+    .viewport {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+    }
+
+    .stage {
+      position: relative;
+      width: var(--stage-width, 1280px);
+      height: var(--stage-height, 720px);
+      border-radius: 8px;
+      background: #eef7f6;
+      box-shadow: 0 24px 70px rgba(24, 52, 59, 0.22);
+      overflow: hidden;
+      transition: opacity 180ms ease, transform 180ms ease, width 180ms ease, height 180ms ease;
+    }
+
+    .stage.changing {
+      opacity: 0.2;
+      transform: translateX(24px);
+    }
+
+    .slide-frame {
+      display: block;
+      width: 1280px;
+      height: 720px;
+      border: 0;
+      background: #eef7f6;
+      transform: scale(var(--scale, 1));
+      transform-origin: top left;
+    }
+
+    .controls {
+      position: fixed;
+      left: 24px;
+      right: 24px;
+      top: 50%;
+      z-index: 18;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    body.menu-open .controls {
+      left: 286px;
+    }
+
+    .control-btn {
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--text);
+      background: var(--panel);
+      cursor: pointer;
+      pointer-events: auto;
+      font-size: 1.6rem;
+      line-height: 1;
+      box-shadow: 0 12px 26px rgba(24, 52, 59, 0.14);
+    }
+
+    .control-btn:hover {
+      background: rgba(21, 148, 166, 0.96);
+    }
+
+    .hint {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 17;
+      transform: translateX(-50%);
+      color: var(--muted);
+      font-size: 0.84rem;
+      text-align: center;
+      pointer-events: none;
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .app-shell {
+        padding: 58px 8px 62px;
+      }
+
+      body.menu-open .app-shell {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      .slide-menu {
+        top: 12px;
+        left: 12px;
+      }
+
+      .slide-count {
+        top: 12px;
+        right: 12px;
+      }
+
+      .menu-toggle {
+      min-width: 84px;
+        padding: 9px 12px;
+      }
+
+      .controls {
+        left: 14px;
+        right: 14px;
+      }
+
+      .hint {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-menu">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="slide-menu-list">
+      Menu
+    </button>
+    <nav class="deck-nav" id="slide-menu-list" aria-label="Navegação por slides">
+      <a href="#s1">Capa</a>
+      <a href="#s2">Agenda da apresentação</a>
+      <a href="#s3">O que é uma CoP?</a>
+      <a href="#s4">As 3 fases</a>
+      <a href="#s5">Fase potencial</a>
+      <a href="#s6">Fase de coalização</a>
+      <a href="#s7">Início ativo</a>
+      <a href="#s8">Sucesso e obstáculos</a>
+      <a href="#s9">Caso COVID-19</a>
+      <a href="#s10">Papel do formador</a>
+      <a href="#s11">Quiz interativo</a>
+      <a href="#s12">Síntese e conclusão</a>
+    </nav>
+  </div>
+
+  <div class="slide-count" aria-live="polite">1 / 12</div>
+
+  <div class="controls" aria-label="Controlos do carrossel">
+    <button class="control-btn" type="button" data-prev aria-label="Slide anterior">‹</button>
+    <button class="control-btn" type="button" data-next aria-label="Slide seguinte">›</button>
+  </div>
+
+  <main class="app-shell">
+    <div class="viewport">
+      <div class="stage">
+        <iframe class="slide-frame" title="Slide atual" src="slides/novo01.html"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <p class="hint">Usa as setas do teclado, os botões laterais ou o menu para navegar.</p>
+
+  <script>
+    const slides = [
+      { id: "s1", title: "Capa", src: "slides/novo01.html" },
+      { id: "s2", title: "Agenda da apresentação", src: "slides/novo02.html" },
+      { id: "s3", title: "O que é uma CoP?", src: "slides/novo03.html" },
+      { id: "s4", title: "As 3 fases", src: "slides/novo04.html" },
+      { id: "s5", title: "Fase potencial", src: "slides/novo05.html" },
+      { id: "s6", title: "Fase de coalização", src: "slides/novo06.html" },
+      { id: "s7", title: "Início ativo", src: "slides/novo07.html" },
+      { id: "s8", title: "Sucesso e obstáculos", src: "slides/novo08.html" },
+      { id: "s9", title: "Caso COVID-19", src: "slides/novo09.html" },
+      { id: "s10", title: "Papel do formador", src: "slides/novo10.html" },
+      { id: "s11", title: "Quiz interativo", src: "slides/novo11.html" },
+      { id: "s12", title: "Síntese e conclusão", src: "slides/novo12.html" }
+    ];
+
+    const stage = document.querySelector(".stage");
+    const frame = document.querySelector(".slide-frame");
+    const navLinks = Array.from(document.querySelectorAll(".deck-nav a"));
+    const counter = document.querySelector(".slide-count");
+    const previous = document.querySelector("[data-prev]");
+    const next = document.querySelector("[data-next]");
+    const menu = document.querySelector(".slide-menu");
+    const menuToggle = document.querySelector(".menu-toggle");
+    let current = 0;
+
+    function fitStage() {
+      const isMenuOpen = document.body.classList.contains("menu-open") && window.innerWidth > 760;
+      const menuOffset = isMenuOpen ? 286 : 0;
+      const availableWidth = window.innerWidth - menuOffset - (window.innerWidth <= 760 ? 16 : 28);
+      const availableHeight = window.innerHeight - (window.innerWidth <= 760 ? 124 : 28);
+      const scale = Math.max(0.2, Math.min(availableWidth / 1280, availableHeight / 720));
+      stage.style.setProperty("--scale", scale);
+      stage.style.setProperty("--stage-width", `${1280 * scale}px`);
+      stage.style.setProperty("--stage-height", `${720 * scale}px`);
+    }
+
+    function showSlide(index, updateHash = true) {
+      current = (index + slides.length) % slides.length;
+      const slide = slides[current];
+
+      stage.classList.add("changing");
+
+      window.setTimeout(() => {
+        frame.src = slide.src;
+        frame.title = `Slide ${current + 1}: ${slide.title}`;
+        counter.textContent = `${current + 1} / ${slides.length}`;
+
+        navLinks.forEach((link, linkIndex) => {
+          link.classList.toggle("active", linkIndex === current);
+        });
+
+        if (updateHash) {
+          history.replaceState(null, "", `#${slide.id}`);
+        }
+      }, 120);
+    }
+
+    frame.addEventListener("load", () => {
+      stage.classList.remove("changing");
+      fitStage();
+    });
+
+    navLinks.forEach((link, index) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        showSlide(index);
+        menu.classList.remove("open");
+        document.body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        fitStage();
+      });
+    });
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("open");
+      document.body.classList.toggle("menu-open", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      fitStage();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!menu.contains(event.target)) {
+        menu.classList.remove("open");
+        document.body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        fitStage();
+      }
+    });
+
+    previous.addEventListener("click", () => showSlide(current - 1));
+    next.addEventListener("click", () => showSlide(current + 1));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight" || event.key === "PageDown") {
+        showSlide(current + 1);
+      }
+
+      if (event.key === "ArrowLeft" || event.key === "PageUp") {
+        showSlide(current - 1);
+      }
+    });
+
+    window.addEventListener("message", (event) => {
+      if (!event.data || event.data.source !== "slide-iframe-child") {
+        return;
+      }
+
+      if (event.data.type === "iframe-keydown") {
+        if (event.data.key === "ArrowRight" || event.data.key === "ArrowDown") {
+          showSlide(current + 1);
+        }
+
+        if (event.data.key === "ArrowLeft" || event.data.key === "ArrowUp") {
+          showSlide(current - 1);
+        }
+      }
+    });
+
+    window.addEventListener("resize", fitStage);
+
+    const initialNumber = Number((location.hash.match(/s(\d+)/) || [])[1]);
+    const initialIndex = Number.isInteger(initialNumber) && initialNumber >= 1 && initialNumber <= slides.length
+      ? initialNumber - 1
+      : 0;
+
+    fitStage();
+    showSlide(initialIndex, false);
+  </script>
+
+<style id="portfolio-floating-buttons-style">
+  .portfolio-floating-buttons{position:fixed;right:22px;bottom:22px;z-index:9999;display:flex;flex-direction:column;gap:10px;font-family:Inter,Arial,sans-serif}
+  .portfolio-floating-buttons a,.portfolio-floating-buttons button{width:48px;height:48px;border-radius:999px;border:1px solid #c8d4e3;background:#fff;color:#002b5b;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,43,91,.18);cursor:pointer;text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}
+  .portfolio-floating-buttons a:hover,.portfolio-floating-buttons button:hover{transform:translateY(-1px);border-color:#bd8a12}
+  .portfolio-floating-buttons svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  @media print{.portfolio-floating-buttons{display:none}}
+</style>
+<div class="portfolio-floating-buttons" aria-label="Navegacao do e-Portfolio">
+  <a href="../../../e-portfolio.html#evidencias/mf2" title="Voltar as evidencias" aria-label="Voltar as evidencias"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/><path d="M9 12h12"/><path d="M3 5v14"/></svg></a>
+</div>
+</body>
+</html>

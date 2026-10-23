@@ -1,0 +1,60 @@
+<div
+  style="max-width: 920px; margin: 18px auto; font-family: Arial, sans-serif; border: 1px solid #e4d2d2; border-radius: 14px; overflow: hidden; background-color: #ffffff;">
+  <div style="background-color: #8b2f2f; color: #ffffff; padding: 20px 24px;">
+    <p style="margin: 6px 0 0 0; font-size: 15px; font-weight: bold;">Profissão
+      de Risco: Bombeiro</p>
+  </div>
+  <div style="padding: 24px; color: #333333; line-height: 1.6;">
+    <div
+      style="background-color: #f9eeee; border-left: 5px solid #c44b4b; padding: 12px 16px; margin-bottom: 20px; border-radius: 8px;">
+      <p style="margin: 0;"><strong>Formanda:</strong> Amélia Cerejo Lopes</p>
+      <p style="margin: 4px 0 0 0;"><strong>Módulo:</strong> MF2 – Conceção da
+        Formação</p>
+      <p style="margin: 4px 0 0 0;"><strong>Atividade:</strong> MF2 A1 –
+        Elaboração de um Recurso Didático e Multimédia</p>
+      <p style="margin: 4px 0 0 0;"><strong>Tema:</strong> Profissão de risco –
+        Bombeiro</p>
+    </div>
+    <h4 style="color: #8b2f2f; margin-top: 0;">Introdução</h4>
+    <p>No âmbito da atividade <strong>MF2 A1 – Elaboração de um Recurso Didático
+        e Multimédia</strong>, foi desenvolvido um recurso digital interativo
+      sobre a profissão de risco <strong>Bombeiro</strong>.</p>
+    <p>A apresentação procura explorar, de forma visual e pedagógica, a
+      descrição da profissão, os principais riscos associados, os equipamentos
+      de proteção utilizados, as medidas de prevenção e exemplos de situações
+      reais.</p>
+    <div
+      style="background-color: #fff6f6; padding: 16px; border-radius: 10px; margin-top: 18px; margin-bottom: 22px; border: 1px solid #f0cccc;">
+      <p style="margin: 0 0 10px 0;">📎 <strong>Link da atividade no
+          Moodle/FAD:</strong></p>
+      <a style="text-decoration: none;"
+        href="https://fad.iefp.pt/mod/page/view.php?id=400379" rel="noopener">
+        <img class="img-fluid"
+          style="width: 100%; max-width: 820px; display: block; margin: 0 auto; border-radius: 10px; border: 1px solid #e4d2d2;"
+          src="https://fad.iefp.pt/draftfile.php/968066/user/draft/423594924/bd30553f-b8f8-4038-a34d-a9984db3f577.png"
+          alt="Pré-visualização da apresentação interativa sobre a profissão de risco Bombeiro">
+      </a>
+      <p style="margin: 12px 0 0 0; text-align: center;"><a
+          style="color: #8b2f2f; font-weight: bold; text-decoration: none;"
+          href="https://fad.iefp.pt/mod/page/view.php?id=400379" rel="noopener">
+          Abrir atividade no Moodle/FAD </a></p>
+    </div>
+    <h4 style="color: #8b2f2f;">Conclusão</h4>
+    <p>Este recurso multimédia foi concebido para apoiar a aprendizagem através
+      de uma apresentação visual, organizada e interativa. A escolha da
+      profissão de Bombeiro permite refletir sobre a importância da prevenção,
+      da segurança e da preparação técnica em profissões de risco.</p>
+    <p>A utilização de um formato digital pretende facilitar o acesso ao
+      conteúdo, promover uma leitura mais dinâmica e reforçar a ligação entre
+      tecnologia, pedagogia e aprendizagem significativa.</p>
+    <div
+      style="background-color: #fff6f6; padding: 14px 16px; border-radius: 8px; margin-top: 18px; border: 1px solid #f0cccc;">
+      <p style="margin: 0 0 8px 0;">✅ <strong>Acesso final à atividade:</strong>
+      </p>
+      <p style="margin: 0;"><a
+          style="color: #8b2f2f; font-weight: bold; text-decoration: none;"
+          href="https://fad.iefp.pt/mod/page/view.php?id=400379" target="_blank"
+          rel="noopener"> Abrir atividade no Moodle/FAD </a></p>
+    </div>
+  </div>
+</div>

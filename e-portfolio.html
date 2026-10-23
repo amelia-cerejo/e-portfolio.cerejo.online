@@ -1,0 +1,1811 @@
+﻿<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>e-Portfólio - Amélia Cerejo Lopes</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #171717;
+        --muted: #5f6470;
+        --blue: #002b5b;
+        --blue-soft: #e7eef7;
+        --gold: #bd8a12;
+        --paper: #fcf9f8;
+        --line: #e6dfdc;
+        --white: #fff;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Segoe UI", Arial, sans-serif;
+        line-height: 1.55;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(252, 249, 248, 0.96);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(10px);
+      }
+
+      .topbar {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 14px 20px;
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .entry-home {
+        width: 42px;
+        height: 42px;
+        border-radius: 999px;
+        border: 1px solid #cbd7e6;
+        background: var(--white);
+        color: var(--blue);
+        display: inline-grid;
+        place-items: center;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(0, 43, 91, 0.08);
+      }
+
+      .entry-home:hover,
+      .entry-home:focus {
+        background: var(--blue-soft);
+      }
+
+      .entry-home svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 6px;
+        background: var(--blue);
+        color: white;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      h1, h2, h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        color: #001736;
+        letter-spacing: 0;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.45rem, 3vw, 2.75rem);
+        line-height: 1.08;
+      }
+
+      h2 {
+        margin: 0 0 16px;
+        font-size: clamp(1.35rem, 2.2vw, 2rem);
+      }
+
+      h3 {
+        margin: 18px 0 8px;
+        font-size: 1.15rem;
+      }
+
+      .subtitle {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      button, .button-link {
+        border: 1px solid #cad4e2;
+        background: var(--white);
+        color: var(--blue);
+        border-radius: 6px;
+        padding: 8px 10px;
+        font: inherit;
+        font-size: 0.9rem;
+        cursor: pointer;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      button:hover, .button-link:hover {
+        border-color: var(--gold);
+      }
+
+      .floating-nav {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 40;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+      }
+
+      .float-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .float-button {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #cad4e2;
+        border-radius: 999px;
+        background: var(--white);
+        color: var(--blue);
+        box-shadow: 0 12px 28px rgba(0, 43, 91, 0.14);
+        text-decoration: none;
+        padding: 0;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .float-button svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        stroke-width: 2.2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .float-button.primary {
+        background: var(--blue);
+        color: #fff;
+      }
+
+      .float-button:hover {
+        border-color: var(--gold);
+        transform: translateY(-1px);
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      .float-button.action-complete {
+        background: #fff7e3;
+        border-color: #d5a02a;
+        color: #7a5200;
+      }
+
+      .float-button.action-print {
+        background: #eef8f1;
+        border-color: #8bbf9a;
+        color: #1f6b3b;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+      .float-button.action-complete {
+        background: #ffe9a8;
+        border-color: #c98a00;
+        color: #694400;
+      }
+
+      .float-button.action-print {
+        background: #dff4e6;
+        border-color: #4f9a69;
+        color: #155c32;
+      }
+
+
+
+      .float-button.is-hidden {
+        display: none;
+      }
+
+      body.sidebar-collapsed .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      body.sidebar-collapsed nav {
+        display: none;
+      }
+
+      .layout {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 24px 20px 48px;
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 24px;
+      }
+
+      nav {
+        position: sticky;
+        top: 82px;
+        align-self: start;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      nav a {
+        display: block;
+        color: var(--blue);
+        text-decoration: none;
+        padding: 9px 10px;
+        border-radius: 6px;
+        font-size: 0.92rem;
+        font-weight: 650;
+      }
+
+      nav a:hover, nav a.active {
+        background: var(--blue-soft);
+      }
+
+      .submenu {
+        display: none;
+        margin: -2px 0 6px 14px;
+        padding-left: 10px;
+        border-left: 2px solid var(--line);
+      }
+
+      .submenu.open {
+        display: block;
+      }
+
+      .submenu a {
+        font-size: 0.84rem;
+        padding: 7px 9px;
+      }
+
+      section {
+        display: none;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: clamp(18px, 3vw, 32px);
+        min-height: calc(100vh - 132px);
+        scroll-margin-top: 96px;
+      }
+
+      section.active-section {
+        display: block;
+      }
+
+      body.print-complete-page nav {
+        display: none;
+      }
+
+      body.print-complete-page .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      main section:not(.active-section) {
+        display: none !important;
+      }
+
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .meta {
+        border-left: 3px solid var(--gold);
+        background: white;
+        padding: 10px 12px;
+      }
+
+      .label {
+        display: block;
+        color: var(--muted);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+      }
+
+      ul {
+        padding-left: 1.2rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      .module, .evidence, .reference, .competence {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 12px 0;
+      }
+
+      .module {
+        display: none;
+      }
+
+      .module.active-module {
+        display: block;
+      }
+
+
+
+      #reflexoes .module > p > strong {
+        color: var(--gold-dark);
+        font-weight: 900;
+      }
+
+      .module-title-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 12px;
+      }
+
+      .module-title-row h3 {
+        margin: 0;
+      }
+
+      .module-title-row .tag {
+        flex: 0 0 auto;
+        margin-top: 2px;
+      }
+
+      #evidencias > h2 {
+        position: sticky;
+        top: 86px;
+        z-index: 5;
+        background: rgba(252, 249, 248, 0.96);
+        border-bottom: 1px solid var(--line);
+        padding: 10px 0 12px;
+        backdrop-filter: blur(8px);
+      }
+
+      .evidence-module {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        margin: 14px 0;
+        overflow: hidden;
+      }
+
+      .evidence-module summary {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px;
+        color: var(--blue);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 800;
+        font-size: 1.1rem;
+      }
+
+      .evidence-module summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .accordion-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: var(--blue-soft);
+        font-family: system-ui, sans-serif;
+        font-size: 1rem;
+        transition: transform 0.15s ease;
+      }
+
+      .evidence-module[open] .accordion-icon {
+        transform: rotate(45deg);
+      }
+
+      .evidence-list {
+        padding: 0 24px 18px 32px;
+      }
+
+      .reference-group {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        margin: 14px 0;
+        overflow: hidden;
+      }
+
+      .reference-group summary {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px;
+        color: var(--blue);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 800;
+        font-size: 1.1rem;
+      }
+
+      .reference-group summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .reference-group[open] .accordion-icon {
+        transform: rotate(45deg);
+      }
+
+      .reference-list {
+        padding: 0 16px 16px;
+      }
+
+      .evidence.is-filtered,
+      .evidence-module.is-filtered {
+        display: none;
+      }
+
+      .submenu-label {
+        display: block;
+        padding: 8px 10px 4px;
+        color: rgba(0, 43, 91, 0.45);
+        font-size: 0.68rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .activity-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .activity-card {
+        background: white;
+        border: 1px solid rgba(0, 43, 91, 0.10);
+        border-radius: 10px;
+        padding: 18px;
+        box-shadow: 0 8px 24px rgba(0, 43, 91, 0.05);
+      }
+
+      .module-heading {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .module-code {
+        min-width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--blue);
+        color: white;
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 800;
+      }
+
+      .activity-card ul {
+        margin: 12px 0 0;
+        padding-left: 2.4rem;
+      }
+
+      .activity-card li {
+        padding-left: 0.25rem;
+      }
+
+      .percurso-intro,
+      .reflection-intro-note,
+      .section-intro {
+        color: #42526a;
+        line-height: 1.65;
+        margin-top: -4px;
+      }
+
+      .activity-card {
+        border-left: 5px solid var(--blue-soft);
+      }
+
+      .tag {
+        display: inline-block;
+        background: var(--blue-soft);
+        color: var(--blue);
+        border-radius: 999px;
+        padding: 3px 9px;
+        font-size: 0.75rem;
+        font-weight: 800;
+      }
+
+      .evidence-link {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 8px;
+        padding: 8px 11px;
+        border: 1px solid #cad4e2;
+        border-radius: 6px;
+        color: var(--blue);
+        background: var(--soft);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .evidence-link:hover {
+        border-color: var(--gold);
+        background: #fffaf0;
+      }
+
+      .quote {
+        border-left: 4px solid var(--gold);
+        background: #fffaf0;
+        padding: 14px 16px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+      }
+
+      .bars {
+        display: grid;
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+
+
+      #autoavaliacao .competence {
+        max-width: 96%;
+        margin-left: auto;
+      }
+
+      @media (max-width: 760px) {
+        #autoavaliacao .competence {
+          max-width: 100%;
+        }
+      }
+
+      .bar {
+        height: 8px;
+        border-radius: 999px;
+        background: #edf1f5;
+        overflow: hidden;
+      }
+
+      .fill {
+        height: 100%;
+        background: var(--gold);
+      }
+
+      footer {
+        text-align: center;
+        color: var(--muted);
+        padding: 24px 20px 40px;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 820px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+          padding-top: 14px;
+        }
+
+        nav {
+
+
+          position: fixed;
+
+
+          left: auto;
+
+
+          right: 86px;
+
+
+          bottom: 18px;
+
+
+          top: auto;
+
+
+          z-index: 39;
+
+
+          width: fit-content;
+
+
+          min-width: 260px;
+
+
+          max-width: calc(100vw - 110px);
+
+
+          max-height: min(520px, calc(100vh - 120px));
+
+
+          overflow-y: auto;
+
+
+          box-shadow: 0 18px 45px rgba(0, 43, 91, 0.16);
+
+
+        }
+
+        body.sidebar-collapsed nav {
+          display: none;
+        }
+
+        .meta-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        header, nav, .floating-nav { display: none; }
+        body { background: white; }
+        .layout { display: block; max-width: none; padding: 0; }
+        section {
+          display: none !important;
+          min-height: auto;
+          break-inside: avoid;
+          border: 0;
+          border-bottom: 1px solid #ddd;
+          border-radius: 0;
+        }
+        section.active-section,
+        body.print-complete-page section {
+          display: block !important;
+        }
+        .module { display: none !important; }
+        .module.active-module,
+        body.print-complete-page .module {
+          display: block !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="topbar">
+        <div class="brand">
+          <div class="mark">EP</div>
+          <div>
+            <strong>e-Portfólio</strong>
+            <p class="subtitle" id="top-formanda"></p>
+          </div>
+        </div>
+        <a class="entry-home" href="index.html" aria-label="Voltar à entrada" title="Voltar à entrada">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 11 9-8 9 8"></path>
+            <path d="M5 10v10h14V10"></path>
+            <path d="M9 20v-6h6v6"></path>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav id="nav" aria-label="Secções do e-Portfólio"></nav>
+      <main id="app"></main>
+    </div>
+
+    <footer id="footer"></footer>
+
+    <div class="floating-nav" aria-label="Navegacao rapida">
+      <div class="float-actions">
+        <button class="float-button primary" type="button" id="float-menu" aria-expanded="true" aria-controls="nav" title="Abrir ou fechar menu lateral" aria-label="Abrir ou fechar menu lateral">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <span class="sr-only">Menu rapido</span>
+        </button>
+        <a class="float-button" href="#capa" title="Inicio" aria-label="Inicio">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-5h5v5"/></svg>
+          <span class="sr-only">Inicio</span>
+        </a>
+        <button class="float-button action-print" type="button" onclick="preparePrint()" title="Imprimir esta secção" aria-label="Imprimir esta secção">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V4h10v4"/><path d="M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v6H7z"/><path d="M17 12h.01"/></svg>
+          <span class="sr-only">Imprimir esta secção</span>
+        </button>
+        <a class="float-button action-complete" href="imprimir-completo.html" title="Ver completo" aria-label="Ver completo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h10v13H8z"/><path d="M6 17H5a2 2 0 0 1-2-2V4h10a2 2 0 0 1 2 2v1"/><path d="M11 11h4"/><path d="M11 15h4"/></svg>
+          <span class="sr-only">Ver completo</span>
+        </a>
+        <button class="float-button is-hidden" type="button" id="float-top" onclick="scrollToTop()" title="Topo" aria-label="Topo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+          <span class="sr-only">Topo</span>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const portfolio = {"title": "e-Portefólio","subtitle": "Portefólio científico-pedagógico • Formação Pedagógica Contínua de Formadores — Formador de Formadores","formanda": "Amélia Cerejo Lopes","entidadeFormadora": "IEFP — Instituto do Emprego e Formação Profissional, I.P.","delegacaoRegional": "Delegação Regional do Alentejo","servico": "Centro de Emprego e Formação Profissional de Beja","curso": "Formação Pedagógica Contínua de Formadores — Formador de Formadores","formaOrganizacao": "E-learning","periodoFormacao": "14 de maio de 2026 a 10 de julho de 2026","coordenadoraPedagogica": "Ivone Silva","formadores": ["Ana Mafalda Maia Caetano de Sales Gomes e Teixeira Pereira","Joaquim Manuel Rodrigues Paulino"],"ccp": "n.º EDF 407745/2006 DL — emitido a 31 de maio de 2006","dataElaboracao": "Julho de 2026","referencialRef": "IEFP. Referencial de Formação Pedagógica Contínua de Formadores — Formador de Formadores, 3.ª edição, janeiro de 2022.","personalBio": "O presente e-portfólio reflexivo apresenta o meu percurso de aprendizagem na Formação Pedagógica Contínua de Formadores – Formador de Formadores. Foi elaborado no âmbito do curso promovido pelo IEFP, em regime de e-learning, e procura evidenciar as aprendizagens, as atividades realizadas e a reflexão crítica desenvolvida ao longo dos módulos.\n\nSou Amélia Cerejo Lopes e tenho um percurso académico e profissional diversificado, com experiência em Psicologia, Gestão, Tecnologias de Informação, formação, gestão de projetos e apoio administrativo. Esta diversidade tem contribuído para uma visão ampla da formação, das pessoas e dos contextos profissionais.\n\nA minha atividade enquanto formadora tem sido marcada pela utilização de ferramentas digitais, ambientes online, plataformas colaborativas e recursos pedagógicos multimédia. Esta experiência ajudou-me a valorizar a clareza, a organização, a acessibilidade dos materiais e a adaptação das estratégias aos participantes.\n\nAo realizar esta formação, procurei reforçar a minha capacidade de analisar necessidades, conceber recursos e percursos formativos, refletir sobre práticas profissionais, utilizar metodologias adequadas e acompanhar outros formadores em processos de desenvolvimento pedagógico.","experienceBullets": ["Formação especializada em contexto de centros de formação do IEFP, empresas e escolas profissionais parceiras","Áreas de especialização orientadas principalmente para as TIC, soft skills e orientação profissional","Acompanhamento individualizado e de grupo em processos de diagnóstico e inserção profissional ativa"],"motivationBullets": ["Aprofundar competências técnicas e pedagógicas estruturantes para formar futuros formadores, articulando conhecimentos operacionais com uma postura reflexiva, crítica e responsável.","Aceder a novas áreas de intervenção profissional, nomeadamente a participação em processos de RvccFor — Reconhecimento, Validação e Certificação de Competências de Formadores, em funções compatíveis com a experiência, as habilitações e o enquadramento institucional.","Atualizar o meu registo profissional e curricular no NETFORCE, integrando as competências e certificações adquiridas."],"portfolioGoalsBullets": ["Reunir informação significativa sobre o percurso formativo realizado;","Relacionar os módulos do curso com as atividades desenvolvidas;","Identificar aprendizagens adquiridas em contextos formais, não formais e informais;","Refletir criticamente sobre práticas pedagógicas e identidade profissional;","Selecionar e justificar evidências relevantes para demonstrar competências;","Identificar pontos fortes, áreas de melhoria e objetivos de desenvolvimento futuro."],"goalsQuote": "Este e-portefólio não é apenas um requisito formal de avaliação, mas um instrumento de desenvolvimento profissional contínuo que pretendo alimentar e atualizar ao longo da minha carreira.","activityModules": [{"code": "MF1","title": "Diagnóstico de Necessidades e Referenciais de Competências e de Formação","activities": ["Sessão Síncrona","Atividade 1 | Instrumentos de Diagnóstico de Necessidades de Competências e de Formação","Atividade 2 | Lacunas de Competências e de Formação","Atividade 3 | Competências Essenciais para uma Função"]},{"code": "MF2","title": "Conceção da Formação","activities": ["Atividade 1 | Recurso Didático e Multimédia","Atividade 2 | Sessão Síncrona","Atividade 3 | Glossário de termos CoP","Atividade 4 | Caraterização das Comunidades de Prática"]},{"code": "MF3","title": "Dinâmica de Aprendizagem ao Longo da Vida","activities": ["Atividade 1 | Sou um Profissional Reflexivo Crítico","Atividade 2 | Sessão Síncrona","Atividade 3 | Lição Dinâmica de Aprendizagem ao Longo da Vida","Atividade 4 | E-Portefólio","Percurso Profissional"]},{"code": "MF4","title": "Metodologias e Estratégias Pedagógicas","activities": ["Atividade 1 | Métodos e Técnicas Pedagógicas","Atividade 2 | Sessão Síncrona","Atividade 3 | Planificação e Protótipo de um Miniprojeto"]},{"code": "MF5","title": "Simulações Pedagógicas","activities": ["Atividade 1 | Práticas de Dinamização da Simulação","Atividade 2 | Sessão Síncrona – Simulação Inicial","Atividade 3 | Instrumento de Suporte a Simulações Pedagógicas – Escolha do Instrumento a Analisar"]}],"modules": [{"id": "m1","code": "MF1","title": "Diagnóstico de Necessidades e Referenciais de Competências e de Formação","hours": "10 horas","sabia": "Antes de iniciar este módulo, já possuía conhecimentos práticos sobre a identificação de necessidades de formação, adquiridos ao longo da minha atividade formativa. Sabia que era importante conhecer o perfil dos formandos antes de planear uma ação, mas ainda não tinha sistematizado esse processo de forma tão estruturada. Os conceitos de referencial de competências e referencial de formação eram-me familiares, embora não dominasse totalmente a sua construção formal.","aprendi": ["Aprofundei instrumentos de diagnóstico de necessidades, distinguindo métodos qualitativos e quantitativos, como observação direta, avaliação de pares, avaliação 360 graus, entrevistas, focus group e análise documental.","Compreendi melhor as vantagens, limitações e cuidados de aplicação da observação direta e da avaliação 360 graus em contextos formativos e organizacionais.","Consolidei as etapas de construção de referenciais de competências, incluindo o mapeamento de unidades de competência e a sua articulação com necessidades reais de desempenho.","A construção de um perfil de formação para Especialista em Promoção de Destinos no TikTok ajudou-me a compreender como se podem desenhar referenciais para funções emergentes.","A análise de lacunas de competências permitiu-me relacionar competências existentes, competências exigidas e respostas formativas ajustadas."],"atividades": ["Sessão síncrona","Atividade 1 | Instrumentos de Diagnóstico de Necessidades de Competências e de Formação","Atividade 2 | Lacunas de Competências e de Formação","Atividade 3 | Competências Essenciais para uma Função"],"reflexao": "O MF1 levou-me a olhar de forma mais estruturada para o diagnóstico de necessidades, reconhecendo-o como uma etapa essencial do planeamento da formação. Percebi que diagnosticar não é apenas recolher informação inicial, mas interpretar dados, compreender contextos e fundamentar decisões pedagógicas. O trabalho sobre o perfil de Especialista em Promoção de Destinos no TikTok mostrou-me também que os referenciais precisam de acompanhar a evolução das profissões e das linguagens digitais.","aplicacaoFutura": "Pretendo rever as fichas e práticas de diagnóstico inicial das formações que dinamizo, usando instrumentos mais adequados ao contexto e ao perfil dos formandos.","aspetosAprofundar": "Desejo aprofundar a construção de referenciais de competências e de formação, bem como a utilização de ferramentas de análise de lacunas alinhadas com o Catálogo Nacional de Qualificações."},{"id": "m2","code": "MF2","title": "Conceção da Formação","hours": "10 horas","sabia": "Já utilizava ferramentas digitais para criar recursos de apoio, como apresentações, vídeos curtos, tabelas e guiões. Contudo, fazia-o sobretudo com base na experiência e na intuição, sem uma aplicação tão consciente dos princípios da aprendizagem multimédia ou da lógica das comunidades de prática.","aprendi": ["Aprofundei os princípios da aprendizagem multimédia de Richard Mayer, em especial a redução de ruído, a sinalização da informação relevante e a coerência visual e verbal.","Reforcei a ideia de que a tecnologia deve estar ao serviço dos objetivos pedagógicos e das características dos formandos adultos.","Compreendi a estrutura das Comunidades de Prática, nomeadamente a relação entre domínio, comunidade e prática.","Trabalhei os conceitos de envolvimento mútuo e repertório partilhado, percebendo o seu valor para a aprendizagem colaborativa entre formadores."],"atividades": ["Atividade 1 | Elaboração de um Recurso Didático e Multimédia","Atividade 2 | Sessão Síncrona","Atividade 3 | Glossário de Termos — Comunidades de Prática","Atividade 4 | Caracterização das Comunidades de Prática"],"reflexao": "O MF2 ajudou-me a olhar para os recursos didáticos com mais critério. Compreendi que um recurso visualmente apelativo pode não ser eficaz se criar excesso de informação ou dispersão. A reflexão sobre Comunidades de Prática também me mostrou que a aprendizagem entre pares pode continuar para além da formação formal, desde que exista um propósito comum, interação regular e partilha de recursos.","aplicacaoFutura": "Passarei a rever os meus recursos pedagógicos com maior atenção à clareza, à organização da informação e à adequação aos objetivos de aprendizagem. Pretendo também incentivar comunidades de prática simples e funcionais entre formadores.","aspetosAprofundar": "Quero aprofundar ferramentas de e-learning e recursos interativos, como H5P, Articulate Storyline ou soluções HTML5, mantendo sempre o foco na utilidade pedagógica."},{"id": "m3","code": "MF3","title": "Dinâmica de Aprendizagem ao Longo da Vida","hours": "10 horas","sabia": "Conhecia genericamente o papel do reconhecimento de competências no sistema nacional de qualificações e sabia que o IEFP disponibiliza a plataforma NETFORCE para a gestão do percurso dos formadores. No entanto, desconhecia vários aspetos específicos do RvccFor e a forma como a aprendizagem formal, não formal e informal se articula no percurso profissional.","aprendi": ["Compreendi melhor o RvccFor — Reconhecimento, Validação e Certificação de Competências de Formadores — e a sua relação com a experiência profissional documentada.","Percebi que o NETFORCE deve ser usado para atualizar o registo profissional e curricular, integrando competências e certificações adquiridas.","Reforcei a distinção entre educação formal, não formal e informal, reconhecendo que todas contribuem para a aprendizagem ao longo da vida.","Aprofundei o papel do e-portefólio como instrumento de autoavaliação, seleção de evidências e reflexão crítica sobre a prática profissional."],"atividades": ["Atividade 1 | Sou um Profissional Reflexivo Crítico","Atividade 2 | Sessão Síncrona","Atividade 3 | Lição Dinâmica de aprendizagem ao longo da vida","Atividade 4 | E-Portefólio","Percurso Profissional"],"reflexao": "O MF3 permitiu-me reconhecer que a experiência profissional ganha valor quando é analisada, documentada e relacionada com referenciais claros. O RvccFor surgiu como uma possibilidade de valorização de percursos, mas também como um processo que exige rigor, evidências e enquadramento adequado. Esta aprendizagem reforçou a importância de manter o meu percurso atualizado e refletido.","aplicacaoFutura": "Pretendo participar em processos de RvccFor, em funções compatíveis com a minha experiência, as minhas habilitações e o enquadramento institucional.","aspetosAprofundar": "Quero conhecer melhor os procedimentos específicos do RvccFor e acompanhar práticas institucionais que me permitam compreender melhor o papel dos diferentes intervenientes."},{"id": "m4","code": "MF4","title": "Metodologias e Estratégias Pedagógicas","hours": "10 horas","sabia": "Já recorria ao método expositivo e a atividades práticas nas minhas formações, alternando momentos de explicação com exercícios individuais ou em grupo. Ainda assim, faltava-me um quadro mais claro para relacionar métodos, técnicas pedagógicas e objetivos de aprendizagem, sobretudo em contextos digitais ou híbridos.","aprendi": ["Reforcei a distinção entre métodos expositivo, interrogativo, demonstrativo e ativo, compreendendo melhor quando e porquê utilizar cada um.","Aprofundei metodologias ativas, como aprendizagem baseada em projetos, estudo de caso, role playing, gamificação e resolução de problemas.","Explorei estratégias colaborativas em e-learning, incluindo fóruns, mapas mentais, murais digitais e trabalho entre pares.","Trabalhei a organização de projetos pedagógicos, articulando objetivos, métodos, recursos, calendarização e avaliação."],"atividades": ["Atividade 1 | Métodos e Técnicas Pedagógicas","Atividade 2 | Sessão Síncrona","Atividade 3 | Planificação e Protótipo de um Miniprojeto"],"reflexao": "O MF4 ajudou-me a confirmar que a qualidade pedagógica não depende da quantidade de recursos utilizados, mas da coerência entre objetivos, métodos, atividades e avaliação. A planificação do miniprojeto levou-me a pensar de forma mais integrada, procurando criar experiências de aprendizagem que façam sentido para os formandos e para o contexto profissional em que se inserem.","aplicacaoFutura": "Pretendo desenhar guiões didáticos mais claros, integrando metodologias ativas sempre que estas contribuam para aprendizagens mais significativas.","aspetosAprofundar": "Quero aprofundar técnicas de facilitação de grupos, metodologias ágeis aplicadas à formação e estratégias de acompanhamento em ambientes digitais."},{"id": "m5","code": "MF5","title": "Simulações Pedagógicas: Acompanhamento e Avaliação","hours": "10 horas","sabia": "Já tinha assistido a simulações pedagógicas em formações anteriores, mas observava-as de forma pouco sistemática. Faltava-me uma grelha de análise mais objetiva para identificar comportamentos pedagógicos, formular feedback e apoiar a melhoria contínua.","aprendi": ["Compreendi melhor os diferentes momentos das simulações pedagógicas e a sua utilidade para diagnosticar, acompanhar e avaliar competências.","Aprofundei a construção de grelhas de observação, incluindo critérios relacionados com comunicação, postura, gestão do tempo, interação e estratégias pedagógicas.","Reforcei a importância do feedback construtivo, claro e respeitador, como elemento central no desenvolvimento de formadores.","Percebi que o acompanhamento deve transformar a observação em propostas concretas de melhoria, ajustadas à pessoa e ao contexto."],"atividades": ["Atividade 1 | Práticas de Dinamização da Simulação Pedagógica","Atividade 2 | Sessão Síncrona - Simulação Inicial — Módulo 2 do Curso de Formação Pedagógica Inicial de Formadores, 2022","Atividade 3 | Instrumento de Suporte a Simulações Pedagógicas: Escolha do Instrumento a Analisar"],"reflexao": "O MF5 mostrou-me que observar uma simulação pedagógica exige atenção, método e responsabilidade. Ao analisar comportamentos pedagógicos, percebi que pequenos detalhes de comunicação, organização e interação podem influenciar muito a qualidade da sessão. Este módulo reforçou a importância de um feedback que ajude o formando a compreender o que pode melhorar e como pode fazê-lo.","aplicacaoFutura": "Pretendo utilizar grelhas de observação mais claras nas simulações e apoiar os formandos com feedback prático, respeitador e orientado para a melhoria.","aspetosAprofundar": "Quero aprofundar instrumentos de observação, técnicas de feedback e estratégias de acompanhamento individual em simulações pedagógicas."}],"competenceRows": [{"id": "c1","name": "Diagnóstico de necessidades de competências e de formação","antes": 2,"apos": 4,"evidences": "Atividades do MF1 sobre diagnóstico e análise de lacunas"},{"id": "c2","name": "Conceção e adaptação de referenciais de competências","antes": 2,"apos": 4,"evidences": "Perfil de competências desenvolvido no MF1"},{"id": "c3","name": "Conceção e adaptação de referenciais de formação","antes": 1,"apos": 4,"evidences": "Plano de formação e atividades de referenciação do MF1"},{"id": "c4","name": "Conceção de recursos didáticos e multimédia","antes": 3,"apos": 5,"evidences": "Recurso didático Profissão de Risco: Bombeiro"},{"id": "c5","name": "Dinamização de comunidades de prática","antes": 2,"apos": 4,"evidences": "Glossários e caracterização das Comunidades de Prática"},{"id": "c6","name": "Construção e avaliação de portefólios","antes": 3,"apos": 5,"evidences": "E-portefólio e ficha de percurso profissional"},{"id": "c7","name": "Métodos e técnicas pedagógicas","antes": 3,"apos": 4,"evidences": "Atividades do MF4 sobre métodos e técnicas pedagógicas"},{"id": "c8","name": "Organização de projetos pedagógicos","antes": 2,"apos": 4,"evidences": "Planificação e protótipo de um miniprojeto"},{"id": "c9","name": "Acompanhamento e avaliação de simulações pedagógicas","antes": 2,"apos": 4,"evidences": "Grelhas e instrumentos do MF5"},{"id": "c10","name": "Utilização de ferramentas digitais na formação","antes": 2,"apos": 4,"evidences": "Recursos digitais e evidências multimédia desenvolvidas"},{"id": "c11","name": "Reflexão crítica sobre a prática profissional","antes": 3,"apos": 5,"evidences": "Reflexões por módulo e síntese global do e-portefólio"}],"pontosFortes": ["Experiência prática consolidada como formadora desde 2006, com públicos diversificados.","Facilidade em refletir criticamente sobre a prática e identificar oportunidades de melhoria.","Boa adaptação a ambientes digitais de aprendizagem, plataformas LMS e ferramentas de e-learning.","Disponibilidade para o trabalho colaborativo e para a partilha de repertório didático.","Postura ética, responsável e centrada na autonomia dos formandos."],"areasDesenvolver": ["Aprofundar a participação em processos de RvccFor, de acordo com o enquadramento institucional aplicável.","Alargar o repertório de técnicas de acompanhamento pedagógico perante formandos com diferentes níveis de experiência.","Desenvolver competências na utilização ética de inteligência artificial generativa no apoio à conceção de formação.","Participar de forma mais regular em Comunidades de Prática de formadores."],"synthesisText1": "A Formação Pedagógica Contínua de Formadores — Formador de Formadores representou um marco importante no meu percurso profissional. Se em 2006 a formação pedagógica inicial me deu as ferramentas adequadas para exercer a atividade formativa, este percurso permitiu-me aprofundar a responsabilidade de formar outros formadores com maior consciência pedagógica, ética e metodológica.","synthesisText2": "A articulação entre teoria, prática e reflexão ajudou-me a consolidar uma visão mais clara sobre o papel do formador de formadores. Compreendi que a qualidade da formação depende da capacidade de diagnosticar necessidades, planear com rigor, escolher metodologias adequadas, acompanhar processos e avaliar evidências com sentido crítico.","synthesisText3": "Esta jornada no IEFP em Beja, acompanhada pelos formadores e partilhada com colegas de percurso, reforçou o meu compromisso com a educação de adultos. Sinto-me mais preparada para continuar a desenvolver a minha prática, prestando um serviço público de elevado rigor técnico e com atenção às pessoas que aprendem.","signatureName": "Amélia Cerejo Lopes","signatureRole": "Formadora de Formadores Certificada","signatureYear": "2026","goalsShortTerm": ["Atualizar o meu registo profissional e curricular no NETFORCE, integrando as competências e certificações adquiridas.","Participar em processos de RvccFor, em funções compatíveis com a experiência, as habilitações e o enquadramento institucional.","Ajustar os meus recursos formativos de acordo com princípios de clareza, coerência e adequação pedagógica.","Facilitar sessões tutoriais iniciais com foco em metodologias ativas e acompanhamento próximo dos formandos."],"goalsMediumTerm": ["Aprofundar a participação em processos de RvccFor, quando o enquadramento institucional e profissional o permitir.","Conceber, testar e dinamizar uma Comunidade de Prática online orientada para a partilha de repertório didático entre formadores.","Especializar-me em metodologias ativas direcionadas para públicos adultos e experientes.","Desenvolver um repositório digital de recursos pedagógicos abertos de apoio à formação de adultos."],"plannedTrainings": ["Formação especializada em Inteligência Artificial Generativa aplicada à conceção de formação e avaliação de competências.","Participação regular em congressos nacionais e conferências sobre andragogia e educação de adultos.","Curso avançado de auditoria de formação e sistemas de garantia da qualidade."],"evidences": [{"id": "ev1","moduleCode": "MF1","title": "Atividade 1 — Instrumentos de Diagnóstico de Necessidades de Competências e de Formação","description": "Trabalho de grupo sobre instrumentos de diagnóstico, com foco na observação direta e na avaliação de pares/360 graus.","url": "evidencias/pdf-viewer.html?file=mf1/mf1-atividade-1-diagnostico.pdf&back=../e-portfolio.html%23evidencias"},{"id": "ev2","moduleCode": "MF1","title": "Atividade 2 — Lacunas de Competências e de Formação","description": "Registo da atividade de análise de lacunas de competências e de formação.","url": "evidencias/pdf-viewer.html?file=mf1/mf1-atividade-2-AMELIA_LOPES_Atividade2 Diagnostico Necessidades Formacao.pdf&back=../e-portfolio.html%23evidencias"},{"id": "ev3","moduleCode": "MF1","title": "Atividade 3 — Competências Essenciais para uma Função","description": "Referencial de competências e plano de formação para a função Especialista em Promoção de Destinos no TikTok.","url": "evidencias/pdf-viewer.html?file=mf1/mf1-atividade-3-perfis-competencias.pdf&back=../e-portfolio.html%23evidencias"},{"id": "ev4","moduleCode": "MF2","title": "MF2 A1 — Profissão de Risco: Bombeiro","description": "Recurso didático e multimédia sobre a profissão de bombeiro, desenvolvido com preocupação de clareza e adequação pedagógica.","url": "evidencias/mf2/recurso-didatico/index.html"},{"id": "ev5","moduleCode": "MF2","title": "MF2 A3 — Glossário: Envolvimento Mútuo","description": "Glossário de termo associado às Comunidades de Prática.","url": "evidencias/mf2/mf2-glossario-envolvimento-mutuo.html"},{"id": "ev6","moduleCode": "MF2","title": "MF2 A3 — Glossário: Repertório Partilhado","description": "Glossário de termo associado às Comunidades de Prática.","url": "evidencias/mf2/mf2-glossario-repertorio-partilhado.html"},{"id": "ev7","moduleCode": "MF2","title": "MF2 A4 — Caracterização das Comunidades de Prática","description": "Trabalho de caracterização do desenvolvimento de uma Comunidade de Prática.","url": "evidencias/pdf-viewer.html?file=mf2/mf2-atividade-4-comunidades-pratica.pdf&back=../e-portfolio.html%23evidencias"},{"id": "ev8","moduleCode": "MF2","title": "MF2 A4 — Proposta de Comunidade de Prática","description": "Proposta de criação e desenvolvimento de uma Comunidade de Prática.","url": "evidencias/mf2/proposta-cop-site/index.html"},{"id": "ev9","moduleCode": "MF3","title": "Atividade 1 — Sou um Profissional Reflexivo Crítico","description": "Trabalho reflexivo sobre a prática profissional do formador.","url": "evidencias/mf3/formador-reflexivo/index.html"},{"id": "ev10","moduleCode": "MF3","title": "Percurso Profissional","description": "Ficha de percurso profissional e de formação.","url": "evidencias/ficha-percurso.html"},{"id": "ev11","moduleCode": "MF4","title": "MF4 | A1 — Métodos e Técnicas Pedagógicas","description": "Evidências associadas à exploração de métodos e técnicas pedagógicas, incluindo infográfico e mapa mental.","url": "evidencias/mf4/mf4-metodos-tecnicas.html"},{"id": "ev12","moduleCode": "MF4","title": "Infográfico — Métodos e Técnicas Pedagógicas","description": "Infográfico produzido no âmbito do MF4.","url": "evidencias/mf4/mf4-infografia.png"},{"id": "ev13","moduleCode": "MF4","title": "Mapa Mental — Métodos e Técnicas Pedagógicas","description": "Mapa mental produzido no âmbito do MF4.","url": "evidencias/mf4/mf4-mapa-mental.png"},{"id": "ev14","moduleCode": "MF4","title": "Planificação e Protótipo de um Miniprojeto","description": "Planificação do miniprojeto pedagógico.","url": "evidencias/pdf-viewer.html?file=mf4/mf4-planificacao-miniprojeto.pdf&back=../e-portfolio.html%23evidencias"},{"id": "ev15","moduleCode": "MF4","title": "Manual de Acolhimento do Formando","description": "Manual de acolhimento associado ao miniprojeto.","url": "evidencias/pdf-viewer.html?file=mf4/mf4-manual-acolhimento-formando.pdf&back=../e-portfolio.html%23evidencias"},{"id": "ev16","moduleCode": "MF5","title": "MF5 | A1 — Práticas de Dinamização da Simulação Pedagógica","description": "Práticas e materiais de dinamização da simulação pedagógica.","url": "evidencias/mf5/simulacoes-pedagogicas/index.html"},{"id": "ev17","moduleCode": "MF5","title": "MF5 | A3 — Instrumento de Suporte a Simulações Pedagógicas","description": "Instrumento digital de apoio à observação, autoavaliação e feedback em simulações pedagógicas.","url": "evidencias/mf5/grelha-avaliacao-feedback/grelha.html"},{"id": "ev19","moduleCode": "MF5","title": "Escolha do Instrumento a Analisar","description": "Análise do instrumento selecionado para observação e feedback.","url": "evidencias/mf5/grelha-avaliacao-feedback/analise.html"}],"references": [{"id": "r1","category": "Legislação","citation": "Portugal. Portaria n.º 214/2011, de 30 de maio. Estabelece o regime de formação e certificação de competências pedagógicas dos formadores."},{"id": "r2","category": "Referenciais","citation": "IEFP — Instituto do Emprego e Formação Profissional. (2022). Referencial de Formação Pedagógica Contínua de Formadores — Formador de Formadores. 3.ª edição."},{"id": "r3","category": "Referenciais","citation": "IEFP — Instituto do Emprego e Formação Profissional. (2023). Referencial de Formação Pedagógica Contínua de Formadores — Simulações Pedagógicas: Acompanhamento e Avaliação."},{"id": "r4","category": "Referenciais","citation": "IEFP — Instituto do Emprego e Formação Profissional. (s.d.). Regulamento da Formação e Certificação de Formadores."},{"id": "r5","category": "Manuais","citation": "ANQEP — Agência Nacional para a Qualificação e o Ensino Profissional. (s.d.). Guia de apoio ao processo de Reconhecimento, Validação e Certificação de Competências."},{"id": "r6","category": "Manuais","citation": "ANQEP — Agência Nacional para a Qualificação e o Ensino Profissional. (s.d.). Referencial de Competências-Chave para a Educação e Formação de Adultos."},{"id": "r7","category": "Manuais","citation": "ANQEP — Agência Nacional para a Qualificação e o Ensino Profissional. (s.d.). Orientações para a construção do portefólio reflexivo de aprendizagens."},{"id": "r8","category": "Obras","citation": "APDSI — Associação para a Promoção e Desenvolvimento da Sociedade da Informação. (2009). e-Portefólios: modelos e práticas."},{"id": "r9","category": "Obras","citation": "Wenger-Trayner, E., & Wenger-Trayner, B. (2015). Introduction to communities of practice. Disponível em: https://www.wenger-trayner.com/introduction-to-communities-of-practice/ [acedido em maio de 2026]"},{"id": "r10","category": "Instrumentos","citation": "IEFP — Instituto do Emprego e Formação Profissional. (2026). Ficha de Percurso Profissional e de Formação."},{"id": "r11","category": "Instrumentos","citation": "IEFP — Instituto do Emprego e Formação Profissional. (2026). Instrumento de autoavaliação “Sou um Profissional Reflexivo Crítico?”."},{"id": "r12","category": "Instrumentos","citation": "IEFP — Instituto do Emprego e Formação Profissional. (2026). Grelhas de avaliação das simulações pedagógicas — CP3, CP3A e CP3B."},{"id": "r13","category": "Recursos","citation": "IEFP — Instituto do Emprego e Formação Profissional. (2026). Plataforma FAD/Moodle."},{"id": "r14","category": "Recursos","citation": "IEFP — Instituto do Emprego e Formação Profissional. (2026). Plataforma NETFORCE."}],"quoteText": "Quem ensina, aprende ao ensinar; e quem aprende, ensina ao aprender.","quoteAuthor": "Paulo Freire","objectivesIntro": "Este e-portfólio tem uma função reflexiva, formativa e demonstrativa. Não pretende ser apenas uma coleção de trabalhos, mas sim um instrumento de análise do percurso realizado, das competências mobilizadas e das aprendizagens construídas ao longo da formação."};
+
+      const sections = [
+        ["capa", "Ficha Identificativa"],
+        ["apresentacao", "Apresentação Pessoal"],
+        ["objetivos", "Objetivos"],
+        ["percurso", "Percurso e Atividades"],
+        ["autoavaliacao", "Autoavaliação"],
+        ["evidencias", "Evidências"],
+        ["reflexoes", "Reflexões"],
+        ["futuro", "Metas e Projetos"],
+        ["bibliografia", "Referências"]
+      ];
+
+      const referenceCategories = [
+        { label: "Legislação", slug: "legislacao" },
+        { label: "Referenciais", slug: "referenciais" },
+        { label: "Manuais", slug: "manuais" },
+        { label: "Obras", slug: "obras" },
+        { label: "Instrumentos", slug: "instrumentos" },
+        { label: "Recursos", slug: "recursos" }
+      ];
+
+      const escapeHtml = (value) => String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+
+      const list = (items) => `<ul>${(items || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+
+      const paragraphs = (value) => String(value || "")
+        .split(/\n{2,}/)
+        .filter(Boolean)
+        .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+        .join("");
+
+      function evidenceActivityLabel(evidence) {
+        const idMap = {
+          ev1: "Atividade 1", ev2: "Atividade 2", ev3: "Atividade 3",
+          ev4: "Atividade 1", ev5: "Atividade 3", ev6: "Atividade 3", ev7: "Atividade 4", ev8: "Atividade 4",
+          ev9: "Atividade 1", ev10: "Percurso Profissional",
+          ev11: "Atividade 1", ev12: "Atividade 1", ev13: "Atividade 1", ev14: "Atividade 3", ev15: "Atividade 3",
+          ev16: "Atividade 1", ev17: "Atividade 3", ev19: "Atividade 3"
+        };
+        if (idMap[evidence.id]) return idMap[evidence.id];
+        const match = String(evidence.title || "").match(/(?:Atividade\s*|\bA)(\d+)/i);
+        return match ? `Atividade ${match[1]}` : evidence.title;
+      }
+
+      function evidenceUrl(evidence, moduleCode) {
+        if (!evidence.url) return "";
+        return String(evidence.url).replace(/back=\.\.\/index\.html%23evidencias(?:%2F[a-z0-9]+)?/i, `back=../e-portfolio.html%23evidencias%2F${String(moduleCode).toLowerCase()}`);
+      }
+
+
+      function evidenceSortValue(evidenceId) {
+        const order = {
+          ev1: 1, ev2: 1, ev3: 1,
+          ev4: 1, ev5: 1, ev6: 2, ev7: 1, ev8: 2,
+          ev9: 1, ev10: 1,
+          ev11: 1, ev12: 2, ev13: 3, ev14: 1, ev15: 2,
+          ev16: 1, ev17: 1, ev19: 2
+        };
+        return order[evidenceId] || 99;
+      }
+
+      function groupedModuleEvidences(moduleCode) {
+        const groups = [];
+        portfolio.evidences
+          .filter((evidence) => evidence.moduleCode === moduleCode)
+          .forEach((evidence) => {
+            const label = evidenceActivityLabel(evidence);
+            let group = groups.find((item) => item.label === label);
+            if (!group) {
+              group = { label, entries: [] };
+              groups.push(group);
+            }
+            group.entries.push({
+              id: evidence.id,
+              description: evidence.description || "",
+              url: evidence.url ? evidenceUrl(evidence, moduleCode) : "",
+              title: evidence.title || ""
+            });
+          });
+        groups.forEach((group) => group.entries.sort((a, b) => evidenceSortValue(a.id) - evidenceSortValue(b.id)));
+        return groups;
+      }
+
+      function renderEvidenceEntries(group) {
+        const uniqueDescriptions = [...new Set(group.entries.map((entry) => entry.description).filter(Boolean))];
+        if (uniqueDescriptions.length <= 1) {
+          const descriptionHtml = uniqueDescriptions[0] ? `<p>${escapeHtml(uniqueDescriptions[0])}</p>` : "";
+          const linksHtml = group.entries
+            .filter((entry) => entry.url)
+            .map((entry) => `<a class="evidence-link" href="${escapeHtml(entry.url)}">Abrir evidência</a>`)
+            .join(" ");
+          return descriptionHtml + linksHtml;
+        }
+
+        return group.entries.map((entry) => `
+          ${entry.description ? `<p>${escapeHtml(entry.description)}</p>` : ""}
+          ${entry.url ? `<a class="evidence-link" href="${escapeHtml(entry.url)}">Abrir evidência</a>` : ""}
+        `).join("");
+      }
+
+      const meta = (label, value) => `
+        <div class="meta">
+          <span class="label">${escapeHtml(label)}</span>
+          <strong>${escapeHtml(value)}</strong>
+        </div>`;
+
+      function renderNav() {
+        const nav = document.getElementById("nav");
+        nav.innerHTML = sections.map(([id, label]) => {
+          const link = `<a href="#${id}" data-section="${id}">${escapeHtml(label)}</a>`;
+          if (id === "evidencias") {
+            return link + `
+              <div class="submenu" id="evidences-submenu">
+                <span class="submenu-label">Por módulos e atividades</span>
+                ${portfolio.modules.map((module) => `
+                  <a href="#evidencias/${module.code.toLowerCase()}" data-section="evidencias" data-module="${escapeHtml(module.code)}">${escapeHtml(module.code)}</a>
+                `).join("")}
+              </div>`;
+          }
+          if (id === "reflexoes") {
+            return link + `
+              <div class="submenu" id="reflections-submenu">
+                <span class="submenu-label">Por módulos e atividades</span>
+                ${portfolio.modules.map((module) => `
+                  <a href="#reflexoes/${module.code.toLowerCase()}" data-section="reflexoes" data-module="${escapeHtml(module.code)}">${escapeHtml(module.code)}</a>
+                `).join("")}
+                <a href="#reflexoes/sintese" data-section="reflexoes" data-module="sintese">Global</a>
+              </div>`;
+          }
+          return link;
+        }).join("");
+        nav.addEventListener("click", (event) => {
+          const link = event.target.closest("a[data-section]");
+          if (!link) return;
+          event.preventDefault();
+          showSection(link.dataset.section, true, link.dataset.module || null);
+        });
+      }
+
+      function setupFloatingNav() {
+        const menuButton = document.getElementById("float-menu");
+        if (menuButton) {
+          menuButton.addEventListener("click", () => {
+            const isCollapsed = document.body.classList.toggle("sidebar-collapsed");
+            menuButton.setAttribute("aria-expanded", String(!isCollapsed));
+          });
+        }
+
+        const topButton = document.getElementById("float-top");
+        const updateTopButton = () => {
+          if (!topButton) return;
+          topButton.classList.toggle("is-hidden", window.scrollY < 180);
+        };
+        updateTopButton();
+        window.addEventListener("scroll", updateTopButton, { passive: true });
+      }
+
+      function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function render() {
+        document.getElementById("top-formanda").textContent = portfolio.formanda;
+        document.getElementById("footer").textContent = `© 2026 ${portfolio.formanda} · ${portfolio.servico}`;
+
+        document.getElementById("app").innerHTML = `
+          <section id="capa" class="hero">
+            <h1>${escapeHtml(portfolio.title)}</h1>
+            <p class="subtitle">${escapeHtml(portfolio.subtitle)}</p>
+            <div class="meta-grid">
+              ${meta("Formanda", portfolio.formanda)}
+              ${meta("Entidade formadora", portfolio.entidadeFormadora)}
+              ${meta("Serviço", portfolio.servico)}
+              ${meta("Curso", portfolio.curso)}
+              ${meta("Organização", portfolio.formaOrganizacao)}
+              ${meta("Período", portfolio.periodoFormacao)}
+              ${meta("Coordenação", portfolio.coordenadoraPedagogica)}
+              ${meta("Data", portfolio.dataElaboracao)}
+            </div>
+          </section>
+
+          <section id="apresentacao">
+            <h2>Apresentação Pessoal</h2>
+            ${paragraphs(portfolio.personalBio)}
+            <h3>Experiência</h3>
+            ${list(portfolio.experienceBullets)}
+            <h3>Motivação</h3>
+            ${list(portfolio.motivationBullets)}
+          </section>
+
+          <section id="objetivos">
+            <h2>Objetivos do e-Portfólio</h2>
+            <p>${escapeHtml(portfolio.objectivesIntro || "")}</p>
+            ${list(portfolio.portfolioGoalsBullets)}
+            <p class="quote">"${escapeHtml(portfolio.goalsQuote)}"</p>
+          </section>
+
+          <section id="percurso">
+            <h2>Percurso e Atividades</h2>
+            <p class="percurso-intro">O curso Formador de Formadores integra a Formação Pedagógica Contínua de Formadores e conduz ao Certificado de Competências Pedagógicas de Especialização (CCPE). A estrutura considerada neste e-portfólio organiza-se em cinco módulos, cada um com contributos específicos para o desenvolvimento do perfil de formador de formadores.</p>
+            <p class="percurso-intro">As atividades realizadas foram enquadradas nos módulos correspondentes, usando os nomes reais indicados no percurso formativo. As explicações seguintes sintetizam o contributo de cada atividade para as aprendizagens desenvolvidas.</p>
+            <div class="activity-grid">
+              ${portfolio.activityModules.map((module) => `
+                <article class="activity-card">
+                  <div class="module-heading">
+                    <span class="module-code">${escapeHtml(module.code)}</span>
+                    <div>
+                      <h3>${escapeHtml(module.title)}</h3>
+                    </div>
+                  </div>
+                  ${list(module.activities)}
+                </article>
+              `).join("")}
+            </div>
+          </section>
+
+          <section id="reflexoes">
+            <h2>Reflexões</h2>
+                        <article class="module reflection-intro" data-module="intro">
+              <span class="tag">Por módulos e atividades</span>
+              <p>A reflexão por módulos permite acompanhar a progressão do percurso e perceber como cada etapa contribuiu para consolidar competências de formador de formadores. Não se trata apenas de enumerar atividades: em cada módulo procuro relacionar o que fiz, o que aprendi, o que já trazia da minha experiência profissional e o que posso transferir para a prática.</p>
+              <p class="reflection-intro-note">A leitura começa pelas atividades realizadas, segue para as aprendizagens construídas e termina com a reflexão crítica, a aplicação futura e os aspetos a aprofundar.</p>
+              <ul>
+                <li>MF1 a MF5: reflexão organizada por módulo e por atividade.</li>
+                <li>Global: leitura integrada do percurso, das aprendizagens e da evolução profissional.</li>
+              </ul>
+              <p class="quote">Selecione MF1, MF2, MF3, MF4, MF5 ou Global no menu lateral para consultar cada reflexão.</p>
+            </article>
+            ${portfolio.modules.map((module) => `
+              <article class="module" data-module="${escapeHtml(module.code)}">
+                <div class="module-title-row">
+                  <h3>${escapeHtml(module.title)}</h3>
+                  <span class="tag">${escapeHtml(module.code)} &middot; ${escapeHtml(module.hours)}</span>
+                </div>
+                <p><strong>O que já sabia:</strong> ${escapeHtml(module.sabia)}</p>
+                <h3>Atividades realizadas</h3>
+                ${list(module.atividades)}
+                <h3>O que aprendi</h3>
+                ${list(module.aprendi)}
+                <p class="quote">"${escapeHtml(module.reflexao)}"</p>
+                <p><strong>Aplicação futura:</strong> ${escapeHtml(module.aplicacaoFutura)}</p>
+                <p><strong>A aprofundar:</strong> ${escapeHtml(module.aspetosAprofundar)}</p>
+              </article>
+            `).join("")}
+          
+              <article class="module synthesis-module" data-module="sintese">
+                                <h3>Reflexão crítica global</h3>
+                <p>A construção deste e-portfólio permitiu-me olhar para o percurso formativo de forma mais estruturada e consciente. Ao organizar os módulos, as atividades e as evidências, tornou-se mais claro que o papel do formador de formadores exige uma combinação de competências técnicas, pedagógicas, relacionais, reflexivas e digitais.</p>
+                <p>O MF1 permitiu-me reforçar a importância do diagnóstico e dos referenciais como base para uma formação coerente. O MF2 ajudou-me a pensar a conceção da formação a partir dos recursos didáticos e das comunidades de prática. O MF3 foi essencial para valorizar a aprendizagem ao longo da vida, a reflexão crítica e o percurso profissional. O MF4 consolidou a escolha de métodos e técnicas pedagógicas e a planificação de miniprojetos. O MF5 permitiu compreender melhor a relevância das simulações pedagógicas, dos instrumentos de observação e do feedback estruturado.</p>
+                <p>Uma das principais aprendizagens deste percurso foi perceber que a formação de formadores exige coerência entre aquilo que se ensina e aquilo que se pratica. O formador de formadores deve ser exemplo de rigor, clareza, respeito, abertura à participação e melhoria contínua.</p>
+                <p>Este e-portfólio também me ajudou a reconhecer competências que já possuía, nomeadamente a criação de recursos digitais, a organização de conteúdos, a adaptação a contextos online e a preocupação com a clareza pedagógica. Ao mesmo tempo, permitiu identificar áreas a aprofundar, como a sistematização da avaliação, a utilização de instrumentos de observação e a planificação de estratégias mais ativas e colaborativas.</p>
+                <h3>Síntese global</h3>
+                <p>${escapeHtml(portfolio.synthesisText1)}</p>
+                <p>${escapeHtml(portfolio.synthesisText2)}</p>
+                <p>${escapeHtml(portfolio.synthesisText3)}</p>
+                <p><strong>${escapeHtml(portfolio.signatureName)}</strong><br />${escapeHtml(portfolio.signatureRole)} · ${escapeHtml(portfolio.signatureYear)}</p>
+              </article>
+          </section>
+
+          <section id="autoavaliacao">
+            <h2>Autoavaliação</h2>
+            <p class="section-intro">A autoavaliação permite reconhecer competências já consolidadas e identificar áreas que necessitam de desenvolvimento. A seguinte síntese organiza a minha perceção atual relativamente ao perfil de formadora e formadora de formadores.</p>
+            ${portfolio.competenceRows.map((row) => `
+              <article class="competence">
+                <h3>${escapeHtml(row.name)}</h3>
+                <div class="bars">
+                  <span class="label">Antes: ${row.antes}/5</span>
+                  <div class="bar"><div class="fill" style="width: ${row.antes * 20}%"></div></div>
+                  <span class="label">Após: ${row.apos}/5</span>
+                  <div class="bar"><div class="fill" style="width: ${row.apos * 20}%"></div></div>
+                </div>
+                <p>${escapeHtml(row.evidences)}</p>
+              </article>
+            `).join("")}
+            <h3>Pontos fortes</h3>
+            ${list(portfolio.pontosFortes)}
+            <h3>Áreas a desenvolver</h3>
+            ${list(portfolio.areasDesenvolver)}
+          </section>
+
+          <section id="futuro">
+            <h2>Metas e Projetos</h2>
+            <h3>Curto prazo</h3>
+            ${list(portfolio.goalsShortTerm)}
+            <h3>Médio prazo</h3>
+            ${list(portfolio.goalsMediumTerm)}
+            <h3>Formações planeadas</h3>
+            ${list(portfolio.plannedTrainings)}
+          </section>
+
+          <section id="evidencias">
+            <h2>Repositório de Evidências</h2>
+            ${portfolio.modules.map((module) => {
+              const moduleEvidences = portfolio.evidences.filter((evidence) => evidence.moduleCode === module.code);
+              if (!moduleEvidences.length) return "";
+              return `
+                <details class="evidence-module" data-module="${escapeHtml(module.code)}" open>
+                  <summary>
+                    <span>${escapeHtml(module.code)} &mdash; ${escapeHtml(module.title)}</span>
+                    <span class="accordion-icon" aria-hidden="true">+</span>
+                  </summary>
+                  <div class="evidence-list">
+                    ${groupedModuleEvidences(module.code).map((group) => `
+                      <article class="evidence" data-module="${escapeHtml(module.code)}">
+                        <h3>${escapeHtml(group.label)}</h3>
+                        ${renderEvidenceEntries(group)}
+                      </article>
+                    `).join("")}
+                  </div>
+                </details>
+              `;
+            }).join("")}
+          </section>
+
+          <section id="bibliografia">
+            <h2>Referências</h2>
+            ${["Legislação", "Referenciais", "Manuais", "Obras", "Instrumentos", "Recursos"].map((category, index) => {
+              const categoryReferences = portfolio.references.filter((reference) => reference.category === category);
+              if (!categoryReferences.length) return "";
+              return `
+                <details class="reference-group" data-category="${escapeHtml(referenceCategories.find((item) => item.label === category)?.slug || category.toLowerCase())}" open>
+                  <summary>
+                    <span>${escapeHtml(category)}</span>
+                    <span class="accordion-icon" aria-hidden="true">+</span>
+                  </summary>
+                  <div class="reference-list">
+                    ${categoryReferences.map((reference) => `
+                      <article class="reference">
+                        <p>${escapeHtml(reference.citation)}</p>
+                      </article>
+                    `).join("")}
+                  </div>
+                </details>
+              `;
+            }).join("")}
+            <p class="quote">"${escapeHtml(portfolio.quoteText)}" — ${escapeHtml(portfolio.quoteAuthor)}</p>
+          </section>
+        `;
+      }
+
+      function showSection(id, updateHash = false, requestedModule = null) {
+        const [rawSection, rawModule] = String(id || "").split("/");
+        const selectedId = sections.some(([sectionId]) => sectionId === rawSection) ? rawSection : "capa";
+        const hasModuleSubmenu = ["reflexoes", "evidencias", "bibliografia"].includes(selectedId);
+        const selectedModule = requestedModule || (hasModuleSubmenu && rawModule ? (selectedId === "bibliografia" ? rawModule.toLowerCase() : rawModule.toUpperCase()) : null);
+        const normalizedModule = selectedModule && selectedModule.toLowerCase() === "sintese" ? "sintese" : selectedModule;
+        document.querySelectorAll("main section").forEach((section) => {
+          section.classList.toggle("active-section", section.id === selectedId);
+        });
+        document.querySelectorAll("nav a").forEach((link) => {
+          const isModuleLink = Boolean(link.dataset.module);
+          const linkModule = link.dataset.module || "";
+          const isActiveModuleLink = isModuleLink && link.dataset.section === selectedId && linkModule.toLowerCase() === String(normalizedModule || "").toLowerCase();
+          const isActiveSectionLink = !isModuleLink && link.dataset.section === selectedId && !(hasModuleSubmenu && normalizedModule);
+          link.classList.toggle("active", isActiveModuleLink || isActiveSectionLink);
+        });
+        document.getElementById("reflections-submenu")?.classList.toggle("open", selectedId === "reflexoes");
+        document.getElementById("evidences-submenu")?.classList.toggle("open", selectedId === "evidencias");
+        document.getElementById("references-submenu")?.classList.toggle("open", selectedId === "bibliografia");
+        if (selectedId === "reflexoes") {
+          document.querySelectorAll(".module").forEach((moduleEl) => {
+            const shouldShowIntro = !normalizedModule && moduleEl.dataset.module === "intro";
+            const shouldShowModule = Boolean(normalizedModule) && moduleEl.dataset.module === normalizedModule;
+            moduleEl.classList.toggle("active-module", shouldShowIntro || shouldShowModule);
+          });
+        } else {
+          document.querySelectorAll(".module").forEach((moduleEl) => moduleEl.classList.remove("active-module"));
+        }
+
+        if (selectedId === "evidencias") {
+          document.querySelectorAll(".evidence-module").forEach((moduleEl, index) => {
+            const isSelected = Boolean(normalizedModule) && moduleEl.dataset.module === normalizedModule;
+            moduleEl.classList.toggle("is-filtered", Boolean(normalizedModule) && !isSelected);
+            if (moduleEl.tagName.toLowerCase() === "details") {
+              moduleEl.open = true;
+            }
+          });
+        } else {
+          document.querySelectorAll(".evidence-module").forEach((moduleEl) => moduleEl.classList.remove("is-filtered"));
+        }
+
+        if (selectedId === "bibliografia") {
+          document.querySelectorAll("details.reference-group").forEach((details) => {
+            details.open = true;
+          });
+        }
+
+        if (updateHash) {
+          history.replaceState(null, "", normalizedModule ? "#" + selectedId + "/" + String(normalizedModule).toLowerCase() : "#" + selectedId);
+        }
+        window.scrollTo({ top: 0, behavior: updateHash ? "smooth" : "auto" });
+      }
+
+      function setupExclusiveAccordions() {
+        document.querySelectorAll("details.evidence-module").forEach((details) => {
+          details.addEventListener("toggle", () => {
+            if (!details.open) return;
+            document.querySelectorAll("details.evidence-module").forEach((other) => {
+              if (other !== details) other.open = false;
+            });
+          });
+        });
+      }
+
+      function preparePrint() {
+        window.scrollTo({ top: 0, behavior: "auto" });
+        setTimeout(() => window.print(), 50);
+      }
+
+      window.addEventListener("afterprint", () => {
+        showSection(location.hash.replace("#", "") || "capa");
+      });
+
+      renderNav();
+      setupFloatingNav();
+      render();
+      showSection(location.hash.replace("#", "") || "capa");
+      window.addEventListener("hashchange", () => showSection(location.hash.replace("#", "") || "capa"));
+    </script>
+  </body>
+</html>

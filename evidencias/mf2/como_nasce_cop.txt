@@ -1,0 +1,79 @@
+<div
+  style="font-family: Arial, sans-serif; line-height: 1.6; color: #263238; max-width: 980px; margin: 6px auto; padding: 6px 18px; box-sizing: border-box;">
+  <div
+    style="background: linear-gradient(135deg, #1f4e79, #4f8fcf); color: white; padding: 22px 24px; border-radius: 14px; margin-bottom: 18px;">
+    <h3 style="margin: 0;">Como nasce uma Comunidade de Prática (CoP)</h3>
+    <p style="margin: 10px 0 0;">Grupo 3 — Amélia e Luísa</p>
+  </div>
+  <p>Olá a todos,</p>
+  <p>Partilhamos o trabalho desenvolvido pelo nosso grupo sobre o tema
+    <strong>“Como nasce uma Comunidade de Prática (CoP)”</strong>.</p>
+  <p>Nesta atividade procurámos compreender de que forma surgem as Comunidades
+    de Prática, quais os fatores que favorecem o seu desenvolvimento e como
+    podem contribuir para a aprendizagem colaborativa e para o desenvolvimento
+    profissional.</p>
+  <div
+    style="background: #f4f8fb; border-left: 6px solid #1f4e79; padding: 12px 18px; border-radius: 12px; margin: 16px 0;">
+    <h3 style="margin: 0 0 10px 0; color: #1f4e79;">🔎 Principais tópicos
+      abordados</h3>
+    <ul style="padding-left: 22px; margin: 0;">
+      <li>Conceito de Comunidade de Prática segundo Wenger;</li>
+      <li>Os três elementos essenciais: <strong>Domínio, Comunidade e
+          Prática</strong>;</li>
+      <li>As três fases do nascimento de uma CoP;</li>
+      <li>Fatores de sucesso e obstáculos ao desenvolvimento da comunidade;</li>
+      <li>Exemplo prático de uma CoP de formadores durante a pandemia COVID-19;
+      </li>
+      <li>Ligação das Comunidades de Prática à formação profissional.</li>
+    </ul>
+  </div>
+  <div style="display: grid; gap: 12px; margin: 18px 0;">
+    <div
+      style="background: #ffffff; border: 1px solid #d9e6f2; padding: 16px 20px; border-radius: 12px;">
+      <h4 style="margin: 0 0 6px; color: #1f4e79;">1. Fase Potencial</h4>
+      <p style="margin: 0;">Existe uma necessidade, interesse ou problema comum,
+        mas ainda não há uma comunidade estruturada.</p>
+    </div>
+    <div
+      style="background: #ffffff; border: 1px solid #d9e6f2; padding: 16px 20px; border-radius: 12px;">
+      <h4 style="margin: 0 0 6px; color: #1f4e79;">2. Fase de Coalização</h4>
+      <p style="margin: 0;">Os membros começam a interagir regularmente, criando
+        confiança, objetivos comuns e formas de colaboração.</p>
+    </div>
+    <div
+      style="background: #ffffff; border: 1px solid #d9e6f2; padding: 16px 20px; border-radius: 12px;">
+      <h4 style="margin: 0 0 6px; color: #1f4e79;">3. Início da Fase Ativa</h4>
+      <p style="margin: 0;">A comunidade começa a produzir valor, partilhando
+        recursos, experiências, ferramentas e boas práticas.</p>
+    </div>
+  </div>
+  <div
+    style="width: 100%; margin: 18px auto; padding: 14px; border: 1px solid #D7E3F8; border-radius: 10px; background: #FFFFFF; box-shadow: 0 4px 12px rgba(30,58,138,0.06); font-family: Arial, Helvetica, sans-serif; box-sizing: border-box;">
+    <div
+      style="width: 100%; margin: 0; padding: 0; overflow: hidden; border-radius: 8px; background: #ffffff; box-sizing: border-box;">
+      <iframe
+        style="width: 100%; height: 700px; border: 0; border-radius: 8px; display: block; margin: 0; background: #FFFFFF; box-sizing: border-box;"
+        title="Comunidade de Prática"
+        src="https://admirable-crepe-47d8b1.netlify.app/"
+        allowfullscreen="allowfullscreen" loading="lazy">
+      </iframe></div>
+    <div style="text-align: right; margin-top: 14px;"><a
+        style="display: inline-block; padding: 8px 14px; background-color: #1e3a8a; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 13px;"
+        href="https://fad.iefp.pt/mod/forum/discuss.php?d=53768#p100506"> Voltar
+        ao Fórum ➡️ </a></div>
+  </div>
+  <div
+    style="background: #fff7e6; border-left: 6px solid #f0a500; padding: 18px 20px; border-radius: 12px; margin: 18px 0;">
+    <h3 style="margin: 0 0 10px; color: #9a6500;">💬 Questão para reflexão e
+      debate</h3>
+    <p style="margin: 0 0 10px 0;"><strong> Na vossa opinião, que fatores são
+        mais importantes para que uma Comunidade de Prática consiga evoluir da
+        fase potencial para uma comunidade ativa e sustentável ao longo do
+        tempo? </strong></p>
+    <p style="margin: 0;">Convidamos todos a partilhar experiências, exemplos ou
+      opiniões sobre este tema.</p>
+  </div>
+  <p>Ficamos a aguardar os vossos comentários.</p>
+  <p style="text-align: right; padding-left: 40px;"><strong>Grupo
+      3</strong><br>Amélia e Luísa</p>
+</div>

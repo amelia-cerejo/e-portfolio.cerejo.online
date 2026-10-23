@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bombeiro - Galeria de Apresenta&ccedil;&atilde;o</title>
+  <style>
+    :root {
+      --red: #b91c1c;
+      --red-dark: #7f1111;
+      --amber: #f5b21b;
+      --charcoal: #151827;
+      --ink: #2a2522;
+      --muted: #75665e;
+      --paper: #fff8eb;
+      --white: #ffffff;
+      --line: rgba(42, 37, 34, 0.16);
+      --green: #237448;
+      --green-bg: #e9f7ef;
+      --error: #b42318;
+      --error-bg: #fff1f0;
+      --shadow: 0 24px 70px rgba(29, 18, 12, 0.22);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      color: var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(245, 178, 27, 0.22), transparent 24rem),
+        radial-gradient(circle at 82% 24%, rgba(185, 28, 28, 0.14), transparent 26rem),
+        #140f0c;
+      line-height: 1.58;
+      overflow: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .deck {
+      position: relative;
+      min-height: 100vh;
+      padding-left: 152px;
+      background:
+        linear-gradient(90deg, rgba(15, 15, 15, 0.88), rgba(15, 15, 15, 0.38)),
+        url("assets/pptx/media/image3.png") center / cover no-repeat;
+      isolation: isolate;
+    }
+
+    .deck.menu-collapsed {
+      padding-left: 0;
+    }
+
+    .deck.menu-collapsed .topbar,
+    .deck.menu-collapsed .progress-track,
+    .deck.menu-collapsed .deck-controls {
+      left: 0;
+    }
+
+    .deck::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(15, 15, 15, 0.22), rgba(15, 15, 15, 0.82)),
+        radial-gradient(circle at 72% 24%, rgba(245, 178, 27, 0.24), transparent 24rem);
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 152px;
+      right: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      min-height: 72px;
+      padding: 14px clamp(16px, 4vw, 44px);
+      color: #fff6df;
+      background: rgba(18, 14, 12, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .menu-toggle {
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border: 0;
+      border-radius: 8px;
+      color: #1b1208;
+      background: linear-gradient(135deg, var(--amber), #ffe082);
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .menu-toggle-lines,
+    .menu-toggle-lines::before,
+    .menu-toggle-lines::after {
+      display: block;
+      width: 20px;
+      height: 3px;
+      border-radius: 999px;
+      background: #1b1208;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .menu-toggle-lines {
+      position: relative;
+    }
+
+    .menu-toggle-lines::before,
+    .menu-toggle-lines::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-toggle-lines::before {
+      top: -7px;
+    }
+
+    .menu-toggle-lines::after {
+      top: 7px;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-lines {
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-lines::before {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-lines::after {
+      top: 0;
+      transform: rotate(90deg);
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 45;
+      width: min(152px, calc(100vw - 34px));
+      padding: 14px 12px;
+      color: #fff7df;
+      background: rgba(18, 14, 12, 0.96);
+      border-right: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 24px 0 60px rgba(0, 0, 0, 0.38);
+      backdrop-filter: blur(18px);
+      transform: translateX(0);
+      transition: transform 0.24s ease;
+    }
+
+    .side-menu.closed {
+      transform: translateX(-104%);
+    }
+
+    .side-menu.open {
+      transform: translateX(0);
+    }
+
+    .side-menu-brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 14px;
+      font-weight: 950;
+      text-align: left;
+    }
+
+    .side-menu-brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      color: #1b1208;
+      background: var(--amber);
+    }
+
+    .side-menu-brand small {
+      display: block;
+      color: var(--amber);
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .side-menu h2 {
+      color: #fff7df;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .side-menu h2::after {
+      width: 70px;
+      height: 3px;
+      margin: 8px 0 0;
+    }
+
+    .side-menu p {
+      color: #d8cdbd;
+      font-size: 0.92rem;
+      margin: 0 0 18px;
+    }
+
+    .side-menu-list {
+      display: grid;
+      gap: 7px;
+    }
+
+    .side-menu button {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0;
+      width: 100%;
+      min-height: 38px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius);
+      color: #fff7df;
+      background: rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      font-weight: 900;
+      text-align: left;
+      font-size: 0.8rem;
+      line-height: 1.12;
+    }
+
+    .side-menu button:hover {
+      color: #1b1208;
+      background: var(--amber);
+    }
+
+    .side-menu button span {
+      display: none;
+    }
+
+    .side-menu button:hover span {
+      color: #1b1208;
+    }
+
+    .menu-backdrop {
+      position: fixed;
+      inset: 72px 0 0 0;
+      z-index: 35;
+      display: none;
+      background: rgba(0, 0, 0, 0.42);
+    }
+
+    .menu-backdrop.open {
+      display: block;
+    }
+
+    @media (min-width: 901px) {
+      .deck.menu-expanded .two-col,
+      .deck.menu-expanded .with-visual {
+        grid-template-columns: 1fr;
+      }
+
+      .deck.menu-expanded .two-col > .image-panel,
+      .deck.menu-expanded .with-visual > .side-visual {
+        display: none;
+      }
+
+      .deck.menu-expanded .case-card {
+        grid-template-columns: 112px minmax(0, 1fr);
+      }
+
+      .deck.menu-expanded .case-photo {
+        display: none;
+      }
+    }
+
+    .brand small {
+      display: block;
+      color: #ffd875;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+    }
+
+    .brand strong {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 1rem;
+    }
+
+    .counter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      color: #fff6df;
+      background: rgba(255, 255, 255, 0.08);
+      font-weight: 850;
+    }
+
+    .progress-track {
+      position: fixed;
+      top: 72px;
+      left: 152px;
+      right: 0;
+      z-index: 21;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--amber), #ffda6a, var(--red));
+      transition: width 0.25s ease;
+    }
+
+    .slides {
+      height: 100vh;
+      padding: 94px clamp(16px, 4vw, 44px) 104px;
+    }
+
+    .slide {
+      position: relative;
+      z-index: 1;
+      display: none;
+      height: 100%;
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+
+    .slide::before {
+      content: "";
+      position: fixed;
+      inset: 72px 0 82px 0;
+      z-index: -1;
+      opacity: 0;
+      background:
+        linear-gradient(90deg, rgba(15, 15, 15, 0.88), rgba(15, 15, 15, 0.54)),
+        var(--slide-bg) center / cover no-repeat;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      display: grid;
+      align-items: center;
+      animation: slideIn 0.38s ease both;
+    }
+
+    .slide.active::before {
+      opacity: 0.58;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .slide-shell {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero-layout,
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr);
+      gap: clamp(22px, 4vw, 54px);
+      align-items: center;
+    }
+
+    .hero-title {
+      max-width: 880px;
+      color: #fff;
+      font-size: clamp(3.8rem, 10vw, 8.8rem);
+      line-height: 0.88;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #ffe7a1;
+      background: rgba(0, 0, 0, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      color: var(--charcoal);
+      font-size: clamp(2.35rem, 5vw, 4.8rem);
+      text-wrap: balance;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 96px;
+      height: 6px;
+      margin-top: 18px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--red), var(--amber));
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: var(--charcoal);
+      font-size: 1.18rem;
+    }
+
+    p {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .hero-copy {
+      max-width: 660px;
+      color: #ffecc0;
+      font-size: clamp(1.08rem, 2.2vw, 1.38rem);
+    }
+
+    .panel {
+      border: 1px solid rgba(255, 255, 255, 0.44);
+      border-radius: var(--radius);
+      background: rgba(255, 248, 235, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .content-panel {
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    .image-panel {
+      position: relative;
+      min-height: min(56vh, 560px);
+      overflow: hidden;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(21, 24, 39, 0), rgba(21, 24, 39, 0.86)),
+        var(--panel-image, url("assets/pptx/media/image3.png")) center / cover no-repeat;
+    }
+
+    .image-panel .caption {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      color: #fff0d1;
+      font-size: 0.95rem;
+      font-weight: 750;
+    }
+
+    .quick-menu {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 12px;
+      border-radius: var(--radius);
+      background: rgba(14, 12, 10, 0.66);
+      backdrop-filter: blur(12px);
+    }
+
+    .quick-menu button {
+      min-height: 34px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      color: #fff6df;
+      background: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+
+    .quick-menu button:hover {
+      color: #201407;
+      background: var(--amber);
+    }
+
+    .index-panel {
+      max-width: 850px;
+    }
+
+    .index-panel .quick-menu {
+      position: static;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+      padding: 0;
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    .index-panel .quick-menu button {
+      min-height: 78px;
+      justify-content: flex-start;
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      color: #fff8df;
+      background:
+        linear-gradient(135deg, rgba(185, 28, 28, 0.9), rgba(245, 178, 27, 0.86)),
+        rgba(21, 24, 39, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 16px 36px rgba(20, 10, 8, 0.28);
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    .index-panel .quick-menu button:hover {
+      color: #151827;
+      background: var(--amber);
+    }
+
+    .stats-grid,
+    .cards-grid,
+    .equipment-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .cards-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .equipment-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .stat,
+    .card,
+    .equipment {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--red-dark);
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1;
+    }
+
+    .stat span,
+    .equipment span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 14px;
+      border-radius: var(--radius);
+      color: #fff;
+      background: var(--charcoal);
+      font-weight: 950;
+    }
+
+    .equipment strong {
+      color: var(--red-dark);
+    }
+
+    .with-visual {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      gap: clamp(18px, 3vw, 32px);
+      align-items: stretch;
+    }
+
+    .side-visual {
+      min-height: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(21, 24, 39, 0), rgba(21, 24, 39, 0.12)),
+        var(--visual) center / cover no-repeat;
+      box-shadow: 0 18px 42px rgba(21, 24, 39, 0.16);
+    }
+
+    .side-visual.contain {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.76)),
+        var(--visual) center / contain no-repeat;
+      background-color: #fff;
+    }
+
+    .equipment-visual {
+      align-self: center;
+      min-height: 430px;
+      max-height: 470px;
+      background-size: 100% 100%, 68% auto;
+    }
+
+    .case-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .photo-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.7fr);
+      gap: clamp(18px, 3vw, 36px);
+      align-items: stretch;
+    }
+
+    .photo-feature {
+      min-height: min(62vh, 610px);
+      border-radius: var(--radius);
+      background: var(--photo) center / cover no-repeat;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+    }
+
+    .photo-note {
+      display: grid;
+      align-content: end;
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    .case-card {
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr) 170px;
+      gap: 18px;
+      align-items: stretch;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .case-photo {
+      min-height: 112px;
+      border-radius: var(--radius);
+      background: var(--case-photo) center / cover no-repeat;
+    }
+
+    .danger-panel {
+      color: #f8efe3;
+      background: rgba(17, 21, 42, 0.96);
+      border-color: rgba(255, 112, 24, 0.34);
+    }
+
+    .danger-panel h2 {
+      color: #ff6b18;
+      font-size: clamp(2.1rem, 4.8vw, 4.1rem);
+      text-transform: uppercase;
+    }
+
+    .danger-panel h2::after {
+      background: linear-gradient(90deg, #ff6b18, var(--amber));
+    }
+
+    .danger-panel p {
+      color: #cfd6e6;
+    }
+
+    .danger-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .danger-stat {
+      padding: 16px;
+      border-radius: var(--radius);
+      background: #182342;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 5px solid var(--accent, #ff6b18);
+    }
+
+    .danger-stat strong {
+      display: block;
+      color: var(--accent, #ff6b18);
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .danger-stat span {
+      display: block;
+      margin-top: 8px;
+      color: #d9e2f4;
+      font-weight: 800;
+    }
+
+    .danger-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(290px, 0.85fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .chart-card,
+    .recent-card {
+      padding: 16px;
+      border-radius: var(--radius);
+      background: #182342;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chart-card h3,
+    .recent-card h3 {
+      color: #f8efe3;
+      text-transform: uppercase;
+      font-size: 1rem;
+    }
+
+    .bar-chart {
+      display: grid;
+      grid-template-columns: repeat(16, minmax(16px, 1fr));
+      align-items: end;
+      gap: 8px;
+      height: 250px;
+      margin-top: 16px;
+      padding: 14px 8px 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px) 0 0 / 100% 20%;
+    }
+
+    .bar {
+      position: relative;
+      height: calc(var(--value) * 10px);
+      min-height: 18px;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, #ff9f18, #f04416);
+    }
+
+    .bar::after {
+      content: attr(data-year);
+      position: absolute;
+      left: 50%;
+      bottom: -34px;
+      transform: translateX(-50%) rotate(-58deg);
+      color: #aeb9d0;
+      font-size: 0.66rem;
+      white-space: nowrap;
+    }
+
+    .recent-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .recent-item {
+      padding: 13px;
+      border-radius: var(--radius);
+      color: #e8eefc;
+      background: #202d52;
+      border-left: 4px solid var(--accent, var(--amber));
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .year {
+      display: grid;
+      place-items: center;
+      min-height: 94px;
+      border-radius: var(--radius);
+      color: var(--amber);
+      background: var(--charcoal);
+      font-size: 1.55rem;
+      font-weight: 950;
+    }
+
+    .question-box {
+      padding: 14px 16px;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .question-title {
+      margin-bottom: 10px;
+      color: var(--charcoal);
+      font-weight: 900;
+    }
+
+    .radio-group {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .radio-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .radio-label:hover {
+      border-color: rgba(185, 28, 28, 0.48);
+    }
+
+    .feedback-msg {
+      display: none;
+      margin-top: 12px;
+      padding: 11px 12px;
+      border-radius: var(--radius);
+      font-weight: 800;
+    }
+
+    .feedback-msg.correct {
+      display: block;
+      color: var(--green);
+      background: var(--green-bg);
+    }
+
+    .feedback-msg.incorrect {
+      display: block;
+      color: var(--error);
+      background: var(--error-bg);
+    }
+
+    .score-block {
+      display: none;
+      margin-top: 16px;
+      padding: 18px;
+      text-align: center;
+      border: 2px solid var(--amber);
+      border-radius: var(--radius);
+      background: #fff4ce;
+    }
+
+    .result-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(280px, 1fr);
+      gap: clamp(18px, 3vw, 34px);
+      align-items: stretch;
+      margin-top: 24px;
+    }
+
+    .result-score {
+      display: grid;
+      place-items: center;
+      min-height: 270px;
+      border-radius: var(--radius);
+      color: #201407;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.6), transparent 12rem),
+        linear-gradient(135deg, var(--amber), #ffdf71);
+      box-shadow: 0 18px 42px rgba(95, 54, 8, 0.22);
+      text-align: center;
+    }
+
+    .result-score strong {
+      display: block;
+      font-size: clamp(4rem, 9vw, 7rem);
+      line-height: 0.95;
+    }
+
+    .result-score span {
+      display: block;
+      margin-top: 10px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .result-feedback {
+      padding: clamp(22px, 4vw, 36px);
+      border-radius: var(--radius);
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--charcoal);
+      font-weight: 900;
+    }
+
+    .form-group input {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .form-group input[readonly] {
+      background: #f1eadf;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: var(--radius);
+      color: #fff;
+      background: var(--red);
+      cursor: pointer;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(127, 17, 17, 0.28);
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: var(--red-dark);
+    }
+
+    .btn-light {
+      color: #201407;
+      background: var(--amber);
+    }
+
+    .btn-light:hover {
+      background: #ffd45e;
+    }
+
+    .deck-controls {
+      position: fixed;
+      left: 152px;
+      right: 0;
+      bottom: 0;
+      z-index: 22;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 14px clamp(16px, 4vw, 44px);
+      background: rgba(18, 14, 12, 0.78);
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-btn {
+      min-width: 128px;
+      color: #fff6df;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+    }
+
+    .nav-btn:hover {
+      color: #201407;
+      background: var(--amber);
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.32);
+      cursor: pointer;
+    }
+
+    .dot.active {
+      width: 34px;
+      background: var(--amber);
+    }
+
+    .hint {
+      margin-top: 18px;
+      color: #ffe9b3;
+      font-size: 0.94rem;
+      font-weight: 750;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        overflow: auto;
+      }
+
+      .deck {
+        padding-left: 0;
+      }
+
+      .topbar {
+        left: 0;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        min-height: auto;
+      }
+
+      .progress-track {
+        left: 0;
+        top: 95px;
+      }
+
+      .side-menu {
+        top: 95px;
+        transform: translateX(-104%);
+      }
+
+      .side-menu.open {
+        transform: translateX(0);
+      }
+
+      .slides {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 122px;
+      }
+
+      .slide {
+        min-height: calc(100vh - 220px);
+      }
+
+      .hero-layout,
+      .two-col,
+      .photo-layout,
+      .stats-grid,
+      .cards-grid,
+      .equipment-grid,
+      .radio-group,
+      .with-visual,
+      .danger-stats,
+      .danger-body,
+      .index-panel .quick-menu,
+      .result-hero,
+      .form-grid,
+      .case-card {
+        grid-template-columns: 1fr;
+      }
+
+      .deck-controls {
+        left: 0;
+        position: sticky;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .dots {
+        grid-column: 1 / -1;
+        order: -1;
+      }
+
+      .nav-btn {
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Galeria de apresenta&ccedil;&atilde;o sobre a profiss&atilde;o de bombeiro">
+    <header class="topbar">
+      <div class="brand">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="side-menu">
+          <span class="menu-toggle-lines" aria-hidden="true"></span>
+        </button>
+        <div>
+            <small>Profiss&otilde;es de risco &bull; MF2 A1</small>
+          <strong id="slide-title">Bombeiro - Profiss&atilde;o de risco</strong>
+        </div>
+      </div>
+      <div class="counter"><span id="current-slide">1</span><span>/</span><span id="total-slides">10</span></div>
+    </header>
+
+    <div class="menu-backdrop" id="menu-backdrop" aria-hidden="true"></div>
+    <aside class="side-menu" id="side-menu" aria-label="Menu lateral da apresenta&ccedil;&atilde;o">
+      <div class="side-menu-brand">
+        <div class="side-menu-brand-mark">B</div>
+        <div>
+          <small>MF2 A1</small>
+          Bombeiro
+        </div>
+      </div>
+      <h2>&Iacute;ndice</h2>
+      <div class="side-menu-list">
+        <button type="button" data-target-title="Abertura">Abertura <span>01</span></button>
+        <button type="button" data-target-title="Objetivo da atividade">&Iacute;ndice <span>02</span></button>
+        <button type="button" data-target-title="O que é ser bombeiro">Descri&ccedil;&atilde;o <span>03</span></button>
+        <button type="button" data-target-title="Fun&ccedil;&otilde;es">Fun&ccedil;&otilde;es <span>04</span></button>
+        <button type="button" data-target-title="Riscos associados">Riscos <span>05</span></button>
+        <button type="button" data-target-title="Principais perigos enfrentados">Perigos <span>06</span></button>
+        <button type="button" data-target-title="Equipamentos de seguran&ccedil;a">EPI <span>07</span></button>
+        <button type="button" data-target-title="Preven&ccedil;&atilde;o">Preven&ccedil;&atilde;o <span>08</span></button>
+        <button type="button" data-target-title="Casos reais">Casos reais <span>09</span></button>
+        <button type="button" data-target-title="Quiz interativo">Quiz <span>10</span></button>
+        <button type="button" data-target-title="Resultado final">Resultado <span>11</span></button>
+      </div>
+    </aside>
+
+    <div class="progress-track" aria-hidden="true">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <section class="slides">
+      <article class="slide active" data-title="Abertura" style="--slide-bg: url('assets/pptx/media/image3.png');">
+        <div class="slide-shell hero-layout">
+          <div>
+            <span class="eyebrow">Her&oacute;is em primeira linha</span>
+            <h1 class="hero-title">Bombeiro</h1>
+            <p class="hero-copy">Uma profiss&atilde;o de alto risco e coragem. Mais de 257 bombeiros morreram em servi&ccedil;o desde 1980 em Portugal.</p>
+            <p class="hint">Usa os bot&otilde;es em baixo ou as setas do teclado para navegar.</p>
+          </div>
+          <aside class="panel content-panel">
+            <h2>Profiss&atilde;o de risco</h2>
+            <button class="btn btn-light" type="button" data-go="next">Come&ccedil;ar</button>
+          </aside>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Objetivo da atividade" style="--slide-bg: url('assets/pptx/media/image42.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel index-panel">
+            <span class="eyebrow">01 &bull; Atividade MF2 A1</span>
+            <h2>&Iacute;ndice da apresenta&ccedil;&atilde;o</h2>
+            <p>Descri&ccedil;&atilde;o da profiss&atilde;o, miss&otilde;es operacionais, riscos associados, equipamentos de seguran&ccedil;a, preven&ccedil;&atilde;o e casos reais em Portugal.</p>
+            <div class="quick-menu" aria-label="Menu direto da apresenta&ccedil;&atilde;o">
+              <button type="button" data-target-title="O que é ser bombeiro">Descri&ccedil;&atilde;o</button>
+              <button type="button" data-target-title="Fun&ccedil;&otilde;es">Fun&ccedil;&otilde;es</button>
+              <button type="button" data-target-title="Riscos associados">Riscos</button>
+              <button type="button" data-target-title="Equipamentos de seguran&ccedil;a">EPI</button>
+              <button type="button" data-target-title="Preven&ccedil;&atilde;o">Preven&ccedil;&atilde;o</button>
+              <button type="button" data-target-title="Casos reais">Casos reais</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Indicadores nacionais" style="--slide-bg: url('assets/pptx/media/image212.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">02 &bull; Bombeiros em Portugal</span>
+            <h2>Indicadores nacionais</h2>
+            <p>Estes n&uacute;meros mostram a dimens&atilde;o humana e operacional do dispositivo nacional.</p>
+            <div class="stats-grid">
+              <div class="stat"><strong>465</strong><span>Corpora&ccedil;&otilde;es</span></div>
+              <div class="stat"><strong>30.433</strong><span>Operacionais</span></div>
+              <div class="stat"><strong>744</strong><span>EIP ativas</span></div>
+              <div class="stat"><strong>257</strong><span>Mortos em servi&ccedil;o desde 1980</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="O que &eacute; ser bombeiro" style="--slide-bg: url('assets/pptx/media/image42.png');">
+        <div class="slide-shell two-col">
+          <div class="panel image-panel" style="--panel-image: url('assets/pptx/media/image42.png');">
+            <p class="caption">Profissional de emerg&ecirc;ncia: miss&atilde;o, prontid&atilde;o e servi&ccedil;o &agrave; comunidade.</p>
+          </div>
+          <div class="panel content-panel">
+            <span class="eyebrow">03 &bull; Profiss&atilde;o</span>
+            <h2>O que &eacute; ser bombeiro</h2>
+            <p>Profissional treinado para combater inc&ecirc;ndios, realizar resgates, prestar primeiros socorros e responder a emerg&ecirc;ncias.</p>
+            <p>A miss&atilde;o &eacute; proteger vidas e bens, em cen&aacute;rios muitas vezes imprevis&iacute;veis e de elevada press&atilde;o.</p>
+            <p><strong>Tipos em Portugal:</strong> volunt&aacute;rios, municipais, sapadores e privativos.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Fun&ccedil;&otilde;es" style="--slide-bg: url('assets/pptx/media/image75.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">04 &bull; Miss&atilde;o operacional</span>
+            <h2>O que faz um bombeiro</h2>
+            <div class="cards-grid">
+              <article class="card"><span class="icon">1</span><h3>Resgate de v&iacute;timas</h3><p>Salvamento de pessoas em edif&iacute;cios, ve&iacute;culos e situa&ccedil;&otilde;es de risco imediato.</p></article>
+              <article class="card"><span class="icon">2</span><h3>Inc&ecirc;ndios florestais</h3><p>Combate a fogos rurais e prote&ccedil;&atilde;o de popula&ccedil;&otilde;es e ecossistemas.</p></article>
+              <article class="card"><span class="icon">3</span><h3>Combate a inc&ecirc;ndios</h3><p>Extin&ccedil;&atilde;o de inc&ecirc;ndios urbanos e industriais com equipamento especializado.</p></article>
+              <article class="card"><span class="icon">4</span><h3>Emerg&ecirc;ncia m&eacute;dica</h3><p>Primeiros socorros, suporte b&aacute;sico de vida e estabiliza&ccedil;&atilde;o de v&iacute;timas.</p></article>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Fotografia: resgate" style="--slide-bg: url('assets/pptx/media/image75.png');">
+        <div class="slide-shell photo-layout">
+          <div class="photo-feature" style="--photo: url('assets/pptx/media/image75.png');" role="img" aria-label="Bombeiros em opera&ccedil;&atilde;o de resgate com escada"></div>
+          <div class="panel photo-note">
+            <span class="eyebrow">Miss&atilde;o 1</span>
+            <h2>Resgate de v&iacute;timas</h2>
+            <p>Salvamento de pessoas em edif&iacute;cios, ve&iacute;culos e situa&ccedil;&otilde;es de risco imediato.</p>
+            <p>Este tipo de opera&ccedil;&atilde;o exige coordena&ccedil;&atilde;o, comunica&ccedil;&atilde;o clara e leitura r&aacute;pida do perigo.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Fotografia: inc&ecirc;ndio florestal" style="--slide-bg: url('assets/pptx/media/image79.png');">
+        <div class="slide-shell photo-layout">
+          <div class="photo-feature" style="--photo: url('assets/pptx/media/image79.png');" role="img" aria-label="Bombeiros em combate a inc&ecirc;ndio florestal"></div>
+          <div class="panel photo-note">
+            <span class="eyebrow">Miss&atilde;o 2</span>
+            <h2>Inc&ecirc;ndios florestais</h2>
+            <p>Combate a fogos rurais e prote&ccedil;&atilde;o de popula&ccedil;&otilde;es, ecossistemas e infraestruturas.</p>
+            <p>A frente de fogo pode mudar rapidamente, tornando essencial o conhecimento situacional.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Riscos associados" style="--slide-bg: url('assets/pptx/media/image181.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">05 &bull; Seguran&ccedil;a ocupacional</span>
+            <h2>Riscos associados &agrave; profiss&atilde;o</h2>
+            <div class="cards-grid">
+              <article class="card"><span class="icon">T</span><h3>Riscos f&iacute;sicos</h3><p>Calor extremo, chamas, colapso de estruturas, quedas e esmagamentos.</p></article>
+              <article class="card"><span class="icon">Q</span><h3>Riscos qu&iacute;micos</h3><p>Inala&ccedil;&atilde;o de fumos t&oacute;xicos e exposi&ccedil;&atilde;o a agentes carcinog&eacute;neos.</p></article>
+              <article class="card"><span class="icon">P</span><h3>Riscos psicol&oacute;gicos</h3><p>Stress cr&oacute;nico, PTSD e burnout ap&oacute;s exposi&ccedil;&atilde;o a situa&ccedil;&otilde;es traum&aacute;ticas.</p></article>
+              <article class="card"><span class="icon">V</span><h3>Riscos rodovi&aacute;rios</h3><p>Acidentes em desloca&ccedil;&atilde;o para ocorr&ecirc;ncias, uma causa relevante de mortalidade em servi&ccedil;o.</p></article>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Principais perigos enfrentados" style="--slide-bg: url('assets/pptx/media/image112.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel danger-panel">
+            <span class="eyebrow">Liga dos Bombeiros Portugueses &bull; desde 1980</span>
+            <h2>Principais perigos enfrentados</h2>
+            <div class="danger-stats">
+              <div class="danger-stat" style="--accent: #ff6b18;"><strong>257</strong><span>Bombeiros mortos em servi&ccedil;o desde 1980</span></div>
+              <div class="danger-stat" style="--accent: #f04416;"><strong>19</strong><span>Mortes no ano mais tr&aacute;gico: 1985</span></div>
+              <div class="danger-stat" style="--accent: #ffc34d;"><strong>~240</strong><span>Feridos em 2025: fumo, fraturas e entorses</span></div>
+            </div>
+            <div class="danger-body">
+              <div class="chart-card">
+                <h3>Mortes por ano - anos mais tr&aacute;gicos</h3>
+                <div class="bar-chart" aria-label="Gr&aacute;fico de barras com mortes por ano">
+                  <div class="bar" style="--value: 19;" data-year="1985"></div>
+                  <div class="bar" style="--value: 18;" data-year="1986"></div>
+                  <div class="bar" style="--value: 10;" data-year="1989"></div>
+                  <div class="bar" style="--value: 7;" data-year="1990"></div>
+                  <div class="bar" style="--value: 6;" data-year="1993"></div>
+                  <div class="bar" style="--value: 13;" data-year="1996"></div>
+                  <div class="bar" style="--value: 10;" data-year="1998"></div>
+                  <div class="bar" style="--value: 8;" data-year="2000"></div>
+                  <div class="bar" style="--value: 7;" data-year="2003"></div>
+                  <div class="bar" style="--value: 16;" data-year="2005"></div>
+                  <div class="bar" style="--value: 6;" data-year="2008"></div>
+                  <div class="bar" style="--value: 5;" data-year="2010"></div>
+                  <div class="bar" style="--value: 10;" data-year="2013"></div>
+                  <div class="bar" style="--value: 7;" data-year="2015"></div>
+                  <div class="bar" style="--value: 5;" data-year="2017"></div>
+                  <div class="bar" style="--value: 5;" data-year="2024"></div>
+                </div>
+              </div>
+              <div class="recent-card">
+                <h3>Dados recentes</h3>
+                <div class="recent-list">
+                  <div class="recent-item" style="--accent: #f04416;">2005: 16 mortes, segundo pior ano, maioritariamente em inc&ecirc;ndios florestais.</div>
+                  <div class="recent-item" style="--accent: #ffc34d;">2020-2025: 21 &oacute;bitos no total; acidentes rodovi&aacute;rios dominam as causas recentes.</div>
+                  <div class="recent-item" style="--accent: #ffc34d;">2024: 5 mortes. 2025: 2 mortes, ambas em acidentes rodovi&aacute;rios em deslocamento.</div>
+                  <div class="recent-item" style="--accent: #31c76a;">2019: &uacute;nico ano sem nenhuma morte em servi&ccedil;o desde 1980.</div>
+                  <div class="recent-item" style="--accent: #ff8a1c;">Tend&ecirc;ncia: redu&ccedil;&atilde;o gradual gra&ccedil;as a melhores equipamentos e forma&ccedil;&atilde;o.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Equipamentos de seguran&ccedil;a" style="--slide-bg: url('assets/pptx/media/image156.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel with-visual">
+            <div>
+              <span class="eyebrow">06 &bull; Equipamento vital</span>
+              <h2>Equipamentos de seguran&ccedil;a</h2>
+              <p>Os Equipamentos de Prote&ccedil;&atilde;o Individual s&atilde;o a barreira entre o operacional e o perigo.</p>
+              <div class="equipment-grid">
+                <div class="equipment"><strong>Fato de combate</strong><span>EN 469 &bull; fibra aramida/Nomex</span></div>
+                <div class="equipment"><strong>Capacete</strong><span>EN 443 &bull; prote&ccedil;&atilde;o facial</span></div>
+                <div class="equipment"><strong>Luvas</strong><span>EN 659 &bull; cortes, calor e chamas</span></div>
+                <div class="equipment"><strong>ARA / SCBA</strong><span>Ambientes t&oacute;xicos</span></div>
+                <div class="equipment"><strong>Botas</strong><span>Refor&ccedil;adas e antifuro</span></div>
+                <div class="equipment"><strong>Balaclava</strong><span>Prote&ccedil;&atilde;o antichama</span></div>
+              </div>
+            </div>
+            <div class="side-visual contain equipment-visual" style="--visual: url('assets/pptx/media/image156.png');" role="img" aria-label="Aparelho de respira&ccedil;&atilde;o aut&oacute;noma"></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Fotografia: ARA / SCBA" style="--slide-bg: url('assets/pptx/media/image156.png');">
+        <div class="slide-shell photo-layout">
+          <div class="photo-feature" style="--photo: url('assets/pptx/media/image156.png'); background-size: contain; background-color: #fff;" role="img" aria-label="Aparelho de respira&ccedil;&atilde;o aut&oacute;noma"></div>
+          <div class="panel photo-note">
+            <span class="eyebrow">Equipamento vital</span>
+            <h2>ARA / SCBA</h2>
+            <p>O aparelho de respira&ccedil;&atilde;o aut&oacute;noma permite atuar em atmosferas t&oacute;xicas ou com falta de oxig&eacute;nio.</p>
+            <p>&Eacute; um dos equipamentos mais importantes para proteger a vida do bombeiro durante a progress&atilde;o.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Preven&ccedil;&atilde;o" style="--slide-bg: url('assets/pptx/media/image161.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">07 &bull; Seguran&ccedil;a operacional</span>
+            <h2>Medidas de preven&ccedil;&atilde;o de acidentes</h2>
+            <div class="cards-grid">
+              <article class="card"><span class="icon">1</span><h3>Forma&ccedil;&atilde;o cont&iacute;nua</h3><p>1.720 a&ccedil;&otilde;es de forma&ccedil;&atilde;o pela ENB em 2022, com treinos e simula&ccedil;&otilde;es.</p></article>
+              <article class="card"><span class="icon">2</span><h3>Uso obrigat&oacute;rio de EPI</h3><p>Fato EN 469, capacete EN 443 e luvas EN 659 em interven&ccedil;&otilde;es.</p></article>
+              <article class="card"><span class="icon">3</span><h3>Protocolos de seguran&ccedil;a</h3><p>Comunica&ccedil;&atilde;o, coordena&ccedil;&atilde;o e reconhecimento do terreno antes de avan&ccedil;ar.</p></article>
+              <article class="card"><span class="icon">4</span><h3>Condu&ccedil;&atilde;o defensiva</h3><p>Motoristas acompanhados por quem conhe&ccedil;a a zona e forma&ccedil;&atilde;o espec&iacute;fica.</p></article>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Casos reais" style="--slide-bg: url('assets/pptx/media/image181.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">08 &bull; Trag&eacute;dias em Portugal</span>
+            <h2>Casos reais que marcaram a hist&oacute;ria</h2>
+            <div class="case-list">
+              <article class="case-card">
+                <div class="year">2024</div>
+                <div>
+                  <h3>Trag&eacute;dia de Nelas</h3>
+                  <p>17 de setembro de 2024, Nelas, Viseu: tr&ecirc;s bombeiros da corpora&ccedil;&atilde;o de Vila Nova de Oliveirinha perderam a vida em servi&ccedil;o.</p>
+                </div>
+                <div class="case-photo" style="--case-photo: url('assets/pptx/media/image181.png');" aria-hidden="true"></div>
+              </article>
+              <article class="case-card">
+                <div class="year">1985</div>
+                <div>
+                  <h3>Inc&ecirc;ndio de Armamar</h3>
+                  <p>14 bombeiros morreram num &uacute;nico inc&ecirc;ndio florestal. O ano de 1985 registou 19 mortes e ficou como o mais tr&aacute;gico desde 1980.</p>
+                </div>
+                <div class="case-photo" style="--case-photo: url('assets/pptx/media/image79.png');" aria-hidden="true"></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Fotografia: homenagem" style="--slide-bg: url('assets/bombeiro-homenagem.png');">
+        <div class="slide-shell photo-layout">
+          <div class="photo-feature" style="--photo: url('assets/bombeiro-homenagem.png');" role="img" aria-label="Bombeiro em cena de homenagem e emerg&ecirc;ncia"></div>
+          <div class="panel photo-note">
+            <span class="eyebrow">Conclus&atilde;o visual</span>
+            <h2>Her&oacute;is do quotidiano</h2>
+            <p>Riscos reais, sacrif&iacute;cios e reconhecimento social: a profiss&atilde;o de bombeiro exige coragem, forma&ccedil;&atilde;o e apoio permanente.</p>
+            <p>Conhecer estes riscos ajuda a valorizar quem protege as comunidades.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Quiz interativo" style="--slide-bg: url('assets/pptx/media/image230.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">09 &bull; Valida&ccedil;&atilde;o</span>
+            <h2>Quiz interativo I</h2>
+            <div class="question-box" id="qb-1">
+              <div class="question-title">1. Desde 1980, quantos bombeiros morreram em servi&ccedil;o em Portugal, segundo os dados apresentados?</div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q1" value="Cerca de 150"> Cerca de 150</label>
+                <label class="radio-label"><input type="radio" name="q1" value="Cerca de 200"> Cerca de 200</label>
+                <label class="radio-label"><input type="radio" name="q1" value="257"> 257</label>
+                <label class="radio-label"><input type="radio" name="q1" value="Mais de 400"> Mais de 400</label>
+              </div>
+              <div id="feedback-q1" class="feedback-msg"></div>
+            </div>
+            <div class="question-box" id="qb-2">
+              <div class="question-title">2. Qual foi o &uacute;nico ano, desde 1980, sem mortes operacionais em servi&ccedil;o?</div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q2" value="2010"> 2010</label>
+                <label class="radio-label"><input type="radio" name="q2" value="2015"> 2015</label>
+                <label class="radio-label"><input type="radio" name="q2" value="2017"> 2017</label>
+                <label class="radio-label"><input type="radio" name="q2" value="2019"> 2019</label>
+              </div>
+              <div id="feedback-q2" class="feedback-msg"></div>
+            </div>
+            <button class="btn" type="button" style="width: 100%; margin-top: 16px;" data-go="next">Continuar quiz</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Quiz interativo II" style="--slide-bg: url('assets/pptx/media/image230.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">10 &bull; Valida&ccedil;&atilde;o</span>
+            <h2>Quiz interativo II</h2>
+            <div class="question-box" id="qb-3">
+              <div class="question-title">3. Qual a norma europeia respons&aacute;vel por regulamentar o fato de combate?</div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q3" value="EN 443"> EN 443</label>
+                <label class="radio-label"><input type="radio" name="q3" value="EN 469"> EN 469</label>
+                <label class="radio-label"><input type="radio" name="q3" value="EN 659"> EN 659</label>
+                <label class="radio-label"><input type="radio" name="q3" value="EN 352"> EN 352</label>
+              </div>
+              <div id="feedback-q3" class="feedback-msg"></div>
+            </div>
+            <div class="question-box" id="qb-4">
+              <div class="question-title">4. Qual destes riscos est&aacute; associado &agrave; inala&ccedil;&atilde;o de fumos t&oacute;xicos?</div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q4" value="Risco químico"> Risco qu&iacute;mico</label>
+                <label class="radio-label"><input type="radio" name="q4" value="Risco visual"> Risco visual</label>
+                <label class="radio-label"><input type="radio" name="q4" value="Risco administrativo"> Risco administrativo</label>
+                <label class="radio-label"><input type="radio" name="q4" value="Risco financeiro"> Risco financeiro</label>
+              </div>
+              <div id="feedback-q4" class="feedback-msg"></div>
+            </div>
+            <button class="btn" type="button" style="width: 100%; margin-top: 16px;" data-go="next">Continuar quiz</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Quiz interativo III" style="--slide-bg: url('assets/pptx/media/image230.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">11 &bull; Valida&ccedil;&atilde;o</span>
+            <h2>Quiz interativo III</h2>
+            <div class="question-box" id="qb-5">
+              <div class="question-title">5. Em que local ocorreu a trag&eacute;dia recente de 2024 referida na apresenta&ccedil;&atilde;o?</div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q5" value="Nelas"> Nelas</label>
+                <label class="radio-label"><input type="radio" name="q5" value="Lisboa"> Lisboa</label>
+                <label class="radio-label"><input type="radio" name="q5" value="Porto"> Porto</label>
+                <label class="radio-label"><input type="radio" name="q5" value="Faro"> Faro</label>
+              </div>
+              <div id="feedback-q5" class="feedback-msg"></div>
+            </div>
+            <div class="question-box" id="qb-6">
+              <div class="question-title">6. O que significa EPI?</div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q6" value="Equipamento de Proteção Individual"> Equipamento de Prote&ccedil;&atilde;o Individual</label>
+                <label class="radio-label"><input type="radio" name="q6" value="Equipa Permanente Interna"> Equipa Permanente Interna</label>
+                <label class="radio-label"><input type="radio" name="q6" value="Emergência Pública Integrada"> Emerg&ecirc;ncia P&uacute;blica Integrada</label>
+                <label class="radio-label"><input type="radio" name="q6" value="Entrada Prioritária Imediata"> Entrada Priorit&aacute;ria Imediata</label>
+              </div>
+              <div id="feedback-q6" class="feedback-msg"></div>
+            </div>
+            <button class="btn" type="button" style="width: 100%; margin-top: 16px;" data-go="next">Continuar quiz</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Quiz interativo IV" style="--slide-bg: url('assets/pptx/media/image230.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">12 &bull; Valida&ccedil;&atilde;o</span>
+            <h2>Quiz interativo IV</h2>
+            <div class="question-box" id="qb-7">
+              <div class="question-title">7. Qual &eacute; uma medida essencial de preven&ccedil;&atilde;o?</div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q7" value="Formação contínua"> Forma&ccedil;&atilde;o cont&iacute;nua</label>
+                <label class="radio-label"><input type="radio" name="q7" value="Ignorar protocolos"> Ignorar protocolos</label>
+                <label class="radio-label"><input type="radio" name="q7" value="Dispensar EPI"> Dispensar EPI</label>
+                <label class="radio-label"><input type="radio" name="q7" value="Avançar sem reconhecer terreno"> Avan&ccedil;ar sem reconhecer terreno</label>
+              </div>
+              <div id="feedback-q7" class="feedback-msg"></div>
+            </div>
+            <div class="question-box" id="qb-8">
+              <div class="question-title">8. Qual comportamento ajuda a reduzir acidentes em desloca&ccedil;&atilde;o para ocorr&ecirc;ncias?</div>
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q8" value="Condução defensiva"> Condu&ccedil;&atilde;o defensiva</label>
+                <label class="radio-label"><input type="radio" name="q8" value="Circular sem coordenação"> Circular sem coordena&ccedil;&atilde;o</label>
+                <label class="radio-label"><input type="radio" name="q8" value="Ignorar o terreno"> Ignorar o terreno</label>
+                <label class="radio-label"><input type="radio" name="q8" value="Dispensar comunicação"> Dispensar comunica&ccedil;&atilde;o</label>
+              </div>
+              <div id="feedback-q8" class="feedback-msg"></div>
+            </div>
+            <button class="btn" id="btn-calculate" type="button" style="width: 100%; margin-top: 16px;">Ver resultado</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="slide" data-title="Resultado final" style="--slide-bg: url('assets/bombeiro-homenagem.png');">
+        <div class="slide-shell">
+          <div class="panel content-panel">
+            <span class="eyebrow">10 &bull; Conclus&atilde;o</span>
+            <h2>Resultado do question&aacute;rio</h2>
+            <p>Este resultado &eacute; formativo: serve para perceber o que ficou claro e o que vale a pena rever.</p>
+            <div class="result-hero">
+              <div class="result-score">
+                <div>
+                  <strong id="result-percentage">0%</strong>
+                  <span id="result-count">Sem respostas ainda</span>
+                </div>
+              </div>
+              <div class="result-feedback">
+                <h3 id="result-title">Pronto para avaliar</h3>
+                <p id="result-message">Podes terminar mesmo sem responder ao quiz. Quando quiseres, volta ao question&aacute;rio e confirma os teus conhecimentos.</p>
+                <p id="result-detail">A profiss&atilde;o de bombeiro exige coragem, prepara&ccedil;&atilde;o e respeito permanente pelas regras de seguran&ccedil;a.</p>
+                <div class="result-actions">
+                  <button class="btn btn-light" type="button" id="btn-result-now">Atualizar resultado</button>
+                  <button class="btn" type="button" data-target-title="Quiz interativo">Voltar ao quiz</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <nav class="deck-controls" aria-label="Controlos da apresenta&ccedil;&atilde;o">
+      <button class="btn nav-btn" id="prev-slide" type="button">Anterior</button>
+      <div class="dots" id="slide-dots" aria-label="Escolher slide"></div>
+      <button class="btn nav-btn" id="next-slide" type="button">Pr&oacute;ximo</button>
+    </nav>
+  </main>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const deck = document.querySelector(".deck");
+    const dotsContainer = document.getElementById("slide-dots");
+    const currentSlide = document.getElementById("current-slide");
+    const totalSlides = document.getElementById("total-slides");
+    const slideTitle = document.getElementById("slide-title");
+    const progressBar = document.getElementById("progress-bar");
+    const prevButton = document.getElementById("prev-slide");
+    const nextButton = document.getElementById("next-slide");
+    const menuToggle = document.getElementById("menu-toggle");
+    const sideMenu = document.getElementById("side-menu");
+    const menuBackdrop = document.getElementById("menu-backdrop");
+    const finishUrl = "https://fad.iefp.pt/mod/forum/discuss.php?d=53704";
+
+    const quizAnswers = {
+      q1: "257",
+      q2: "2019",
+      q3: "EN 469",
+      q4: "Risco químico",
+      q5: "Nelas",
+      q6: "Equipamento de Proteção Individual",
+      q7: "Formação contínua",
+      q8: "Condução defensiva"
+    };
+
+    let activeIndex = 0;
+
+    totalSlides.textContent = slides.length;
+
+    slides.forEach((slide, index) => {
+      const dot = document.createElement("button");
+      dot.className = "dot";
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Ir para o slide ${index + 1}`);
+      dot.addEventListener("click", () => showSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(document.querySelectorAll(".dot"));
+
+    function showSlide(index) {
+      activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle("active", slideIndex === activeIndex);
+        slide.scrollTop = 0;
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("active", dotIndex === activeIndex);
+      });
+
+      currentSlide.textContent = activeIndex + 1;
+      slideTitle.textContent = slides[activeIndex].dataset.title || "Apresenta\u00e7\u00e3o";
+      progressBar.style.width = `${((activeIndex + 1) / slides.length) * 100}%`;
+      prevButton.disabled = activeIndex === 0;
+      nextButton.disabled = activeIndex === slides.length - 1;
+      nextButton.textContent = activeIndex === slides.length - 1 ? "Fim" : "Pr\u00f3ximo";
+    }
+
+    function nextSlide() {
+      if (activeIndex === slides.length - 1) {
+        window.location.href = finishUrl;
+        return;
+      }
+
+      showSlide(activeIndex + 1);
+    }
+
+    function prevSlide() {
+      showSlide(activeIndex - 1);
+    }
+
+    function setMenuOpen(isOpen) {
+      const isMobile = window.matchMedia("(max-width: 900px)").matches;
+      sideMenu.classList.toggle("open", isOpen);
+      sideMenu.classList.toggle("closed", !isOpen && !isMobile);
+      deck.classList.toggle("menu-expanded", isOpen && !isMobile);
+      deck.classList.toggle("menu-collapsed", !isOpen && !isMobile);
+      menuBackdrop.classList.toggle("open", isOpen && isMobile);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+    }
+
+    function setFeedback(questionName, isCorrect, correctAnswer, hasAnswer) {
+      const feedback = document.getElementById(`feedback-${questionName}`);
+      feedback.className = `feedback-msg ${isCorrect ? "correct" : "incorrect"}`;
+      if (isCorrect) {
+        feedback.textContent = "Correto. Boa leitura dos dados apresentados.";
+      } else if (hasAnswer) {
+        feedback.textContent = `Resposta incorreta. A resposta certa \u00e9: ${correctAnswer}.`;
+      } else {
+        feedback.textContent = `Sem resposta. A resposta certa \u00e9: ${correctAnswer}.`;
+      }
+    }
+
+    function updateResult(score, answered, total) {
+      const percentage = Math.round((score / total) * 100);
+      const resultPercentage = document.getElementById("result-percentage");
+      const resultCount = document.getElementById("result-count");
+      const resultTitle = document.getElementById("result-title");
+      const resultMessage = document.getElementById("result-message");
+      const resultDetail = document.getElementById("result-detail");
+
+      resultPercentage.textContent = `${percentage}%`;
+      resultCount.textContent = `${score}/${total} corretas | ${answered}/${total} respondidas`;
+
+      if (answered === 0) {
+        resultTitle.textContent = "Ainda sem respostas, mas com caminho aberto";
+        resultMessage.textContent = "Podes terminar a apresenta\u00e7\u00e3o sem responder. O importante \u00e9 teres explorado os riscos, equipamentos e medidas de preven\u00e7\u00e3o.";
+        resultDetail.textContent = "Quando quiseres, volta ao quiz e testa os teus conhecimentos com calma.";
+      } else if (percentage >= 85) {
+        resultTitle.textContent = "Excelente trabalho";
+        resultMessage.textContent = "Demonstraste um conhecimento muito forte sobre a profiss\u00e3o de bombeiro, os seus riscos e os equipamentos de seguran\u00e7a.";
+        resultDetail.textContent = "Continua a valorizar a prepara\u00e7\u00e3o, a preven\u00e7\u00e3o e o respeito por quem protege a comunidade.";
+      } else if (percentage >= 60) {
+        resultTitle.textContent = "Bom progresso";
+        resultMessage.textContent = "A base est\u00e1 l\u00e1. Rev\u00ea sobretudo os riscos, as normas dos EPI e os casos reais apresentados.";
+        resultDetail.textContent = "Aprender sobre esta profiss\u00e3o tamb\u00e9m \u00e9 aprender a reconhecer responsabilidade, seguran\u00e7a e coragem.";
+      } else {
+        resultTitle.textContent = "Continua a construir";
+        resultMessage.textContent = "Ainda h\u00e1 conte\u00fados a consolidar, e isso faz parte do processo. Rev\u00ea os slides e volta ao question\u00e1rio.";
+        resultDetail.textContent = "O essencial \u00e9 ficares com uma ideia clara: forma\u00e7\u00e3o, equipamento e protocolos reduzem acidentes.";
+      }
+    }
+
+    function calculateScore(options = {}) {
+      let score = 0;
+      let answered = 0;
+      const total = Object.keys(quizAnswers).length;
+
+      Object.entries(quizAnswers).forEach(([questionName, correctAnswer]) => {
+        const selected = document.querySelector(`input[name="${questionName}"]:checked`);
+        const hasAnswer = Boolean(selected);
+        const isCorrect = Boolean(selected && selected.value === correctAnswer);
+
+        if (hasAnswer) {
+          answered += 1;
+        }
+
+        if (isCorrect) {
+          score += 1;
+        }
+
+        setFeedback(questionName, isCorrect, correctAnswer, hasAnswer);
+      });
+
+      updateResult(score, answered, total);
+
+      if (options.goToResult !== false) {
+        const resultIndex = slides.findIndex((slide) => slide.dataset.title === "Resultado final");
+        showSlide(resultIndex);
+      }
+    }
+
+    prevButton.addEventListener("click", prevSlide);
+    nextButton.addEventListener("click", nextSlide);
+    document.querySelectorAll("[data-go='next']").forEach((button) => {
+      button.addEventListener("click", nextSlide);
+    });
+    document.getElementById("btn-calculate").addEventListener("click", () => calculateScore());
+    document.getElementById("btn-result-now").addEventListener("click", () => calculateScore({ goToResult: false }));
+    setMenuOpen(!window.matchMedia("(max-width: 900px)").matches);
+    menuToggle.addEventListener("click", () => {
+      const isOpen = sideMenu.classList.contains("open") && !sideMenu.classList.contains("closed");
+      setMenuOpen(!isOpen);
+    });
+    menuBackdrop.addEventListener("click", () => setMenuOpen(false));
+    window.addEventListener("resize", () => {
+      setMenuOpen(!window.matchMedia("(max-width: 900px)").matches);
+    });
+
+    document.querySelectorAll("[data-target-title]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetTitle = button.dataset.targetTitle;
+        const targetIndex = slides.findIndex((slide) => slide.dataset.title === targetTitle);
+
+        if (targetIndex >= 0) {
+          showSlide(targetIndex);
+          setMenuOpen(false);
+        }
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const activeTag = document.activeElement.tagName.toLowerCase();
+      const isTyping = activeTag === "input" || activeTag === "textarea";
+
+      if (isTyping) return;
+      if (event.key === "Escape") setMenuOpen(false);
+      if (event.key === "ArrowRight" || event.key === "PageDown") nextSlide();
+      if (event.key === "ArrowLeft" || event.key === "PageUp") prevSlide();
+      if (event.key === "Home") showSlide(0);
+      if (event.key === "End") showSlide(slides.length - 1);
+    });
+
+    updateResult(0, 0, Object.keys(quizAnswers).length);
+    showSlide(0);
+  </script>
+
+<style id="portfolio-floating-buttons-style">
+  .portfolio-floating-buttons{position:fixed;right:22px;bottom:22px;z-index:9999;display:flex;flex-direction:column;gap:10px;font-family:Inter,Arial,sans-serif}
+  .portfolio-floating-buttons a,.portfolio-floating-buttons button{width:48px;height:48px;border-radius:999px;border:1px solid #c8d4e3;background:#fff;color:#002b5b;display:grid;place-items:center;box-shadow:0 12px 30px rgba(0,43,91,.18);cursor:pointer;text-decoration:none;transition:transform .15s ease,border-color .15s ease,background .15s ease}
+  .portfolio-floating-buttons a:hover,.portfolio-floating-buttons button:hover{transform:translateY(-1px);border-color:#bd8a12}
+  .portfolio-floating-buttons svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  @media print{.portfolio-floating-buttons{display:none}}
+</style>
+<div class="portfolio-floating-buttons" aria-label="Navegacao do e-Portfolio">
+  <a href="../../../e-portfolio.html#evidencias/mf2" title="Voltar as evidencias" aria-label="Voltar as evidencias"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/><path d="M9 12h12"/><path d="M3 5v14"/></svg></a>
+</div>
+</body>
+</html>
