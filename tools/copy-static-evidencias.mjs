@@ -9,3 +9,4 @@ await mkdir(resolve(root, "dist"), { recursive: true });
 await cp(source, target, { recursive: true, force: true });
 await cp(resolve(root, "e-portfolio.html"), resolve(root, "dist", "e-portfolio.html"), { force: true });
 await cp(resolve(root, "imprimir-completo.html"), resolve(root, "dist", "imprimir-completo.html"), { force: true });
+await cp(resolve(root, "trabalhos-academicos"), resolve(root, "dist", "trabalhos-academicos"), { recursive: true, force: true });
