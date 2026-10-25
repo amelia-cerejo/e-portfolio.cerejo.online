@@ -3,8 +3,6 @@
   if (!modal || typeof modal.showModal !== 'function') return;
   const frame = modal.querySelector('iframe');
   const title = modal.querySelector('h2');
-  const download = modal.querySelector('.pdf-modal-download');
-  const fallback = modal.querySelector('.pdf-modal-fallback a');
   let trigger;
   document.querySelectorAll('[data-pdf-modal]').forEach(link => {
     link.addEventListener('click', event => {
@@ -14,8 +12,6 @@
       title.textContent = link.closest('article').querySelector('.eyebrow').textContent;
       frame.title = title.textContent + ' — PDF';
       frame.src = link.href;
-      download.href = fallback.href = link.href;
-      download.download = link.nextElementSibling.download;
       modal.showModal();
       document.body.classList.add('pdf-modal-open');
       modal.querySelector('button').focus();
